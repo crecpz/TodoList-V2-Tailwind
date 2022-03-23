@@ -18,20 +18,27 @@
 </head>
 
 <body class="font-space-mono bg-black text-primary">
+
     <div class="container px-4 py-16">
-        <!-- 提醒: 在做transition動畫改變物體寬度時，btn的寬度可以使用min-width，它不需要指定width，即可做到! -->
-        <div class="relative">
+        <div class="relative -left-1.5 -top-1.5">
+            <!-- search btn -->
             <button id="btn" class="btn btn--black min-w-0 text-left">
                 <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
             </button>
-            <div id="search-bar" class="text-sm relative -translate-y-full -z-[3]">
+
+            <!-- search bar -->
+
+            <!-- -translate-y-full -->
+            <div id="search-bar" class="text-sm relative opacity-0 invisible -z-[1] -translate-y-full">
                 <div
                     class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-2 px-4">
                     <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
-                    <input type="text" placeholder="Search" class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
+                    <input type="text" id="search-input" placeholder="Search"
+                        class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
+                    <i id="search-close-btn" class="fa-solid fa-circle-xmark cursor-pointer text-base"></i>
                 </div>
                 <div
-                    class="relative -z-[1] left-1.5 top-1.5 py-2 px-4  border border-primary/80 w-full h-full text-transparent">
+                    class="relative left-1.5 top-1.5 -z-[1] py-2 px-4  border border-primary/80 w-full h-full text-transparent">
                     1</div>
             </div>
         </div>
