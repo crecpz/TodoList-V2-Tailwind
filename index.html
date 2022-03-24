@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todolist v2</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/caret.css">
     <!-- google font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,8 +34,8 @@
                 <div
                     class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-2 px-4">
                     <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
-                    <input type="text" id="search-input" placeholder="Search"
-                        class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
+                    <div  contenteditable="true" id="search-input"
+                        class="text-primary outline-none bg-black w-full h-full">Search</div>
                     <i id="search-close-btn" class="fa-solid fa-circle-xmark cursor-pointer text-base"></i>
                 </div>
                 <div
@@ -42,9 +43,17 @@
                     1</div>
             </div>
         </div>
+
+        <div id="demo" contenteditable="true" spellcheck="false">﻿﻿Custom caret is ﻿here.﻿</div>
     </div>
 
     <script src="main.js"></script>
+    <script src="jquery-3.2.1.slim.min.js"></script>
+    <script src="jquery.custom-caret-1.1.js"></script>
+    <script>
+    $("#demo").customCaret();
+    $("#search-input").customCaret();
+    </script>
 </body>
 
 </html>
