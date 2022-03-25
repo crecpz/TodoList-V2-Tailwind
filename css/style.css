@@ -708,6 +708,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.25rem;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .text-primary {
   --tw-text-opacity: 1;
   color: rgb(188 184 184 / var(--tw-text-opacity));
