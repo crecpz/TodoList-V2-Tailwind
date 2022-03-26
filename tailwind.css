@@ -4,9 +4,9 @@
 
 @keyframes full-width {
     0%{
-        min-width:0;
+        max-width:0;
     }100%{
-        min-width:100%;
+        max-width:100%;
     }
 }
 
@@ -16,29 +16,25 @@
     .btn{
         @apply relative py-2 px-4 border border-primary transition-colors duration-200;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-1.5 after:top-1.5 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
-        @apply after:hover:left-1 after:hover:top-1 hover:bg-primary hover:text-black;
+        @apply hover:bg-primary hover:text-black after:hover:left-1 after:hover:top-1;
         @apply text-sm;
+    }    
+    
+    .btn--black{
+        @apply bg-black;
     }
 
     .full-width{
         animation:full-width 500ms ease forwards;
     }
+}
 
-
-    /* .btn::after{
-        transition:all 500ms;
-    } */
-
-    /* .btn:hover::after{
-        @apply 
-    } */
-
-    .btn--gray{
-
+@layer utilities{
+    .hide{
+        @apply invisible opacity-0;
     }
 
-    .btn--black{
-        @apply bg-black;
+    .show{
+        @apply visible opacity-100;
     }
-
 }
