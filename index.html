@@ -21,23 +21,29 @@
     <!-- container -->
     <div class="container px-4 py-16">
 
-        <div class="relative flex justify-between">
-            <h1 id="title" class="text-2xl">Todo List</h1>
-            <button id="menu-btn"><i class="fa-solid fa-bars text-2xl"></i></button>
+        <div class="relative flex justify-between items-center">
+            <!-- <button id="menu-btn" class="hidden mr-4"><i class="fa-solid fa-bars text-2xl"></i></button> -->
+            <button id="menu-btn"
+                class="relative mr-4 w-6 h-0.5 bg-white before:content-[''] before:absolute before:-top-2 before:left-0 before:w-full before:h-0.5 before:bg-white after:absolute after:top-2 after:left-0 after:w-full after:h-0.5 after:bg-white before:rotate-45 after:-rotate-45"></button>
+            <h1 id="title" class="text-3xl">Todo List</h1>
 
-            <div id="menu" class="hide absolute left-0 -top-1.5">
+            <!-- 功能按鈕區 -->
+            <div id="menu" class="hidden w-full -translate-y-1.5">
+
                 <!-- search btn -->
-                <button id="search-btn" class="btn btn--black text-left">
+                <button id="search-btn" class="btn btn--black text-left mr-4">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
                 </button>
 
+                <!-- completed btn -->
                 <button id="completed-btn" class="btn btn--black">
                     <i class="fa-solid fa-trash mr-2"></i>Clear Completed
                 </button>
+
                 <!-- search wrapper -->
-                <div id="search-wrapper" class="absolute left-0 top-0 -z-[1] w-full text-sm opacity-0 invisible ">
+                <div id="search-wrapper" class="hidden w-full text-sm">
                     <div
-                        class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-2 px-4">
+                        class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-1.5 px-2 sm:py-2 sm:px-4">
                         <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
                         <input type="text" id="search-input" placeholder="Search"
                             class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
@@ -45,7 +51,7 @@
                             class="text-primary-darken fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
                     </div>
                     <div
-                        class="relative left-1.5 top-1.5 -z-[1] py-2 px-4  border border-primary/80 w-full h-full text-transparent">
+                        class="relative left-1.5 top-1.5 -z-[1] py-1.5 px-2 sm:py-2 sm:px-4  border border-primary/80 w-full h-full text-transparent">
                         1
                     </div>
                 </div>
