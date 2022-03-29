@@ -22,13 +22,22 @@
     <div class="container px-4 py-16">
 
         <div class="relative flex justify-between items-center">
+
             <!-- <button id="menu-btn" class="hidden mr-4"><i class="fa-solid fa-bars text-2xl"></i></button> -->
-            <button id="menu-btn"
-                class="relative mr-4 w-6 h-0.5 bg-white before:content-[''] before:absolute before:-top-2 before:left-0 before:w-full before:h-0.5 before:bg-white after:absolute after:top-2 after:left-0 after:w-full after:h-0.5 after:bg-white before:rotate-45 after:-rotate-45"></button>
-            <h1 id="title" class="text-3xl">Todo List</h1>
+            <button id="menu-btn" class="w-6 h-8 mr-4 flex-shrink-0">
+                <div class="hamburger">
+                </div>
+                <!-- 點擊後:打X -->
+                <!-- before:rotate-45
+                            before:translate-y-2
+                            after:-translate-y-2 
+                            after:-rotate-45 -->
+            </button>
+
+            <h1 id="title" class="text-3xl leading-[34px]">Todo List</h1>
 
             <!-- 功能按鈕區 -->
-            <div id="menu" class="hidden w-full -translate-y-1.5">
+            <div id="menu" class="hidden w-full">
 
                 <!-- search btn -->
                 <button id="search-btn" class="btn btn--black text-left mr-4">
@@ -41,7 +50,7 @@
                 </button>
 
                 <!-- search wrapper -->
-                <div id="search-wrapper" class="hidden w-full text-sm">
+                <div id="search-wrapper" class="hidden relative w-full text-sm">
                     <div
                         class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-1.5 px-2 sm:py-2 sm:px-4">
                         <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>

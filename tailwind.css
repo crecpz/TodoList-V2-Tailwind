@@ -11,6 +11,41 @@
 }
 
 
+@keyframes hamburger-change--x{
+    0%{
+        @apply bg-white;
+    }
+
+    100%{
+        @apply bg-transparent;
+    }
+}
+
+@keyframes before-change--x{
+    50%{
+        @apply top-1/2 -translate-y-1/2;
+    }
+
+    100%{
+        @apply top-1/2 -translate-y-1/2 rotate-45;
+    }
+}
+
+@keyframes after-change--x{
+    50%{
+        @apply -top-1/2 translate-y-1/2;
+    }
+
+    100%{
+        @apply -top-1/2 translate-y-1/2 -rotate-45;
+    }
+}
+
+@keyframes change--arrow{
+
+}
+
+
 
 @layer components{
     .btn{
@@ -28,6 +63,15 @@
     .full-width{
         animation:full-width 500ms ease forwards;
     }
+
+    .hamburger{
+        @apply relative w-full h-0.5 bg-white ;
+        @apply before:content-[''] before:absolute before:left-0 before:-top-2 before:w-full before:h-0.5 before:bg-white before:animate-before-expand;
+        @apply after:content-[''] after:absolute after:left-0 after:top-2 after:w-full after:h-0.5 after:bg-white;
+        /* animation: hamburger-change--x 500ms forwards; */
+    }
+
+    
 }
 
 @layer utilities{
@@ -38,4 +82,36 @@
     .show{
         @apply visible opacity-100;
     }
+
+    .hamburger--expand{
+        /* @apply ; */
+    }
+
+    .hamburger--arrow {
+
+    }
 }
+
+/* .hamburger,
+    .hamburger::before,
+    .hamburger::after{
+        @apply w-full h-0.5 bg-white;
+    }
+
+    .hamburger::before,
+    .hamburger::after{
+        @apply content-[''] absolute left-0;
+    }
+
+    .hamburger::before{
+        @apply -top-2;
+        /* animation: before-change--x 1000ms forwards; */
+        /* @apply rotate-45 -translate-y-1/2; */
+    /* } */
+/* 
+    .hamburger::after{
+        @apply top-2; */
+        /* animation: after-change--x 1000ms forwards; */
+        /* @apply -translate-y-1 -rotate-45; 
+    }
+  */
