@@ -15,6 +15,8 @@ menuBtn.addEventListener('click', () => {
     
 
     hamburger.classList.toggle('hamburger-expand')
+    hamburger.classList.toggle('hamburger-collapse')
+
 
 
 

@@ -65,11 +65,10 @@
     }
 
     .hamburger{
-        @apply relative w-full h-0.5 bg-white transition-all duration-300;
-        @apply before:content-[''] before:absolute before:left-0 before:-top-2 before:w-full before:h-0.5 before:bg-white before:transition-all before:duration-500;
-        @apply after:content-[''] after:absolute after:left-0 after:top-2 after:w-full after:h-0.5 after:bg-white after:transition-all after:duration-500;
-        /* @apply before:animate-expand--before; */
-        /* @apply after:animate-expand--after; */
+        /* hamburger基本樣式 */
+        @apply relative w-full h-0.5 bg-white ;
+        @apply before:content-[''] before:absolute before:w-full before:h-0.5 before:bg-white  before:left-0;
+        @apply after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-white after:left-0;
     }
 
     
@@ -84,46 +83,33 @@
         @apply visible opacity-100;
     }
 
+
     .hamburger-expand{
-        /* 注意: 目前發現其實根本不用做那麼多動畫，transition就可以完成。
-            1. 關於transition出現一個小問題是我希望top-0先跑，接下來才是跑rotate，這裡需要使用transition-delay。
-                可是我只要個別將rotate做delay，如果tailwind不行的話我就寫css。
-            2. 關於動畫如何寫進tailwindcss，我的config那段可以複製到notion裡面記下來。
-         */
-        @apply bg-transparent;
-        @apply before:top-0 before:rotate-45 before:opacity-100;
-        @apply after:top-0 after:-rotate-45 after:opacity-100;
+        @apply bg-transparent transition-colors duration-200;
+        @apply before:top-0 before:rotate-45 ;
+        @apply after:top-0 after:-rotate-45 ;
+    }
+    .hamburger-expand::before{
+        transition: top 200ms ease-in, transform 200ms ease-in 200ms; 
+    }
+    .hamburger-expand::after{
+        transition: top 200ms ease-in, transform 200ms ease-in 200ms; 
     }
 
-    .hamburger-collapse{
 
+    .hamburger-collapse{
+        @apply transition-colors duration-200;
+        @apply before:-top-2 before:rotate-0 ;
+        @apply after:top-2 after:-rotate-0 ;
+    } 
+    .hamburger-collapse::before{
+        transition: top 200ms ease-in 200ms, transform 200ms ease-in; 
+    }
+    .hamburger-collapse::after{
+        transition: top 200ms ease-in 200ms, transform 200ms ease-in; 
     }
 
     .hamburger-arrow {
 
     }
 }
-
-/* .hamburger,
-    .hamburger::before,
-    .hamburger::after{
-        @apply w-full h-0.5 bg-white;
-    }
-
-    .hamburger::before,
-    .hamburger::after{
-        @apply content-[''] absolute left-0;
-    }
-
-    .hamburger::before{
-        @apply -top-2;
-        /* animation: before-change--x 1000ms forwards; */
-        /* @apply rotate-45 -translate-y-1/2; */
-    /* } */
-/* 
-    .hamburger::after{
-        @apply top-2; */
-        /* animation: after-change--x 1000ms forwards; */
-        /* @apply -translate-y-1 -rotate-45; 
-    }
-  */
