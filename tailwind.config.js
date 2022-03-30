@@ -4,38 +4,55 @@ module.exports = {
   ],
   theme: {
     extend: {
+
       colors: {
         primary: '#BCB8B8',
         'primary-darken': '#7c7c7c',
       },
+
       fontFamily: {
         'space-mono': "'Space Mono', monospace",
       },
+
       keyframes: {
-        'before-expand': {
+        'expand--before': {
           '50%': {
-            top:'50%',
-            'translate-y':'-50%'
+            top: '0%',
           },
-          '100%':{
-            top:'50%',
-            transform:'translate-y(-50%)',
-            transform:'rotate(45deg)'
+          '100%': {
+            top: '0%',
+            transform: 'rotate(45deg)',
           },
         },
 
-        'after-expand': {
-
+        'expand--after': {
+          '50%': {
+            top: '0%',
+          },
+          '100%': {
+            top: '0%',
+            transform: 'rotate(-45deg)',
+          }
         },
 
         'disappear': {
-
+          '0%': {
+            'background-color': 'white',
+          },
+          '100%': {
+            'background-color': 'transparent',
+          }
         },
+
       },
       animation: {
-        'before-expand': 'ease-in-out 1000ms forwards',
-        'after-expand': 'ease-in-out 1000ms forwards',
-        'disappear': 'ease-in-out 500ms forwards',
+        'expand--before': 'expand--before ease-in 500ms forwards',
+        'expand--after': 'expand--after ease-in 500ms forwards',
+        'disappear': 'disappear ease-in 300ms forwards',
+
+        'collapse--before':'expand--before ease-in 500ms reverse forwards',
+        'collapse--after':'expand--after ease-in 500ms reverse forwards',
+        'appear': 'disappear ease-in 300ms reverse forwards',
       },
     },
     container: {

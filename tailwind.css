@@ -11,7 +11,7 @@
 }
 
 
-@keyframes hamburger-change--x{
+/* @keyframes hamburger-change--x{
     0%{
         @apply bg-white;
     }
@@ -43,13 +43,13 @@
 
 @keyframes change--arrow{
 
-}
+} */
 
 
 
 @layer components{
     .btn{
-        @apply relative sm:py-2 sm:px-4 border border-primary transition-colors duration-200;
+        @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-1.5 after:top-1.5 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
         @apply hover:bg-primary hover:text-black after:hover:left-1 after:hover:top-1;
         @apply text-sm;
@@ -65,10 +65,11 @@
     }
 
     .hamburger{
-        @apply relative w-full h-0.5 bg-white ;
-        @apply before:content-[''] before:absolute before:left-0 before:-top-2 before:w-full before:h-0.5 before:bg-white before:animate-before-expand;
-        @apply after:content-[''] after:absolute after:left-0 after:top-2 after:w-full after:h-0.5 after:bg-white;
-        /* animation: hamburger-change--x 500ms forwards; */
+        @apply relative w-full h-0.5 bg-white transition-all duration-300;
+        @apply before:content-[''] before:absolute before:left-0 before:-top-2 before:w-full before:h-0.5 before:bg-white before:transition-all before:duration-500;
+        @apply after:content-[''] after:absolute after:left-0 after:top-2 after:w-full after:h-0.5 after:bg-white after:transition-all after:duration-500;
+        /* @apply before:animate-expand--before; */
+        /* @apply after:animate-expand--after; */
     }
 
     
@@ -83,11 +84,22 @@
         @apply visible opacity-100;
     }
 
-    .hamburger--expand{
-        /* @apply ; */
+    .hamburger-expand{
+        /* 注意: 目前發現其實根本不用做那麼多動畫，transition就可以完成。
+            1. 關於transition出現一個小問題是我希望top-0先跑，接下來才是跑rotate，這裡需要使用transition-delay。
+                可是我只要個別將rotate做delay，如果tailwind不行的話我就寫css。
+            2. 關於動畫如何寫進tailwindcss，我的config那段可以複製到notion裡面記下來。
+         */
+        @apply bg-transparent;
+        @apply before:top-0 before:rotate-45 before:opacity-100;
+        @apply after:top-0 after:-rotate-45 after:opacity-100;
     }
 
-    .hamburger--arrow {
+    .hamburger-collapse{
+
+    }
+
+    .hamburger-arrow {
 
     }
 }
