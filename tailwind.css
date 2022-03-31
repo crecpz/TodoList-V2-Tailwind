@@ -11,42 +11,6 @@
 }
 
 
-/* @keyframes hamburger-change--x{
-    0%{
-        @apply bg-white;
-    }
-
-    100%{
-        @apply bg-transparent;
-    }
-}
-
-@keyframes before-change--x{
-    50%{
-        @apply top-1/2 -translate-y-1/2;
-    }
-
-    100%{
-        @apply top-1/2 -translate-y-1/2 rotate-45;
-    }
-}
-
-@keyframes after-change--x{
-    50%{
-        @apply -top-1/2 translate-y-1/2;
-    }
-
-    100%{
-        @apply -top-1/2 translate-y-1/2 -rotate-45;
-    }
-}
-
-@keyframes change--arrow{
-
-} */
-
-
-
 @layer components{
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
@@ -64,17 +28,17 @@
         animation:full-width 500ms ease forwards;
     }
 
+    /* ---hamburger基本樣式--- */
     .hamburger{
-        /* hamburger基本樣式 */
-        @apply relative w-full h-0.5 bg-white ;
-        @apply before:content-[''] before:absolute before:w-full before:h-0.5 before:bg-white  before:left-0;
-        @apply after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-white after:left-0;
+        @apply relative w-full h-0.5 bg-white;
+        @apply before:content-[''] before:absolute before:left-0 before:-top-2 before:w-full before:h-0.5 before:bg-white before:rotate-0;
+        @apply after:content-[''] after:absolute after:left-0 after:top-2 after:w-full after:h-0.5 after:bg-white after:-rotate-0;
     }
-
-    
 }
 
+
 @layer utilities{
+    /* ---hide & show--- */
     .hide{
         @apply invisible opacity-0;
     }
@@ -83,32 +47,39 @@
         @apply visible opacity-100;
     }
 
-
+    /* ---hamburger-expand--- */
     .hamburger-expand{
         @apply bg-transparent transition-colors duration-200;
-        @apply before:top-0 before:rotate-45 ;
-        @apply after:top-0 after:-rotate-45 ;
+        @apply before:top-0 before:rotate-45;
+        @apply after:top-0 after:-rotate-45;
     }
-    .hamburger-expand::before{
-        transition: top 200ms ease-in, transform 200ms ease-in 200ms; 
+
+    .hamburger-expand{
+        transition: background-color 200ms ease-in 200ms;
     }
-    .hamburger-expand::after{
+
+    .hamburger-expand::before,
+    .hamburger-expand::after {
         transition: top 200ms ease-in, transform 200ms ease-in 200ms; 
     }
 
 
+    /* ---hamburger-collapse--- */
     .hamburger-collapse{
-        @apply transition-colors duration-200;
         @apply before:-top-2 before:rotate-0 ;
         @apply after:top-2 after:-rotate-0 ;
     } 
-    .hamburger-collapse::before{
-        transition: top 200ms ease-in 200ms, transform 200ms ease-in; 
+
+    .hamburger-collapse{
+        transition: background-color 200ms ease-in 200ms;
     }
-    .hamburger-collapse::after{
+
+    .hamburger-collapse::before,
+    .hamburger-collapse::after {
         transition: top 200ms ease-in 200ms, transform 200ms ease-in; 
     }
 
+    /* hamburger change to arrow */
     .hamburger-arrow {
 
     }

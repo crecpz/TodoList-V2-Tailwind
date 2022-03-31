@@ -14,9 +14,15 @@ menuBtn.addEventListener('click', () => {
 
     
 
-    hamburger.classList.toggle('hamburger-expand')
-    hamburger.classList.toggle('hamburger-collapse')
+    // hamburger.classList.toggle('hamburger-expand')
 
+    if(!hamburger.classList.contains('hamburger-expand')){
+        hamburger.classList.remove('hamburger-collapse')
+        hamburger.classList.add('hamburger-expand')
+    }else{
+        hamburger.classList.remove('hamburger-expand')
+        hamburger.classList.add('hamburger-collapse')
+    }
 
 
 

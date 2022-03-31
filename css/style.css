@@ -571,8 +571,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.hamburger{
-  /* hamburger基本樣式 */
+/* ---hamburger基本樣式--- */
+
+.hamburger {
+  position: relative;
+  height: 0.125rem;
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.\!hamburger {
   position: relative;
   height: 0.125rem;
   width: 100%;
@@ -583,8 +592,25 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hamburger::before {
   position: absolute;
   left: 0px;
+  top: -0.5rem;
   height: 0.125rem;
   width: 100%;
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.\!hamburger::before {
+  position: absolute;
+  left: 0px;
+  top: -0.5rem;
+  height: 0.125rem;
+  width: 100%;
+  --tw-rotate: 0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-content: '';
@@ -594,8 +620,25 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hamburger::after {
   position: absolute;
   left: 0px;
+  top: 0.5rem;
   height: 0.125rem;
   width: 100%;
+  --tw-rotate: -0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.\!hamburger::after {
+  position: absolute;
+  left: 0px;
+  top: 0.5rem;
+  height: 0.125rem;
+  width: 100%;
+  --tw-rotate: -0deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
   --tw-content: '';
@@ -800,6 +843,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-duration: 300ms;
 }
 
+/* ---hide & show--- */
+
+/* ---hamburger-expand--- */
+
 .hamburger-expand {
   background-color: transparent;
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
@@ -823,21 +870,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hamburger-expand::before{
+.hamburger-expand{
+  transition: background-color 200ms ease-in 200ms;
+}
+
+.hamburger-expand::before,
+    .hamburger-expand::after {
   transition: top 200ms ease-in, transform 200ms ease-in 200ms;
 }
 
-.hamburger-expand::after{
-  transition: top 200ms ease-in, transform 200ms ease-in 200ms;
-}
-
-.hamburger-collapse {
-  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
+/* ---hamburger-collapse--- */
 
 .hamburger-collapse::before {
   top: -0.5rem;
@@ -853,13 +895,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.hamburger-collapse::before{
+.hamburger-collapse{
+  transition: background-color 200ms ease-in 200ms;
+}
+
+.hamburger-collapse::before,
+    .hamburger-collapse::after {
   transition: top 200ms ease-in 200ms, transform 200ms ease-in;
 }
 
-.hamburger-collapse::after{
-  transition: top 200ms ease-in 200ms, transform 200ms ease-in;
-}
+/* hamburger change to arrow */
 
 @-webkit-keyframes full-width {
   0%{
@@ -880,40 +925,6 @@ Ensure the default browser behavior of the `hidden` attribute.
     max-width:100%;
   }
 }
-
-/* @keyframes hamburger-change--x{
-    0%{
-        @apply bg-white;
-    }
-
-    100%{
-        @apply bg-transparent;
-    }
-}
-
-@keyframes before-change--x{
-    50%{
-        @apply top-1/2 -translate-y-1/2;
-    }
-
-    100%{
-        @apply top-1/2 -translate-y-1/2 rotate-45;
-    }
-}
-
-@keyframes after-change--x{
-    50%{
-        @apply -top-1/2 translate-y-1/2;
-    }
-
-    100%{
-        @apply -top-1/2 translate-y-1/2 -rotate-45;
-    }
-}
-
-@keyframes change--arrow{
-
-} */
 
 .placeholder\:text-primary::-moz-placeholder {
   --tw-text-opacity: 1;
