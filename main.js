@@ -1,10 +1,31 @@
 // hamburger menu
-let menuBtn = document.querySelector('#menu-btn')
-let menu = document.querySelector('#menu')
-let title = document.querySelector('#title')
-let hamburger = document.querySelector('#hamburger')
+const menuBtn = document.querySelector('#menu-btn')
+const menu = document.querySelector('#menu')
+const title = document.querySelector('#title')
+const hamburger = document.querySelector('#hamburger')
+const searchBtn = document.querySelector('#search-btn')
+const searchWrapper = document.querySelector('#search-wrapper')
+const completedBtn = document.querySelector('#completed-btn')
+const closeSearchBtn = document.querySelector('#search-close-btn')
+const searchInput = document.querySelector('#search-input')
 
-// Homepage <---> menu
+// Homepage ---> menu
+const showMenu = () => {
+    menu.classList.remove('hidden');
+    menu.classList.add('flex')
+    menu.classList.add('item-center')
+    menu.classList.add('justify-end')
+    title.classList.add('hidden')
+
+    if(hamburger.classList.contains('hamburger-expand')){
+        menuBtn.removeEventListener('click', showMenu)
+        menuBtn.addEventListener('click', backToHomepage)
+    }else if(hamburger.classList.contains('hamburger-expand')){
+        // 填入關於箭頭的功能
+    }
+}
+
+// menu ---> Homepage
 const backToHomepage = () => {
     menu.classList.add('hidden');
     menu.classList.remove('flex')
@@ -14,17 +35,8 @@ const backToHomepage = () => {
     menuBtn.removeEventListener('click', backToHomepage)
     menuBtn.addEventListener('click', showMenu)
 }
-const showMenu = () => {
-    menu.classList.remove('hidden');
-    menu.classList.add('flex')
-    menu.classList.add('item-center')
-    menu.classList.add('justify-end')
-    title.classList.add('hidden')
-    menuBtn.removeEventListener('click', showMenu)
-    menuBtn.addEventListener('click', backToHomepage)
-}
 
-// hamburger switcher
+// hamburger switcher(expand & collapse)
 const hamburgerSwitcher = () => {
     if (!hamburger.classList.contains('hamburger-expand')) {
         hamburger.classList.remove('hamburger-collapse')
@@ -35,6 +47,9 @@ const hamburgerSwitcher = () => {
     }
 }
 
+// hamburger switcher(arrow)
+const hamburgerArrowChanger = () => {}
+
 // open search input
 const openSearchInput = () => {
     searchBtn.classList.add('hidden')
@@ -44,22 +59,16 @@ const openSearchInput = () => {
     menuBtn.removeEventListener('click', showMenu)
     menuBtn.removeEventListener('click', backToHomepage)
     menuBtn.removeEventListener('click', hamburgerSwitcher)
-    // ↓ 這行有問題，因為showMenu自帶刪除己身之事件監聽，所以不能這樣用。
+
+    // ↓ 這行原本有問題，但我有在showMenu加判斷式了，如果到時候如果有把
+    // ↓  hamburger-expand替換成hamburger-arrow的話，就不會有自刪自己event的問題了。
     menuBtn.addEventListener('click', showMenu)
 }
 
 menuBtn.addEventListener('click', hamburgerSwitcher)
 menuBtn.addEventListener('click', showMenu)
-
-let searchBtn = document.querySelector('#search-btn')
-let searchWrapper = document.querySelector('#search-wrapper')
-let completedBtn = document.querySelector('#completed-btn')
-
+searchBtn.addEventListener('click', hamburgerArrowChanger)
 searchBtn.addEventListener('click', openSearchInput)
-
-// close search btn
-let closeSearchBtn = document.querySelector('#search-close-btn')
-let searchInput = document.querySelector('#search-input')
 
 
 closeSearchBtn.addEventListener('click', () => {

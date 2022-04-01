@@ -885,6 +885,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 /* hamburger change to arrow */
 
+.hamburger-arrow {
+}
+
 @-webkit-keyframes full-width {
   0%{
     max-width:0;
