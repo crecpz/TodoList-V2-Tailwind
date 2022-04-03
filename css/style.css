@@ -885,8 +885,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 /* hamburger change to arrow */
 
-.hamburger-arrow {
+.hamburger-arrow::before {
+  --tw-translate-x: -50%;
+  content: var(--tw-content);
+  --tw-rotate: -45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
+
+.hamburger-arrow::before, 
+    .hamburger-arrow::after {
+}
+
+/* 
+        目前要來開始做hamburger-arrow的箭頭樣式。
+        我打算先試試看原封不動往左translate，因為
+        角度是正確的，只差長度與位置。
+    */
 
 @-webkit-keyframes full-width {
   0%{

@@ -48,7 +48,10 @@ const hamburgerSwitcher = () => {
 }
 
 // hamburger switcher(arrow)
-const hamburgerArrowChanger = () => {}
+const hamburgerArrowChanger = () => {
+    hamburger.classList.add('hamburger-arrow')
+    hamburger.classList.remove('hamburger-expand')
+}
 
 // open search input
 const openSearchInput = () => {
