@@ -30,11 +30,12 @@
 
     /* ---hamburger基本樣式--- */
     .hamburger{
-        @apply relative w-full h-0.5 bg-white;
+        @apply relative w-full h-0.5 bg-white rounded-lg;
     }
 
     .hamburger::before,
     .hamburger::after{
+        @apply rounded-lg;
         content:'';
         position: absolute;
         left: 0;
@@ -99,17 +100,30 @@
 
     /* hamburger change to arrow */
     .hamburger-arrow {
-        @apply before:-translate-x-1/2 before:-rotate-45;
+        @apply bg-white transition-colors;
+        @apply  before:top-0 before:-rotate-45 before:w-3/4 before:bg-red-500;
+        @apply  after:-top-0 after:rotate-45 after:w-3/4 after:bg-green-500;
+        
+        /*
+        before:-translate-x-1/2  before:-top-1
+
+        /*
+        
+        */
     }
 
     .hamburger-arrow::before, 
     .hamburger-arrow::after {
-    
+        /* transform-origin: left; */
+        transition: background-color 200ms ease-in 200ms,transform 200ms ease-in, top ease-in 200ms, width ease-in 200ms;
     }
 
     /* 
-        目前要來開始做hamburger-arrow的箭頭樣式。
-        我打算先試試看原封不動往左translate，因為
-        角度是正確的，只差長度與位置。
+        hamburger的變形:
+        1. collapse -->  expand   --OK
+        2. expand   -->  collapse --OK
+        3. expand   -->  arrow
+        4. arrow    -->  expand 
     */
+    
 }

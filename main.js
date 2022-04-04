@@ -9,35 +9,14 @@ const completedBtn = document.querySelector('#completed-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 
-// Homepage ---> menu
-const showMenu = () => {
-    menu.classList.remove('hidden');
-    menu.classList.add('flex')
-    menu.classList.add('item-center')
-    menu.classList.add('justify-end')
-    title.classList.add('hidden')
 
-    if(hamburger.classList.contains('hamburger-expand')){
-        menuBtn.removeEventListener('click', showMenu)
-        menuBtn.addEventListener('click', backToHomepage)
-    }else if(hamburger.classList.contains('hamburger-expand')){
-        // 填入關於箭頭的功能
-    }
-}
-
-// menu ---> Homepage
-const backToHomepage = () => {
-    menu.classList.add('hidden');
-    menu.classList.remove('flex')
-    menu.classList.remove('item-center')
-    menu.classList.remove('justify-end')
-    title.classList.remove('hidden')
-    menuBtn.removeEventListener('click', backToHomepage)
-    menuBtn.addEventListener('click', showMenu)
-}
+menuBtn.addEventListener('click', hamburgerSwitcher)
+menuBtn.addEventListener('click', showMenu)
+searchBtn.addEventListener('click', hamburgerArrowChanger)
+searchBtn.addEventListener('click', openSearchInput)
 
 // hamburger switcher(expand & collapse)
-const hamburgerSwitcher = () => {
+function hamburgerSwitcher() {
     if (!hamburger.classList.contains('hamburger-expand')) {
         hamburger.classList.remove('hamburger-collapse')
         hamburger.classList.add('hamburger-expand')
@@ -47,33 +26,78 @@ const hamburgerSwitcher = () => {
     }
 }
 
-// hamburger switcher(arrow)
-const hamburgerArrowChanger = () => {
+function hamburgerArrowChanger() {
     hamburger.classList.add('hamburger-arrow')
     hamburger.classList.remove('hamburger-expand')
+    
+    
+    // hamburger.classList.add('hamburger-collapse')
+    
+    // const delayRemove = setTimeout(() => {
+    //     // hamburger.classList.remove('hamburger-collapse')
+    //     hamburger.classList.remove('hamburger-collapse')
+    // }, 1000);
 }
 
-// open search input
-const openSearchInput = () => {
+
+function showMenu() {
+    style_showMenu();
+    title.classList.add('hidden')
+    menuBtn.removeEventListener('click', showMenu);
+    menuBtn.addEventListener('click', backToHomepage);
+}
+
+function backToHomepage() {
+    style_hideMenu()
+    title.classList.remove('hidden')
+    menuBtn.removeEventListener('click', backToHomepage)
+    menuBtn.addEventListener('click', showMenu)
+}
+
+
+
+
+function openSearchInput() {
     searchBtn.classList.add('hidden')
     completedBtn.classList.add('hidden')
     searchWrapper.classList.remove('hidden')
 
-    menuBtn.removeEventListener('click', showMenu)
+    // 移除無用監聽器:
     menuBtn.removeEventListener('click', backToHomepage)
     menuBtn.removeEventListener('click', hamburgerSwitcher)
 
-    // ↓ 這行原本有問題，但我有在showMenu加判斷式了，如果到時候如果有把
-    // ↓  hamburger-expand替換成hamburger-arrow的話，就不會有自刪自己event的問題了。
-    menuBtn.addEventListener('click', showMenu)
+    // 樣式調整:
+    // 尚需一個menuBtn.addEventListener('click', 作為箭頭轉為X的函數);
+
+    // 新增所需監聽器:
+    menuBtn.addEventListener('click', closeSearchInput);
+
 }
 
-menuBtn.addEventListener('click', hamburgerSwitcher)
-menuBtn.addEventListener('click', showMenu)
-searchBtn.addEventListener('click', hamburgerArrowChanger)
-searchBtn.addEventListener('click', openSearchInput)
+function closeSearchInput() {
+    searchBtn.classList.remove('hidden')
+    completedBtn.classList.remove('hidden')
+    searchWrapper.classList.add('hidden')
 
 
-closeSearchBtn.addEventListener('click', () => {
+    menuBtn.removeEventListener('click', closeSearchInput);
+    menuBtn.addEventListener('click', backToHomepage);
+}
 
-})
+function style_showMenu() {
+    menu.classList.remove('hidden')
+    menu.classList.add('flex')
+    menu.classList.add('item-center')
+    menu.classList.add('justify-end')
+}
+
+function style_hideMenu() {
+    menu.classList.add('hidden')
+    menu.classList.remove('flex')
+    menu.classList.remove('item-center')
+    menu.classList.remove('justify-end')
+}
+
+
+
+
