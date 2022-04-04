@@ -30,11 +30,12 @@
 
     /* ---hamburger基本樣式--- */
     .hamburger{
-        @apply relative w-full h-0.5 bg-white;
+        @apply relative w-full h-0.5 bg-white rounded-lg;
     }
 
     .hamburger::before,
     .hamburger::after{
+        @apply rounded-lg;
         content:'';
         position: absolute;
         left: 0;
@@ -99,12 +100,21 @@
 
     /* hamburger change to arrow */
     .hamburger-arrow {
-        @apply before:-translate-x-1/2 before:-rotate-45;
+        @apply  before:w-3/4 before:top-0 before:-rotate-45;
+        @apply  after:w-3/4  after:-top-0 after:rotate-45;
+        
+        /*
+        before:-translate-x-1/2  before:-top-1
+
+        /*
+        
+        */
     }
 
     .hamburger-arrow::before, 
     .hamburger-arrow::after {
-    
+        transform-origin: left;
+        transition: transform 200ms ease-in, top ease-in 200ms, width ease-in 400ms;
     }
 
     /* 
@@ -112,4 +122,5 @@
         我打算先試試看原封不動往左translate，因為
         角度是正確的，只差長度與位置。
     */
+    
 }

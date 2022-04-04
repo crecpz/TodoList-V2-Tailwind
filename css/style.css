@@ -577,6 +577,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative;
   height: 0.125rem;
   width: 100%;
+  border-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
@@ -585,8 +586,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   position: relative;
   height: 0.125rem;
   width: 100%;
+  border-radius: 0.5rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.hamburger::before, .hamburger::after {
+  border-radius: 0.5rem;
+}
+
+.\!hamburger::before, .\!hamburger::after {
+  border-radius: 0.5rem;
 }
 
 .hamburger::before,
@@ -886,14 +896,34 @@ Ensure the default browser behavior of the `hidden` attribute.
 /* hamburger change to arrow */
 
 .hamburger-arrow::before {
-  --tw-translate-x: -50%;
+  top: 0px;
+  width: 75%;
   content: var(--tw-content);
   --tw-rotate: -45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hamburger-arrow::after {
+  top: -0px;
+  width: 75%;
+  content: var(--tw-content);
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hamburger-arrow {
+  /*
+        before:-translate-x-1/2  before:-top-1
+
+        /*
+        
+        */
+}
+
 .hamburger-arrow::before, 
     .hamburger-arrow::after {
+  transform-origin: left;
+  transition: transform 200ms ease-in, top ease-in 200ms, width ease-in 400ms;
 }
 
 /* 
