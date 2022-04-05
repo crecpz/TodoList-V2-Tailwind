@@ -100,31 +100,14 @@
 
     /* hamburger change to arrow */
     .hamburger-arrow {
-<<<<<<< HEAD
-        @apply bg-transparent transition-colors;
+        /* @apply bg-transparent transition-colors; */
         @apply before:-rotate-45 before:-top-1.5 before:w-3/4;
         @apply after:rotate-45 after:top-1.5 after:w-3/4;
-=======
-        @apply  before:w-3/4 before:top-0 before:-rotate-45;
-        @apply  after:w-3/4  after:-top-0 after:rotate-45;
-        
-        /*
-        before:-translate-x-1/2  before:-top-1
-
-        /*
-        
-        */
->>>>>>> 9d9f5e256eaf94633bd856c1eb0ce95095bd19b1
     }
 
     .hamburger-arrow::before, 
     .hamburger-arrow::after {
-<<<<<<< HEAD
         transition: transform 400ms ease-in, top ease-in 200ms 200ms, width ease-in 200ms;
-=======
-        transform-origin: left;
-        transition: transform 200ms ease-in, top ease-in 200ms, width ease-in 400ms;
->>>>>>> 9d9f5e256eaf94633bd856c1eb0ce95095bd19b1
     }
 
     /* 

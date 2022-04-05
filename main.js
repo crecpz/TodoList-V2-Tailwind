@@ -102,8 +102,6 @@ function style_hideSearchInput() {
     searchWrapper.classList.add('hidden')
 }
 
-
-
 function style_showSearchInput() {
     searchBtn.classList.add('hidden')
     completedBtn.classList.add('hidden')
