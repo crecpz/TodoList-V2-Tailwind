@@ -905,7 +905,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .hamburger-arrow::before {
+<<<<<<< HEAD
   top: -0.375rem;
+=======
+  top: 0px;
+>>>>>>> 9d9f5e256eaf94633bd856c1eb0ce95095bd19b1
   width: 75%;
   content: var(--tw-content);
   --tw-rotate: -45deg;
@@ -913,16 +917,36 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .hamburger-arrow::after {
+<<<<<<< HEAD
   top: 0.375rem;
+=======
+  top: -0px;
+>>>>>>> 9d9f5e256eaf94633bd856c1eb0ce95095bd19b1
   width: 75%;
   content: var(--tw-content);
   --tw-rotate: 45deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+<<<<<<< HEAD
 .hamburger-arrow::before, 
     .hamburger-arrow::after {
   transition: transform 400ms ease-in, top ease-in 200ms 200ms, width ease-in 200ms;
+=======
+.hamburger-arrow {
+  /*
+        before:-translate-x-1/2  before:-top-1
+
+        /*
+        
+        */
+}
+
+.hamburger-arrow::before, 
+    .hamburger-arrow::after {
+  transform-origin: left;
+  transition: transform 200ms ease-in, top ease-in 200ms, width ease-in 400ms;
+>>>>>>> 9d9f5e256eaf94633bd856c1eb0ce95095bd19b1
 }
 
 /* 

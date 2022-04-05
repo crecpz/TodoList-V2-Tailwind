@@ -68,8 +68,6 @@ function openSearchInput() {
 
     // 新增所需監聽器:
     menuBtn.addEventListener('click', closeSearchInput);
-
-
 }
 
 function closeSearchInput() {
@@ -101,8 +99,6 @@ function style_hideSearchInput() {
     completedBtn.classList.remove('hidden')
     searchWrapper.classList.add('hidden')
 }
-
-
 
 function style_showSearchInput() {
     searchBtn.classList.add('hidden')
