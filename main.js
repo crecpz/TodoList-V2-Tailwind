@@ -68,8 +68,6 @@ function openSearchInput() {
 
     // 新增所需監聽器:
     menuBtn.addEventListener('click', closeSearchInput);
-
-
 }
 
 function closeSearchInput() {
