@@ -865,7 +865,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hamburger-expand::before,
     .hamburger-expand::after {
-  transition: top 200ms ease-in, transform 200ms ease-in 200ms;
+  transition: top 300ms ease-in 200ms, transform 600ms ease-in, width ease-in 500ms;
 }
 
 /* ---hamburger-collapse--- */
@@ -890,7 +890,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hamburger-collapse::before,
     .hamburger-collapse::after {
-  transition: top 200ms ease-in 200ms, transform 200ms ease-in;
+  transition: top 300ms ease-in, transform 500ms ease-in;
 }
 
 /* hamburger change to arrow */
@@ -920,7 +920,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .hamburger-arrow::before, 
     .hamburger-arrow::after {
-  transition: transform 400ms ease-in, top ease-in 200ms 200ms, width ease-in 200ms;
+  transition: top 500ms ease-in, transform 500ms ease-in, width ease-in 200ms;
 }
 
 /* 
@@ -928,8 +928,8 @@ Ensure the default browser behavior of the `hidden` attribute.
         1. collapse -->  expand   --OK
         2. expand   -->  collapse --OK
         3. expand   -->  arrow    --OK
-        4. arrow    -->  expand 
-    */
+        4. arrow    -->  expand   --OK
+        */
 
 @-webkit-keyframes full-width {
   0%{
