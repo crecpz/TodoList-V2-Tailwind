@@ -10,13 +10,13 @@ const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 
 
-menuBtn.addEventListener('click', hamburgerSwitcher)
+menuBtn.addEventListener('click', hamburger_expandSwitcher)
 menuBtn.addEventListener('click', showMenu)
-searchBtn.addEventListener('click', hamburgerArrowChanger)
+searchBtn.addEventListener('click', hamburger_arrowSwitcher)
 searchBtn.addEventListener('click', openSearchInput)
 
 // hamburger switcher(expand & collapse)
-function hamburgerSwitcher() {
+function hamburger_expandSwitcher() {
     if (!hamburger.classList.contains('hamburger-expand')) {
         hamburger.classList.remove('hamburger-collapse')
         hamburger.classList.add('hamburger-expand')
@@ -26,17 +26,15 @@ function hamburgerSwitcher() {
     }
 }
 
-function hamburgerArrowChanger() {
-    hamburger.classList.add('hamburger-arrow')
-    hamburger.classList.remove('hamburger-expand')
-    
-    
-    // hamburger.classList.add('hamburger-collapse')
-    
-    // const delayRemove = setTimeout(() => {
-    //     // hamburger.classList.remove('hamburger-collapse')
-    //     hamburger.classList.remove('hamburger-collapse')
-    // }, 1000);
+function hamburger_arrowSwitcher() {
+    if (hamburger.classList.contains('hamburger-expand')) {
+        hamburger.classList.add('hamburger-arrow')
+        hamburger.classList.remove('hamburger-expand')
+    } else {
+        hamburger.classList.add('hamburger-expand')
+        hamburger.classList.remove('hamburger-arrow')
+    }
+
 }
 
 
@@ -58,31 +56,31 @@ function backToHomepage() {
 
 
 function openSearchInput() {
-    searchBtn.classList.add('hidden')
-    completedBtn.classList.add('hidden')
-    searchWrapper.classList.remove('hidden')
+    style_showSearchInput()
 
     // 移除無用監聽器:
     menuBtn.removeEventListener('click', backToHomepage)
-    menuBtn.removeEventListener('click', hamburgerSwitcher)
+    menuBtn.removeEventListener('click', hamburger_expandSwitcher)
 
     // 樣式調整:
     // 尚需一個menuBtn.addEventListener('click', 作為箭頭轉為X的函數);
+    menuBtn.addEventListener('click', hamburger_arrowSwitcher)
 
     // 新增所需監聽器:
     menuBtn.addEventListener('click', closeSearchInput);
 
+
 }
 
 function closeSearchInput() {
-    searchBtn.classList.remove('hidden')
-    completedBtn.classList.remove('hidden')
-    searchWrapper.classList.add('hidden')
-
-
+    style_hideSearchInput()
     menuBtn.removeEventListener('click', closeSearchInput);
+    menuBtn.removeEventListener('click', hamburger_arrowSwitcher);
     menuBtn.addEventListener('click', backToHomepage);
+    menuBtn.addEventListener('click', hamburger_expandSwitcher);
 }
+
+/* style控制系列 */
 
 function style_showMenu() {
     menu.classList.remove('hidden')
@@ -98,6 +96,16 @@ function style_hideMenu() {
     menu.classList.remove('justify-end')
 }
 
+function style_hideSearchInput() {
+    searchBtn.classList.remove('hidden')
+    completedBtn.classList.remove('hidden')
+    searchWrapper.classList.add('hidden')
+}
 
 
 
+function style_showSearchInput() {
+    searchBtn.classList.add('hidden')
+    completedBtn.classList.add('hidden')
+    searchWrapper.classList.remove('hidden')
+}

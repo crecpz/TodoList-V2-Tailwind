@@ -100,29 +100,21 @@
 
     /* hamburger change to arrow */
     .hamburger-arrow {
-        @apply bg-white transition-colors;
-        @apply  before:top-0 before:-rotate-45 before:w-3/4 before:bg-red-500;
-        @apply  after:-top-0 after:rotate-45 after:w-3/4 after:bg-green-500;
-        
-        /*
-        before:-translate-x-1/2  before:-top-1
-
-        /*
-        
-        */
+        @apply bg-transparent transition-colors;
+        @apply before:-rotate-45 before:-top-1.5 before:w-3/4;
+        @apply after:rotate-45 after:top-1.5 after:w-3/4;
     }
 
     .hamburger-arrow::before, 
     .hamburger-arrow::after {
-        /* transform-origin: left; */
-        transition: background-color 200ms ease-in 200ms,transform 200ms ease-in, top ease-in 200ms, width ease-in 200ms;
+        transition: transform 400ms ease-in, top ease-in 200ms 200ms, width ease-in 200ms;
     }
 
     /* 
         hamburger的變形:
         1. collapse -->  expand   --OK
         2. expand   -->  collapse --OK
-        3. expand   -->  arrow
+        3. expand   -->  arrow    --OK
         4. arrow    -->  expand 
     */
     
