@@ -100,7 +100,7 @@
 
     /* hamburger change to arrow */
     .hamburger-arrow {
-        @apply bg-transparent transition-colors;
+        @apply bg-transparent transition-all;
         @apply before:-rotate-45 before:-top-1.5 before:w-3/4;
         @apply after:rotate-45 after:top-1.5 after:w-3/4;
     }
