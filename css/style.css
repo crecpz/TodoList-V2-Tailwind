@@ -931,6 +931,11 @@ Ensure the default browser behavior of the `hidden` attribute.
         4. arrow    -->  expand   --OK
         */
 
+.animation-fadeout {
+  -webkit-animation: fadeout 300ms forwards;
+          animation: fadeout 300ms forwards;
+}
+
 @-webkit-keyframes full-width {
   0%{
     max-width:0;
@@ -948,6 +953,46 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   100%{
     max-width:100%;
+  }
+}
+
+@-webkit-keyframes fadeout{
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout{
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadein{
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein{
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 

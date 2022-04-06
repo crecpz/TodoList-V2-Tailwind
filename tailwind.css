@@ -11,6 +11,7 @@
 }
 
 
+
 @layer components{
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
@@ -117,5 +118,30 @@
         3. expand   -->  arrow    --OK
         4. arrow    -->  expand   --OK
         */
-    
+
+
+        .animation-fadeout {
+            animation: fadeout 300ms forwards;
+        }
+}
+
+
+@keyframes fadeout{
+    0%{
+        @apply opacity-100;
+    }
+
+    100%{
+        @apply opacity-0;
+    }
+}
+
+@keyframes fadein{
+    0%{
+        @apply opacity-0;
+    }
+
+    100%{
+        @apply opacity-100;
+    }
 }

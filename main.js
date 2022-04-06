@@ -39,10 +39,13 @@ function hamburger_arrowSwitcher() {
 
 
 function showMenu() {
-    style_showMenu();
-    title.classList.add('hidden')
-    menuBtn.removeEventListener('click', showMenu);
-    menuBtn.addEventListener('click', backToHomepage);
+    title.classList.add('animation-fadeout')
+    title.addEventListener('animationend', () => {
+        style_showMenu();
+        title.classList.add('hidden')
+        menuBtn.removeEventListener('click', showMenu);
+        menuBtn.addEventListener('click', backToHomepage);
+    })
 }
 
 function backToHomepage() {
@@ -63,7 +66,6 @@ function openSearchInput() {
     menuBtn.removeEventListener('click', hamburger_expandSwitcher)
 
     // 樣式調整:
-    // 尚需一個menuBtn.addEventListener('click', 作為箭頭轉為X的函數);
     menuBtn.addEventListener('click', hamburger_arrowSwitcher)
 
     // 新增所需監聽器:
