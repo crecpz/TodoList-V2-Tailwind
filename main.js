@@ -57,6 +57,7 @@ function backToHomepage() {
 
 function openSearchInput() {
     style_showSearchInput()
+    style_hideMenu()
 
     // 移除無用監聽器:
     menuBtn.removeEventListener('click', backToHomepage)
@@ -72,6 +73,7 @@ function openSearchInput() {
 
 function closeSearchInput() {
     style_hideSearchInput()
+    showMenu()
     menuBtn.removeEventListener('click', closeSearchInput);
     menuBtn.removeEventListener('click', hamburger_arrowSwitcher);
     menuBtn.addEventListener('click', backToHomepage);
