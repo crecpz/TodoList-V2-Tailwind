@@ -11,6 +11,7 @@
 }
 
 
+
 @layer components{
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
@@ -110,12 +111,55 @@
         transition: top 500ms ease-in, transform 500ms ease-in, width ease-in 200ms;
     }
 
-    /* 
-        hamburger的變形:
-        1. collapse -->  expand   --OK
-        2. expand   -->  collapse --OK
-        3. expand   -->  arrow    --OK
-        4. arrow    -->  expand   --OK
-        */
+    .animation-fade-in {
+        animation: fade-in 500ms forwards;
+    }
+
+    .animation-fade-out {
+        animation: fade-out 500ms forwards;
+    }
+
+    /* 曾嘗試想用transition的方式，但:
+        1. 對於transition-opacity來說，對於display的切換是無效果的，除非要使用transitionend。 
+        2. 更深層的問題，對於首頁那些本來早已存在的東西，需要使用類似漢堡條的處理方式來防止F5刷新閃爍。
+    */
     
+
+    /* .fadein{
+        @apply transition-opacity duration-500 opacity-100;
+    }
+
+    .fadeout{
+        @apply transition-opacity duration-500 opacity-0;
+    } */
 }
+
+@keyframes fade-in{
+    0%{
+        @apply opacity-0;
+    }
+
+    100%{
+        @apply opacity-100;
+    }
+}
+
+@keyframes fade-out{
+    0%{
+        @apply opacity-100;
+    }
+
+    100%{
+        @apply opacity-0;
+    }
+}
+/* 
+fadein、fadeout的問題有待解決......
+
+現在的問題出在title被告知其需要監聽animationend，如果發現任何animationend就執行 style_showMenu()、style_hideTitle();
+現在要想想要怎麼解決。
+
+想到的方法:
+方法01 將title的監聽設定成用完就丟，但前提是title的callback function是匿名，我砍不掉匿名函式，至少需要將其取個名字。
+方法02 使用判斷式的方式，使其不要看到任何的animationend都執行style_showMenu()、style_hideTitle()，而是要看特定的條件，什麼時候可以執行，然後執行什麼，都設定好。
+ */
