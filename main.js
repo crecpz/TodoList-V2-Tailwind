@@ -8,7 +8,7 @@ const searchWrapper = document.querySelector('#search-wrapper')
 const completedBtn = document.querySelector('#completed-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
-
+let animationend = false;
 
 menuBtn.addEventListener('click', hamburger_expandSwitcher)
 searchBtn.addEventListener('click', hamburger_arrowSwitcher)
@@ -17,6 +17,12 @@ searchBtn.addEventListener('click', openSearchInput)
 
 menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
+
+/**
+ * 連續點按產生出的問題有稍微做一些修正，但還是要經過測試。
+ * 目前的commit還不會merge到dev，等到確定沒問題才會merge。
+ * 在那之前，要先測試!
+ */
 
 
 // menuBtn.addEventListener('click', fadeOutMenu)
@@ -60,16 +66,19 @@ function fadeInTitle() {
 function fadeInItem(targetItem, callback, evenTarget, removeCallback, addCallback) {
     targetItem.classList.add('animation-fade-in')
     targetItem.addEventListener('animationend', () => {
+        menuBtn.classList.remove('pointer-events-none')
         evenTarget.removeEventListener('click', removeCallback)
         callback()
         targetItem.classList.remove('animation-fade-in')
         evenTarget.addEventListener('click', addCallback)
+        // menuBtn.disabled = false;
     })
 }
 
 function fadeOutItem(targetItem, callback, evenTarget, removeCallback, addCallback) {
     targetItem.classList.add('animation-fade-out')
     targetItem.addEventListener('animationend', () => {
+        menuBtn.classList.remove('pointer-events-none')
         callback()
         targetItem.classList.remove('animation-fade-out')
         evenTarget.removeEventListener('click', removeCallback)
@@ -86,6 +95,16 @@ function fadeOutItem(targetItem, callback, evenTarget, removeCallback, addCallba
 
 // hamburger switcher(expand & collapse)
 function hamburger_expandSwitcher() {
+    menuBtn.disabled = true;
+    let disabledTime = setTimeout(() => {
+        menuBtn.disabled = false;
+        clearTimeout(disabledTime)
+        // console.log('clear!');
+    }, 1000)
+
+
+
+    // menuBtn.classList.add('pointer-events-none')
     if (!hamburger.classList.contains('hamburger-expand')) {
         hamburger.classList.remove('hamburger-collapse')
         hamburger.classList.add('hamburger-expand')

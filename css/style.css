@@ -639,6 +639,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   transform: rotate(-0deg) !important;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .absolute {
   position: absolute;
 }

@@ -67,6 +67,7 @@
         @apply visible opacity-100;
     }
 
+
     /* ---hamburger-expand--- */
     .hamburger-expand{
         @apply bg-transparent transition-colors duration-200;
