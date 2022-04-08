@@ -11,71 +11,77 @@ const searchInput = document.querySelector('#search-input')
 
 
 menuBtn.addEventListener('click', hamburger_expandSwitcher)
-// menuBtn.addEventListener('click', showMenu)
+searchBtn.addEventListener('click', hamburger_arrowSwitcher)
+searchBtn.addEventListener('click', openSearchInput)
 
 
-menuBtn.addEventListener('click', fadeoutTitle)
-// menuBtn.addEventListener('click', fadeoutMenu)
+menuBtn.addEventListener('click', fadeOutTitle)
+menuBtn.addEventListener('click', fadeInMenu)
+
+
+// menuBtn.addEventListener('click', fadeOutMenu)
 
 
 // menuBtn.addEventListener('click', () => {
-//     fadeout(title, showMenu)
+//     fadeOut(title, showMenu)
 // })
-// menuBtn.addEventListener('click', fadeoutFather)
+// menuBtn.addEventListener('click', fadeOutFather)
 
-// function fadeoutFather() {
-//     fadeout(title, showMenu)
+// function fadeOutFather() {
+//     fadeOut(title, showMenu)
 // }
 
 
 
 // menuBtn.addEventListener('click', ()=>{
-//     title.classList.add('animation-fadeout')
+//     title.classList.add('animation-fadeOut')
 //     title.addEventListener('animationend', showMenu)
 // })
-searchBtn.addEventListener('click', hamburger_arrowSwitcher)
-searchBtn.addEventListener('click', openSearchInput)
 
-function fadeoutTitle() {
-    fadeoutItem(title, showMenu, menuBtn, fadeoutTitle)
-}
-function fadeoutMenu() {
-    fadeoutItem(menu, backToHomepage, menuBtn, fadeoutMenu)
+
+function fadeOutTitle() {
+    fadeOutItem(title, showMenu, menuBtn, fadeOutTitle, fadeInTitle)
 }
 
-/* 以下測試中 */
+function fadeInMenu() {
+    fadeInItem(menu, showMenu, menuBtn, fadeInMenu, fadeOutMenu)
+}
 
-// function fadeinMenu() {
-//     fadeinItem(menu, showMenu, menuBtn, fadeinMenu)
-// }
+function fadeOutMenu() {
+    fadeOutItem(menu, backToHomepage, menuBtn, fadeOutMenu, fadeInMenu)
+}
 
-// function fadeinItem(targetItem, callback, evenTarget, evenTargetCallback) {
-//     targetItem.classList.add('animation-fadein')
-//     targetItem.addEventListener('animationend', () => {
-//         callback()
-//         targetItem.classList.remove('animation-fadein')
-//         evenTarget.removeEventListener('click', evenTargetCallback)
-//     })
-// }
+function fadeInTitle() {
+    fadeInItem(title, backToHomepage, menuBtn, fadeInTitle, fadeOutTitle)
+}
 
-// 先檢查看看函數有沒有問題，接著檢查函數連接的相關事件有沒有問題。
-// 如果檢查函數大概沒問題卻還是不會動，可以考慮【來與回只寫來不寫回】
-// 畢竟很多都重複動作的感覺
+
+// (要fadeOut的對象, 結束動畫後要執行的函數, 事件觸發對象, 事件觸發對象callback函數) 
+function fadeInItem(targetItem, callback, evenTarget, removeCallback, addCallback) {
+    targetItem.classList.add('animation-fade-in')
+    targetItem.addEventListener('animationend', () => {
+        evenTarget.removeEventListener('click', removeCallback)
+        callback()
+        targetItem.classList.remove('animation-fade-in')
+        evenTarget.addEventListener('click', addCallback)
+    })
+}
+
+function fadeOutItem(targetItem, callback, evenTarget, removeCallback, addCallback) {
+    targetItem.classList.add('animation-fade-out')
+    targetItem.addEventListener('animationend', () => {
+        callback()
+        targetItem.classList.remove('animation-fade-out')
+        evenTarget.removeEventListener('click', removeCallback)
+        evenTarget.addEventListener('click', addCallback)
+    })
+}
 
 /* 以上測試中 */
 
 
 /* 以下沒問題 */
 
-// fadeoutItem(要fadeout的對象, 結束動畫後要執行的函數, 事件觸發對象, 事件觸發對象callback函數) 
-function fadeoutItem(targetItem, callback, evenTarget, evenTargetCallback) {
-    targetItem.classList.add('animation-fadeout')
-    targetItem.addEventListener('animationend', () => {
-        callback()
-        targetItem.classList.remove('animation-fadeout')
-        evenTarget.removeEventListener('click', evenTargetCallback)
-    })
-}
 
 
 // hamburger switcher(expand & collapse)
@@ -107,7 +113,8 @@ function showMenu() {
     style_showMenu();
     menuBtn.removeEventListener('click', showMenu);
     // backup!! menuBtn.addEventListener('click', backToHomepage);
-    menuBtn.addEventListener('click', fadeoutMenu);
+    // menuBtn.addEventListener('click', fadeOutMenu);
+    // menuBtn.addEventListener('click', fadeOutTitle)
 }
 
 // 原汁原味 backToHomepage()
@@ -115,15 +122,16 @@ function backToHomepage() {
     style_hideMenu()
     style_showTitle()
     menuBtn.removeEventListener('click', backToHomepage)
-    menuBtn.addEventListener('click', showMenu)
+    // backup!! menuBtn.addEventListener('click', showMenu)
+    // menuBtn.addEventListener('click', fadeInMenu)
 }
 
 
 
 // function showMenu() {
-//     title.classList.add('animation-fadeout')
+//     title.classList.add('animation-fadeOut')
 //     title.addEventListener('animationend', () => {
-//         title.classList.remove('animation-fadeout')
+//         title.classList.remove('animation-fadeOut')
 //         style_hideTitle();
 //         style_showMenu();
 //     })
@@ -133,9 +141,9 @@ function backToHomepage() {
 
 
 // function backToHomepage() {
-//     menu.classList.add('animation-fadeout')
+//     menu.classList.add('animation-fadeOut')
 //     menu.addEventListener('animationend', () => {
-//         menu.classList.remove('animation-fadeout')
+//         menu.classList.remove('animation-fadeOut')
 //         style_hideMenu()
 //         style_showTitle()
 //     })
