@@ -86,10 +86,6 @@ function fadeOutItem(targetItem, callback, evenTarget, removeCallback, addCallba
     })
 }
 
-/* 以上測試中 */
-
-
-/* 以下沒問題 */
 
 
 
@@ -98,9 +94,9 @@ function hamburger_expandSwitcher() {
     menuBtn.disabled = true;
     let disabledTime = setTimeout(() => {
         menuBtn.disabled = false;
-        clearTimeout(disabledTime)
+        // clearTimeout(disabledTime)
         // console.log('clear!');
-    }, 1000)
+    }, 750)
 
 
 

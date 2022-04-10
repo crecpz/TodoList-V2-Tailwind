@@ -113,11 +113,11 @@
     }
 
     .animation-fade-in {
-        animation: fade-in 500ms forwards;
+        animation: fade-in 400ms forwards ease-in-out;
     }
 
     .animation-fade-out {
-        animation: fade-out 500ms forwards;
+        animation: fade-out 400ms forwards ease-in-out;
     }
 
     /* 曾嘗試想用transition的方式，但:
