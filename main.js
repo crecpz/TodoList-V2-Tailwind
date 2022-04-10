@@ -96,7 +96,7 @@ function hamburger_expandSwitcher() {
         menuBtn.disabled = false;
         // clearTimeout(disabledTime)
         // console.log('clear!');
-    }, 750)
+    }, 600)
 
 
 

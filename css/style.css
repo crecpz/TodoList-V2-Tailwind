@@ -928,13 +928,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .animation-fade-in {
-  -webkit-animation: fade-in 400ms forwards ease-in-out;
-          animation: fade-in 400ms forwards ease-in-out;
+  -webkit-animation: fade-in 300ms forwards ease-in-out;
+          animation: fade-in 300ms forwards ease-in-out;
 }
 
 .animation-fade-out {
-  -webkit-animation: fade-out 400ms forwards ease-in-out;
-          animation: fade-out 400ms forwards ease-in-out;
+  -webkit-animation: fade-out 300ms forwards ease-in-out;
+          animation: fade-out 300ms forwards ease-in-out;
 }
 
 /* 曾嘗試想用transition的方式，但:
