@@ -13,6 +13,10 @@
 
 
 @layer components{
+    .content {
+        @apply mx-auto px-5;
+    }
+    
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-1.5 after:top-1.5 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
@@ -54,6 +58,7 @@
         top: 8px;
         transform: rotate(-0deg);
     }
+
 }
 
 
@@ -120,19 +125,6 @@
         animation: fade-out 300ms forwards ease-in-out;
     }
 
-    /* 曾嘗試想用transition的方式，但:
-        1. 對於transition-opacity來說，對於display的切換是無效果的，除非要使用transitionend。 
-        2. 更深層的問題，對於首頁那些本來早已存在的東西，需要使用類似漢堡條的處理方式來防止F5刷新閃爍。
-    */
-    
-
-    /* .fadein{
-        @apply transition-opacity duration-500 opacity-100;
-    }
-
-    .fadeout{
-        @apply transition-opacity duration-500 opacity-0;
-    } */
 }
 
 @keyframes fade-in{

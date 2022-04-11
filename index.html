@@ -18,53 +18,61 @@
 </head>
 
 <body class="font-space-mono bg-black text-primary">
-    <!-- container -->
-    <div class="container px-5 py-16">
-
-        <div class="relative flex justify-between items-center">
-
-            <button id="menu-btn" class="w-6 h-6 mr-4 flex-shrink-0 cursor-pointer">
-                <div id="hamburger" class="hamburger">
-                </div>
-            </button>
-
-            <h1 id="title" class="text-3xl leading-[34px]">Todo List</h1>
-
-            <!-- 功能按鈕區 -->
-            <div id="menu" class="hidden w-full">
-
-                <!-- search btn -->
-                <button id="search-btn" class="btn btn--black text-left mr-4">
-                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
+    <header class="pt-16 mb-28">
+        <!-- container -->
+        <div class="content">
+            <div class="relative flex justify-between items-center">
+                <button id="menu-btn" class="w-6 h-6 mr-4 flex-shrink-0 cursor-pointer">
+                    <div id="hamburger" class="hamburger">
+                    </div>
                 </button>
 
-                <!-- completed btn -->
-                <button id="completed-btn" class="btn btn--black">
-                    <i class="fa-solid fa-trash mr-2"></i>Clear Completed
-                </button>
-            </div>
+                <h1 id="title" class="text-3xl leading-[34px]">Todo List</h1>
 
-            <!-- search wrapper -->
-            <div id="search-wrapper" class="hidden relative w-full text-sm">
-                <div
-                    class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-1.5 px-2 sm:py-2 sm:px-4">
-                    <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
-                    <input type="text" id="search-input" placeholder="Search"
-                        class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
-                    <i id="search-close-btn"
-                        class="text-primary-darken fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
+                <!-- 功能按鈕區 -->
+                <div id="menu" class="hidden w-full">
+
+                    <!-- search btn -->
+                    <button id="search-btn" class="btn btn--black text-left mr-4">
+                        <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
+                    </button>
+
+                    <!-- completed btn -->
+                    <button id="completed-btn" class="btn btn--black">
+                        <i class="fa-solid fa-trash mr-2"></i>Clear Completed
+                    </button>
                 </div>
-                <div
-                    class="relative left-1.5 top-1.5 -z-[1] py-1.5 px-2 sm:py-2 sm:px-4  border border-primary/80 w-full h-full text-transparent">
-                    1
+
+                <!-- search wrapper -->
+                <div id="search-wrapper" class="hidden relative w-full text-sm">
+                    <div
+                        class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-1.5 px-2 sm:py-2 sm:px-4">
+                        <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
+                        <input type="text" id="search-input" placeholder="Search"
+                            class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
+                        <i id="search-close-btn"
+                            class="text-primary-darken fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
+                    </div>
+                    <div
+                        class="relative left-1.5 top-1.5 -z-[1] py-1.5 px-2 sm:py-2 sm:px-4  border border-primary/80 w-full h-full text-transparent">
+                        1
+                    </div>
                 </div>
             </div>
         </div>
+    </header>
+
+    <main>
+        <div class="content">
+            <div class="flex bg-primary-darkenest border border-primary-darken">
+                <input type="text" placeholder="Typing something..." name="" id=""
+                    class="w-full text-white bg-transparent outline-none px-3 py-2.5 placeholder:text-primary">
+                    <button class="bg-primary"><i class="fa-solid fa-arrow-right px-4 py-3 text-primary-darkenest"></i></button>
+            </div>
 
 
-
-    </div>
-
+        </div>
+    </main>
     <script src="main.js"></script>
 </body>
 
