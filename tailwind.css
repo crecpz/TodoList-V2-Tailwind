@@ -59,6 +59,33 @@
         transform: rotate(-0deg);
     }
 
+
+    /* list */
+
+    .todo-item {
+        @apply flex items-center py-2;
+    }
+
+    .todo-checkbox {
+        @apply mx-4 appearance-none bg-red-500;
+    }
+
+    .todo-text {
+
+    }
+
+    .todo-option{
+        @apply px-2 ml-auto;
+    }
+
+    .todo-option__dot{
+        @apply w-1 h-1 mb-0.5 rounded-full bg-primary;
+    }
+
+    .todo-option__dot:last-child {
+        @apply mb-0;
+    }
+
 }
 
 

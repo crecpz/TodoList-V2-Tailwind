@@ -62,15 +62,43 @@
         </div>
     </header>
 
-    <main>
+    <main class="mt-40">
         <div class="content">
             <div class="flex bg-primary-darkenest border border-primary-darken">
                 <input type="text" placeholder="Typing something..." name="" id=""
-                    class="w-full text-white bg-transparent outline-none px-3 py-2.5 placeholder:text-primary">
-                    <button class="bg-primary"><i class="fa-solid fa-arrow-right px-4 py-3 text-primary-darkenest"></i></button>
+                    class="w-full text-white bg-transparent outline-none px-3 py-2 placeholder:text-primary">
+                <button class="bg-primary-darken">
+                    <i class="fa-solid fa-arrow-right px-4 py-2.5 text-primary-darkenest"></i>
+                </button>
             </div>
 
+            <!-- <div id="status-bar"class="flex items-center w-full mt-16 border border-primary">
+                <button class="flex items-center justify-center text-center flex-[1_1_20%] border-r border-primary bg-primary text-black">All</button>
+                <button class="flex items-center justify-center text-center flex-[1_1_35%] border-r border-primary">Active</button>
+                <button class="flex items-center justify-center text-center flex-[1_1_45%]">Completed</button>
+            </div> -->
 
+            <div id="status-bar" class="flex items-center w-full mt-20">
+                <button
+                    class="flex items-center justify-center text-center flex-[1_1_20%] py-1 border border-primary border-r-0 bg-primary text-black">All</button>
+                <button
+                    class="flex items-center justify-center text-center flex-[1_1_35%] py-1 border border-primary border-r-0">Active</button>
+                <button
+                    class="flex items-center justify-center text-center flex-[1_1_45%] py-1 border border-primary">Completed</button>
+            </div>
+
+            <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
+            <ul class="border border-t-0 border-primary">
+                <li id="todo-item" class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <p id="todo-text" class="todo-text">巴拿馬總統跟我算是有一點交情</p>
+                    <button id="todo-option" class="todo-option">
+                        <div class="todo-option__dot"></div>
+                        <div class="todo-option__dot"></div>
+                        <div class="todo-option__dot"></div>
+                    </button>
+                </li>
+            </ul>
         </div>
     </main>
     <script src="main.js"></script>

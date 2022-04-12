@@ -8,7 +8,7 @@ const searchWrapper = document.querySelector('#search-wrapper')
 const completedBtn = document.querySelector('#completed-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
-let animationend = false;
+const statusBar = document.querySelector('#status-bar')
 
 menuBtn.addEventListener('click', hamburger_expandSwitcher)
 searchBtn.addEventListener('click', hamburger_arrowSwitcher)
@@ -18,31 +18,7 @@ searchBtn.addEventListener('click', openSearchInput)
 menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
-/**
- * 連續點按產生出的問題有稍微做一些修正，但還是要經過測試。
- * 目前的commit還不會merge到dev，等到確定沒問題才會merge。
- * 在那之前，要先測試!
- */
-
-
-// menuBtn.addEventListener('click', fadeOutMenu)
-
-
-// menuBtn.addEventListener('click', () => {
-//     fadeOut(title, showMenu)
-// })
-// menuBtn.addEventListener('click', fadeOutFather)
-
-// function fadeOutFather() {
-//     fadeOut(title, showMenu)
-// }
-
-
-
-// menuBtn.addEventListener('click', ()=>{
-//     title.classList.add('animation-fadeOut')
-//     title.addEventListener('animationend', showMenu)
-// })
+statusBar.addEventListener('click', statusBarActive)
 
 
 function fadeOutTitle() {
@@ -120,51 +96,17 @@ function hamburger_arrowSwitcher() {
     }
 }
 
-
-
-// 原汁原味showMenu()
 function showMenu() {
     style_hideTitle();
     style_showMenu();
     menuBtn.removeEventListener('click', showMenu);
-    // backup!! menuBtn.addEventListener('click', backToHomepage);
-    // menuBtn.addEventListener('click', fadeOutMenu);
-    // menuBtn.addEventListener('click', fadeOutTitle)
 }
 
-// 原汁原味 backToHomepage()
 function backToHomepage() {
     style_hideMenu()
     style_showTitle()
     menuBtn.removeEventListener('click', backToHomepage)
-    // backup!! menuBtn.addEventListener('click', showMenu)
-    // menuBtn.addEventListener('click', fadeInMenu)
 }
-
-
-
-// function showMenu() {
-//     title.classList.add('animation-fadeOut')
-//     title.addEventListener('animationend', () => {
-//         title.classList.remove('animation-fadeOut')
-//         style_hideTitle();
-//         style_showMenu();
-//     })
-//     menuBtn.removeEventListener('click', showMenu);
-//     menuBtn.addEventListener('click', backToHomepage);
-// }
-
-
-// function backToHomepage() {
-//     menu.classList.add('animation-fadeOut')
-//     menu.addEventListener('animationend', () => {
-//         menu.classList.remove('animation-fadeOut')
-//         style_hideMenu()
-//         style_showTitle()
-//     })
-//     menuBtn.removeEventListener('click', backToHomepage)
-//     menuBtn.addEventListener('click', showMenu)
-// }
 
 function openSearchInput() {
     style_showSearchInput()
@@ -224,4 +166,16 @@ function style_showSearchInput() {
     searchBtn.classList.add('hidden')
     completedBtn.classList.add('hidden')
     searchWrapper.classList.remove('hidden')
+}
+
+function statusBarActive(e) {
+    if (e.target.tagName === 'BUTTON') {
+        statusBar.querySelectorAll('button').forEach(item => {
+            item.classList.remove('bg-primary')
+            item.classList.remove('text-black')
+        })
+
+        e.target.classList.add('bg-primary')
+        e.target.classList.add('text-black')
+    }
 }
