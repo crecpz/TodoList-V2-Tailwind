@@ -37,8 +37,8 @@
                         <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
                     </button>
 
-                    <!-- completed btn -->
-                    <button id="completed-btn" class="btn btn--black">
+                    <!-- clear btn -->
+                    <button id="clear-btn" class="btn btn--black">
                         <i class="fa-solid fa-trash mr-2"></i>Clear Completed
                     </button>
                 </div>
@@ -65,10 +65,10 @@
     <main class="mt-40">
         <div class="content">
             <div class="flex bg-primary-darkenest border border-primary-darken">
-                <input type="text" placeholder="Typing something..." name="" id=""
+                <input type="text" placeholder="Add a new task!" name="" id="todo-input"
                     class="w-full text-white bg-transparent outline-none px-3 py-2 placeholder:text-primary">
                 <button class="bg-primary-darken">
-                    <i class="fa-solid fa-arrow-right px-4 py-2.5 text-primary-darkenest"></i>
+                    <i class="fa-solid fa-arrow-right px-4 py-2.5 text-white"></i>
                 </button>
             </div>
 
@@ -78,25 +78,31 @@
                 <button class="flex items-center justify-center text-center flex-[1_1_45%]">Completed</button>
             </div> -->
 
-            <div id="status-bar" class="flex items-center w-full mt-20">
-                <button
-                    class="flex items-center justify-center text-center flex-[1_1_20%] py-1 border border-primary border-r-0 bg-primary text-black">All</button>
-                <button
-                    class="flex items-center justify-center text-center flex-[1_1_35%] py-1 border border-primary border-r-0">Active</button>
-                <button
-                    class="flex items-center justify-center text-center flex-[1_1_45%] py-1 border border-primary">Completed</button>
+            <div id="status-bar" class="status-bar">
+                <button class="status-bar__btn status-bar__all-btn status-bar__btn--active">All</button>
+                <button class="status-bar__btn status-bar__active-btn">Active</button>
+                <button class="status-bar__btn status-bar__completed-btn">Completed</button>
             </div>
 
             <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
-            <ul class="border border-t-0 border-primary">
-                <li id="todo-item" class="todo-item">
-                    <input type="checkbox" class="todo-checkbox">
-                    <p id="todo-text" class="todo-text">巴拿馬總統跟我算是有一點交情</p>
-                    <button id="todo-option" class="todo-option">
-                        <div class="todo-option__dot"></div>
-                        <div class="todo-option__dot"></div>
-                        <div class="todo-option__dot"></div>
-                    </button>
+            <ul class="border border-t-0 border-primary py-4">
+                <li>
+                    <div id="todo-item" class="todo-item">
+                        <input id="todo-checkbox" type="checkbox" class="todo-checkbox">
+                        <p id="todo-text" class="todo-text">
+                            大道之行也，天下為公，選賢與能，講信修睦。故人不獨親其親，不獨子其子，使老有所終，壯有所用，幼有所長，鰥、寡、孤、獨、廢疾者皆有所養，男有分，女有歸。貨惡其棄于地也，不必藏于己；力惡其不出于身也，不必為己。是故謀閉而不興，盜竊亂賊而不作，故外戶而不閉，是謂大同。
+                        </p>
+                        <button id="todo-option-btn" class="todo-option-btn">
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                        </button>
+                    </div>
+                    <div class="todo-option">
+                        <button id="edit-btn" class="btn btn--small btn--black mr-4">Edit<i
+                                class="fa-solid fa-pen-to-square ml-2"></i></button>
+                        <button id="remove-btn" class="btn btn--small btn--black">Remove<i class="fa-solid fa-trash ml-2"></i></button>
+                    </div>
                 </li>
             </ul>
         </div>

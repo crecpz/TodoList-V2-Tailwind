@@ -5,10 +5,24 @@ const title = document.querySelector('#title')
 const hamburger = document.querySelector('#hamburger')
 const searchBtn = document.querySelector('#search-btn')
 const searchWrapper = document.querySelector('#search-wrapper')
-const completedBtn = document.querySelector('#completed-btn')
+const clearBtn = document.querySelector('#clear-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 const statusBar = document.querySelector('#status-bar')
+
+/* Todo Input */
+const todoInput = document.querySelector('#todo-input')
+
+/* List */
+const todoItem = document.querySelector('#todo-item')
+const todoCheckbox = document.querySelector('#todo-checkbox')
+const todoText = document.querySelector('#todo-text')
+const todoOptionBtn = document.querySelector('#todo-option-btn')
+
+// 以下測試
+const editBtn = document.querySelector('#edit-btn')
+editBtn.addEventListener('click', () => todoText.setAttribute('contenteditable', 'true'))
+//
 
 menuBtn.addEventListener('click', hamburger_expandSwitcher)
 searchBtn.addEventListener('click', hamburger_arrowSwitcher)
@@ -19,6 +33,7 @@ menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
 statusBar.addEventListener('click', statusBarActive)
+
 
 
 function fadeOutTitle() {
@@ -170,12 +185,11 @@ function style_showSearchInput() {
 
 function statusBarActive(e) {
     if (e.target.tagName === 'BUTTON') {
-        statusBar.querySelectorAll('button').forEach(item => {
-            item.classList.remove('bg-primary')
-            item.classList.remove('text-black')
+        statusBar.querySelectorAll('.status-bar__btn').forEach(item => {
+            item.classList.remove('status-bar__btn--active')
         })
 
-        e.target.classList.add('bg-primary')
-        e.target.classList.add('text-black')
+        e.target.classList.add('status-bar__btn--active')
     }
 }
+

@@ -19,11 +19,15 @@
     
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
-        @apply after:content-[''] after:absolute after:-z-[1] after:left-1.5 after:top-1.5 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
-        @apply hover:bg-primary hover:text-black after:hover:left-1 after:hover:top-1;
+        @apply after:content-[''] after:absolute after:-z-[1] after:left-1 after:top-1 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
+        @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
         @apply text-sm;
         @apply py-1.5 px-2;
-    }    
+    }
+
+    .btn--small{
+        @apply py-1 px-3;
+    } 
     
     .btn--black{
         @apply bg-black;
@@ -59,34 +63,72 @@
         transform: rotate(-0deg);
     }
 
+    /* status bar */
+    .status-bar {
+        @apply flex items-center w-full mt-20;
+    }
+    
+    .status-bar__btn {
+        @apply flex items-center justify-center text-center py-2 border border-primary;
+    }
+
+    .status-bar__all-btn {
+        @apply flex-[1_1_25%] border-r-0;
+    }
+
+    .status-bar__active-btn {
+        @apply flex-[1_1_35%] border-r-0;
+    }
+
+    .status-bar__completed-btn {
+        @apply flex-[1_1_40%];
+    }
+
+    .status-bar__btn--active {
+        @apply bg-primary-darken text-white;
+    }
+
 
     /* list */
 
     .todo-item {
-        @apply flex items-center py-2;
+        @apply flex items-center px-6 py-3 hover:bg-primary/20;
     }
 
     .todo-checkbox {
-        @apply mx-4 appearance-none bg-red-500;
+        @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
+    }
+
+    .todo-checkbox:checked::before {
+        @apply content-['']  w-2 h-2 bg-primary-darken;
     }
 
     .todo-text {
-
+        @apply pl-4 mr-4 cursor-pointer;
     }
 
-    .todo-option{
+    .todo-option-btn{
         @apply px-2 ml-auto;
     }
-
-    .todo-option__dot{
+    
+    .todo-option-btn__dot{
         @apply w-1 h-1 mb-0.5 rounded-full bg-primary;
     }
-
-    .todo-option__dot:last-child {
+    
+    .todo-option-btn__dot:last-child {
         @apply mb-0;
     }
 
+    .todo-option {
+        @apply flex justify-end items-center my-4 w-full;
+    }
 }
+
+
+
+
+
+
 
 
 @layer utilities{
@@ -173,13 +215,3 @@
         @apply opacity-0;
     }
 }
-/* 
-fadein、fadeout的問題有待解決......
-
-現在的問題出在title被告知其需要監聽animationend，如果發現任何animationend就執行 style_showMenu()、style_hideTitle();
-現在要想想要怎麼解決。
-
-想到的方法:
-方法01 將title的監聽設定成用完就丟，但前提是title的callback function是匿名，我砍不掉匿名函式，至少需要將其取個名字。
-方法02 使用判斷式的方式，使其不要看到任何的animationend都執行style_showMenu()、style_hideTitle()，而是要看特定的條件，什麼時候可以執行，然後執行什麼，都設定好。
- */
