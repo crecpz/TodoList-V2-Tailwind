@@ -17,7 +17,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="font-space-mono bg-black text-primary">
+<body class="font-space-mono bg-black text-primary tracking-widest">
     <header class="pt-16 mb-28">
         <!-- container -->
         <div class="content">
@@ -83,14 +83,14 @@
                 <button class="status-bar__btn status-bar__active-btn">Active</button>
                 <button class="status-bar__btn status-bar__completed-btn">Completed</button>
             </div>
-
+            <!-- ，選賢與能，講信修睦。故人不獨親其親，不獨子其子，使老有所終，壯有所用，幼有所長，鰥、寡、孤、獨、廢疾者皆有所養，男有分，女有歸。貨惡其棄于地也，不必藏于己；力惡其不出于身也，不必為己。是故謀閉而不興，盜竊亂賊而不作，故外戶而不閉，是謂大同。 -->
             <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
-            <ul class="border border-t-0 border-primary py-4">
-                <li>
-                    <div id="todo-item" class="todo-item">
+            <ul class="border border-t-0 border-primary pt-4">
+                <li id="todo-item" class="todo-item">
+                    <div class="flex items-center justify-between w-full">
                         <input id="todo-checkbox" type="checkbox" class="todo-checkbox">
-                        <p id="todo-text" class="todo-text">
-                            大道之行也，天下為公，選賢與能，講信修睦。故人不獨親其親，不獨子其子，使老有所終，壯有所用，幼有所長，鰥、寡、孤、獨、廢疾者皆有所養，男有分，女有歸。貨惡其棄于地也，不必藏于己；力惡其不出于身也，不必為己。是故謀閉而不興，盜竊亂賊而不作，故外戶而不閉，是謂大同。
+                        <p id="todo-text" class="todo-text focus-visible:outline-none">
+                            天下為公大道之行也下天下為公大道之行也下天天下為公大道之行也下天下為公大道之行也下天下為天下為公大道之行也下天下為公大道之行也下天下為天下為公大道之行也下天下為公大道之行也下天下為天下為公大道之行也下天下為公大道之行也下天下為下為公大道之行也下
                         </p>
                         <button id="todo-option-btn" class="todo-option-btn">
                             <div class="todo-option-btn__dot"></div>
@@ -98,10 +98,33 @@
                             <div class="todo-option-btn__dot"></div>
                         </button>
                     </div>
+
                     <div class="todo-option">
                         <button id="edit-btn" class="btn btn--small btn--black mr-4">Edit<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-                        <button id="remove-btn" class="btn btn--small btn--black">Remove<i class="fa-solid fa-trash ml-2"></i></button>
+                        <button id="remove-btn" class="btn btn--small btn--black">Remove<i
+                                class="fa-solid fa-trash ml-2"></i></button>
+                    </div>
+                </li>
+
+                <li id="todo-item" class="todo-item">
+                    <div class="flex items-center justify-between w-full">
+                        <input id="todo-checkbox" type="checkbox" class="todo-checkbox">
+                        <p id="todo-text" class="todo-text">
+                            天下為公大道之行也下天下為公大道之行也下天下為公大道之行也下
+                        </p>
+                        <button id="todo-option-btn" class="todo-option-btn">
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                        </button>
+                    </div>
+
+                    <div class="todo-option">
+                        <button id="edit-btn" class="btn btn--small btn--black mr-4">Edit<i
+                                class="fa-solid fa-pen-to-square ml-2"></i></button>
+                        <button id="remove-btn" class="btn btn--small btn--black">Remove<i
+                                class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>
             </ul>

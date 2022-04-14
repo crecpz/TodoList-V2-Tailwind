@@ -694,16 +694,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 /* list */
 
 .todo-item {
+  margin-bottom: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-}
-
-.todo-item:hover {
-  background-color: rgb(188 184 184 / 0.2);
 }
 
 .todo-checkbox {
@@ -733,9 +729,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .todo-text {
-  margin-right: 1rem;
   cursor: pointer;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   padding-left: 1rem;
+  padding-right: 0.75rem;
 }
 
 .todo-option-btn {
@@ -758,12 +756,26 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 .todo-option {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   display: flex;
   width: 100%;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  margin-left: 3.5rem;
+  /* 此設定可讓todo-option與btn對齊 */
+  /* @apply max-h-0 invisible opacity-0 mt-0 mb-0; */
+}
+
+.todo-item:hover +.todo-option{
+  /* @apply scale-y-0 opacity-0;*/
+  visibility: visible;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  max-height: 100px;
+  opacity: 1;
+  /* @apply min-h-full;*/
 }
 
 .pointer-events-none {
@@ -979,13 +991,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.625rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .pt-16 {
   padding-top: 4rem;
+}
+
+.pt-4 {
+  padding-top: 1rem;
 }
 
 .text-left {
@@ -1017,6 +1028,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .leading-\[34px\] {
   line-height: 34px;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
 }
 
 .text-primary {
@@ -1181,6 +1196,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
+/* 
+1. li最好還是較做todo-item比較好，裡面要包什麼樣式另外寫就好了
+ */
+
 @-webkit-keyframes fade-in{
   0% {
     opacity: 0;
@@ -1239,6 +1258,35 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(188 184 184 / var(--tw-text-opacity));
+}
+
+.focus-visible\:border-0:focus-visible {
+  border-width: 0px;
+}
+
+.focus-visible\:border-none:focus-visible {
+  border-style: none;
+}
+
+.focus-visible\:outline-none:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.focus-visible\:outline:focus-visible {
+  outline-style: solid;
+}
+
+.focus-visible\:outline-hidden:focus-visible {
+  outline-style: hidden;
+}
+
+.focus-visible\:outline-1:focus-visible {
+  outline-width: 1px;
+}
+
+.focus-visible\:outline-red-300:focus-visible {
+  outline-color: #fca5a5;
 }
 
 @media (min-width: 640px) {

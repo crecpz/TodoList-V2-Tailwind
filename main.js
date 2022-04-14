@@ -35,6 +35,28 @@ menuBtn.addEventListener('click', fadeInMenu)
 statusBar.addEventListener('click', statusBarActive)
 
 
+/* 以下測試編輯文字 可行 */ 
+function selectText(node) {
+    node = document.getElementById(node);
+
+    if (document.body.createTextRange) {
+        const range = document.body.createTextRange();
+        range.moveToElementText(node);
+        range.select();
+    } else if (window.getSelection) {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    } else {
+        console.warn("Could not select text in node: Unsupported browser.");
+    }
+}
+const clickable = document.querySelector('#edit-btn');
+clickable.addEventListener('click', () => selectText('todo-text'));
+/* 以上測試編輯文字 */ 
+
 
 function fadeOutTitle() {
     fadeOutItem(title, showMenu, menuBtn, fadeOutTitle, fadeInTitle)
