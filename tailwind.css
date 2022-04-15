@@ -104,7 +104,11 @@
     }
 
     .todo-text {
-        @apply pl-4 pr-3 py-4 cursor-pointer;
+        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-2 py-2 cursor-pointer ;  
+        /* 
+        此行將邊距在不調整總體邊距的前提下作了調整
+        margin & padding各佔一半
+        */ 
     }
 
     .todo-option-btn{

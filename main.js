@@ -38,7 +38,7 @@ statusBar.addEventListener('click', statusBarActive)
 /* 以下測試編輯文字 可行 */ 
 function selectText(node) {
     node = document.getElementById(node);
-
+    node.style.border = '1px dashed'
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();
         range.moveToElementText(node);
