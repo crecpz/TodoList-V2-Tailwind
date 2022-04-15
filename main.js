@@ -195,13 +195,13 @@ function style_hideMenu() {
 
 function style_hideSearchInput() {
     searchBtn.classList.remove('hidden')
-    completedBtn.classList.remove('hidden')
+    clearBtn.classList.remove('hidden')
     searchWrapper.classList.add('hidden')
 }
 
 function style_showSearchInput() {
     searchBtn.classList.add('hidden')
-    completedBtn.classList.add('hidden')
+    clearBtn.classList.add('hidden')
     searchWrapper.classList.remove('hidden')
 }
 
