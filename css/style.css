@@ -547,19 +547,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   content: var(--tw-content);
 }
 
-.btn:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(188 184 184 / var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.btn:hover::after {
-  left: 0px;
-  content: var(--tw-content);
-  top: 0px;
-}
-
 .btn {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -567,6 +554,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.375rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(188 184 184 / var(--tw-bg-opacity));
+  }
+
+  .btn:hover {
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+  }
+
+  .btn:hover::after {
+    content: var(--tw-content);
+    left: 0px;
+  }
+
+  .btn:hover::after {
+    content: var(--tw-content);
+    top: 0px;
+  }
 }
 
 .btn--small {
@@ -926,6 +935,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-top-width: 0px;
 }
 
+.border-t {
+  border-top-width: 1px;
+}
+
 .border-primary {
   --tw-border-opacity: 1;
   border-color: rgb(188 184 184 / var(--tw-border-opacity));
@@ -938,6 +951,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-primary-darken {
   --tw-border-opacity: 1;
   border-color: rgb(124 124 124 / var(--tw-border-opacity));
+}
+
+.border-primary-darkenest {
+  --tw-border-opacity: 1;
+  border-color: rgb(40 40 40 / var(--tw-border-opacity));
 }
 
 .bg-black {
@@ -1182,26 +1200,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .animation-fade-out {
   -webkit-animation: fade-out 300ms forwards ease-in-out;
           animation: fade-out 300ms forwards ease-in-out;
-}
-
-@-webkit-keyframes full-width {
-  0%{
-    max-width:0;
-  }
-
-  100%{
-    max-width:100%;
-  }
-}
-
-@keyframes full-width {
-  0%{
-    max-width:0;
-  }
-
-  100%{
-    max-width:100%;
-  }
 }
 
 /* 

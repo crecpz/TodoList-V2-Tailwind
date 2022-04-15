@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes full-width {
-    0%{
-        max-width:0;
-    }100%{
-        max-width:100%;
-    }
-}
-
-
 
 @layer components{
     .content {
@@ -20,9 +11,15 @@
     .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-1 after:top-1 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
-        @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
         @apply text-sm;
         @apply py-1.5 px-2;
+    }
+
+
+    @media (hover: hover) {
+        .btn {
+            @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
+        }
     }
 
     .btn--small{
