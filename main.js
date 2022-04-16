@@ -10,34 +10,69 @@ const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 const statusBar = document.querySelector('#status-bar')
 
+/* hamburger switch */
+menuBtn.addEventListener('click', hamburger_expandSwitcher)
+searchBtn.addEventListener('click', hamburger_arrowSwitcher)
+
+/* open search input */
+searchBtn.addEventListener('click', openSearchInput)
+
+/* title, menu fadein & fadeout  */
+menuBtn.addEventListener('click', fadeOutTitle)
+menuBtn.addEventListener('click', fadeInMenu)
+
+
 /* Todo Input */
 const todoInput = document.querySelector('#todo-input')
 
 /* List */
-const todoItem = document.querySelector('#todo-item')
-const todoCheckbox = document.querySelector('#todo-checkbox')
-const todoText = document.querySelector('#todo-text')
-const todoOptionBtn = document.querySelector('#todo-option-btn')
+const todoList = document.querySelector('#todo-list')
 
-// 以下測試
-const editBtn = document.querySelector('#edit-btn')
-editBtn.addEventListener('click', () => todoText.setAttribute('contenteditable', 'true'))
+const todoItems = todoList.querySelectorAll('.todo-item');
+// const todoCheckbox = document.querySelectorAll('.todo-checkbox')
+const todoText = document.querySelector('.todo-text')
+
+
+todoList.addEventListener('click', e => {
+    const todoOption = e.target.parentElement.parentElement.querySelector('.todo-option');
+    const todoOptionBtn = e.target.parentElement.parentElement.querySelector('.todo-option-btn')
+    if (e.target === todoOptionBtn) {
+        todoOption.classList.toggle('todo-option--open')
+    }
+})
+
+// 使editBtn按下去之後該文字區域變成可編輯狀態。
+// const editBtn = document.querySelector('.edit-btn')
+// editBtn.addEventListener('click', () => todoText.setAttribute('contenteditable', 'true'))
 //
 
-menuBtn.addEventListener('click', hamburger_expandSwitcher)
-searchBtn.addEventListener('click', hamburger_arrowSwitcher)
-searchBtn.addEventListener('click', openSearchInput)
 
 
-menuBtn.addEventListener('click', fadeOutTitle)
-menuBtn.addEventListener('click', fadeInMenu)
+
+// 使editBtn按下去之後該文字區域變成可編輯狀態。
+// 0416 這邊有問題: 這邊報錯了 要寫好
+const editBtn = document.querySelectorAll('.edit-btn')
+editBtn.forEach(btn => {
+    btn.addEventListener('click', e => {
+        const todoText = e.target.parentElement.parentElement.querySelector('.todo-text')
+        console.log(e.target)
+        todoText.setAttribute('contenteditable', 'true')
+    })
+})
+//
+
+
+// 以下兩行是受到selectText函數啟發，原來這樣寫也行，我的作法多套了一層function。但這兩還最後還是會出現閃爍
+// menuBtn.addEventListener('click', () => fadeInItem(menu, showMenu, menuBtn, fadeInMenu, fadeOutMenu))
+// menuBtn.addEventListener('click', () => fadeOutItem(title, showMenu, menuBtn, fadeOutTitle, fadeInTitle))
 
 statusBar.addEventListener('click', statusBarActive)
 
 
-/* 以下測試編輯文字 可行 */ 
-function selectText(node) {
-    node = document.getElementById(node);
+/* 以下測試編輯文字 可行 */
+function selectText(e, node) {
+    node = e.target.parentElement.parentElement.querySelector('.todo-text');
+    // console.log(node)
     node.style.border = '1px dashed'
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();
@@ -53,9 +88,13 @@ function selectText(node) {
         console.warn("Could not select text in node: Unsupported browser.");
     }
 }
-const clickable = document.querySelector('#edit-btn');
-clickable.addEventListener('click', () => selectText('todo-text'));
-/* 以上測試編輯文字 */ 
+const clickable = document.querySelectorAll('.edit-btn');
+clickable.forEach(item => {
+    item.addEventListener('click', e => selectText(e, 'todo-text'));
+})
+// const clickable = document.querySelector('.edit-btn');
+// clickable.addEventListener('click', e => selectText(e, 'todo-text'));
+/* 以上測試編輯文字 */
 
 
 function fadeOutTitle() {

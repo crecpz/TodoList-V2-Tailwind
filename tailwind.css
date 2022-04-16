@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    i {
+        @apply pointer-events-none;
+    }
+}
 
 @layer components{
     .content {
@@ -91,11 +96,16 @@
     /* list */
 
     .todo-item {
-        @apply flex flex-col items-center px-6 mb-4;
+        @apply flex flex-col items-center px-6 py-2 first:border-t-0;
+        @apply border-t border-primary/25;
     }
 
     .todo-checkbox {
         @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
+    }
+
+    .todo-checkbox:checked {
+        @apply line-through;
     }
 
     .todo-checkbox:checked::before {
@@ -103,7 +113,7 @@
     }
 
     .todo-text {
-        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-2 py-2 cursor-pointer ;  
+        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer ;  
         /* 
         此行將邊距在不調整總體邊距的前提下作了調整
         margin & padding各佔一半
@@ -127,20 +137,16 @@
         @apply transition-all duration-500;
         
         @apply ml-14; /* 此設定可讓todo-option與btn對齊 */
-        /* @apply max-h-0 invisible opacity-0 mt-0 mb-0; */
+        @apply max-h-0 invisible opacity-0 mt-0 mb-0;
+        /* @apply max-h-[100px] visible opacity-100 mt-2 my-4; */
     }
 
-    .todo-item:hover +.todo-option{
+    .todo-option--open {
         /* @apply scale-y-0 opacity-0;*/
         @apply max-h-[100px] visible opacity-100 mt-2 my-4;
         /* @apply min-h-full;*/
     }
 }
-
-/* 
-1. li最好還是較做todo-item比較好，裡面要包什麼樣式另外寫就好了
- */
-
 
 
 
