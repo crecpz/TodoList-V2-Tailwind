@@ -804,6 +804,7 @@ i {
 }
 
 .todo-option-btn__dot {
+  pointer-events: none;
   margin-bottom: 0.125rem;
   height: 0.25rem;
   width: 0.25rem;

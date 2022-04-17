@@ -125,7 +125,7 @@
     }
     
     .todo-option-btn__dot{
-        @apply w-1 h-1 mb-0.5 rounded-full bg-primary;
+        @apply w-1 h-1 mb-0.5 rounded-full bg-primary pointer-events-none;
     }
     
     .todo-option-btn__dot:last-child {

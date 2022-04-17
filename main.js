@@ -1,4 +1,3 @@
-// hamburger menu
 const menuBtn = document.querySelector('#menu-btn')
 const menu = document.querySelector('#menu')
 const title = document.querySelector('#title')
@@ -17,40 +16,82 @@ searchBtn.addEventListener('click', hamburger_arrowSwitcher)
 /* open search input */
 searchBtn.addEventListener('click', openSearchInput)
 
-/* title, menu fadein & fadeout  */
+/* title, menu -> fadein & fadeout  */
 menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
 
 /* Todo Input */
 const todoInput = document.querySelector('#todo-input')
+const addBtn = document.querySelector('#add-btn')
+addBtn.addEventListener('click', addNewTodo)
 
-/* List */
+/* Todo List */
 const todoList = document.querySelector('#todo-list')
-
 const todoItems = todoList.querySelectorAll('.todo-item');
+
+function addNewTodo() {
+    let todoListData = JSON.parse(localStorage.getItem('todos'))
+    if (!todoListData) {
+        todoListData = [];
+    }
+    let inputData = {
+        content: todoInput.value,
+        status: 'active',
+    }
+    todoListData.push(inputData)
+    todoInput.value = '';
+    localStorage.setItem('todos', JSON.stringify(todoListData))
+    renderTodo()
+}
+
+/**
+ * localstorage已經寫完，正準備進入render階段。
+ */
+
+
+function renderTodo() {
+    let todoItem = '';
+    todoItem +=
+        `<li class="todo-item">
+            <div class="flex items-center justify-between w-full">
+                <input type="checkbox" class="todo-checkbox">
+                <p class="todo-text focus-visible:outline-none">
+                    ${1}
+                </p>
+                <button class="todo-option-btn">
+                    <div class="todo-option-btn__dot"></div>
+                    <div class="todo-option-btn__dot"></div>
+                    <div class="todo-option-btn__dot"></div>
+                </button>
+            </div>
+            <div class="todo-option">
+                <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
+                        class="fa-solid fa-pen-to-square ml-2"></i></button>
+                <button class="remove-btn btn btn--small btn--black">Remove<i
+                        class="fa-solid fa-trash ml-2"></i></button>
+            </div>
+        </li>`
+    todoList.innerHTML = todoItem;
+}
+
+
+
 // const todoCheckbox = document.querySelectorAll('.todo-checkbox')
 const todoText = document.querySelector('.todo-text')
 
 
 todoList.addEventListener('click', e => {
     const todoOption = e.target.parentElement.parentElement.querySelector('.todo-option');
-    const todoOptionBtn = e.target.parentElement.parentElement.querySelector('.todo-option-btn')
-    if (e.target === todoOptionBtn) {
+    const clickingTodoOptionDot = e.target.classList.value === 'todo-option-btn';
+    // 提醒: 我在css中已經將todo-option-btn__dot的pointer-event設為none，所以在此處
+    //       無論怎麼點都不會點到todo-option-btn__dot
+    if (clickingTodoOptionDot) {
         todoOption.classList.toggle('todo-option--open')
     }
 })
 
 // 使editBtn按下去之後該文字區域變成可編輯狀態。
-// const editBtn = document.querySelector('.edit-btn')
-// editBtn.addEventListener('click', () => todoText.setAttribute('contenteditable', 'true'))
-//
-
-
-
-
-// 使editBtn按下去之後該文字區域變成可編輯狀態。
-// 0416 這邊有問題: 這邊報錯了 要寫好
 const editBtn = document.querySelectorAll('.edit-btn')
 editBtn.forEach(btn => {
     btn.addEventListener('click', e => {
