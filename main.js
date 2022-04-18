@@ -24,7 +24,6 @@ menuBtn.addEventListener('click', fadeInMenu)
 /* Todo Input */
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
-
 todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
         addNewTodo()
@@ -32,14 +31,16 @@ todoInput.addEventListener('keyup', e => {
 })
 addBtn.addEventListener('click', addNewTodo)
 
+
+
 /* Todo List */
 const todoList = document.querySelector('#todo-list')
 const todoItems = todoList.querySelectorAll('.todo-item');
-
 let todoListData = JSON.parse(localStorage.getItem('todos'))
 
-
 renderTodo()
+
+
 function renderTodo() {
     let todoItems = '';
     if (todoListData) {
@@ -48,8 +49,7 @@ function renderTodo() {
                 `<li class="todo-item">
                     <div class="flex items-center justify-between w-full">
                         <input type="checkbox" class="todo-checkbox">
-                        <p class="todo-text">${data.content}
-                        </p>
+                        <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
                             <div class="todo-option-btn__dot"></div>
                             <div class="todo-option-btn__dot"></div>
@@ -69,7 +69,6 @@ function renderTodo() {
 
 }
 
-
 function addNewTodo() {
     if (todoInput.value.trim() !== '') {
         if (!todoListData) {
@@ -78,39 +77,44 @@ function addNewTodo() {
 
         let inputData = {
             content: todoInput.value,
+            checked: false,
             status: 'active',
         }
-        todoListData.push(inputData)
+
+        todoListData.unshift(inputData)
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo()
-        
-    }else {
+
+    } else {
         todoInput.value = '';
     }
 }
 
 
-// const todoCheckbox = document.querySelectorAll('.todo-checkbox')
-const todoText = document.querySelector('.todo-text')
-
-
 todoList.addEventListener('click', e => {
-    const todoOption = e.target.parentElement.parentElement.querySelector('.todo-option');
-    const clickingTodoOptionDot = e.target.classList.value === 'todo-option-btn';
-    // 提醒: 我在css中已經將todo-option-btn__dot的pointer-event設為none，所以在此處
-    //       無論怎麼點都不會點到todo-option-btn__dot
-    if (clickingTodoOptionDot) {
+    const todoItem = e.target.closest('li')
+
+
+    // 如果用戶點按todo-option-btn，使其展開todo-option
+    const todoOption = todoItem.querySelector('.todo-option');
+    if (e.target.classList.value === 'todo-option-btn') {
         todoOption.classList.toggle('todo-option--open')
     }
+
+    // ★處改成寫進來
+
+
 })
 
+
+
+// ★
 // 使editBtn按下去之後該文字區域變成可編輯狀態。
 const editBtn = document.querySelectorAll('.edit-btn')
 editBtn.forEach(btn => {
     btn.addEventListener('click', e => {
         const todoText = e.target.parentElement.parentElement.querySelector('.todo-text')
-        console.log(e.target)
         todoText.setAttribute('contenteditable', 'true')
     })
 })
@@ -127,7 +131,6 @@ statusBar.addEventListener('click', statusBarActive)
 /* 以下測試編輯文字 可行 */
 function selectText(e, node) {
     node = e.target.parentElement.parentElement.querySelector('.todo-text');
-    // console.log(node)
     node.style.border = '1px dashed'
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();
