@@ -47,7 +47,7 @@ function renderTodo() {
         todoListData.forEach((data) => {
             todoItems +=
                 `<li class="todo-item">
-                    <div class="flex items-center justify-between w-full">
+                    <label class="flex items-center justify-between w-full">
                         <input type="checkbox" class="todo-checkbox">
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
@@ -55,7 +55,7 @@ function renderTodo() {
                             <div class="todo-option-btn__dot"></div>
                             <div class="todo-option-btn__dot"></div>
                         </button>
-                    </div>
+                    </label>
                     <div class="todo-option">
                         <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
@@ -63,6 +63,23 @@ function renderTodo() {
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
+                // `<li class="todo-item">
+                //     <div class="flex items-center justify-between w-full">
+                //         <input type="checkbox" class="todo-checkbox">
+                //         <p class="todo-text">${data.content}</p>
+                //         <button class="todo-option-btn">
+                //             <div class="todo-option-btn__dot"></div>
+                //             <div class="todo-option-btn__dot"></div>
+                //             <div class="todo-option-btn__dot"></div>
+                //         </button>
+                //     </div>
+                //     <div class="todo-option">
+                //         <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
+                //                 class="fa-solid fa-pen-to-square ml-2"></i></button>
+                //         <button class="remove-btn btn btn--small btn--black">Remove<i
+                //                 class="fa-solid fa-trash ml-2"></i></button>
+                //     </div>
+                // </li>`
             todoList.innerHTML = todoItems;
         })
     }
@@ -94,6 +111,7 @@ function addNewTodo() {
 
 todoList.addEventListener('click', e => {
     const todoItem = e.target.closest('li')
+    const label = todoItem.querySelector('label')
 
 
     // 如果用戶點按todo-option-btn，使其展開todo-option
@@ -130,7 +148,14 @@ statusBar.addEventListener('click', statusBarActive)
 
 /* 以下測試編輯文字 可行 */
 function selectText(e, node) {
-    node = e.target.parentElement.parentElement.querySelector('.todo-text');
+    const todoItem = e.target.closest('li')
+
+    // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
+    const label = todoItem.querySelector('label')
+    label.classList.add('pointer-events-none')
+
+    node = todoItem.querySelector('.todo-text');
+
     node.style.border = '1px dashed'
     if (document.body.createTextRange) {
         const range = document.body.createTextRange();
