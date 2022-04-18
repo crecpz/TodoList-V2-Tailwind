@@ -24,57 +24,71 @@ menuBtn.addEventListener('click', fadeInMenu)
 /* Todo Input */
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
+
+todoInput.addEventListener('keyup', e => {
+    if (e.key === "Enter") {
+        addNewTodo()
+    }
+})
 addBtn.addEventListener('click', addNewTodo)
 
 /* Todo List */
 const todoList = document.querySelector('#todo-list')
 const todoItems = todoList.querySelectorAll('.todo-item');
 
-function addNewTodo() {
-    let todoListData = JSON.parse(localStorage.getItem('todos'))
-    if (!todoListData) {
-        todoListData = [];
-    }
-    let inputData = {
-        content: todoInput.value,
-        status: 'active',
-    }
-    todoListData.push(inputData)
-    todoInput.value = '';
-    localStorage.setItem('todos', JSON.stringify(todoListData))
-    renderTodo()
-}
-
-/**
- * localstorage已經寫完，正準備進入render階段。
- */
+let todoListData = JSON.parse(localStorage.getItem('todos'))
 
 
+renderTodo()
 function renderTodo() {
-    let todoItem = '';
-    todoItem +=
-        `<li class="todo-item">
-            <div class="flex items-center justify-between w-full">
-                <input type="checkbox" class="todo-checkbox">
-                <p class="todo-text focus-visible:outline-none">
-                    ${1}
-                </p>
-                <button class="todo-option-btn">
-                    <div class="todo-option-btn__dot"></div>
-                    <div class="todo-option-btn__dot"></div>
-                    <div class="todo-option-btn__dot"></div>
-                </button>
-            </div>
-            <div class="todo-option">
-                <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
-                        class="fa-solid fa-pen-to-square ml-2"></i></button>
-                <button class="remove-btn btn btn--small btn--black">Remove<i
-                        class="fa-solid fa-trash ml-2"></i></button>
-            </div>
-        </li>`
-    todoList.innerHTML = todoItem;
+    let todoItems = '';
+    if (todoListData) {
+        todoListData.forEach((data) => {
+            todoItems +=
+                `<li class="todo-item">
+                    <div class="flex items-center justify-between w-full">
+                        <input type="checkbox" class="todo-checkbox">
+                        <p class="todo-text">${data.content}
+                        </p>
+                        <button class="todo-option-btn">
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                        </button>
+                    </div>
+                    <div class="todo-option">
+                        <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
+                                class="fa-solid fa-pen-to-square ml-2"></i></button>
+                        <button class="remove-btn btn btn--small btn--black">Remove<i
+                                class="fa-solid fa-trash ml-2"></i></button>
+                    </div>
+                </li>`
+            todoList.innerHTML = todoItems;
+        })
+    }
+
 }
 
+
+function addNewTodo() {
+    if (todoInput.value.trim() !== '') {
+        if (!todoListData) {
+            todoListData = [];
+        }
+
+        let inputData = {
+            content: todoInput.value,
+            status: 'active',
+        }
+        todoListData.push(inputData)
+        todoInput.value = '';
+        localStorage.setItem('todos', JSON.stringify(todoListData))
+        renderTodo()
+        
+    }else {
+        todoInput.value = '';
+    }
+}
 
 
 // const todoCheckbox = document.querySelectorAll('.todo-checkbox')

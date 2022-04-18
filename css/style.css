@@ -791,10 +791,11 @@ i {
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
   padding-right: 0.375rem;
-  /* 
-        此行將邊距在不調整總體邊距的前提下作了調整
-        margin & padding各佔一半
-        */
+}
+
+.todo-text:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 
 .todo-option-btn {
