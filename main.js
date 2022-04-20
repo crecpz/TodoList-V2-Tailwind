@@ -46,7 +46,7 @@ function renderTodo() {
         todoListData.forEach((data, index) => {
             todoItems +=
                 `<li class="todo-item" id="${index}">
-                    <label class="flex items-center justify-between w-full">
+                    <label class="flex items-center justify-between w-full cursor-pointer">
                         <input type="checkbox" class="todo-checkbox">
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
@@ -90,39 +90,58 @@ function addNewTodo() {
     }
 }
 
-// if (todoList) {
-// }
-
-// 0419 目前有個小問題是在於當我的todo空無一物的時候，我點todolist會有報錯，
-// 因為我監聽器裡面所聲明的那些東西根本都還不存在。
 
 todoList.addEventListener('click', e => {
+    if (e.target.id !== 'empty-msg') {
+        const todoItem = e.target.closest('li')
+        // const label = todoItem.querySelector('label')
+        // const editBtn = todoItem.querySelector('.edit-btn')
 
-    const todoItem = e.target.closest('li')
-    // const label = todoItem.querySelector('label')
-    // const editBtn = todoItem.querySelector('.edit-btn')
-
-    /* 如果用戶點按todo-option-btn，使其展開todo-option */
-    const todoOption = todoItem.querySelector('.todo-option');
-    if (e.target.classList.value === 'todo-option-btn') {
-        todoOption.classList.toggle('todo-option--open')
-    }
-
-    // 如果用戶點按的class是remove-btn，刪除該項
-    if (e.target.classList.contains('remove-btn')) {
-        removeTodo()
-        if (todoListData.length === 0) {
-            todoList.innerHTML = '';
+        /* 如果用戶點按todo-option-btn，使其展開todo-option */
+        const todoOption = todoItem.querySelector('.todo-option');
+        if (e.target.classList.value === 'todo-option-btn') {
+            todoOption.classList.toggle('todo-option--open')
         }
-    }
 
-    function removeTodo() {
-        todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
-        console.log(todoListData);
-        localStorage.setItem('todos', JSON.stringify(todoListData))
-        renderTodo()
-    }
+        // 如果用戶點按的class是remove-btn，刪除該項
+        if (e.target.classList.contains('remove-btn')) {
+            removeTodo()
+            if (todoListData.length === 0) {
+                todoList.innerHTML = '';
+            }
+        }
+        function removeTodo() {
+            todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
+            localStorage.setItem('todos', JSON.stringify(todoListData))
+            renderTodo()
+        }
 
+        const todoCheckbox = todoItem.querySelector('.todo-checkbox')
+        const todoText = todoItem.querySelector('.todo-text')
+        let isChecked = todoCheckbox.checked;
+
+        console.log(e.target);
+        if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
+            // console.log(todoListData[todoItem.id])
+        }
+
+        if (isChecked) {
+            todoText.classList.add('line-through')
+        } else {
+            todoText.classList.remove('line-through')
+        }
+
+        // todoCheckbox.addEventListener('click', e => {
+        //     e.stopPropagation();
+        // })
+
+
+        function changingStatus() {
+
+        }
+
+
+    }
 })
 
 

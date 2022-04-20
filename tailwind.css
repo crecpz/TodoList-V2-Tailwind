@@ -113,7 +113,7 @@
     }
 
     .todo-text {
-        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none;
+        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none;
     }
 
     .todo-option-btn{
