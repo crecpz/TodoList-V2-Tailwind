@@ -21,7 +21,9 @@ menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
 
-/* Todo Input - click addBtn or press Enter to add new todo */
+/* Todo Input */ 
+
+//  adding new todo by {click addBtn} & {press Enter}
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
 todoInput.addEventListener('keyup', e => {
@@ -34,20 +36,27 @@ addBtn.addEventListener('click', addNewTodo)
 
 /* Todo List */
 const todoList = document.querySelector('#todo-list')
-const todoItems = todoList.querySelectorAll('.todo-item');
 let todoListData = JSON.parse(localStorage.getItem('todos'))
 
 renderTodo()
 
 
 function renderTodo() {
+    let checkbox;
     let todoItems = '';
+
     if (todoListData) {
         todoListData.forEach((data, index) => {
+            if (data.status === 'active') {
+                checkbox = ''
+            } else {
+                checkbox = 'checked'
+            }
+
             todoItems +=
                 `<li class="todo-item" id="${index}">
                     <label class="flex items-center justify-between w-full cursor-pointer">
-                        <input type="checkbox" class="todo-checkbox">
+                        <input type="checkbox" class="todo-checkbox" ${checkbox}>
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
                             <div class="todo-option-btn__dot"></div>
@@ -62,6 +71,7 @@ function renderTodo() {
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
+
             todoList.innerHTML = todoItems;
         })
     }
@@ -93,17 +103,19 @@ function addNewTodo() {
 
 todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg') {
+        // 取得點按的目標todoItem
         const todoItem = e.target.closest('li')
-        // const label = todoItem.querySelector('label')
-        // const editBtn = todoItem.querySelector('.edit-btn')
 
-        /* 如果用戶點按todo-option-btn，使其展開todo-option */
+
+        /* todo-option button */
+
+        // 如果用戶點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
         if (e.target.classList.value === 'todo-option-btn') {
             todoOption.classList.toggle('todo-option--open')
         }
 
-        // 如果用戶點按的class是remove-btn，刪除該項
+        // 如果用戶點按的class是remove-btn，刪除該項todoItem
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
             if (todoListData.length === 0) {
@@ -111,38 +123,27 @@ todoList.addEventListener('click', e => {
             }
         }
         function removeTodo() {
+            // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)
+            // 給todoListData
             todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
             localStorage.setItem('todos', JSON.stringify(todoListData))
             renderTodo()
         }
 
         const todoCheckbox = todoItem.querySelector('.todo-checkbox')
-        const todoText = todoItem.querySelector('.todo-text')
         let isChecked = todoCheckbox.checked;
+        todoListData[todoItem.id].status = isChecked ? 'completed' : 'active';
 
-        console.log(e.target);
-        if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
-            // console.log(todoListData[todoItem.id])
-        }
-
-        if (isChecked) {
-            todoText.classList.add('line-through')
-        } else {
-            todoText.classList.remove('line-through')
-        }
-
-        // todoCheckbox.addEventListener('click', e => {
-        //     e.stopPropagation();
-        // })
-
-
-        function changingStatus() {
-
-        }
-
-
+        localStorage.setItem('todos', JSON.stringify(todoListData))
     }
 })
+
+
+
+
+
+
+
 
 
 

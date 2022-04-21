@@ -767,7 +767,9 @@ i {
   border-color: rgb(188 184 184 / var(--tw-border-opacity));
 }
 
-.todo-checkbox:checked {
+.todo-checkbox:checked +.todo-text {
+  --tw-text-opacity: 1;
+  color: rgb(124 124 124 / var(--tw-text-opacity));
   -webkit-text-decoration-line: line-through;
           text-decoration-line: line-through;
 }

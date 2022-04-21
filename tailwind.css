@@ -104,8 +104,8 @@
         @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
     }
 
-    .todo-checkbox:checked {
-        @apply line-through;
+    .todo-checkbox:checked +.todo-text{
+        @apply line-through text-primary-darken;
     }
 
     .todo-checkbox:checked::before {
