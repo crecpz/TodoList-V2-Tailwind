@@ -7,10 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todolist v2</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- google font  -->
+    <!-- google font : Space-mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- google font : Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- google font : Noto Serif Traditional Chinese -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap" rel="stylesheet">
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
         integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
@@ -66,10 +74,13 @@
         <div class="content">
             <!-- add task input -->
             <div class="flex bg-primary-darkenest border border-primary-darken">
-                <input type="text" placeholder="Add a new task!" name="" id="todo-input"
+                <input type="text" placeholder="Add a new task!" id="todo-input"
                     class="w-full text-white bg-transparent outline-none px-3 py-2 placeholder:text-primary">
-                <button id="add-btn" class="bg-primary-darken">
+                <!-- <button id="add-btn" class="bg-primary-darken active:bg-primary-darken/50">
                     <i class="fa-solid fa-arrow-right px-4 py-2.5 text-white"></i>
+                </button> -->
+                <button id="add-btn" class="bg-primary-darken active:bg-primary-darken/50">
+                    <i class="fa-solid fa-arrow-right px-5 py-4 text-white"></i>
                 </button>
             </div>
 

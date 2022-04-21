@@ -12,7 +12,7 @@ module.exports = {
       },
 
       fontFamily: {
-        'space-mono': "'Space Mono', monospace",
+        'space-mono': "'Space Mono', monospace,'Noto Serif TC','Noto Sans TC'",
       },
     },
   },

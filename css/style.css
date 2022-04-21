@@ -802,10 +802,10 @@ i {
   outline-offset: 2px;
 }
 
-.todo-option-btn {
+.todo-option-btn{
+  /* @apply px-2 ml-auto; */
   margin-left: auto;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 0.5rem;
 }
 
 .todo-option-btn__dot {
@@ -1063,6 +1063,11 @@ i {
   padding-bottom: 0.625rem;
 }
 
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -1081,7 +1086,7 @@ i {
 }
 
 .font-space-mono {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Space Mono', monospace,'Noto Serif TC','Noto Sans TC';
 }
 
 .text-3xl {
@@ -1129,11 +1134,6 @@ i {
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.line-through {
-  -webkit-text-decoration-line: line-through;
-          text-decoration-line: line-through;
 }
 
 .outline-none {
@@ -1316,6 +1316,10 @@ i {
 .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(188 184 184 / var(--tw-text-opacity));
+}
+
+.active\:bg-primary-darken\/50:active {
+  background-color: rgb(124 124 124 / 0.5);
 }
 
 @media (min-width: 640px) {

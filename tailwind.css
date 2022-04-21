@@ -117,7 +117,8 @@
     }
 
     .todo-option-btn{
-        @apply px-2 ml-auto;
+        /* @apply px-2 ml-auto; */
+        @apply p-2 ml-auto;
     }
     
     .todo-option-btn__dot{
