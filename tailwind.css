@@ -37,10 +37,6 @@
         @apply bg-black;
     }
 
-    .full-width{
-        animation:full-width 500ms ease forwards;
-    }
-
     /* ---hamburger基本樣式--- */
     .hamburger{
         @apply relative w-full h-0.5 bg-white rounded-lg;
@@ -73,7 +69,7 @@
     }
     
     .status-bar__btn {
-        @apply flex items-center justify-center text-center py-2 border border-primary;
+        @apply flex items-center justify-center italic font-bold text-center py-2 border border-primary;
     }
 
     .status-bar__all-btn {
@@ -114,6 +110,7 @@
 
     .todo-text {
         @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none;
+        @apply font-bold;
     }
 
     .todo-option-btn{

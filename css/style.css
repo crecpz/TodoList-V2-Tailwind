@@ -706,6 +706,8 @@ i {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   text-align: center;
+  font-weight: 700;
+  font-style: italic;
 }
 
 .status-bar__all-btn {
@@ -800,6 +802,10 @@ i {
 .todo-text:focus-visible {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.todo-text {
+  font-weight: 700;
 }
 
 .todo-option-btn{
@@ -910,10 +916,6 @@ i {
   margin-top: 10rem;
 }
 
-.mt-16 {
-  margin-top: 4rem;
-}
-
 .ml-2 {
   margin-left: 0.5rem;
 }
@@ -942,18 +944,6 @@ i {
   width: 100%;
 }
 
-.flex-\[1_1_20\%\] {
-  flex: 1 1 20%;
-}
-
-.flex-\[1_1_35\%\] {
-  flex: 1 1 35%;
-}
-
-.flex-\[1_1_45\%\] {
-  flex: 1 1 45%;
-}
-
 .flex-shrink-0 {
   flex-shrink: 0;
 }
@@ -970,20 +960,12 @@ i {
   justify-content: flex-end;
 }
 
-.justify-center {
-  justify-content: center;
-}
-
 .justify-between {
   justify-content: space-between;
 }
 
 .border {
   border-width: 1px;
-}
-
-.border-r {
-  border-right-width: 1px;
 }
 
 .border-t-0 {
@@ -1021,11 +1003,6 @@ i {
 .bg-primary-darken {
   --tw-bg-opacity: 1;
   background-color: rgb(124 124 124 / var(--tw-bg-opacity));
-}
-
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(188 184 184 / var(--tw-bg-opacity));
 }
 
 .py-1\.5 {
@@ -1085,8 +1062,8 @@ i {
   text-align: center;
 }
 
-.font-space-mono {
-  font-family: 'Space Mono', monospace,'Noto Serif TC','Noto Sans TC';
+.font-Source-Code-Pro {
+  font-family: 'Source Code Pro', monospace,'Noto Serif TC','Noto Sans TC';
 }
 
 .text-3xl {
@@ -1129,11 +1106,6 @@ i {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .outline-none {

@@ -12,7 +12,8 @@ module.exports = {
       },
 
       fontFamily: {
-        'space-mono': "'Space Mono', monospace,'Noto Serif TC','Noto Sans TC'",
+        // 'space-mono': "'Space Mono', monospace,'Noto Sans TC','Noto Serif TC'",
+        'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Serif TC','Noto Sans TC'",
       },
     },
   },
