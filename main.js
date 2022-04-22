@@ -21,7 +21,7 @@ menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
 
-/* Todo Input */ 
+/* Todo Input */
 
 //  adding new todo by {click addBtn} & {press Enter}
 const todoInput = document.querySelector('#todo-input')
@@ -115,6 +115,19 @@ todoList.addEventListener('click', e => {
             todoOption.classList.toggle('todo-option--open')
         }
 
+        // 控制checkbox狀態
+        if(e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
+            changeStatus()
+        }
+
+        function changeStatus() {
+            const todoCheckbox = todoItem.querySelector('.todo-checkbox')
+            let isChecked = todoCheckbox.checked;
+            todoListData[todoItem.id].status = isChecked ? 'completed' : 'active';
+            localStorage.setItem('todos', JSON.stringify(todoListData))
+        }
+
+
         // 如果用戶點按的class是remove-btn，刪除該項todoItem
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
@@ -130,11 +143,7 @@ todoList.addEventListener('click', e => {
             renderTodo()
         }
 
-        const todoCheckbox = todoItem.querySelector('.todo-checkbox')
-        let isChecked = todoCheckbox.checked;
-        todoListData[todoItem.id].status = isChecked ? 'completed' : 'active';
 
-        localStorage.setItem('todos', JSON.stringify(todoListData))
     }
 })
 
