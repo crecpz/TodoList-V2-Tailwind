@@ -65,12 +65,29 @@ function renderTodo() {
                         </button>
                     </label>
                     <div class="todo-option">
-                        <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
+                        <button class="edit-btn btn2 btn--small mr-8">Edit<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-                        <button class="remove-btn btn btn--small btn--black">Remove<i
+                        <button class="remove-btn btn2 btn--small">Remove<i
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
+                // `<li class="todo-item" id="${index}">
+                //     <label class="flex items-center justify-between w-full cursor-pointer">
+                //         <input type="checkbox" class="todo-checkbox" ${checkbox}>
+                //         <p class="todo-text">${data.content}</p>
+                //         <button class="todo-option-btn">
+                //             <div class="todo-option-btn__dot"></div>
+                //             <div class="todo-option-btn__dot"></div>
+                //             <div class="todo-option-btn__dot"></div>
+                //         </button>
+                //     </label>
+                //     <div class="todo-option">
+                //         <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
+                //                 class="fa-solid fa-pen-to-square ml-2"></i></button>
+                //         <button class="remove-btn btn btn--small btn--black">Remove<i
+                //                 class="fa-solid fa-trash ml-2"></i></button>
+                //     </div>
+                // </li>`
 
             todoList.innerHTML = todoItems;
         })
@@ -102,7 +119,10 @@ function addNewTodo() {
 
 
 todoList.addEventListener('click', e => {
+    // const emptyMsg = document.querySelector('#empty-msg')
     if (e.target.id !== 'empty-msg') {
+
+
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li')
 
@@ -116,7 +136,7 @@ todoList.addEventListener('click', e => {
         }
 
         // 控制checkbox狀態
-        if(e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
+        if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus()
         }
 
@@ -132,16 +152,17 @@ todoList.addEventListener('click', e => {
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
             if (todoListData.length === 0) {
-                todoList.innerHTML = '';
+                todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
             }
         }
         function removeTodo() {
-            // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)
-            // 給todoListData
+            // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
             todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
             localStorage.setItem('todos', JSON.stringify(todoListData))
             renderTodo()
         }
+
+
 
 
     }

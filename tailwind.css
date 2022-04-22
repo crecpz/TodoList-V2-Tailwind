@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@media (hover: hover) {
+    /*原版標記 .btn {
+        @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
+        @apply active:bg-primary active:text-black after:active:left-0 after:active:top-0;
+    } */
+    .btn {
+        @apply hover:bg-primary hover:text-black;
+        @apply active:bg-primary active:text-black active:border-primary-darkenest;
+        /* after:active:left-0 after:active:top-0 */
+    }
+}
+
 @layer base {
     i {
         @apply pointer-events-none;
@@ -9,33 +21,50 @@
 }
 
 @layer components{
+   /* 暫時放這裡 */
+    .btn2 {
+        /* @apply before:border before:border-primary; */
+    }
+
+    /* 目前在做btn的改版，從下面的選項開始做起，如果做得不錯的話，
+    再來改上面目錄的按鈕。
+    */
+
+
+
     .content {
         @apply mx-auto px-5;
     }
     
     .btn{
+        @apply relative text-sm py-1.5 px-2 rounded-sm  border bg-primary transition-transform duration-100;
+        @apply after:content-[''] after:absolute after:-z-[1] after:left-[4.5px] after:top-[4.5px] after:rounded-sm after:border after:border-primary/80 after:w-full after:h-full;
+        @apply sm:py-2 sm:px-4;
+    }
+
+    /*原版標記 .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-1 after:top-1 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
         @apply text-sm;
         @apply py-1.5 px-2;
         @apply active:bg-red-500;
-    }
+    } */
 
 
-    @media (hover: hover) {
-        .btn {
-            @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
-            @apply active:bg-primary active:text-black after:active:left-0 after:active:top-0;
-        }
-    }
+
 
     .btn--small{
         @apply py-1 px-3;
     } 
     
-    .btn--black{
+    /* .btn--black{
         @apply bg-black;
+    } */
+    
+    .btn--black{
+        @apply text-black;
     }
+
 
     /* ---hamburger基本樣式--- */
     .hamburger{
@@ -67,10 +96,16 @@
     .status-bar {
         @apply flex items-center w-full mt-20;
     }
+    /*原版標記 .status-bar {
+        @apply flex items-center w-full mt-20;
+    } */
     
     .status-bar__btn {
-        @apply flex items-center justify-center italic font-bold text-center py-2 border border-primary;
+        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary-darken;
     }
+    /*原版標記 .status-bar__btn {
+        @apply flex items-center justify-center italic font-bold text-center py-2 border border-primary;
+    } */
 
     .status-bar__all-btn {
         @apply flex-[1_1_25%] border-r-0;
@@ -84,16 +119,24 @@
         @apply flex-[1_1_40%];
     }
 
-    .status-bar__btn--active {
+    /*原版標記 .status-bar__btn--active {
         @apply bg-primary-darken text-white;
+    } */
+    .status-bar__btn--active {
+        @apply border-b border-white text-white;
     }
 
 
     /* list */
 
-    .todo-item {
+    /*原版標記 .todo-item {
         @apply flex flex-col items-center px-6 py-2 first:border-t-0;
         @apply border-t border-primary/25;
+    } */
+
+    .todo-item {
+        @apply flex flex-col items-center px-2 py-2;
+        @apply border-b border-primary/25;
     }
 
     .todo-checkbox {
@@ -114,7 +157,6 @@
     }
 
     .todo-option-btn{
-        /* @apply px-2 ml-auto; */
         @apply p-2 ml-auto;
     }
     
