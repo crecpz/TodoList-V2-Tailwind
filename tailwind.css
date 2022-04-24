@@ -7,10 +7,12 @@
         @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
         @apply active:bg-primary active:text-black after:active:left-0 after:active:top-0;
     } */
+
+
     .btn {
-        @apply hover:bg-primary hover:text-black;
-        @apply active:bg-primary active:text-black active:border-primary-darkenest;
-        /* after:active:left-0 after:active:top-0 */
+        @apply active:top-1.5 active:left-1.5  active:text-[#eee]/80;
+        @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
+        @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
 }
 
@@ -21,26 +23,22 @@
 }
 
 @layer components{
-   /* 暫時放這裡 */
-    .btn2 {
-        /* @apply before:border before:border-primary; */
+
+    .btn {
+        @apply relative left-0 top-0 text-[#eee] bg-primary-darkenest transition-all duration-100; 
+        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:skew-x-[45deg] before:bg-primary-darken before:transition-all before:duration-75;
+        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
     }
-
-    /* 目前在做btn的改版，從下面的選項開始做起，如果做得不錯的話，
-    再來改上面目錄的按鈕。
-    */
-
-
 
     .content {
         @apply mx-auto px-5;
     }
     
-    .btn{
-        @apply relative text-sm py-1.5 px-2 rounded-sm  border bg-primary transition-transform duration-100;
+    /* .btn{
+        @apply relative text-sm py-1.5 px-2 rounded-sm border bg-primary transition-transform duration-100;
         @apply after:content-[''] after:absolute after:-z-[1] after:left-[4.5px] after:top-[4.5px] after:rounded-sm after:border after:border-primary/80 after:w-full after:h-full;
         @apply sm:py-2 sm:px-4;
-    }
+    } */
 
     /*原版標記 .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;

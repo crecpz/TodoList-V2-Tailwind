@@ -506,15 +506,54 @@ i {
   }
 }
 
-/* 暫時放這裡 */
-
-.btn2 {
-  /* @apply before:border before:border-primary; */
+.btn {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 40 40 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(238 238 238 / var(--tw-text-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 100ms;
 }
 
-/* 目前在做btn的改版，從下面的選項開始做起，如果做得不錯的話，
-    再來改上面目錄的按鈕。
-    */
+.btn::before {
+  position: absolute;
+  left: 0.25rem;
+  bottom: -0.375rem;
+  z-index: -10;
+  height: 0.375rem;
+  width: 100%;
+  --tw-skew-x: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(124 124 124 / var(--tw-bg-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 75ms;
+  --tw-content: '';
+  content: var(--tw-content);
+}
+
+.btn::after {
+  position: absolute;
+  top: 0.25rem;
+  right: -0.375rem;
+  z-index: -10;
+  height: 100%;
+  width: 0.375rem;
+  --tw-skew-y: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-bg-opacity: 1;
+  background-color: rgb(188 184 184 / var(--tw-bg-opacity));
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 75ms;
+  --tw-content: '';
+  content: var(--tw-content);
+}
 
 .content {
   margin-left: auto;
@@ -523,48 +562,11 @@ i {
   padding-right: 1.25rem;
 }
 
-.btn {
-  position: relative;
-  border-radius: 0.125rem;
-  border-width: 1px;
-  --tw-bg-opacity: 1;
-  background-color: rgb(188 184 184 / var(--tw-bg-opacity));
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 100ms;
-}
-
-.btn::after {
-  position: absolute;
-  left: 4.5px;
-  top: 4.5px;
-  z-index: -1;
-  height: 100%;
-  width: 100%;
-  border-radius: 0.125rem;
-  border-width: 1px;
-  border-color: rgb(188 184 184 / 0.8);
-  --tw-content: '';
-  content: var(--tw-content);
-}
-
-@media (min-width: 640px) {
-  .btn {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .btn {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
+/* .btn{
+        @apply relative text-sm py-1.5 px-2 rounded-sm border bg-primary transition-transform duration-100;
+        @apply after:content-[''] after:absolute after:-z-[1] after:left-[4.5px] after:top-[4.5px] after:rounded-sm after:border after:border-primary/80 after:w-full after:h-full;
+        @apply sm:py-2 sm:px-4;
+    } */
 
 /*原版標記 .btn{
         @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
@@ -1221,33 +1223,48 @@ i {
         @apply active:bg-primary active:text-black after:active:left-0 after:active:top-0;
     } */
 
-  .btn:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(188 184 184 / var(--tw-bg-opacity));
-  }
-
-  .btn:hover {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
+  .btn:active {
+    top: 0.375rem;
   }
 
   .btn:active {
-    --tw-border-opacity: 1;
-    border-color: rgb(40 40 40 / var(--tw-border-opacity));
+    left: 0.375rem;
   }
 
   .btn:active {
-    --tw-bg-opacity: 1;
-    background-color: rgb(188 184 184 / var(--tw-bg-opacity));
+    color: rgb(238 238 238 / 0.8);
   }
 
-  .btn:active {
-    --tw-text-opacity: 1;
-    color: rgb(0 0 0 / var(--tw-text-opacity));
+  .btn:active::before {
+    content: var(--tw-content);
+    bottom: 0px;
   }
 
-  .btn {
-    /* after:active:left-0 after:active:top-0 */
+  .btn:active::before {
+    content: var(--tw-content);
+    left: 0px;
+  }
+
+  .btn:active::before {
+    content: var(--tw-content);
+    --tw-skew-x: 0deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  }
+
+  .btn:active::after {
+    content: var(--tw-content);
+    right: 0px;
+  }
+
+  .btn:active::after {
+    content: var(--tw-content);
+    top: 0px;
+  }
+
+  .btn:active::after {
+    content: var(--tw-content);
+    --tw-skew-y: 0deg;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 }
 

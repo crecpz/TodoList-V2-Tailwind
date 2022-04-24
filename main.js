@@ -64,10 +64,10 @@ function renderTodo() {
                             <div class="todo-option-btn__dot"></div>
                         </button>
                     </label>
-                    <div class="todo-option">
-                        <button class="edit-btn btn2 btn--small mr-8">Edit<i
+                    <div class="todo-option todo-option--open">
+                        <button class="edit-btn btn btn--small mr-8">Edit<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-                        <button class="remove-btn btn2 btn--small">Remove<i
+                        <button class="remove-btn btn btn--small">Remove<i
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
