@@ -64,30 +64,13 @@ function renderTodo() {
                             <div class="todo-option-btn__dot"></div>
                         </button>
                     </label>
-                    <div class="todo-option todo-option--open">
+                    <div class="todo-option">
                         <button class="edit-btn btn btn--small mr-8">Edit<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
                         <button class="remove-btn btn btn--small">Remove<i
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
-                // `<li class="todo-item" id="${index}">
-                //     <label class="flex items-center justify-between w-full cursor-pointer">
-                //         <input type="checkbox" class="todo-checkbox" ${checkbox}>
-                //         <p class="todo-text">${data.content}</p>
-                //         <button class="todo-option-btn">
-                //             <div class="todo-option-btn__dot"></div>
-                //             <div class="todo-option-btn__dot"></div>
-                //             <div class="todo-option-btn__dot"></div>
-                //         </button>
-                //     </label>
-                //     <div class="todo-option">
-                //         <button class="edit-btn btn btn--small btn--black mr-4">Edit<i
-                //                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-                //         <button class="remove-btn btn btn--small btn--black">Remove<i
-                //                 class="fa-solid fa-trash ml-2"></i></button>
-                //     </div>
-                // </li>`
 
             todoList.innerHTML = todoItems;
         })
@@ -131,9 +114,17 @@ todoList.addEventListener('click', e => {
 
         // 如果用戶點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
+
         if (e.target.classList.value === 'todo-option-btn') {
             todoOption.classList.toggle('todo-option--open')
+
+            if (e.target.nodeName !== 'BUTTON') {
+                console.log(123)
+                todoOption.classList.remove('todo-option--open')
+            }
+
         }
+        // console.log(e.target.nodeName === 'BUTTON');
 
         // 控制checkbox狀態
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {

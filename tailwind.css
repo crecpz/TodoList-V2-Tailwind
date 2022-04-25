@@ -10,7 +10,7 @@
 
 
     .btn {
-        @apply active:top-1.5 active:left-1.5  active:text-[#eee]/80;
+        @apply active:top-1.5 active:left-1.5  active:text-primary;
         @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
         @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
@@ -25,10 +25,11 @@
 @layer components{
 
     .btn {
-        @apply relative left-0 top-0 text-[#eee] bg-primary-darkenest transition-all duration-100; 
-        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:skew-x-[45deg] before:bg-primary-darken before:transition-all before:duration-75;
-        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
+        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
+        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
+        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
     }
+
 
     .content {
         @apply mx-auto px-5;
@@ -49,11 +50,11 @@
     } */
 
 
-
+/* 
 
     .btn--small{
-        @apply py-1 px-3;
-    } 
+        @apply ;
+    }  */
     
     /* .btn--black{
         @apply bg-black;
@@ -66,18 +67,17 @@
 
     /* ---hamburger基本樣式--- */
     .hamburger{
-        @apply relative w-full h-0.5 bg-white rounded-lg;
+        @apply relative w-full h-0.5 bg-primary rounded-lg;
     }
 
     .hamburger::before,
     .hamburger::after{
-        @apply rounded-lg;
+        @apply rounded-lg bg-primary;
         content:'';
         position: absolute;
         left: 0;
         width: 100%;
         height: 2px;
-        background: white;
     }
 
     .hamburger::before{
@@ -99,10 +99,12 @@
     } */
     
     .status-bar__btn {
-        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary-darken;
+        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
     }
-    /*原版標記 .status-bar__btn {
+
+    /* .status-bar__btn {
         @apply flex items-center justify-center italic font-bold text-center py-2 border border-primary;
+        @apply bg-primary-darkenest text-black;
     } */
 
     .status-bar__all-btn {
@@ -117,11 +119,8 @@
         @apply flex-[1_1_40%];
     }
 
-    /*原版標記 .status-bar__btn--active {
-        @apply bg-primary-darken text-white;
-    } */
     .status-bar__btn--active {
-        @apply border-b border-white text-white;
+        @apply border-b-2 border-primary text-primary;
     }
 
 
@@ -142,11 +141,11 @@
     }
 
     .todo-checkbox:checked +.todo-text{
-        @apply line-through text-primary-darken;
+        @apply line-through text-primary;
     }
 
     .todo-checkbox:checked::before {
-        @apply content-['']  w-2 h-2 bg-primary-darken;
+        @apply content-['']  w-2 h-2 bg-primary;
     }
 
     .todo-text {

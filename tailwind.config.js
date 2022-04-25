@@ -6,13 +6,18 @@ module.exports = {
     extend: {
 
       colors: {
-        primary: '#BCB8B8',
-        'primary-darken': '#7c7c7c',
-        'primary-darkenest' : '#282828',
+        primary: '#464543',
+        secondary:'#d6c4b0'
+        // 'primary-darken': '#7c7c7c',
+        // 'primary-darkenest' : '#282828',
+
+
+        // primary: '#BCB8B8',
+        // 'primary-darken': '#7c7c7c',
+        // 'primary-darkenest' : '#282828',
       },
 
       fontFamily: {
-        // 'space-mono': "'Space Mono', monospace,'Noto Sans TC','Noto Serif TC'",
         'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Serif TC','Noto Sans TC'",
       },
     },

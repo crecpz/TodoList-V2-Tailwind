@@ -28,7 +28,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="font-Source-Code-Pro bg-black text-primary tracking-widest">
+<body class="font-Source-Code-Pro bg-secondary text-primary tracking-widest">
     <header class="pt-16 mb-28">
         <!-- container -->
         <div class="content">
@@ -62,7 +62,7 @@
                         <input type="text" id="search-input" placeholder="Search"
                             class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
                         <i id="search-close-btn"
-                            class="text-primary-darken fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
+                            class="text-primary fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
                     </div>
                     <div
                         class="relative left-1.5 top-1.5 -z-[1] py-1.5 px-2 sm:py-2 sm:px-4  border border-primary/80 w-full h-full text-transparent">
@@ -76,14 +76,18 @@
     <main class="mt-40">
         <div class="content">
             <!-- add task input -->
-            <div class="flex bg-primary-darkenest border border-primary-darken">
-                <input type="text" placeholder="Add a new task!" id="todo-input"
-                    class="w-full text-white bg-transparent outline-none px-3 py-2 placeholder:text-primary">
-                <!-- <button id="add-btn" class="bg-primary-darken active:bg-primary-darken/50">
-                    <i class="fa-solid fa-arrow-right px-4 py-2.5 text-white"></i>
-                </button> -->
-                <button id="add-btn" class="bg-primary-darken active:bg-primary-darken/50">
-                    <i class="fa-solid fa-arrow-right px-5 py-4 text-white"></i>
+            <div class="flex">
+                <div class="relative w-full 
+                before:content-[''] before:absolute before:left-1.5 before:-bottom-3 before:w-full before:h-3 before:border-2 before:border-r-0 before:border-t-0 before:border-primary/30 before:rounded-sm before:bg-primary/10 before:skew-x-[45deg]
+                    ">
+                    <input type="text" placeholder="Add a new task!" id="todo-input"
+                        class="w-full h-full bg-secondary border-2 border-primary rounded-sm text-primary bg-transparent outline-none px-3 py-2 placeholder:text-primary">
+                </div>
+                <button id="add-btn"
+                    class="relative bg-primary active:bg-primary
+                before:content-[''] before:absolute before:w-full before:h-3 before:-bottom-3 before:left-1.5 before:border-2 before:border-r-0 before:border-t-0 before:border-primary before:bg-primary/70 before:skew-x-[45deg]
+                after:contetn-[''] after:absolute after:-right-3 after:top-1.5 after:w-3 after:h-full after:border-2 after:border-primary  after:skew-y-[45deg]">
+                    <i class="fa-solid fa-arrow-right px-5 py-4 text-secondary"></i>
                 </button>
             </div>
 
@@ -99,7 +103,7 @@
             <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
             <!-- 原版標記<ul id="todo-list" class="border border-t-0 border-primary"> -->
             <ul id="todo-list" class="">
-                <p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>
+                <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
             </ul>
         </div>
     </main>
