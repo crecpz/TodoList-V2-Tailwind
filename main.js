@@ -34,6 +34,11 @@ todoInput.addEventListener('keydown', e => {
 
 addBtn.addEventListener('mousedown', e => {
     addBtn.classList.add('add-btn--active')
+    // console.log(1)
+
+    addBtn.addEventListener('mouseout', ()=> {
+        addBtn.classList.remove('add-btn--active')
+    })
 })
 
 

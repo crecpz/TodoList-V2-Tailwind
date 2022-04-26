@@ -1045,7 +1045,7 @@ i {
 }
 
 .font-Source-Code-Pro {
-  font-family: 'Source Code Pro', monospace,'Noto Serif TC','Noto Sans TC';
+  font-family: 'Source Code Pro', monospace,'Noto Sans TC','Noto Serif TC';
 }
 
 .text-3xl {
@@ -1061,6 +1061,10 @@ i {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .leading-\[34px\] {
@@ -1484,6 +1488,18 @@ i {
 .placeholder\:text-primary::placeholder {
   --tw-text-opacity: 1;
   color: rgb(70 69 67 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-primary\/60::-moz-placeholder {
+  color: rgb(70 69 67 / 0.6);
+}
+
+.placeholder\:text-primary\/60:-ms-input-placeholder {
+  color: rgb(70 69 67 / 0.6);
+}
+
+.placeholder\:text-primary\/60::placeholder {
+  color: rgb(70 69 67 / 0.6);
 }
 
 .before\:absolute::before {

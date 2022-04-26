@@ -18,7 +18,7 @@ module.exports = {
       },
 
       fontFamily: {
-        'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Serif TC','Noto Sans TC'",
+        'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Sans TC','Noto Serif TC'",
       },
     },
   },
