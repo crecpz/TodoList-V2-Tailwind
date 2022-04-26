@@ -14,6 +14,42 @@
         @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
         @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
+
+    .add-btn {
+        @apply relative bg-primary;
+        @apply before:content-[''] before:absolute before:w-full before:h-2 before:-bottom-2 before:left-1 before:bg-primary/50 before:skew-x-[45deg];
+        @apply after:content-[''] after:absolute after:-right-2 after:top-1 after:w-2 after:h-full after:border after:border-b-0 after:border-r-0 after:border-t-0 after:border-primary after:bg-primary/20 after:skew-y-[45deg];
+    }
+
+
+    .add-btn--active {
+        @apply left-1 top-1;
+        @apply before:-bottom-1 before:left-0.5 before:h-1;
+        @apply after:-right-1 after:top-0.5 after:w-1;
+    }
+
+    /*
+    
+    0426後記:
+    目前使用鍵盤控制enter可以有按鍵按下的效果，滑鼠點擊也可以有效果，
+    小問題: 滑鼠押著不放，往旁邊滑動，會出現問題，可以使用mouseout之類的解決吧?
+    
+    https://medium.com/@shizukuichi/mouse-event-%E5%B0%8F%E7%AD%86%E8%A8%98-feb5dd866b0
+    
+    */
+
+
+
+
+
+    /* 使用css:active:  
+    
+    #add-btn {
+        @apply active:left-1 active:top-1;
+        @apply active:before:-bottom-1 active:before:left-0.5 active:before:h-1 active:after:-right-1 active:after:top-0.5 active:after:w-1
+    } */
+
+    
 }
 
 @layer base {

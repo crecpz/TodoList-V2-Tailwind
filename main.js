@@ -26,10 +26,27 @@ menuBtn.addEventListener('click', fadeInMenu)
 //  adding new todo by {click addBtn} & {press Enter}
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
+todoInput.addEventListener('keydown', e => {
+    if (e.key === "Enter") {
+        addBtn.classList.add('add-btn--active')
+    }
+})
+
+addBtn.addEventListener('mousedown', e => {
+    addBtn.classList.add('add-btn--active')
+})
+
+
 todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
         addNewTodo()
+        addBtn.classList.remove('add-btn--active')
     }
+})
+
+addBtn.addEventListener('mouseup', e => {
+    addNewTodo()
+    addBtn.classList.remove('add-btn--active')
 })
 addBtn.addEventListener('click', addNewTodo)
 
