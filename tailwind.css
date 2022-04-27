@@ -16,11 +16,10 @@
     }
 
     .add-btn {
-        @apply relative bg-primary;
+        @apply relative bg-primary/70;
         @apply before:content-[''] before:absolute before:w-full before:h-2 before:-bottom-2 before:left-1 before:bg-primary/50 before:skew-x-[45deg];
         @apply after:content-[''] after:absolute after:-right-2 after:top-1 after:w-2 after:h-full after:border after:border-b-0 after:border-r-0 after:border-t-0 after:border-primary after:bg-primary/20 after:skew-y-[45deg];
     }
-
 
     .add-btn--active {
         @apply left-1 top-1;
@@ -71,31 +70,6 @@
         @apply mx-auto px-5;
     }
     
-    /* .btn{
-        @apply relative text-sm py-1.5 px-2 rounded-sm border bg-primary transition-transform duration-100;
-        @apply after:content-[''] after:absolute after:-z-[1] after:left-[4.5px] after:top-[4.5px] after:rounded-sm after:border after:border-primary/80 after:w-full after:h-full;
-        @apply sm:py-2 sm:px-4;
-    } */
-
-    /*原版標記 .btn{
-        @apply relative sm:py-2 sm:px-4 border border-primary transition-transform duration-200;
-        @apply after:content-[''] after:absolute after:-z-[1] after:left-1 after:top-1 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
-        @apply text-sm;
-        @apply py-1.5 px-2;
-        @apply active:bg-red-500;
-    } */
-
-
-/* 
-
-    .btn--small{
-        @apply ;
-    }  */
-    
-    /* .btn--black{
-        @apply bg-black;
-    } */
-    
     .btn--black{
         @apply text-black;
     }
@@ -130,18 +104,10 @@
     .status-bar {
         @apply flex items-center w-full mt-20;
     }
-    /*原版標記 .status-bar {
-        @apply flex items-center w-full mt-20;
-    } */
     
     .status-bar__btn {
         @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
     }
-
-    /* .status-bar__btn {
-        @apply flex items-center justify-center italic font-bold text-center py-2 border border-primary;
-        @apply bg-primary-darkenest text-black;
-    } */
 
     .status-bar__all-btn {
         @apply flex-[1_1_25%] border-r-0;
@@ -159,14 +125,6 @@
         @apply border-b-2 border-primary text-primary;
     }
 
-
-    /* list */
-
-    /*原版標記 .todo-item {
-        @apply flex flex-col items-center px-6 py-2 first:border-t-0;
-        @apply border-t border-primary/25;
-    } */
-
     .todo-item {
         @apply flex flex-col items-center px-2 py-2;
         @apply border-b border-primary/25;
@@ -177,16 +135,20 @@
     }
 
     .todo-checkbox:checked +.todo-text{
-        @apply line-through text-primary;
+        @apply line-through text-primary/60;
     }
 
     .todo-checkbox:checked::before {
-        @apply content-['']  w-2 h-2 bg-primary;
+        @apply content-[''] w-2 h-2 bg-primary/80 rounded-sm;
     }
 
     .todo-text {
-        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none;
-        @apply font-bold;
+        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
+        /* @apply font-bold; */
+    }
+
+    .todo-text[contenteditable="true"] {
+        @apply border border-dashed border-current;
     }
 
     .todo-option-btn{
@@ -194,7 +156,7 @@
     }
     
     .todo-option-btn__dot{
-        @apply w-1 h-1 mb-0.5 rounded-full bg-primary pointer-events-none;
+        @apply w-[3px] h-[3px] mb-0.5 rounded-full bg-primary pointer-events-none;
     }
     
     .todo-option-btn__dot:last-child {

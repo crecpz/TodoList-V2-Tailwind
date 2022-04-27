@@ -26,21 +26,31 @@ menuBtn.addEventListener('click', fadeInMenu)
 //  adding new todo by {click addBtn} & {press Enter}
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
+
+
+// {click addBtn}
+addBtn.addEventListener('mousedown', e => {
+    addBtn.classList.add('add-btn--active')
+
+    addBtn.addEventListener('mouseout', () => {
+        addBtn.classList.remove('add-btn--active')
+    })
+})
+
+addBtn.addEventListener('mouseup', e => {
+    addNewTodo()
+    addBtn.classList.remove('add-btn--active')
+})
+addBtn.addEventListener('click', addNewTodo)
+
+
+// {press Enter}
+
 todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
         addBtn.classList.add('add-btn--active')
     }
 })
-
-addBtn.addEventListener('mousedown', e => {
-    addBtn.classList.add('add-btn--active')
-    // console.log(1)
-
-    addBtn.addEventListener('mouseout', ()=> {
-        addBtn.classList.remove('add-btn--active')
-    })
-})
-
 
 todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
@@ -49,11 +59,7 @@ todoInput.addEventListener('keyup', e => {
     }
 })
 
-addBtn.addEventListener('mouseup', e => {
-    addNewTodo()
-    addBtn.classList.remove('add-btn--active')
-})
-addBtn.addEventListener('click', addNewTodo)
+
 
 
 /* Todo List */
@@ -144,9 +150,7 @@ todoList.addEventListener('click', e => {
                 console.log(123)
                 todoOption.classList.remove('todo-option--open')
             }
-
         }
-        // console.log(e.target.nodeName === 'BUTTON');
 
         // 控制checkbox狀態
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
@@ -160,97 +164,146 @@ todoList.addEventListener('click', e => {
             localStorage.setItem('todos', JSON.stringify(todoListData))
         }
 
+        // 編輯項目
+        if (e.target.classList.contains('edit-btn')) {
+            const todoText = todoItem.querySelector('.todo-text')
+            // let todoTextValue = todoText.innerHTML;
+            todoText.setAttribute('contenteditable', true)
 
-        // 如果用戶點按的class是remove-btn，刪除該項todoItem
+
+
+
+            selectText()
+
+            const editBtn = e.target
+            // editBtn.addEventListener('click', selectText)
+
+            function selectText(node) {
+                // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
+                // const label = todoItem.querySelector('label')
+                // label.classList.add('pointer-events-none')
+
+                node = todoText;
+                // node.style.border = '1px dashed'
+
+                if (document.body.createTextRange) {
+                    const range = document.body.createTextRange();
+                    range.moveToElementText(node);
+                    range.select();
+                } else if (window.getSelection) {
+                    console.log(2);
+                    const selection = window.getSelection();
+                    const range = document.createRange();
+                    range.selectNodeContents(node);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                } else {
+                    console.warn("Could not select text in node: Unsupported browser.");
+                }
+            }
+
+
+
+
+            todoText.addEventListener('blur', cancelEditable)
+
+            function cancelEditable() {
+                todoText.removeAttribute('contenteditable')
+                // todoText.style.border = '';
+            }
+
+
+
+
+
+            // const todoTextInput = document.createElement('input')
+            // todoText.parentElement.replaceChild(todoTextInput, todoText)
+            // todoTextInput.type = 'text'
+            // todoTextInput.className = 'todo-text'
+            // todoTextInput.value = todoTextValue;
+            // console.log(todoTextValue)
+
+
+
+            // console.log(todoTextInput)
+            // todoText
+            // todoText.parentElement.removeChild(todoText)
+            // console.log(todoText)
+            // todoItem.querySelector('.todo-text').innerHTML = '<input type="text">'
+        }
+
+
+        // 移除項目
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
             if (todoListData.length === 0) {
                 todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
             }
         }
+
         function removeTodo() {
             // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
             todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
             localStorage.setItem('todos', JSON.stringify(todoListData))
             renderTodo()
         }
-
-
-
-
     }
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// ★
-// 使editBtn按下去之後該文字區域變成可編輯狀態。
-// 有問題!這邊只取到靜態的元素，你只能靠重新整理讓這按鈕能動
-
-
-// const editBtn = document.querySelectorAll('.edit-btn')
-// editBtn.forEach(btn => {
-//     btn.addEventListener('click', e => {
-//         const todoText = e.target.parentElement.parentElement.querySelector('.todo-text')
-//         console.log(todoText)
-
-//         todoText.setAttribute('contenteditable', 'true')
-//     })
-// })
-
+statusBar.addEventListener('click', statusBarActive)
 
 
 // 以下兩行是受到selectText函數啟發，原來這樣寫也行，我的作法多套了一層function。但這兩還最後還是會出現閃爍
 // menuBtn.addEventListener('click', () => fadeInItem(menu, showMenu, menuBtn, fadeInMenu, fadeOutMenu))
 // menuBtn.addEventListener('click', () => fadeOutItem(title, showMenu, menuBtn, fadeOutTitle, fadeInTitle))
 
-statusBar.addEventListener('click', statusBarActive)
+
+/* 編輯文字功能方法一(未完成) begin */
+//..........這行以下註解切換
+// function selectText(e, node) {
+//     const todoItem = e.target.closest('li')
+
+//     // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
+//     const label = todoItem.querySelector('label')
+//     label.classList.add('pointer-events-none')
+
+//     node = todoItem.querySelector('.todo-text');
+//     node.style.border = '1px dashed'
+//     if (document.body.createTextRange) {
+//         const range = document.body.createTextRange();
+//         range.moveToElementText(node);
+//         range.select();
+//     } else if (window.getSelection) {
+//         const selection = window.getSelection();
+//         const range = document.createRange();
+//         range.selectNodeContents(node);
+//         selection.removeAllRanges();
+//         selection.addRange(range);
+//     } else {
+//         console.warn("Could not select text in node: Unsupported browser.");
+//     }
+// }
 
 
-/* 以下測試編輯文字 可行 */
-function selectText(e, node) {
-    const todoItem = e.target.closest('li')
+// const clickable = document.querySelectorAll('.edit-btn');
+// clickable.forEach(item => {
+//     item.addEventListener('click', e => selectText(e, 'todo-text'));
+// })
+// // const clickable = document.querySelector('.edit-btn');
+// // clickable.addEventListener('click', e => selectText(e, 'todo-text'));
 
-    // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
-    const label = todoItem.querySelector('label')
-    label.classList.add('pointer-events-none')
-
-    node = todoItem.querySelector('.todo-text');
-    node.style.border = '1px dashed'
-    if (document.body.createTextRange) {
-        const range = document.body.createTextRange();
-        range.moveToElementText(node);
-        range.select();
-    } else if (window.getSelection) {
-        const selection = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents(node);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    } else {
-        console.warn("Could not select text in node: Unsupported browser.");
-    }
-}
+// ........這行以上註解切換
+/* 編輯文字功能方法一(未完成) end */
 
 
-const clickable = document.querySelectorAll('.edit-btn');
-clickable.forEach(item => {
-    item.addEventListener('click', e => selectText(e, 'todo-text'));
-})
-// const clickable = document.querySelector('.edit-btn');
-// clickable.addEventListener('click', e => selectText(e, 'todo-text'));
-/* 以上測試編輯文字 */
+/* 編輯文字功能方法二 begin */
+
+
+/* 編輯文字功能方法二 end */
+
+
+
 
 
 function fadeOutTitle() {
