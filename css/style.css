@@ -564,6 +564,11 @@ i {
   content: var(--tw-content);
 }
 
+.btn--small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 .content {
   margin-left: auto;
   margin-right: auto;
@@ -655,6 +660,15 @@ i {
   align-items: center;
 }
 
+/* 英文版有italic .......................
+    
+    .status-bar__btn {
+        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
+    } 
+    */
+
+/* 中文版沒有italic 。  新增tracking-[0.3em]*/
+
 .status-bar__btn {
   display: flex;
   align-items: center;
@@ -665,8 +679,7 @@ i {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   text-align: center;
-  font-weight: 700;
-  font-style: italic;
+  letter-spacing: 0.3em;
 }
 
 .status-bar__all-btn {
@@ -689,6 +702,7 @@ i {
   border-color: rgb(70 69 67 / var(--tw-border-opacity));
   --tw-text-opacity: 1;
   color: rgb(70 69 67 / var(--tw-text-opacity));
+  font-weight: 700;
 }
 
 .todo-item {
@@ -812,6 +826,9 @@ i {
   /* @apply min-h-full;*/
 }
 
+.edit-btn[disabled] {
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -930,10 +947,6 @@ i {
 
 .border {
   border-width: 1px;
-}
-
-.border-t-0 {
-  border-top-width: 0px;
 }
 
 .border-primary {
@@ -1084,6 +1097,10 @@ i {
 
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ---hide & show--- */
@@ -1354,12 +1371,21 @@ i {
     content: var(--tw-content);
   }
 
+  .add-btn {
+    /* @apply ; */
+  }
+
   .add-btn--active {
     left: 0.25rem;
   }
 
   .add-btn--active {
     top: 0.25rem;
+  }
+
+  .add-btn--active {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   }
 
   .add-btn--active::before {
@@ -1392,22 +1418,70 @@ i {
     width: 0.25rem;
   }
 
-  /*
-    
-    0426後記:
-    目前使用鍵盤控制enter可以有按鍵按下的效果，滑鼠點擊也可以有效果，
-    小問題: 滑鼠押著不放，往旁邊滑動，會出現問題，可以使用mouseout之類的解決吧?
-    
-    https://medium.com/@shizukuichi/mouse-event-%E5%B0%8F%E7%AD%86%E8%A8%98-feb5dd866b0
-    
-    */
+  .bg-transition {
+  }
+}
 
-  /* 使用css:active:  
-    
-    #add-btn {
-        @apply active:left-1 active:top-1;
-        @apply active:before:-bottom-1 active:before:left-0.5 active:before:h-1 active:after:-right-1 active:after:top-0.5 active:after:w-1
-    } */
+@-webkit-keyframes add-btn-transition {
+  0% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  }
+
+  100% {
+    background-color: rgb(70 69 67 / 0.7);
+  }
+}
+
+@keyframes add-btn-transition {
+  0% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  }
+
+  100% {
+    background-color: rgb(70 69 67 / 0.7);
+  }
+}
+
+@-webkit-keyframes latestItem{
+  0% {
+    background-color: rgb(70 69 67 / 0.3);
+  }
+
+  25% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  }
+
+  50% {
+    background-color: rgb(70 69 67 / 0.3);
+  }
+
+  100% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  }
+}
+
+@keyframes latestItem{
+  0% {
+    background-color: rgb(70 69 67 / 0.3);
+  }
+
+  25% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  }
+
+  50% {
+    background-color: rgb(70 69 67 / 0.3);
+  }
+
+  100% {
+    --tw-bg-opacity: 1;
+    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  }
 }
 
 @-webkit-keyframes fade-in{

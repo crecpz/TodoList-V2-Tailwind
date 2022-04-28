@@ -31,7 +31,9 @@ const addBtn = document.querySelector('#add-btn')
 // {click addBtn}
 addBtn.addEventListener('mousedown', e => {
     addBtn.classList.add('add-btn--active')
+    addBtn.style.animation = '';
 
+    // 防止用戶壓著滑鼠不放移出範圍產生的按鈕卡住問題
     addBtn.addEventListener('mouseout', () => {
         addBtn.classList.remove('add-btn--active')
     })
@@ -40,7 +42,20 @@ addBtn.addEventListener('mousedown', e => {
 addBtn.addEventListener('mouseup', e => {
     addNewTodo()
     addBtn.classList.remove('add-btn--active')
+
+    // 按下addBtn產生的動畫效果
+    addBtnTransition()
 })
+
+// 仍需要一個設定是當用戶重複點按的時候，使按紐背景變黑，且重跑動畫。
+
+function addBtnTransition() {
+    addBtn.style.animation = "add-btn-transition linear 1000ms forwards";
+    addBtn.addEventListener('animationend', () => {
+        addBtn.style.animation = '';
+    })
+}
+
 addBtn.addEventListener('click', addNewTodo)
 
 
@@ -56,6 +71,8 @@ todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
         addNewTodo()
         addBtn.classList.remove('add-btn--active')
+        // 按下addBtn產生的動畫效果
+        addBtnTransition()
     }
 })
 
@@ -71,15 +88,19 @@ renderTodo()
 
 function renderTodo() {
     let checkbox;
+    // let disabled;
     let todoItems = '';
 
     if (todoListData) {
         todoListData.forEach((data, index) => {
             if (data.status === 'active') {
                 checkbox = ''
+                // disabled = ''
             } else {
                 checkbox = 'checked'
+                // disabled = 'disabled'
             }
+
 
             todoItems +=
                 `<li class="todo-item" id="${index}">
@@ -93,12 +114,31 @@ function renderTodo() {
                         </button>
                     </label>
                     <div class="todo-option">
-                        <button class="edit-btn btn btn--small mr-8">Edit<i
+                        <button class="edit-btn btn btn--small mr-8">編輯<i
                                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-                        <button class="remove-btn btn btn--small">Remove<i
+                        <button class="remove-btn btn btn--small">刪除<i
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
+
+            // 英文版
+            // `<li class="todo-item" id="${index}">
+            //     <label class="flex items-center justify-between w-full cursor-pointer">
+            //         <input type="checkbox" class="todo-checkbox" ${checkbox}>
+            //         <p class="todo-text">${data.content}</p>
+            //         <button class="todo-option-btn">
+            //             <div class="todo-option-btn__dot"></div>
+            //             <div class="todo-option-btn__dot"></div>
+            //             <div class="todo-option-btn__dot"></div>
+            //         </button>
+            //     </label>
+            //     <div class="todo-option">
+            //         <button class="edit-btn btn btn--small mr-8">Edit<i
+            //                 class="fa-solid fa-pen-to-square ml-2"></i></button>
+            //         <button class="remove-btn btn btn--small">Remove<i
+            //                 class="fa-solid fa-trash ml-2"></i></button>
+            //     </div>
+            // </li>`
 
             todoList.innerHTML = todoItems;
         })
@@ -122,10 +162,23 @@ function addNewTodo() {
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo()
+        latestItemHighlight(todoList)
+
 
     } else {
         todoInput.value = '';
     }
+}
+
+/**
+ * 在父層的第一個ElementChild加上動畫效果，以表示它是最新的todo
+ * @param {*} parentElement 父層
+ */
+function latestItemHighlight(parentElement) {
+    parentElement.firstElementChild.style.animation = 'latestItem 2000ms ease-in-out';
+    parentElement.firstElementChild.addEventListener('animationend',()=> {
+        parentElement.firstElementChild.style.animation = '';
+    })
 }
 
 
@@ -164,19 +217,20 @@ todoList.addEventListener('click', e => {
             localStorage.setItem('todos', JSON.stringify(todoListData))
         }
 
+
+
         // 編輯項目
         if (e.target.classList.contains('edit-btn')) {
             const todoText = todoItem.querySelector('.todo-text')
             // let todoTextValue = todoText.innerHTML;
             todoText.setAttribute('contenteditable', true)
 
-
-
-
             selectText()
 
             const editBtn = e.target
-            // editBtn.addEventListener('click', selectText)
+            // 需要處理在編輯模式中會點擊到label的問題
+            // 還有在已完成模式中藥如何處理編輯問題?
+            // 我想到一個方法，編輯完之後預設就是使它變成待完成
 
             function selectText(node) {
                 // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。

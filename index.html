@@ -77,6 +77,7 @@
         <div class="content">
             <!-- add task input -->
             <div class="flex">
+
                 <div class="relative w-full 
                 before:content-[''] before:absolute before:left-1 before:-bottom-2 before:w-full before:h-2 before:border before:border-r-0 before:border-t-0 before:border-primary/30 before:bg-primary/20  before:rounded-sm before:skew-x-[45deg]
                 after:content-[''] after:absolute after:top-1 after:-right-2 after:w-2 after:h-full after:border-2 after:border-l-0  after:border-r-0 after:border-primary/30 after:bg-primary/10 after:rounded-sm after:skew-y-[45deg]
@@ -85,19 +86,23 @@
                         class="font-bold w-full h-full bg-secondary border border-primary/50 rounded-sm text-primary bg-transparent outline-none px-3 py-2 placeholder:text-primary/50 placeholder:italic">
                 </div>
 
-                <button id="add-btn"
-                    class="add-btn">
+                <button id="add-btn" class="add-btn">
                     <i class="fa-solid fa-arrow-right px-5 py-4 text-secondary"></i>
                 </button>
             </div>
 
             <div id="status-bar" class="status-bar">
-                <button class="status-bar__btn status-bar__all-btn status-bar__btn--active">All</button>
+                <!-- <button class="status-bar__btn status-bar__all-btn status-bar__btn--active">All</button>
                 <button class="status-bar__btn status-bar__active-btn">Active</button>
-                <button class="status-bar__btn status-bar__completed-btn">Completed</button>
+                <button class="status-bar__btn status-bar__completed-btn">Completed</button> -->
+
+                <!-- 中文 -->
+                <button class="status-bar__btn status-bar__all-btn status-bar__btn--active">全部</button>
+                <button class="status-bar__btn status-bar__active-btn">待完成</button>
+                <button class="status-bar__btn status-bar__completed-btn">已完成</button>
             </div>
+
             <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
-            <!-- 原版標記<ul id="todo-list" class="border border-t-0 border-primary"> -->
             <ul id="todo-list" class="">
                 <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
             </ul>
