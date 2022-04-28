@@ -176,7 +176,7 @@ function addNewTodo() {
  */
 function latestItemHighlight(parentElement) {
     parentElement.firstElementChild.style.animation = 'latestItem 2000ms ease-in-out';
-    parentElement.firstElementChild.addEventListener('animationend',()=> {
+    parentElement.firstElementChild.addEventListener('animationend', () => {
         parentElement.firstElementChild.style.animation = '';
     })
 }
@@ -222,7 +222,9 @@ todoList.addEventListener('click', e => {
         // 編輯項目
         if (e.target.classList.contains('edit-btn')) {
             const todoText = todoItem.querySelector('.todo-text')
-            // let todoTextValue = todoText.innerHTML;
+
+            /* 這是原本的編輯方式
+
             todoText.setAttribute('contenteditable', true)
 
             selectText()
@@ -245,7 +247,6 @@ todoList.addEventListener('click', e => {
                     range.moveToElementText(node);
                     range.select();
                 } else if (window.getSelection) {
-                    console.log(2);
                     const selection = window.getSelection();
                     const range = document.createRange();
                     range.selectNodeContents(node);
@@ -257,33 +258,81 @@ todoList.addEventListener('click', e => {
             }
 
 
-
-
             todoText.addEventListener('blur', cancelEditable)
 
             function cancelEditable() {
                 todoText.removeAttribute('contenteditable')
-                // todoText.style.border = '';
+            }
+            */
+
+
+            /* 這是用dialog的編輯方式  */
+            
+
+            editDialog();
+
+            function editDialog() {
+                const dialog = document.querySelector('#dialog')
+                // const editText = todoText.innerHTML;
+                
+                dialog.innerHTML =
+                    `
+                    <p class="text-xl text-center mb-8">編輯待辦事項</p>
+                    <p class="edit-text">${todoText.innerHTML}</p>
+                    <div class="flex mt-8">
+                    <button class="cancel-btn btn btn-small mr-6">取消</button>
+                        <button class="save-btn btn btn-small">儲存</button>
+                    </div> 
+                    `
+                let editText = dialog.querySelector('.edit-text')
+                editText.setAttribute('contenteditable', true)
+                selectText(editText)
+                // 0429 到這邊已經可以初步的打開對話視窗來編輯，但尚未有儲存功能
+                // 視窗沒有一個固定大小，編輯框也沒有一個文字的邊界(或是border提示你現在在編輯)
+                // 請先去css設定編輯狀態時的外框樣式，建議外框設定一個固定的高度，如果超出該外框，
+                // 則試著隱藏scroll bar但保有捲動功能。
+
+                dialog.showModal()
+                const cancelBtn = dialog.querySelector('.cancel-btn')
+                cancelBtn.addEventListener('click', () => {
+                    dialog.close();
+                })
+
+
+
+
+
+
+
+                
+
+                function selectText(node) {
+                    // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
+                    // const label = todoItem.querySelector('label')
+                    // label.classList.add('pointer-events-none')
+    
+                    // node = todoText;
+                    // node.style.border = '1px dashed'
+
+                    
+    
+                    if (document.body.createTextRange) {
+                        const range = document.body.createTextRange();
+                        range.moveToElementText(node);
+                        range.select();
+                    } else if (window.getSelection) {
+                        const selection = window.getSelection();
+                        const range = document.createRange();
+                        range.selectNodeContents(node);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    } else {
+                        console.warn("Could not select text in node: Unsupported browser.");
+                    }
+                }
+
             }
 
-
-
-
-
-            // const todoTextInput = document.createElement('input')
-            // todoText.parentElement.replaceChild(todoTextInput, todoText)
-            // todoTextInput.type = 'text'
-            // todoTextInput.className = 'todo-text'
-            // todoTextInput.value = todoTextValue;
-            // console.log(todoTextValue)
-
-
-
-            // console.log(todoTextInput)
-            // todoText
-            // todoText.parentElement.removeChild(todoText)
-            // console.log(todoText)
-            // todoItem.querySelector('.todo-text').innerHTML = '<input type="text">'
         }
 
 

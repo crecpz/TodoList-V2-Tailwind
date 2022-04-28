@@ -101,11 +101,19 @@
                 <button class="status-bar__btn status-bar__active-btn">待完成</button>
                 <button class="status-bar__btn status-bar__completed-btn">已完成</button>
             </div>
-
             <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
             <ul id="todo-list" class="">
                 <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
             </ul>
+
+            <dialog id="dialog" class="flex flex-col items-center">
+                <!-- <p class="text-xl text-center mb-8">編輯</p>
+                ${todoText}
+                <div class="flex mt-8">
+                    <button class="cancel-btn btn btn-small mr-6">取消</button>
+                    <button class="save-btn btn btn-small">儲存</button>
+                </div> -->
+            </dialog>
         </div>
     </main>
     <script src="main.js"></script>

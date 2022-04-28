@@ -3,48 +3,39 @@
 @tailwind utilities;
 
 @media (hover: hover) {
-    /*原版標記 .btn {
-        @apply hover:bg-primary hover:text-black after:hover:left-0 after:hover:top-0;
-        @apply active:bg-primary active:text-black after:active:left-0 after:active:top-0;
-    } */
-
-
-    .btn {
-        @apply active:top-1.5 active:left-1.5  active:text-primary;
-        @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
-        @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
-    }
-
-    .add-btn {
-        @apply relative bg-primary/70;
-        @apply before:content-[''] before:absolute before:w-full before:h-2 before:-bottom-2 before:left-1 before:bg-primary/50 before:skew-x-[45deg];
-        @apply after:content-[''] after:absolute after:-right-2 after:top-1 after:w-2 after:h-full after:border after:border-b-0 after:border-r-0 after:border-t-0 after:border-primary after:bg-primary/20 after:skew-y-[45deg];
-        /* @apply ; */
-    }
-
-    .add-btn--active {
-        @apply left-1 top-1 bg-black;
-        @apply before:-bottom-1 before:left-0.5 before:h-1;
-        @apply after:-right-1 after:top-0.5 after:w-1;
-    } 
-
     .bg-transition {
         
     }
 }
 
-@keyframes add-btn-transition {
-    0%{
-        @apply bg-black;
-    }
-    100%{
-        @apply bg-primary/70;
-    }
-}
 
 @layer base {
     i {
         @apply pointer-events-none;
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+    width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        @apply bg-primary/20;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        @apply bg-primary/40; 
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-primary;
+    }
+
+    dialog {
+        @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl  rounded-md ;
     }
 }
 
@@ -54,7 +45,22 @@
         @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
         @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
         @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
+        @apply active:top-1.5 active:left-1.5  active:text-primary;
+        @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
+        @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
+
+    .add-btn {
+        @apply relative bg-primary/70;
+        @apply before:content-[''] before:absolute before:w-full before:h-2 before:-bottom-2 before:left-1 before:bg-primary/50 before:skew-x-[45deg];
+        @apply after:content-[''] after:absolute after:-right-2 after:top-1 after:w-2 after:h-full after:border after:border-b-0 after:border-r-0 after:border-t-0 after:border-primary after:bg-primary/20 after:skew-y-[45deg];
+    }
+
+    .add-btn--active {
+        @apply left-1 top-1 bg-black;
+        @apply before:-bottom-1 before:left-0.5 before:h-1;
+        @apply after:-right-1 after:top-0.5 after:w-1;
+    } 
 
     .btn--small {
         @apply text-sm;
@@ -106,7 +112,7 @@
         @apply flex items-center w-full mt-20;
     }
     
-    /* 英文版有italic .......................
+    /* 英文版有italic             .......................
     
     .status-bar__btn {
         @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
@@ -282,6 +288,16 @@
         @apply bg-secondary;
     }
 }
+
+@keyframes add-btn-transition {
+    0%{
+        @apply bg-black;
+    }
+    100%{
+        @apply bg-primary/70;
+    }
+}
+
 
 @keyframes fade-in{
     0%{
