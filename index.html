@@ -28,7 +28,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="font-Source-Code-Pro bg-[#dbc3ab] text-primary tracking-widest">
+<body class="font-Source-Code-Pro bg-[#dbc3ab] text-primary tracking-widest overflow-y-scroll">
     <header class="pt-16 mb-28">
         <!-- container -->
         <div class="content">
@@ -106,16 +106,16 @@
                 <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
             </ul>
 
-            <dialog id="dialog" class="flex flex-col items-center">
-                <!-- <p class="text-xl text-center mb-8">編輯</p>
-                ${todoText}
-                <div class="flex mt-8">
-                    <button class="cancel-btn btn btn-small mr-6">取消</button>
-                    <button class="save-btn btn btn-small">儲存</button>
-                </div> -->
-            </dialog>
         </div>
     </main>
+    <dialog id="dialog">
+        <!-- <p class="text-xl text-center mb-8">編輯</p>
+        ${todoText}
+        <div class="flex mt-8">
+            <button class="cancel-btn btn btn-small mr-6">取消</button>
+            <button class="save-btn btn btn-small">儲存</button>
+        </div> -->
+    </dialog>
     <script src="main.js"></script>
 </body>
 

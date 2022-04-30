@@ -14,9 +14,15 @@
         @apply pointer-events-none;
     }
 
+    /* scrollbar setting */
+/* 
+    body[class~="overflow-y-hidden"] ::-webkit-scrollbar{
+        @apply w-20;
+    } */
+
     /* width */
     ::-webkit-scrollbar {
-    width: 10px;
+        width: 10px;
     }
 
     /* Track */
@@ -35,18 +41,35 @@
     }
 
     dialog {
-        @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl  rounded-md ;
+        @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md ;
     }
+
+    dialog[open] {
+        animation: slide-up 500ms forwards;
+    }
+    
+    dialog[open]::backdrop {
+        @apply bg-primary/80 h-[100vh] overflow-y-hidden;
+        animation: fade-in 700ms forwards;
+    }
+
+    dialog[closing]{
+        animation: slide-down 700ms forwards;
+    }
+    
+    dialog[closing]::backdrop {
+        animation: fade-out 1000ms forwards;
+    } 
 }
 
 @layer components{
 
     .btn {
-        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
-        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
-        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
+        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary rounded-sm transition-all duration-100; 
         @apply active:top-1.5 active:left-1.5  active:text-primary;
+        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
         @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
+        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
         @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
 
@@ -74,12 +97,17 @@
 
 
     .content {
-        @apply mx-auto px-5;
+        @apply mx-auto px-6;
     }
     
     .btn--black{
         @apply text-black;
     }
+
+
+
+
+
 
 
     /* ---hamburger基本樣式--- */
@@ -192,9 +220,6 @@
         /* @apply scale-y-0 opacity-0;*/
         @apply max-h-[100px] visible opacity-100 mt-2 my-4;
         /* @apply min-h-full;*/
-    }
-
-    .edit-btn[disabled] {
     }
 }
 
@@ -316,5 +341,69 @@
 
     100%{
         @apply opacity-0;
+    }
+}
+
+@keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  
+  @keyframes slide-down {
+    from {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  
+    to {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+  }
+
+@keyframes scale-up {
+    from {
+        transform:scale(0.75);
+    }
+
+    to {
+        transform:scale(1)
+    }
+}
+
+@keyframes scale-down {
+    from {
+        transform:scale(1);
+    }
+
+    to {
+        transform:scale(.75)
+    }
+}
+
+@keyframes room-in {
+    from {
+        @apply scale-75 opacity-0;
+    }
+
+    to {
+        @apply scale-100 opacity-100;
+    }
+}
+
+@keyframes room-out {
+    from {
+        @apply scale-100 opacity-100;
+    }
+
+    to {
+        @apply scale-75 opacity-0;
     }
 }

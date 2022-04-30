@@ -50,7 +50,7 @@ addBtn.addEventListener('mouseup', e => {
 // 仍需要一個設定是當用戶重複點按的時候，使按紐背景變黑，且重跑動畫。
 
 function addBtnTransition() {
-    addBtn.style.animation = "add-btn-transition linear 1000ms forwards";
+    addBtn.style.animation = "add-btn-transition linear 2000ms forwards";
     addBtn.addEventListener('animationend', () => {
         addBtn.style.animation = '';
     })
@@ -65,6 +65,7 @@ todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
         addBtn.classList.add('add-btn--active')
     }
+    addBtn.style.animation = '';
 })
 
 todoInput.addEventListener('keyup', e => {
@@ -267,35 +268,37 @@ todoList.addEventListener('click', e => {
 
 
             /* 這是用dialog的編輯方式  */
-            
+
 
             editDialog();
 
             function editDialog() {
                 const dialog = document.querySelector('#dialog')
                 // const editText = todoText.innerHTML;
-                
+
                 dialog.innerHTML =
                     `
                     <p class="text-xl text-center mb-8">編輯待辦事項</p>
-                    <p class="edit-text">${todoText.innerHTML}</p>
-                    <div class="flex mt-8">
-                    <button class="cancel-btn btn btn-small mr-6">取消</button>
+                    <p id="edit-text" class="h-[80px] p-2 outline-none border border-primary  rounded-md overflow-y-scroll">${todoText.innerHTML}</p>
+                    <div class="flex justify-center items-center mt-8">
+                        <button class="cancel-btn btn btn-small mr-6">取消</button>
                         <button class="save-btn btn btn-small">儲存</button>
                     </div> 
                     `
-                let editText = dialog.querySelector('.edit-text')
+                let editText = dialog.querySelector('#edit-text')
                 editText.setAttribute('contenteditable', true)
                 selectText(editText)
                 // 0429 到這邊已經可以初步的打開對話視窗來編輯，但尚未有儲存功能
-                // 視窗沒有一個固定大小，編輯框也沒有一個文字的邊界(或是border提示你現在在編輯)
-                // 請先去css設定編輯狀態時的外框樣式，建議外框設定一個固定的高度，如果超出該外框，
-                // 則試著隱藏scroll bar但保有捲動功能。
+                // -視窗沒有一個固定大小
 
                 dialog.showModal()
                 const cancelBtn = dialog.querySelector('.cancel-btn')
                 cancelBtn.addEventListener('click', () => {
-                    dialog.close();
+                    dialog.setAttribute('closing', '')
+                    dialog.addEventListener('animationend', () => {
+                        dialog.close();
+                        dialog.removeAttribute('closing', '')
+                    }, { once: true })
                 })
 
 
@@ -304,18 +307,18 @@ todoList.addEventListener('click', e => {
 
 
 
-                
+
 
                 function selectText(node) {
                     // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
                     // const label = todoItem.querySelector('label')
                     // label.classList.add('pointer-events-none')
-    
+
                     // node = todoText;
                     // node.style.border = '1px dashed'
 
-                    
-    
+
+
                     if (document.body.createTextRange) {
                         const range = document.body.createTextRange();
                         range.moveToElementText(node);
