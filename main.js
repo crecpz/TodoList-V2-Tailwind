@@ -184,29 +184,20 @@ function latestItemHighlight(parentElement) {
 
 
 todoList.addEventListener('click', e => {
-    // const emptyMsg = document.querySelector('#empty-msg')
     if (e.target.id !== 'empty-msg') {
-
-
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li')
 
 
-        /* todo-option button */
+        /* 展開todo-option */
 
         // 如果用戶點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
-
         if (e.target.classList.value === 'todo-option-btn') {
             todoOption.classList.toggle('todo-option--open')
-
-            if (e.target.nodeName !== 'BUTTON') {
-                console.log(123)
-                todoOption.classList.remove('todo-option--open')
-            }
         }
 
-        // 控制checkbox狀態
+       /* 控制checkbox狀態 */
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus()
         }
@@ -220,104 +211,134 @@ todoList.addEventListener('click', e => {
 
 
 
-        // 編輯項目
+        /* 編輯項目 */
         if (e.target.classList.contains('edit-btn')) {
+            // 一按下「編輯」，就收合已展開的todoOption
+            todoOption.classList.remove('todo-option--open')
+
+            // 獲取todoText DOM
             const todoText = todoItem.querySelector('.todo-text')
 
-            /* 這是原本的編輯方式
+            editingDialog();
+            
+            /**編輯狀態視窗:開啟 */
+            function editingDialog() {
+                // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
+                const editDialog = document.querySelector('#edit-dialog')
+                editDialog.innerHTML =
+                `
+                <p class="text-xl text-center mb-8">編輯待辦事項</p>
+                <p id="edit-text" class="h-[80px] p-2 outline-none border border-primary  rounded-md overflow-y-auto">${todoText.innerHTML}</p>
+                <div class="flex justify-center items-center mt-8">
+                <button class="cancel-btn btn btn-small mr-6">取消</button>
+                <button class="save-btn btn btn-small">儲存</button>
+                </div> 
+                `
 
-            todoText.setAttribute('contenteditable', true)
-
-            selectText()
-
-            const editBtn = e.target
-            // 需要處理在編輯模式中會點擊到label的問題
-            // 還有在已完成模式中藥如何處理編輯問題?
-            // 我想到一個方法，編輯完之後預設就是使它變成待完成
-
-            function selectText(node) {
-                // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
-                // const label = todoItem.querySelector('label')
-                // label.classList.add('pointer-events-none')
-
-                node = todoText;
-                // node.style.border = '1px dashed'
-
-                if (document.body.createTextRange) {
-                    const range = document.body.createTextRange();
-                    range.moveToElementText(node);
-                    range.select();
-                } else if (window.getSelection) {
-                    const selection = window.getSelection();
-                    const range = document.createRange();
-                    range.selectNodeContents(node);
-                    selection.removeAllRanges();
-                    selection.addRange(range);
-                } else {
-                    console.warn("Could not select text in node: Unsupported browser.");
-                }
-            }
-
-
-            todoText.addEventListener('blur', cancelEditable)
-
-            function cancelEditable() {
-                todoText.removeAttribute('contenteditable')
-            }
-            */
-
-
-            /* 這是用dialog的編輯方式  */
-
-
-            editDialog();
-
-            function editDialog() {
-                const dialog = document.querySelector('#dialog')
-                // const editText = todoText.innerHTML;
-
-                dialog.innerHTML =
-                    `
-                    <p class="text-xl text-center mb-8">編輯待辦事項</p>
-                    <p id="edit-text" class="h-[80px] p-2 outline-none border border-primary  rounded-md overflow-y-scroll">${todoText.innerHTML}</p>
-                    <div class="flex justify-center items-center mt-8">
-                        <button class="cancel-btn btn btn-small mr-6">取消</button>
-                        <button class="save-btn btn btn-small">儲存</button>
-                    </div> 
-                    `
-                let editText = dialog.querySelector('#edit-text')
+                // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
+                let editText = editDialog.querySelector('#edit-text')
                 editText.setAttribute('contenteditable', true)
-                selectText(editText)
-                // 0429 到這邊已經可以初步的打開對話視窗來編輯，但尚未有儲存功能
-                // -視窗沒有一個固定大小
 
-                dialog.showModal()
-                const cancelBtn = dialog.querySelector('.cancel-btn')
-                cancelBtn.addEventListener('click', () => {
+                selectText(editText)
+
+                function selectText(node) {
+                    if (document.body.createTextRange) {
+                        const range = document.body.createTextRange();
+                        range.moveToElementText(node);
+                        range.select();
+                    } else if (window.getSelection) {
+                        const selection = window.getSelection();
+                        const range = document.createRange();
+                        range.selectNodeContents(node);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    } else {
+                        console.warn("Could not select text in node: Unsupported browser.");
+                    }
+                }
+
+                // 以上內容準備完成後，使對話框彈出
+                editDialog.showModal()
+
+
+                // 「取消」鈕的相關設定
+                const cancelBtn = editDialog.querySelector('.cancel-btn')
+                // 如果用戶點按取消鈕，關閉dialog
+                cancelBtn.addEventListener('click', () => closeDialog(editDialog))
+
+
+                // !!!!!!!!!!!!!!!!!!!!!!!!!!! 從此處開始往下還沒有加上註解描述
+                // 先試著將這個編輯部分的<p>換成input
+                // 那段HTML我已經改成input放在index.html的最下面了
+                
+
+                cancelBtn.addEventListener('click', cancelConfirm)
+
+                /**
+                 * 此函數用來關閉dialog(附帶監聽animationend)
+                 * @param {*} dialog 欲關閉的dialog
+                 */
+                function closeDialog(dialog) {
                     dialog.setAttribute('closing', '')
                     dialog.addEventListener('animationend', () => {
                         dialog.close();
                         dialog.removeAttribute('closing', '')
                     }, { once: true })
-                })
+                }
+
+                function cancelConfirm() {
+                    // 如果用戶有更動todTtext，則執行以下
+                    if (editText.innerHTML != todoText.innerHTML) {
+                        const confirmDialog = document.querySelector('#confirm-dialog')
+                        confirmDialog.innerHTML =
+                            `
+                        <div class="flex flex-col items-center">
+                            <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
+                            <p class="text-center text-xl mb-6">編輯尚未儲存</p>
+                            <p class="text-center text-sm">是否儲存更動?</p>
+                            <div class="flex justify-center items-center mt-6">
+                                <button class="cancel-btn btn btn-small mr-6">不儲存</button>
+                                <button class="save-btn btn btn-small">儲存</button>
+                            </div>
+                        </div>
+                        `
+                        confirmDialog.showModal()
+
+                        const cancelBtn = confirmDialog.querySelector('.cancel-btn')
+                        cancelBtn.addEventListener('click', () => closeDialog(confirmDialog))
+                    }
+                }
 
 
+                const saveBtn = editDialog.querySelector('.save-btn')
+                saveBtn.addEventListener('click', () => closeDialog(editDialog))
+                saveBtn.addEventListener('click', updateTodoText)
+                function updateTodoText() {
+                    todoText.innerHTML = editText.innerHTML;
+                    todoListData[todoItem.id].content = editText.innerHTML
+                    localStorage.setItem('todos', JSON.stringify(todoListData))
+                    // console.log(todoListData[todoItem.id].content)
+                }
+            }
 
+            /* 這是原本的編輯方式
 
+                todoText.setAttribute('contenteditable', true)
 
+                selectText()
 
-
-
+                const editBtn = e.target
+                // 需要處理在編輯模式中會點擊到label的問題
+                // 還有在已完成模式中藥如何處理編輯問題?
+                // 我想到一個方法，編輯完之後預設就是使它變成待完成
 
                 function selectText(node) {
                     // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
                     // const label = todoItem.querySelector('label')
                     // label.classList.add('pointer-events-none')
 
-                    // node = todoText;
+                    node = todoText;
                     // node.style.border = '1px dashed'
-
-
 
                     if (document.body.createTextRange) {
                         const range = document.body.createTextRange();
@@ -334,12 +355,20 @@ todoList.addEventListener('click', e => {
                     }
                 }
 
-            }
+
+                todoText.addEventListener('blur', cancelEditable)
+
+                function cancelEditable() {
+                    todoText.removeAttribute('contenteditable')
+                }
+                */
+
+
 
         }
 
 
-        // 移除項目
+        /* 移除項目 */
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
             if (todoListData.length === 0) {

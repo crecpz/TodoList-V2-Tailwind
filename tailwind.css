@@ -15,29 +15,30 @@
     }
 
     /* scrollbar setting */
-/* 
-    body[class~="overflow-y-hidden"] ::-webkit-scrollbar{
-        @apply w-20;
-    } */
-
-    /* width */
     ::-webkit-scrollbar {
         width: 10px;
     }
 
-    /* Track */
     ::-webkit-scrollbar-track {
         @apply bg-primary/20;
     }
     
-    /* Handle */
     ::-webkit-scrollbar-thumb {
         @apply bg-primary/40; 
     }
-    
-    /* Handle on hover */
+
     ::-webkit-scrollbar-thumb:hover {
         @apply bg-primary;
+    }
+
+    /* selection */
+
+    ::selection {
+        @apply bg-primary/30 /* WebKit/Blink Browsers */
+    }
+
+    ::-moz-selection {
+        @apply bg-primary/30; /* Gecko Browsers */
     }
 
     dialog {
@@ -189,6 +190,7 @@
     .todo-text {
         @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
         /* @apply font-bold; */
+        @apply flex flex-wrap;
     }
 
     .todo-text[contenteditable="true"] {
