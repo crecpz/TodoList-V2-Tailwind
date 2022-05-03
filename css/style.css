@@ -1036,11 +1036,6 @@ dialog[closing]::backdrop {
   z-index: -1;
 }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .mb-28 {
   margin-bottom: 7rem;
 }
@@ -1077,12 +1072,12 @@ dialog[closing]::backdrop {
   margin-left: 0.5rem;
 }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
-}
-
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .mt-6 {
@@ -1197,6 +1192,24 @@ dialog[closing]::backdrop {
   background-color: transparent;
 }
 
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: rgb(70 69 67 / var(--tw-bg-opacity));
+}
+
+.bg-primary-light {
+  --tw-bg-opacity: 1;
+  background-color: rgb(155 154 152 / var(--tw-bg-opacity));
+}
+
+.bg-secondary\/50 {
+  background-color: rgb(214 196 176 / 0.5);
+}
+
+.bg-secondary\/10 {
+  background-color: rgb(214 196 176 / 0.1);
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -1272,39 +1285,9 @@ dialog[closing]::backdrop {
   line-height: 1.75rem;
 }
 
-.text-8xl {
-  font-size: 6rem;
-  line-height: 1;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 1;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .font-bold {
@@ -1331,11 +1314,6 @@ dialog[closing]::backdrop {
 .text-secondary {
   --tw-text-opacity: 1;
   color: rgb(214 196 176 / var(--tw-text-opacity));
-}
-
-.text-primary-light {
-  --tw-text-opacity: 1;
-  color: rgb(155 154 152 / var(--tw-text-opacity));
 }
 
 .outline-none {
