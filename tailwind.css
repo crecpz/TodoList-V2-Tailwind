@@ -40,6 +40,8 @@
     ::-moz-selection {
         @apply bg-primary/30; /* Gecko Browsers */
     }
+    
+    /* dialog */
 
     dialog {
         @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md ;
@@ -61,6 +63,11 @@
     dialog[closing]::backdrop {
         animation: fade-out 1000ms forwards;
     } 
+
+    /* textarea */
+    textarea{
+        @apply resize-none;
+    }
 }
 
 @layer components{

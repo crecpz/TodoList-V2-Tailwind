@@ -33,7 +33,7 @@ addBtn.addEventListener('mousedown', e => {
     addBtn.classList.add('add-btn--active')
     addBtn.style.animation = '';
 
-    // 防止用戶壓著滑鼠不放移出範圍產生的按鈕卡住問題
+    // 防止使用者壓著滑鼠不放移出範圍產生的按鈕卡住問題
     addBtn.addEventListener('mouseout', () => {
         addBtn.classList.remove('add-btn--active')
     })
@@ -47,7 +47,7 @@ addBtn.addEventListener('mouseup', e => {
     addBtnTransition()
 })
 
-// 仍需要一個設定是當用戶重複點按的時候，使按紐背景變黑，且重跑動畫。
+// 仍需要一個設定是當使用者重複點按的時候，使按紐背景變黑，且重跑動畫。
 
 function addBtnTransition() {
     addBtn.style.animation = "add-btn-transition linear 2000ms forwards";
@@ -96,10 +96,8 @@ function renderTodo() {
         todoListData.forEach((data, index) => {
             if (data.status === 'active') {
                 checkbox = ''
-                // disabled = ''
             } else {
                 checkbox = 'checked'
-                // disabled = 'disabled'
             }
 
 
@@ -191,7 +189,7 @@ todoList.addEventListener('click', e => {
 
         /* 展開todo-option */
 
-        // 如果用戶點按todo-option-btn，使其展開todo-option
+        // 如果使用者點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
         if (e.target.classList.value === 'todo-option-btn') {
             todoOption.classList.toggle('todo-option--open')
@@ -204,10 +202,13 @@ todoList.addEventListener('click', e => {
 
         function changeStatus() {
             const todoCheckbox = todoItem.querySelector('.todo-checkbox')
-            let isChecked = todoCheckbox.checked;
-            todoListData[todoItem.id].status = isChecked ? 'completed' : 'active';
+            todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
             localStorage.setItem('todos', JSON.stringify(todoListData))
         }
+
+
+
+        /* 編輯todoText (input版本) */
         if (e.target.classList.contains('edit-btn')) {
             // 一按下「編輯」，就收合已展開的todoOption
             todoOption.classList.remove('todo-option--open')
@@ -215,16 +216,18 @@ todoList.addEventListener('click', e => {
             // 獲取todoText DOM
             const todoText = todoItem.querySelector('.todo-text')
 
-            editingDialog();
+            editMode();
 
-            /**編輯狀態視窗:開啟 */
-            function editingDialog() {
+            /**
+             * 編輯模式:開啟
+             */
+            function editMode() {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog')
                 editDialog.innerHTML =
                     `
                     <p class="text-xl text-center mb-8">編輯待辦事項</p>
-                    <input type=""text" id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary  rounded-md overflow-y-auto">
+                    <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary  rounded-md overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center mt-8">
                     <button class="cancel-btn btn btn-small mr-6">取消</button>
                     <button class="save-btn btn btn-small">儲存</button>
@@ -260,32 +263,18 @@ todoList.addEventListener('click', e => {
 
                 // 「取消」鈕的相關設定
                 const cancelBtn = editDialog.querySelector('.cancel-btn')
-                // 如果用戶點按取消鈕，關閉dialog
+                // 如果使用者點按取消鈕，關閉dialog
                 cancelBtn.addEventListener('click', () => closeDialog(editDialog))
-
-
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!! 從此處開始往下還沒有加上註解描述
-                // 先試著將這個編輯部分的<p>換成input
-                // 那段HTML我已經改成input放在index.html的最下面了
-
-
                 cancelBtn.addEventListener('click', cancelConfirm)
 
                 /**
-                 * 此函數用來關閉dialog(附帶監聽animationend)
-                 * @param {*} dialog 欲關閉的dialog
+                 * 確認使用者是否更動todTtext，如果有則執行此函式的內容；
+                 * 沒有則此函式的內容可忽略。
                  */
-                function closeDialog(dialog) {
-                    dialog.setAttribute('closing', '')
-                    dialog.addEventListener('animationend', () => {
-                        dialog.close();
-                        dialog.removeAttribute('closing', '')
-                    }, { once: true })
-                }
-
                 function cancelConfirm() {
-                    // 如果用戶有更動todTtext，則執行以下
+                    // 如果使用者有更動todTtext，則執行以下；沒有則此函式的內容可忽略。                    
                     if (editText.value != todoText.innerHTML) {
+                        // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
                         const confirmDialog = document.querySelector('#confirm-dialog')
                         confirmDialog.innerHTML =
                             `
@@ -299,33 +288,53 @@ todoList.addEventListener('click', e => {
                             </div>
                         </div>
                         `
+
+                        // 準備完成，使confirmDialog彈出
                         confirmDialog.showModal()
 
+                        // 【編輯尚未儲存，是否儲存更動?】
+
+                        // 若使用者選擇不儲存 --->　關閉此confirmDialog
                         const cancelBtn = confirmDialog.querySelector('.cancel-btn')
                         cancelBtn.addEventListener('click', () => closeDialog(confirmDialog))
+
+                        // 若使用者選擇儲存　---> 儲存此次變更
+                        const saveBtn = confirmDialog.querySelector('.save-btn')
+                        saveBtn.addEventListener('click', () => closeDialog(confirmDialog))
+                        saveBtn.addEventListener('click', updateChanges)
                     }
                 }
 
 
                 const saveBtn = editDialog.querySelector('.save-btn')
                 saveBtn.addEventListener('click', () => closeDialog(editDialog))
-                saveBtn.addEventListener('click', updateTodoText)
-                function updateTodoText() {
+                saveBtn.addEventListener('click', updateChanges)
+
+
+                /**
+                * 將已編輯的todoText更新至HTML與localstorage
+                */
+                function updateChanges() {
                     todoText.innerHTML = editText.value;
                     todoListData[todoItem.id].content = editText.value
                     localStorage.setItem('todos', JSON.stringify(todoListData))
-                    // console.log(todoListData[todoItem.id].content)
                 }
+
+                /**
+                 * 此函數用來關閉dialog(附帶監聽animationend)
+                 * @param {*} dialog 欲關閉的dialog
+                 */
+                function closeDialog(dialog) {
+                    dialog.setAttribute('closing', '')
+                    dialog.addEventListener('animationend', () => {
+                        dialog.close();
+                        dialog.removeAttribute('closing', '')
+                    }, { once: true })
+                }
+
             }
 
 
-            /* 移除項目 */
-            if (e.target.classList.contains('remove-btn')) {
-                removeTodo()
-                if (todoListData.length === 0) {
-                    todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
-                }
-            }
 
             function removeTodo() {
                 // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
@@ -334,6 +343,23 @@ todoList.addEventListener('click', e => {
                 renderTodo()
             }
         }
+
+
+
+        /* 移除項目 */
+        if (e.target.classList.contains('remove-btn')) {
+            removeTodo()
+            if (todoListData.length === 0) {
+                todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
+            }
+        }
+
+        function removeTodo() {
+            // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
+            todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
+            localStorage.setItem('todos', JSON.stringify(todoListData))
+            renderTodo()
+        }
     }
 })
 
@@ -341,7 +367,7 @@ todoList.addEventListener('click', e => {
 
 
 
-        /* 編輯項目 p段落版本 */
+/* 編輯項目 p段落版本 */
 //         if (e.target.classList.contains('edit-btn')) {
 //             // 一按下「編輯」，就收合已展開的todoOption
 //             todoOption.classList.remove('todo-option--open')
@@ -393,7 +419,7 @@ todoList.addEventListener('click', e => {
 
 //                 // 「取消」鈕的相關設定
 //                 const cancelBtn = editDialog.querySelector('.cancel-btn')
-//                 // 如果用戶點按取消鈕，關閉dialog
+//                 // 如果使用者點按取消鈕，關閉dialog
 //                 cancelBtn.addEventListener('click', () => closeDialog(editDialog))
 
 
@@ -417,7 +443,7 @@ todoList.addEventListener('click', e => {
 //                 }
 
 //                 function cancelConfirm() {
-//                     // 如果用戶有更動todTtext，則執行以下
+//                     // 如果使用者有更動todTtext，則執行以下
 //                     if (editText.innerHTML != todoText.innerHTML) {
 //                         const confirmDialog = document.querySelector('#confirm-dialog')
 //                         confirmDialog.innerHTML =
@@ -451,70 +477,10 @@ todoList.addEventListener('click', e => {
 //                 }
 //             }
 
-//             //     /* 這是原本的編輯方式
-
-//             //         todoText.setAttribute('contenteditable', true)
-
-//             //         selectText()
-
-//             //         const editBtn = e.target
-//             //         // 需要處理在編輯模式中會點擊到label的問題
-//             //         // 還有在已完成模式中藥如何處理編輯問題?
-//             //         // 我想到一個方法，編輯完之後預設就是使它變成待完成
-
-//             //         function selectText(node) {
-//             //             // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
-//             //             // const label = todoItem.querySelector('label')
-//             //             // label.classList.add('pointer-events-none')
-
-//             //             node = todoText;
-//             //             // node.style.border = '1px dashed'
-
-//             //             if (document.body.createTextRange) {
-//             //                 const range = document.body.createTextRange();
-//             //                 range.moveToElementText(node);
-//             //                 range.select();
-//             //             } else if (window.getSelection) {
-//             //                 const selection = window.getSelection();
-//             //                 const range = document.createRange();
-//             //                 range.selectNodeContents(node);
-//             //                 selection.removeAllRanges();
-//             //                 selection.addRange(range);
-//             //             } else {
-//             //                 console.warn("Could not select text in node: Unsupported browser.");
-//             //             }
-//             //         }
-
-
-//             //         todoText.addEventListener('blur', cancelEditable)
-
-//             //         function cancelEditable() {
-//             //             todoText.removeAttribute('contenteditable')
-//             //         }
-//             //         */
 
 
 
-//             // }
 
-
-//             /* 移除項目 */
-//             if (e.target.classList.contains('remove-btn')) {
-//                 removeTodo()
-//                 if (todoListData.length === 0) {
-//                     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
-//                 }
-//             }
-
-//             function removeTodo() {
-//                 // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
-//                 todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
-//                 localStorage.setItem('todos', JSON.stringify(todoListData))
-//                 renderTodo()
-//             }
-//         }
-//     }
-// })
 
 
 statusBar.addEventListener('click', statusBarActive)
