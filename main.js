@@ -208,7 +208,7 @@ todoList.addEventListener('click', e => {
 
 
 
-        /* 編輯todoText (input版本) */
+        /* 編輯todoText */
         if (e.target.classList.contains('edit-btn')) {
             // 一按下「編輯」，就收合已展開的todoOption
             todoOption.classList.remove('todo-option--open')
@@ -216,6 +216,7 @@ todoList.addEventListener('click', e => {
             // 獲取todoText DOM
             const todoText = todoItem.querySelector('.todo-text')
 
+            // 調用editMode()
             editMode();
 
             /**
@@ -237,6 +238,9 @@ todoList.addEventListener('click', e => {
                 let editText = editDialog.querySelector('#edit-text')
                 editText.value = todoText.innerHTML;
                 editText.select()
+
+
+                // 以下這段暫時用不到，但是如果未來在處理手機板不會自動全選的時候，可能會用到
                 // editText.setAttribute('contenteditable', true)
 
                 // selectText(editText)
@@ -257,21 +261,35 @@ todoList.addEventListener('click', e => {
                 //     }
                 // }
 
+                // 先確保在開啟dialog前，dialog是關閉的狀態
+                editDialog.close()
+
                 // 以上內容準備完成後，使對話框彈出
                 editDialog.showModal()
 
 
-                // 「取消」鈕的相關設定
+
+
+                // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
+
+                // 當使用者按下【儲存】(無論是否有編輯過):
+                // 關閉dialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
+                const saveBtn = editDialog.querySelector('.save-btn')
+                saveBtn.addEventListener('click', () => closeDialog(editDialog))
+                saveBtn.addEventListener('click', updateChanges)
+                saveBtn.addEventListener('click', changeToActive)
+
+                // 當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
                 const cancelBtn = editDialog.querySelector('.cancel-btn')
-                // 如果使用者點按取消鈕，關閉dialog
                 cancelBtn.addEventListener('click', () => closeDialog(editDialog))
-                cancelBtn.addEventListener('click', cancelConfirm)
+                cancelBtn.addEventListener('click', checkIfEdited)
 
                 /**
-                 * 確認使用者是否更動todTtext，如果有則執行此函式的內容；
-                 * 沒有則此函式的內容可忽略。
+                 * 注意:此函數的內容只有在使用者已經更動過editText中的內容卻未儲存的情況下才會執行。
+                 * 確認使用者是否更動todTtext，如果有，則執行此函式的內容；
+                 * 如果沒有，則忽略此函式的內容。
                  */
-                function cancelConfirm() {
+                function checkIfEdited() {
                     // 如果使用者有更動todTtext，則執行以下；沒有則此函式的內容可忽略。                    
                     if (editText.value != todoText.innerHTML) {
                         // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
@@ -288,35 +306,66 @@ todoList.addEventListener('click', e => {
                             </div>
                         </div>
                         `
+                        // 先確保在開啟dialog前，dialog是關閉的狀態
+                        confirmDialog.close()
 
-                        // 準備完成，使confirmDialog彈出
+                        // confirmDialog內容準備完成，使confirmDialog彈出
                         confirmDialog.showModal()
 
-                        // 【編輯尚未儲存，是否儲存更動?】
 
-                        // 若使用者選擇不儲存 --->　關閉此confirmDialog
+                        // 在confirmDialog有兩個按鈕，分別是【不儲存】與【儲存】:
+
+                        // 若使用者選擇【不儲存】--->　關閉此confirmDialog
                         const cancelBtn = confirmDialog.querySelector('.cancel-btn')
                         cancelBtn.addEventListener('click', () => closeDialog(confirmDialog))
 
-                        // 若使用者選擇儲存　---> 儲存此次變更
+                        // 若使用者選擇【儲存】　---> 儲存此次變更
+                        // 關閉confirmDialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
                         const saveBtn = confirmDialog.querySelector('.save-btn')
                         saveBtn.addEventListener('click', () => closeDialog(confirmDialog))
                         saveBtn.addEventListener('click', updateChanges)
+                        saveBtn.addEventListener('click', changeToActive)
                     }
                 }
 
+                editDialog.addEventListener('keydown', e => {
+                    /* 原本想要做按下esc可以等同於按下取消鈕一樣的效果，但出了點問題，像是如果 
+                    把文字編輯過之後，再次打開編輯框，不做任何編輯就按ESC，會跳出checkIfEdited對話框 */
+                    // if (e.key === "Escape") {
+                    //     e.preventDefault();
+                    //     e.stopPropagation()
+                    //     closeDialog(editDialog);
+                    //     checkIfEdited();
+                    // }
 
-                const saveBtn = editDialog.querySelector('.save-btn')
-                saveBtn.addEventListener('click', () => closeDialog(editDialog))
-                saveBtn.addEventListener('click', updateChanges)
+
+                    // 所以，我想試著用 esc 點下去就相當於點下取消按鈕，我不要再重複綁一堆亂七八糟的了，先來研究如何阻止連續觸發keydown
+                    // https://localcoder.org/prevent-javascript-keydown-event-from-being-handled-multiple-times-while-held-do#solution_3
+
+                    if (e.key === "Escape") {
+                        e.preventDefault();
+                        cancelBtn.click();
+                    }
+
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        closeDialog(editDialog);
+                        updateChanges();
+                        changeToActive();
+                    }
+                })
+
 
 
                 /**
                 * 將已編輯的todoText更新至HTML與localstorage
                 */
                 function updateChanges() {
+                    // 將編輯後的文字更新至DOM
                     todoText.innerHTML = editText.value;
+                    // 將編輯後的文字更新至todoListData中
                     todoListData[todoItem.id].content = editText.value
+                    // 將最新的todoListData更新至localstorage中
                     localStorage.setItem('todos', JSON.stringify(todoListData))
                 }
 
@@ -329,7 +378,19 @@ todoList.addEventListener('click', e => {
                     dialog.addEventListener('animationend', () => {
                         dialog.close();
                         dialog.removeAttribute('closing', '')
+                        // dialog.removeAttribute('open', '')
                     }, { once: true })
+                }
+
+
+                /**
+                 * 在編輯過後，若使用者按下「儲存」，自動將原本已經勾選的checkbox取消勾選
+                 */
+                function changeToActive() {
+                    const checkbox = todoItem.querySelector('.todo-checkbox')
+                    if (checkbox.checked) {
+                        checkbox.click()
+                    }
                 }
 
             }
@@ -524,17 +585,6 @@ statusBar.addEventListener('click', statusBarActive)
 // })
 // // const clickable = document.querySelector('.edit-btn');
 // // clickable.addEventListener('click', e => selectText(e, 'todo-text'));
-
-// ........這行以上註解切換
-/* 編輯文字功能方法一(未完成) end */
-
-
-/* 編輯文字功能方法二 begin */
-
-
-/* 編輯文字功能方法二 end */
-
-
 
 
 
