@@ -89,17 +89,16 @@ renderTodo()
 
 function renderTodo() {
     let checkbox;
-    // let disabled;
     let todoItems = '';
 
     if (todoListData) {
         todoListData.forEach((data, index) => {
+            // 檢查每一項todoListData內的「status」，確認其狀態是否為active
             if (data.status === 'active') {
                 checkbox = ''
             } else {
                 checkbox = 'checked'
             }
-
 
             todoItems +=
                 `<li class="todo-item" id="${index}">
@@ -119,25 +118,6 @@ function renderTodo() {
                                 class="fa-solid fa-trash ml-2"></i></button>
                     </div>
                 </li>`
-
-            // 英文版
-            // `<li class="todo-item" id="${index}">
-            //     <label class="flex items-center justify-between w-full cursor-pointer">
-            //         <input type="checkbox" class="todo-checkbox" ${checkbox}>
-            //         <p class="todo-text">${data.content}</p>
-            //         <button class="todo-option-btn">
-            //             <div class="todo-option-btn__dot"></div>
-            //             <div class="todo-option-btn__dot"></div>
-            //             <div class="todo-option-btn__dot"></div>
-            //         </button>
-            //     </label>
-            //     <div class="todo-option">
-            //         <button class="edit-btn btn btn--small mr-8">Edit<i
-            //                 class="fa-solid fa-pen-to-square ml-2"></i></button>
-            //         <button class="remove-btn btn btn--small">Remove<i
-            //                 class="fa-solid fa-trash ml-2"></i></button>
-            //     </div>
-            // </li>`
 
             todoList.innerHTML = todoItems;
         })
@@ -185,7 +165,6 @@ todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg') {
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li')
-
 
         /* 展開todo-option */
 
@@ -241,6 +220,7 @@ todoList.addEventListener('click', e => {
 
 
                 // 以下這段暫時用不到，但是如果未來在處理手機板不會自動全選的時候，可能會用到
+                // 先不刪
                 // editText.setAttribute('contenteditable', true)
 
                 // selectText(editText)
