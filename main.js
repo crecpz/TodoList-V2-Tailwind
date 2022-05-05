@@ -7,7 +7,7 @@ const searchWrapper = document.querySelector('#search-wrapper')
 const clearBtn = document.querySelector('#clear-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
-const statusBar = document.querySelector('#status-bar')
+
 
 /* hamburger switch */
 menuBtn.addEventListener('click', hamburger_expandSwitcher)
@@ -77,53 +77,6 @@ todoInput.addEventListener('keyup', e => {
     }
 })
 
-
-
-
-/* Todo List */
-const todoList = document.querySelector('#todo-list')
-let todoListData = JSON.parse(localStorage.getItem('todos'))
-
-renderTodo()
-
-
-function renderTodo() {
-    let checkbox;
-    let todoItems = '';
-
-    if (todoListData) {
-        todoListData.forEach((data, index) => {
-            // 檢查每一項todoListData內的「status」，確認其狀態是否為active
-            if (data.status === 'active') {
-                checkbox = ''
-            } else {
-                checkbox = 'checked'
-            }
-
-            todoItems +=
-                `<li class="todo-item" id="${index}">
-                    <label class="flex items-center justify-between w-full cursor-pointer">
-                        <input type="checkbox" class="todo-checkbox" ${checkbox}>
-                        <p class="todo-text">${data.content}</p>
-                        <button class="todo-option-btn">
-                            <div class="todo-option-btn__dot"></div>
-                            <div class="todo-option-btn__dot"></div>
-                            <div class="todo-option-btn__dot"></div>
-                        </button>
-                    </label>
-                    <div class="todo-option">
-                        <button class="edit-btn btn btn--small mr-8">編輯<i
-                                class="fa-solid fa-pen-to-square ml-2"></i></button>
-                        <button class="remove-btn btn btn--small">刪除<i
-                                class="fa-solid fa-trash ml-2"></i></button>
-                    </div>
-                </li>`
-
-            todoList.innerHTML = todoItems;
-        })
-    }
-}
-
 function addNewTodo() {
 
     if (todoInput.value.trim() !== '') {
@@ -149,6 +102,60 @@ function addNewTodo() {
     }
 }
 
+
+
+/* Todo List */
+const todoList = document.querySelector('#todo-list')
+let todoListData = JSON.parse(localStorage.getItem('todos'))
+
+// 如果要重寫，記得我在checkbox那邊已經輸入了以些有關改動data-set的值的code
+renderTodo()
+
+function renderTodo(statusName = 'all') {
+    let checkbox;
+    let todoItems = '';
+
+    if (todoListData) {
+
+        todoListData.forEach((data, index) => {
+            // 檢查每一項todoListData內的「status」，確認其狀態是否為active
+            if (data.status === 'active') {
+                checkbox = ''
+            } else {
+                checkbox = 'checked'
+            }
+            console.log(statusName,data.status)
+            // 這邊產生了一些問題，如果彼此有不同的狀態，問題不會產生；如果都是相同的狀態，那無論怎麼按標籤都會顯示出所有的狀態
+            // 詳請參考 https://youtu.be/2QIMUBilooc
+            if (statusName === data.status || statusName === 'all') {
+                todoItems +=
+                    `<li class="todo-item" id="${index}" data-status="${data.status}">
+        <label class="flex items-center justify-between w-full cursor-pointer">
+            <input type="checkbox" class="todo-checkbox" ${checkbox}>
+            <p class="todo-text">${data.content}</p>
+            <button class="todo-option-btn">
+                <div class="todo-option-btn__dot"></div>
+                <div class="todo-option-btn__dot"></div>
+                <div class="todo-option-btn__dot"></div>
+            </button>
+        </label>
+        <div class="todo-option">
+            <button class="edit-btn btn btn--small mr-8">編輯<i
+                    class="fa-solid fa-pen-to-square ml-2"></i></button>
+            <button class="remove-btn btn btn--small">刪除<i
+                    class="fa-solid fa-trash ml-2"></i></button>
+        </div>
+    </li>`
+
+                todoList.innerHTML = todoItems;
+            }
+
+
+
+        })
+    }
+}
+
 /**
  * 在父層的第一個ElementChild加上動畫效果，以表示它是最新的todo
  * @param {*} parentElement 父層
@@ -160,6 +167,35 @@ function latestItemHighlight(parentElement) {
     })
 }
 
+/* statusBar(全部、待完成、已完成) */
+const statusBar = document.querySelector('#status-bar')
+statusBar.addEventListener('click', statusBarActive)
+
+function statusBarActive(e) {
+    if (e.target.tagName === 'BUTTON') {
+        statusBar.querySelectorAll('.status-bar__btn').forEach(item => {
+            item.classList.remove('status-bar__btn--active')
+        })
+
+        e.target.classList.add('status-bar__btn--active')
+
+
+        renderTodo(e.target.id)
+
+        // const todoItems = todoList.querySelectorAll('.todo-item')
+
+        // if (e.target.classList.contains('status-bar__all-btn')) {
+        //     console.log('all');
+        // } else if (e.target.classList.contains('status-bar__active-btn')) {
+        //     console.log('active');
+
+
+        // } else if (e.target.classList.contains('status-bar__completed-btn')) {
+        //     console.log('completed');
+
+        // }
+    }
+}
 
 todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg') {
@@ -179,8 +215,15 @@ todoList.addEventListener('click', e => {
             changeStatus()
         }
 
+
+        /**
+         * 更換checkbox的狀態。
+         * 1.更換在HTML中，對應項目的data-status狀態 2.更換todoListData中，對應項目的status屬性，並將其更新至localStorage
+         */
         function changeStatus() {
             const todoCheckbox = todoItem.querySelector('.todo-checkbox')
+            // 
+            todoItem.dataset.status = todoCheckbox.checked ? 'completed' : 'active';
             todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
             localStorage.setItem('todos', JSON.stringify(todoListData))
         }
@@ -524,7 +567,7 @@ todoList.addEventListener('click', e => {
 
 
 
-statusBar.addEventListener('click', statusBarActive)
+
 
 
 // 以下兩行是受到selectText函數啟發，原來這樣寫也行，我的作法多套了一層function。但這兩還最後還是會出現閃爍
@@ -715,13 +758,5 @@ function style_showSearchInput() {
     searchWrapper.classList.remove('hidden')
 }
 
-function statusBarActive(e) {
-    if (e.target.tagName === 'BUTTON') {
-        statusBar.querySelectorAll('.status-bar__btn').forEach(item => {
-            item.classList.remove('status-bar__btn--active')
-        })
 
-        e.target.classList.add('status-bar__btn--active')
-    }
-}
 
