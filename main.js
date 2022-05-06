@@ -21,12 +21,13 @@ menuBtn.addEventListener('click', fadeOutTitle)
 menuBtn.addEventListener('click', fadeInMenu)
 
 
+
+
 /* Todo Input */
 
 //  adding new todo by {click addBtn} & {press Enter}
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
-
 
 // {click addBtn}
 addBtn.addEventListener('mousedown', e => {
@@ -47,8 +48,6 @@ addBtn.addEventListener('mouseup', e => {
     addBtnTransition()
 })
 
-// 仍需要一個設定是當使用者重複點按的時候，使按紐背景變黑，且重跑動畫。
-
 function addBtnTransition() {
     addBtn.style.animation = "add-btn-transition linear 2000ms forwards";
     addBtn.addEventListener('animationend', () => {
@@ -58,9 +57,7 @@ function addBtnTransition() {
 
 addBtn.addEventListener('click', addNewTodo)
 
-
 // {press Enter}
-
 todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
         addBtn.classList.add('add-btn--active')
@@ -93,9 +90,8 @@ function addNewTodo() {
         todoListData.unshift(inputData)
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
-        renderTodo()
+        renderTodo(currentTab)
         latestItemHighlight(todoList)
-
 
     } else {
         todoInput.value = '';
@@ -105,13 +101,41 @@ function addNewTodo() {
 
 
 /* Todo List */
+
+
+/* status(全部、待完成、已完成) */
+const statusTabs = document.querySelector('#status');
+let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
+
+activeCurrentTab()
+
+function activeCurrentTab() {
+    const activeTarget = statusTabs.querySelector(`#${currentTab}`)
+    statusTabs.querySelectorAll('.status__tab').forEach(item => {
+        item.classList.remove('status__tab--current')
+    })
+    activeTarget.classList.add('status__tab--current')
+}
+
+
+statusTabs.addEventListener('click', updateCurrentStatus)
+
+function updateCurrentStatus(e) {
+    currentTab = e.target.id;
+    localStorage.setItem('currentTab', JSON.stringify(currentTab))
+    activeCurrentTab()
+    renderTodo(currentTab)
+}
+
+
+
+
 const todoList = document.querySelector('#todo-list')
 let todoListData = JSON.parse(localStorage.getItem('todos'))
 
-// 如果要重寫，記得我在checkbox那邊已經輸入了以些有關改動data-set的值的code
-renderTodo()
+renderTodo(currentTab)
 
-function renderTodo(statusName = 'all') {
+function renderTodo(currentTab) {
     let checkbox;
     let todoItems = '';
 
@@ -124,34 +148,31 @@ function renderTodo(statusName = 'all') {
             } else {
                 checkbox = 'checked'
             }
-            console.log(statusName,data.status)
+            // console.log(`我點的頁籤名: ${statusName}` , `data.status`)
             // 這邊產生了一些問題，如果彼此有不同的狀態，問題不會產生；如果都是相同的狀態，那無論怎麼按標籤都會顯示出所有的狀態
             // 詳請參考 https://youtu.be/2QIMUBilooc
-            if (statusName === data.status || statusName === 'all') {
+            // || statusName === 'all'
+            if (currentTab === data.status || currentTab === 'all') {
                 todoItems +=
                     `<li class="todo-item" id="${index}" data-status="${data.status}">
-        <label class="flex items-center justify-between w-full cursor-pointer">
-            <input type="checkbox" class="todo-checkbox" ${checkbox}>
-            <p class="todo-text">${data.content}</p>
-            <button class="todo-option-btn">
-                <div class="todo-option-btn__dot"></div>
-                <div class="todo-option-btn__dot"></div>
-                <div class="todo-option-btn__dot"></div>
-            </button>
-        </label>
-        <div class="todo-option">
-            <button class="edit-btn btn btn--small mr-8">編輯<i
-                    class="fa-solid fa-pen-to-square ml-2"></i></button>
-            <button class="remove-btn btn btn--small">刪除<i
-                    class="fa-solid fa-trash ml-2"></i></button>
-        </div>
-    </li>`
-
-                todoList.innerHTML = todoItems;
+                        <label class="flex items-center justify-between w-full cursor-pointer">
+                            <input type="checkbox" class="todo-checkbox" ${checkbox}>
+                            <p class="todo-text">${data.content}</p>
+                            <button class="todo-option-btn">
+                                <div class="todo-option-btn__dot"></div>
+                                <div class="todo-option-btn__dot"></div>
+                                <div class="todo-option-btn__dot"></div>
+                            </button>
+                        </label>
+                        <div class="todo-option">
+                            <button class="edit-btn btn btn--small mr-8">編輯<i
+                                    class="fa-solid fa-pen-to-square ml-2"></i></button>
+                            <button class="remove-btn btn btn--small">刪除<i
+                                    class="fa-solid fa-trash ml-2"></i></button>
+                        </div>
+                    </li>`
             }
-
-
-
+            todoList.innerHTML = todoItems || '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
         })
     }
 }
@@ -167,34 +188,14 @@ function latestItemHighlight(parentElement) {
     })
 }
 
-/* statusBar(全部、待完成、已完成) */
-const statusBar = document.querySelector('#status-bar')
-statusBar.addEventListener('click', statusBarActive)
-
-function statusBarActive(e) {
-    if (e.target.tagName === 'BUTTON') {
-        statusBar.querySelectorAll('.status-bar__btn').forEach(item => {
-            item.classList.remove('status-bar__btn--active')
-        })
-
-        e.target.classList.add('status-bar__btn--active')
 
 
-        renderTodo(e.target.id)
-
-        // const todoItems = todoList.querySelectorAll('.todo-item')
-
-        // if (e.target.classList.contains('status-bar__all-btn')) {
-        //     console.log('all');
-        // } else if (e.target.classList.contains('status-bar__active-btn')) {
-        //     console.log('active');
-
-
-        // } else if (e.target.classList.contains('status-bar__completed-btn')) {
-        //     console.log('completed');
-
-        // }
-    }
+function checkIfListEmpty() {
+    // document.querySelector('#todo-list')
+    console.log(todoList.children)
+    // if (todoListData.length === 0 || todoList) {
+    //     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
+    // }
 }
 
 todoList.addEventListener('click', e => {
@@ -424,7 +425,7 @@ todoList.addEventListener('click', e => {
                 // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
                 todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
                 localStorage.setItem('todos', JSON.stringify(todoListData))
-                renderTodo()
+                renderTodo(currentTab)
             }
         }
 
@@ -433,9 +434,10 @@ todoList.addEventListener('click', e => {
         /* 移除項目 */
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
-            if (todoListData.length === 0) {
-                todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
-            }
+            checkIfListEmpty()
+            // if (todoListData.length === 0) {
+            //     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
+            // }
         }
 
         function removeTodo() {

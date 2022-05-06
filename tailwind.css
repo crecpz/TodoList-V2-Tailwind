@@ -143,36 +143,28 @@
         transform: rotate(-0deg);
     }
 
-    /* status bar */
-    .status-bar {
+    /* status */
+    .status {
         @apply flex items-center w-full mt-20;
     }
-    
-    /* 英文版有italic             .......................
-    
-    .status-bar__btn {
-        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
-    } 
-    */
 
-    /* 中文版沒有italic 。  新增tracking-[0.3em]*/
-    .status-bar__btn {
+    .status__tab {
         @apply flex items-center justify-center text-center py-2 border-b border-primary tracking-[0.3em];
     }
 
-    .status-bar__all-btn {
+    .status__tab-all {
         @apply flex-[1_1_25%] border-r-0;
     }
 
-    .status-bar__active-btn {
+    .status__tab-active {
         @apply flex-[1_1_35%] border-r-0;
     }
 
-    .status-bar__completed-btn {
+    .status__tab-completed {
         @apply flex-[1_1_40%];
     }
 
-    .status-bar__btn--active {
+    .status__tab--current {
         @apply border-b-2 border-primary text-primary;
         @apply font-bold;
     }

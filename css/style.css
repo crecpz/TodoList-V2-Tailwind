@@ -823,25 +823,16 @@ textarea {
   transform: rotate(-0deg) !important;
 }
 
-/* status bar */
+/* status */
 
-.status-bar {
+.status {
   margin-top: 5rem;
   display: flex;
   width: 100%;
   align-items: center;
 }
 
-/* 英文版有italic             .......................
-    
-    .status-bar__btn {
-        @apply flex items-center justify-center italic font-bold text-center py-2 border-b border-primary;
-    } 
-    */
-
-/* 中文版沒有italic 。  新增tracking-[0.3em]*/
-
-.status-bar__btn {
+.status__tab {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -854,21 +845,21 @@ textarea {
   letter-spacing: 0.3em;
 }
 
-.status-bar__all-btn {
+.status__tab-all {
   flex: 1 1 25%;
   border-right-width: 0px;
 }
 
-.status-bar__active-btn {
+.status__tab-active {
   flex: 1 1 35%;
   border-right-width: 0px;
 }
 
-.status-bar__completed-btn {
+.status__tab-completed {
   flex: 1 1 40%;
 }
 
-.status-bar__btn--active {
+.status__tab--current {
   border-bottom-width: 2px;
   --tw-border-opacity: 1;
   border-color: rgb(70 69 67 / var(--tw-border-opacity));
