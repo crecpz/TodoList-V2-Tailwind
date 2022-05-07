@@ -148,13 +148,10 @@ function renderTodo(currentTab) {
             } else {
                 checkbox = 'checked'
             }
-            // console.log(`我點的頁籤名: ${statusName}` , `data.status`)
-            // 這邊產生了一些問題，如果彼此有不同的狀態，問題不會產生；如果都是相同的狀態，那無論怎麼按標籤都會顯示出所有的狀態
-            // 詳請參考 https://youtu.be/2QIMUBilooc
-            // || statusName === 'all'
+
             if (currentTab === data.status || currentTab === 'all') {
                 todoItems +=
-                    `<li class="todo-item" id="${index}" data-status="${data.status}">
+                    `<li class="todo-item" id="${index}"">
                         <label class="flex items-center justify-between w-full cursor-pointer">
                             <input type="checkbox" class="todo-checkbox" ${checkbox}>
                             <p class="todo-text">${data.content}</p>
@@ -188,11 +185,15 @@ function latestItemHighlight(parentElement) {
     })
 }
 
+function addedPrompt(){
+    
+}
+
 
 
 function checkIfListEmpty() {
     // document.querySelector('#todo-list')
-    console.log(todoList.children)
+    // console.log(todoList.children)
     // if (todoListData.length === 0 || todoList) {
     //     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
     // }
@@ -223,10 +224,18 @@ todoList.addEventListener('click', e => {
          */
         function changeStatus() {
             const todoCheckbox = todoItem.querySelector('.todo-checkbox')
-            // 
-            todoItem.dataset.status = todoCheckbox.checked ? 'completed' : 'active';
             todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
             localStorage.setItem('todos', JSON.stringify(todoListData))
+            console.log(todoCheckbox.checked)
+            // console.log(`
+            // 現在的cruuentTab是${currentTab}
+            // 此todoItem的checkbox狀態是${}
+            // `)
+            
+            
+            
+            // 這邊不會執行，不知道為什麼
+            // renderTodo(currentTab)
         }
 
 
@@ -418,15 +427,6 @@ todoList.addEventListener('click', e => {
                 }
 
             }
-
-
-
-            function removeTodo() {
-                // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
-                todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
-                localStorage.setItem('todos', JSON.stringify(todoListData))
-                renderTodo(currentTab)
-            }
         }
 
 
@@ -444,7 +444,7 @@ todoList.addEventListener('click', e => {
             // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
             todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
             localStorage.setItem('todos', JSON.stringify(todoListData))
-            renderTodo()
+            renderTodo(currentTab)
         }
     }
 })
