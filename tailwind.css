@@ -149,7 +149,7 @@
     }
 
     .status__tab {
-        @apply flex items-center justify-center text-center py-2 border-b border-primary tracking-[0.3em];
+        @apply flex items-center justify-center text-sm text-center py-2 border-b border-primary tracking-[0.3em];
     }
 
     .status__tab-all {

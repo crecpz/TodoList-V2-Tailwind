@@ -90,8 +90,12 @@ function addNewTodo() {
         todoListData.unshift(inputData)
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
+        console.log(currentTab)
         renderTodo(currentTab)
-        latestItemHighlight(todoList)
+
+        // if(currentTab !== 'completed'){
+        //     latestItemHighlight(todoList)
+        // }    
 
     } else {
         todoInput.value = '';
@@ -137,7 +141,7 @@ renderTodo(currentTab)
 
 function renderTodo(currentTab) {
     let checkbox;
-    let todoItems = '';
+    let todoItems = ''; 
 
     if (todoListData) {
 
@@ -194,9 +198,9 @@ function addedPrompt(){
 function checkIfListEmpty() {
     // document.querySelector('#todo-list')
     // console.log(todoList.children)
-    // if (todoListData.length === 0 || todoList) {
-    //     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
-    // }
+    if (todoListData.length === 0) {
+        todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
+    }
 }
 
 todoList.addEventListener('click', e => {
@@ -226,7 +230,7 @@ todoList.addEventListener('click', e => {
             const todoCheckbox = todoItem.querySelector('.todo-checkbox')
             todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
             localStorage.setItem('todos', JSON.stringify(todoListData))
-            console.log(todoCheckbox.checked)
+            // console.log(todoCheckbox.checked)
             // console.log(`
             // 現在的cruuentTab是${currentTab}
             // 此todoItem的checkbox狀態是${}
@@ -430,14 +434,10 @@ todoList.addEventListener('click', e => {
         }
 
 
-
         /* 移除項目 */
         if (e.target.classList.contains('remove-btn')) {
             removeTodo()
             checkIfListEmpty()
-            // if (todoListData.length === 0) {
-            //     todoList.innerHTML = '<p id="empty-msg" class="text-primary-darken text-center py-4">Is empty here.</p>';
-            // }
         }
 
         function removeTodo() {
@@ -448,128 +448,6 @@ todoList.addEventListener('click', e => {
         }
     }
 })
-
-
-
-
-
-/* 編輯項目 p段落版本 */
-//         if (e.target.classList.contains('edit-btn')) {
-//             // 一按下「編輯」，就收合已展開的todoOption
-//             todoOption.classList.remove('todo-option--open')
-
-//             // 獲取todoText DOM
-//             const todoText = todoItem.querySelector('.todo-text')
-
-//             editingDialog();
-
-//             /**編輯狀態視窗:開啟 */
-//             function editingDialog() {
-//                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
-//                 const editDialog = document.querySelector('#edit-dialog')
-//                 editDialog.innerHTML =
-//                     `
-//                 <p class="text-xl text-center mb-8">編輯待辦事項</p>
-//                 <p id="edit-text" class="h-[80px] p-2 outline-none border border-primary  rounded-md overflow-y-auto">${todoText.innerHTML}</p>
-//                 <div class="flex justify-center items-center mt-8">
-//                 <button class="cancel-btn btn btn-small mr-6">取消</button>
-//                 <button class="save-btn btn btn-small">儲存</button>
-//                 </div> 
-//                 `
-
-//                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
-//                 let editText = editDialog.querySelector('#edit-text')
-//                 editText.setAttribute('contenteditable', true)
-
-//                 selectText(editText)
-
-//                 function selectText(node) {
-//                     if (document.body.createTextRange) {
-//                         const range = document.body.createTextRange();
-//                         range.moveToElementText(node);
-//                         range.select();
-//                     } else if (window.getSelection) {
-//                         const selection = window.getSelection();
-//                         const range = document.createRange();
-//                         range.selectNodeContents(node);
-//                         selection.removeAllRanges();
-//                         selection.addRange(range);
-//                     } else {
-//                         console.warn("Could not select text in node: Unsupported browser.");
-//                     }
-//                 }
-
-//                 // 以上內容準備完成後，使對話框彈出
-//                 editDialog.showModal()
-
-
-//                 // 「取消」鈕的相關設定
-//                 const cancelBtn = editDialog.querySelector('.cancel-btn')
-//                 // 如果使用者點按取消鈕，關閉dialog
-//                 cancelBtn.addEventListener('click', () => closeDialog(editDialog))
-
-
-//                 // !!!!!!!!!!!!!!!!!!!!!!!!!!! 從此處開始往下還沒有加上註解描述
-//                 // 先試著將這個編輯部分的<p>換成input
-//                 // 那段HTML我已經改成input放在index.html的最下面了
-
-
-//                 cancelBtn.addEventListener('click', cancelConfirm)
-
-//                 /**
-//                  * 此函數用來關閉dialog(附帶監聽animationend)
-//                  * @param {*} dialog 欲關閉的dialog
-//                  */
-//                 function closeDialog(dialog) {
-//                     dialog.setAttribute('closing', '')
-//                     dialog.addEventListener('animationend', () => {
-//                         dialog.close();
-//                         dialog.removeAttribute('closing', '')
-//                     }, { once: true })
-//                 }
-
-//                 function cancelConfirm() {
-//                     // 如果使用者有更動todTtext，則執行以下
-//                     if (editText.innerHTML != todoText.innerHTML) {
-//                         const confirmDialog = document.querySelector('#confirm-dialog')
-//                         confirmDialog.innerHTML =
-//                             `
-//                         <div class="flex flex-col items-center">
-//                             <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
-//                             <p class="text-center text-xl mb-6">編輯尚未儲存</p>
-//                             <p class="text-center text-sm">是否儲存更動?</p>
-//                             <div class="flex justify-center items-center mt-6">
-//                                 <button class="cancel-btn btn btn-small mr-6">不儲存</button>
-//                                 <button class="save-btn btn btn-small">儲存</button>
-//                             </div>
-//                         </div>
-//                         `
-//                         confirmDialog.showModal()
-
-//                         const cancelBtn = confirmDialog.querySelector('.cancel-btn')
-//                         cancelBtn.addEventListener('click', () => closeDialog(confirmDialog))
-//                     }
-//                 }
-
-
-//                 const saveBtn = editDialog.querySelector('.save-btn')
-//                 saveBtn.addEventListener('click', () => closeDialog(editDialog))
-//                 saveBtn.addEventListener('click', updateTodoText)
-//                 function updateTodoText() {
-//                     todoText.innerHTML = editText.innerHTML;
-//                     todoListData[todoItem.id].content = editText.innerHTML
-//                     localStorage.setItem('todos', JSON.stringify(todoListData))
-//                     // console.log(todoListData[todoItem.id].content)
-//                 }
-//             }
-
-
-
-
-
-
-
-
 
 
 // 以下兩行是受到selectText函數啟發，原來這樣寫也行，我的作法多套了一層function。但這兩還最後還是會出現閃爍
@@ -759,6 +637,3 @@ function style_showSearchInput() {
     clearBtn.classList.add('hidden')
     searchWrapper.classList.remove('hidden')
 }
-
-
-

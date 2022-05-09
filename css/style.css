@@ -468,7 +468,7 @@ dialog {
   max-width: 80%;
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   padding: 2rem;
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -605,7 +605,7 @@ textarea {
   --tw-border-opacity: 1;
   border-color: rgb(70 69 67 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
-  background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.75rem;
@@ -842,6 +842,8 @@ textarea {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   letter-spacing: 0.3em;
 }
 
@@ -1184,7 +1186,7 @@ textarea {
 
 .bg-secondary {
   --tw-bg-opacity: 1;
-  background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+  background-color: rgb(219 195 171 / var(--tw-bg-opacity));
 }
 
 .bg-transparent {
@@ -1294,7 +1296,7 @@ textarea {
 
 .text-secondary {
   --tw-text-opacity: 1;
-  color: rgb(214 196 176 / var(--tw-text-opacity));
+  color: rgb(219 195 171 / var(--tw-text-opacity));
 }
 
 .outline-none {
@@ -1435,7 +1437,7 @@ textarea {
 
   25% {
     --tw-bg-opacity: 1;
-    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+    background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   }
 
   50% {
@@ -1444,7 +1446,7 @@ textarea {
 
   100% {
     --tw-bg-opacity: 1;
-    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+    background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   }
 }
 
@@ -1455,7 +1457,7 @@ textarea {
 
   25% {
     --tw-bg-opacity: 1;
-    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+    background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   }
 
   50% {
@@ -1464,7 +1466,7 @@ textarea {
 
   100% {
     --tw-bg-opacity: 1;
-    background-color: rgb(214 196 176 / var(--tw-bg-opacity));
+    background-color: rgb(219 195 171 / var(--tw-bg-opacity));
   }
 }
 
