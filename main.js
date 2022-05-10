@@ -4,7 +4,6 @@ const title = document.querySelector('#title')
 const hamburger = document.querySelector('#hamburger')
 const searchBtn = document.querySelector('#search-btn')
 const searchWrapper = document.querySelector('#search-wrapper')
-const clearBtn = document.querySelector('#clear-btn')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 
@@ -83,14 +82,13 @@ function addNewTodo() {
 
         let inputData = {
             content: todoInput.value,
-            checked: false,
+            // checked: false,
             status: 'active',
         }
 
         todoListData.unshift(inputData)
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
-        console.log(currentTab)
         renderTodo(currentTab)
 
         // if(currentTab !== 'completed'){
@@ -141,7 +139,7 @@ renderTodo(currentTab)
 
 function renderTodo(currentTab) {
     let checkbox;
-    let todoItems = ''; 
+    let todoItems = '';
 
     if (todoListData) {
 
@@ -189,8 +187,8 @@ function latestItemHighlight(parentElement) {
     })
 }
 
-function addedPrompt(){
-    
+function addedPrompt() {
+
 }
 
 
@@ -235,9 +233,9 @@ todoList.addEventListener('click', e => {
             // 現在的cruuentTab是${currentTab}
             // 此todoItem的checkbox狀態是${}
             // `)
-            
-            
-            
+
+
+
             // 這邊不會執行，不知道為什麼
             // renderTodo(currentTab)
         }
@@ -392,8 +390,6 @@ todoList.addEventListener('click', e => {
                     }
                 })
 
-
-
                 /**
                 * 將已編輯的todoText更新至HTML與localstorage
                 */
@@ -419,7 +415,6 @@ todoList.addEventListener('click', e => {
                     }, { once: true })
                 }
 
-
                 /**
                  * 在編輯過後，若使用者按下「儲存」，自動將原本已經勾選的checkbox取消勾選
                  */
@@ -432,7 +427,6 @@ todoList.addEventListener('click', e => {
 
             }
         }
-
 
         /* 移除項目 */
         if (e.target.classList.contains('remove-btn')) {
@@ -449,45 +443,16 @@ todoList.addEventListener('click', e => {
     }
 })
 
-
-// 以下兩行是受到selectText函數啟發，原來這樣寫也行，我的作法多套了一層function。但這兩還最後還是會出現閃爍
-// menuBtn.addEventListener('click', () => fadeInItem(menu, showMenu, menuBtn, fadeInMenu, fadeOutMenu))
-// menuBtn.addEventListener('click', () => fadeOutItem(title, showMenu, menuBtn, fadeOutTitle, fadeInTitle))
-
-
-/* 編輯文字功能方法一(未完成) begin */
-//..........這行以下註解切換
-// function selectText(e, node) {
-//     const todoItem = e.target.closest('li')
-
-//     // 此處將label取消滑鼠事件，待編輯完畢後要再次打開，記得。
-//     const label = todoItem.querySelector('label')
-//     label.classList.add('pointer-events-none')
-
-//     node = todoItem.querySelector('.todo-text');
-//     node.style.border = '1px dashed'
-//     if (document.body.createTextRange) {
-//         const range = document.body.createTextRange();
-//         range.moveToElementText(node);
-//         range.select();
-//     } else if (window.getSelection) {
-//         const selection = window.getSelection();
-//         const range = document.createRange();
-//         range.selectNodeContents(node);
-//         selection.removeAllRanges();
-//         selection.addRange(range);
-//     } else {
-//         console.warn("Could not select text in node: Unsupported browser.");
-//     }
-// }
-
-
-// const clickable = document.querySelectorAll('.edit-btn');
-// clickable.forEach(item => {
-//     item.addEventListener('click', e => selectText(e, 'todo-text'));
-// })
-// // const clickable = document.querySelector('.edit-btn');
-// // clickable.addEventListener('click', e => selectText(e, 'todo-text'));
+/* 移除所有已完成項目 */
+const clearBtn = document.querySelector('#clear-btn')
+clearBtn.addEventListener('click', clearCompleted)
+function clearCompleted() {
+    todoListData = todoListData.filter(data => {
+        return data.status !== 'completed';
+    })
+    renderTodo(currentTab)
+    localStorage.setItem('todos', JSON.stringify(todoListData))
+}
 
 
 
