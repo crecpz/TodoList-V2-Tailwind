@@ -54,18 +54,11 @@
             </ul>
 
             <!-- add task input -->
-            <div class="flex">
-
-                <div class="relative w-full 
-                before:content-[''] before:absolute before:left-1 before:-bottom-2 before:w-full before:h-2 before:border before:border-r-0 before:border-t-0 before:border-primary/30 before:bg-primary/20  before:rounded-sm before:skew-x-[45deg]
-                after:content-[''] after:absolute after:top-1 after:-right-2 after:w-2 after:h-full after:border-2 after:border-l-0  after:border-r-0 after:border-primary/30 after:bg-primary/10 after:rounded-sm after:skew-y-[45deg]
-                    ">
-                    <input type="text" placeholder="New task here!" id="todo-input"
-                        class="font-bold w-full h-full bg-secondary border border-primary/50 rounded-sm text-primary bg-transparent outline-none px-3 py-2 placeholder:text-primary/50 placeholder:italic">
-                </div>
-
-                <button id="add-btn" class="add-btn">
-                    <i class="fa-solid fa-arrow-right px-5 py-4 text-secondary"></i>
+            <div class="flex border-t-4 border-t-primary">
+                <input type="text" placeholder="New task here!" id="todo-input"
+                    class="font-bold w-full h-full bg-secondary border text-primary outline-none px-3 py-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic">
+                <button id="add-btn" class="bg-tertiary rounded-br-xl">
+                    <i class="fa-solid fa-arrow-right px-5 py-4 text-primary"></i>
                 </button>
             </div>
 

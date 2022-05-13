@@ -81,16 +81,9 @@
         @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
     }
 
-    .add-btn {
-        @apply relative bg-primary/70;
-        @apply before:content-[''] before:absolute before:w-full before:h-2 before:-bottom-2 before:left-1 before:bg-primary/50 before:skew-x-[45deg];
-        @apply after:content-[''] after:absolute after:-right-2 after:top-1 after:w-2 after:h-full after:border after:border-b-0 after:border-r-0 after:border-t-0 after:border-primary after:bg-primary/20 after:skew-y-[45deg];
-    }
 
     .add-btn--active {
-        @apply left-1 top-1 bg-black;
-        @apply before:-bottom-1 before:left-0.5 before:h-1;
-        @apply after:-right-1 after:top-0.5 after:w-1;
+
     } 
 
     .btn--small {
@@ -186,9 +179,7 @@
     }
 
     .todo-text {
-        @apply ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
-        /* @apply font-bold; */
-        @apply flex flex-wrap;
+        @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
     }
 
     .todo-text[contenteditable="true"] {
