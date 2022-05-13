@@ -28,53 +28,31 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="font-Source-Code-Pro bg-[#dbc3ab] text-primary tracking-widest overflow-y-scroll">
+<body class="h-[100vh] font-Source-Code-Pro bg-primary text-secondary tracking-widest overflow-y-scroll">
     <header class="pt-16 mb-28">
+
+        <button id="clear-btn" class="btn btn--black">
+            <i class="fa-solid fa-trash mr-2"></i>Clear Completed
+        </button>
         <!-- container -->
-        <div class="content">
-            <div class="relative flex justify-between items-center">
-                <button id="menu-btn" class="w-6 h-6 mr-4 flex-shrink-0 cursor-pointer">
-                    <div id="hamburger" class="hamburger">
-                    </div>
-                </button>
-
-                <h1 id="title" class="text-3xl leading-[34px]">Todo List</h1>
-
-                <!-- 功能按鈕區 -->
-                <div id="menu" class="hidden w-full">
-
-                    <!-- search btn -->
-                    <button id="search-btn" class="btn btn--black text-left mr-4">
-                        <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
-                    </button>
-                    <!--  -->
-                    <!-- clear btn -->
-                    <button id="clear-btn" class="btn btn--black">
-                        <i class="fa-solid fa-trash mr-2"></i>Clear Completed
-                    </button>
-                </div>
-
-                <!-- search wrapper -->
-                <div id="search-wrapper" class="hidden relative w-full text-sm">
-                    <div
-                        class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-1.5 px-2 sm:py-2 sm:px-4">
-                        <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
-                        <input type="text" id="search-input" placeholder="Search"
-                            class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
-                        <i id="search-close-btn"
-                            class="text-primary fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
-                    </div>
-                    <div
-                        class="relative left-1.5 top-1.5 -z-[1] py-1.5 px-2 sm:py-2 sm:px-4  border border-primary/80 w-full h-full text-transparent">
-                        1
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- <div class="content"> -->
+        <h1 id="title" class="text-3xl text-center leading-[34px]">Todo List</h1>
+        <!-- </div> -->
     </header>
 
     <main class="mt-40">
         <div class="content">
+
+            <div id="status" class="status">
+                <button id="all" class="status__tab status__tab-all status__tab--current">全部</button>
+                <button id="active" class="status__tab status__tab-active">待完成</button>
+                <button id="completed" class="status__tab status__tab-completed">已完成</button>
+            </div>
+
+            <ul id="todo-list" class="bg-secondary">
+                <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
+            </ul>
+
             <!-- add task input -->
             <div class="flex">
 
@@ -91,17 +69,12 @@
                 </button>
             </div>
 
-            <div id="status" class="status">
-                <button id="all" class="status__tab status__tab-all status__tab--current">全部</button>
-                <button id="active" class="status__tab status__tab-active">待完成</button>
-                <button id="completed" class="status__tab status__tab-completed">已完成</button>
-            </div>
-            <!-- checkbox styling 參考 https://moderncss.dev/pure-css-custom-checkbox-style/ -->
-            <ul id="todo-list" class="">
-                <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
-            </ul>
         </div>
+
+
     </main>
+
+
     <dialog id="edit-dialog"></dialog>
     <dialog id="confirm-dialog"></dialog>
 

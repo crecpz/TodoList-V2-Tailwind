@@ -1,23 +1,14 @@
 const menuBtn = document.querySelector('#menu-btn')
 const menu = document.querySelector('#menu')
 const title = document.querySelector('#title')
-const hamburger = document.querySelector('#hamburger')
+
 const searchBtn = document.querySelector('#search-btn')
 const searchWrapper = document.querySelector('#search-wrapper')
 const closeSearchBtn = document.querySelector('#search-close-btn')
 const searchInput = document.querySelector('#search-input')
 
 
-/* hamburger switch */
-menuBtn.addEventListener('click', hamburger_expandSwitcher)
-searchBtn.addEventListener('click', hamburger_arrowSwitcher)
 
-/* open search input */
-searchBtn.addEventListener('click', openSearchInput)
-
-/* title, menu -> fadein & fadeout  */
-menuBtn.addEventListener('click', fadeOutTitle)
-menuBtn.addEventListener('click', fadeInMenu)
 
 
 

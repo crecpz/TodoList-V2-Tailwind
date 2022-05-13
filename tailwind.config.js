@@ -6,18 +6,14 @@ module.exports = {
     extend: {
 
       colors: {
-        primary: '#464543',
-        'primary-light':'#9b9a98',
-        'primary-dark':'#333332',
-        // secondary:'#d6c4b0',
-        secondary:'#dbc3ab',
-        // 'primary-darken': '#7c7c7c',
-        // 'primary-darkenest' : '#282828',
-
-
-        // primary: '#BCB8B8',
-        // 'primary-darken': '#7c7c7c',
-        // 'primary-darkenest' : '#282828',
+        primary:'#405362',
+        secondary:'#eee5dc',
+        tertiary:'#efc881',
+        
+        // primary: '#464543',
+        // 'primary-light':'#9b9a98',
+        // 'primary-dark':'#333332',
+        // secondary:'#dbc3ab',
       },
 
       fontFamily: {
