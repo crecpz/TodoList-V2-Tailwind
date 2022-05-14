@@ -4,10 +4,10 @@
 
 /*
 0514後記
-普通btn按鈕的shadow基本樣式已大致處理好
+接下來要來處理h100vh的問題，想想看要用什麼方式使其不要超出螢幕
 
-接下來要來處理的是底部那個清除已完成的按鈕
-
+想一個對策，不管用什麼手機都能夠自然
+可以去更改圖片的高度或寬度 在IPHONE SE圖片有點大了
  */
 
 @media (hover: hover) {
@@ -24,21 +24,21 @@
     }
 
     /* scrollbar setting */
-    /* ::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         width: 10px;
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-red-500;
+        @apply bg-primary/30;
     }
     
     ::-webkit-scrollbar-thumb {
-        @apply bg-red-500; 
+        @apply bg-primary/50; 
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-red-500;
-    } */
+        @apply bg-black;
+    }
 
     /* selection */
 
@@ -86,7 +86,7 @@
     }
     
     .btn {
-        @apply py-1 px-4 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
+        @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
         @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
     }
 
@@ -102,37 +102,27 @@
 
     } 
 
-    .btn--disabled {
+    /* .btn--disabled {
         @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
         @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
         @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
-    }
+    } */
 
     
 
     /* status */
     .status {
-        @apply flex items-center w-full mt-20 bg-tertiary rounded-tl-3xl rounded-tr-3xl border-b-4 border-b-primary;
+        @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary;
     }
 
     .status__tab {
         @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em];
-    }
-
-    .status__tab-all {
-        /* @apply flex-[1_1_25%] border-r-0; */
-    }
-
-    .status__tab-active {
-        /* @apply flex-[1_1_35%] border-r-0; */
-    }
-
-    .status__tab-completed {
-        /* @apply flex-[1_1_40%]; */
-    }
+    }    
 
     .status__tab--current {
-        /* @apply  */
+        @apply flex justify-center items-center;
+        @apply before:content-['\f104'] before:font-Font-Awesome before:text-primary before:pr-1;
+        @apply after:content-['\f105'] after:font-Font-Awesome after:text-primary after:pl-1;
     }
 
     .todo-item {
@@ -174,13 +164,11 @@
     .todo-option {
         @apply flex justify-start items-center w-full;
         @apply transition-all duration-500;
-        /* @apply max-h-[100px] visible opacity-100 mt-2 my-4; */
+        @apply invisible max-h-0 opacity-0 mt-0 my-0;
     }
 
     .todo-option--open {
-        /* @apply scale-y-0 opacity-0;*/
         @apply max-h-[100px] visible opacity-100 mt-2 my-4;
-        /* @apply min-h-full;*/
     }
 }
 
