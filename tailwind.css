@@ -2,9 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+0514後記
+普通btn按鈕的shadow基本樣式已大致處理好
+
+接下來要來處理的是底部那個清除已完成的按鈕
+
+ */
+
 @media (hover: hover) {
-    .bg-transition {
-        
+    .btn {
+        @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
+        @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
     }
 }
 
@@ -15,21 +24,21 @@
     }
 
     /* scrollbar setting */
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         width: 10px;
     }
 
     ::-webkit-scrollbar-track {
-        @apply bg-primary/20;
+        @apply bg-red-500;
     }
     
     ::-webkit-scrollbar-thumb {
-        @apply bg-primary/40; 
+        @apply bg-red-500; 
     }
 
     ::-webkit-scrollbar-thumb:hover {
-        @apply bg-primary;
-    }
+        @apply bg-red-500;
+    } */
 
     /* selection */
 
@@ -72,69 +81,34 @@
 
 @layer components{
 
+    .content {
+        @apply mx-auto px-4;
+    }
+    
     .btn {
-        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary rounded-sm transition-all duration-100; 
-        @apply active:top-1.5 active:left-1.5  active:text-primary;
-        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
-        @apply active:before:bottom-0 active:before:left-0 active:before:skew-x-0;
-        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
-        @apply active:after:right-0 active:after:top-0 active:after:skew-y-0;
+        @apply py-1 px-4 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
+        @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
     }
 
+    .btn-normal {
+        @apply bg-secondary;
+    }
+
+    .btn-hightlight{
+        @apply bg-tertiary;
+    }
 
     .add-btn--active {
 
     } 
 
-    .btn--small {
-        @apply text-sm;
-    }
-    
     .btn--disabled {
         @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
         @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
         @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
     }
 
-
-    .content {
-        @apply mx-auto px-4;
-    }
     
-    .btn--black{
-        @apply text-black;
-    }
-
-
-
-
-
-
-
-    /* ---hamburger基本樣式--- */
-    .hamburger{
-        @apply relative w-full h-0.5 bg-primary rounded-lg;
-    }
-
-    .hamburger::before,
-    .hamburger::after{
-        @apply rounded-lg bg-primary;
-        content:'';
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 2px;
-    }
-
-    .hamburger::before{
-        top: -8px;
-        transform: rotate(0deg);
-    }
-
-    .hamburger::after{
-        top: 8px;
-        transform: rotate(-0deg);
-    }
 
     /* status */
     .status {
@@ -162,8 +136,7 @@
     }
 
     .todo-item {
-        @apply flex flex-col items-center px-2 py-2;
-        @apply border-b border-primary/25;
+        @apply flex flex-col items-center px-6 py-2;
     }
 
     .todo-checkbox {
@@ -199,11 +172,8 @@
     }
 
     .todo-option {
-        @apply flex justify-start items-center ml-6 w-full;
+        @apply flex justify-start items-center w-full;
         @apply transition-all duration-500;
-        
-        @apply ml-14; /* 此設定可讓todo-option與btn對齊 */
-        @apply max-h-0 invisible opacity-0 mt-0 mb-0;
         /* @apply max-h-[100px] visible opacity-100 mt-2 my-4; */
     }
 
@@ -228,60 +198,6 @@
     .show{
         @apply visible opacity-100;
     }
-
-
-    /* ---hamburger-expand--- */
-    .hamburger-expand{
-        @apply bg-transparent transition-colors duration-200;
-        @apply before:top-0 before:rotate-45;
-        @apply after:top-0 after:-rotate-45;
-    }
-
-    .hamburger-expand{
-        transition: background-color 200ms ease-in 200ms;
-    }
-
-    .hamburger-expand::before,
-    .hamburger-expand::after {
-        transition: top 300ms ease-in 200ms, transform 600ms ease-in, width ease-in 500ms; 
-    }
-
-
-    /* ---hamburger-collapse--- */
-    .hamburger-collapse{
-        @apply before:-top-2 before:rotate-0 ;
-        @apply after:top-2 after:-rotate-0 ;
-    } 
-
-    .hamburger-collapse{
-        transition: background-color 200ms ease-in 200ms;
-    }
-
-    .hamburger-collapse::before,
-    .hamburger-collapse::after {
-        transition: top 300ms ease-in, transform 500ms ease-in; 
-    }
-
-    /* hamburger change to arrow */
-    .hamburger-arrow {
-        @apply bg-transparent transition-all;
-        @apply before:-rotate-45 before:-top-1.5 before:w-3/4;
-        @apply after:rotate-45 after:top-1.5 after:w-3/4;
-    }
-
-    .hamburger-arrow::before, 
-    .hamburger-arrow::after {
-        transition: top 500ms ease-in, transform 500ms ease-in, width ease-in 200ms;
-    }
-
-    .animation-fade-in {
-        animation: fade-in 300ms forwards ease-in-out;
-    }
-
-    .animation-fade-out {
-        animation: fade-out 300ms forwards ease-in-out;
-    }
-
 }
 
 

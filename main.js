@@ -155,10 +155,10 @@ function renderTodo(currentTab) {
                             </button>
                         </label>
                         <div class="todo-option">
-                            <button class="edit-btn btn btn--small mr-8">編輯<i
-                                    class="fa-solid fa-pen-to-square ml-2"></i></button>
-                            <button class="remove-btn btn btn--small">刪除<i
-                                    class="fa-solid fa-trash ml-2"></i></button>
+                            <button class="edit-btn btn  mr-6"><i
+                                    class="fa-solid fa-pen-to-square mr-2"></i>編輯</button>
+                            <button class="remove-btn btn btn-hightlight"><i
+                                    class="fa-solid fa-trash mr-2"></i>刪除</button>
                         </div>
                     </li>`
             }

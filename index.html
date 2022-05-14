@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant-TW" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -28,21 +28,16 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="h-[100vh] font-Source-Code-Pro bg-primary text-secondary tracking-widest overflow-y-scroll">
-    <header class="pt-16 mb-28">
-
-        <button id="clear-btn" class="btn btn--black">
-            <i class="fa-solid fa-trash mr-2"></i>Clear Completed
-        </button>
-        <!-- container -->
-        <!-- <div class="content"> -->
-        <h1 id="title" class="text-3xl text-center leading-[34px]">Todo List</h1>
-        <!-- </div> -->
+<body class="w-full h-full font-Source-Code-Pro bg-primary text-secondary tracking-widest">
+    <header class="pt-16">
+        <div class="content">
+            <h1 id="title" class="text-3xl text-center leading-[34px]">Todo List</h1>
+        </div>
     </header>
 
     <main class="mt-40">
         <div class="content">
-
+            <!-- <div class="bg-secondary"> -->
             <div id="status" class="status">
                 <button id="all" class="status__tab status__tab-all status__tab--current">全部</button>
                 <button id="active" class="status__tab status__tab-active">待完成</button>
@@ -53,6 +48,12 @@
                 <p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>
             </ul>
 
+            <div class="flex items-center px-6 bg-secondary">
+                <button id="clear-btn" class="btn btn-hightlight flex items-center justify-center w-full">
+                    <img class="w-4 mr-2" src="img/delete-complete.svg">清除已完成
+                </button>
+            </div>
+
             <!-- add task input -->
             <div class="flex border-t-4 border-t-primary">
                 <input type="text" placeholder="New task here!" id="todo-input"
@@ -61,10 +62,8 @@
                     <i class="fa-solid fa-arrow-right px-5 py-4 text-primary"></i>
                 </button>
             </div>
-
+            <!-- </div> -->
         </div>
-
-
     </main>
 
 
