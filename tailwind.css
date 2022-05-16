@@ -84,6 +84,10 @@
     .content {
         @apply mx-auto px-4;
     }
+
+    .growing-wrapper {
+        @apply shadow-primary/30 shadow-[0_0_8px_2px] overflow-hidden transition-[height] duration-500;
+    }
     
     .btn {
         @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;

@@ -102,6 +102,9 @@ let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
 activeCurrentTab()
 
+/**
+ * 將css中的.status__tab--current狀態給其中一個status__tab。
+ */
 function activeCurrentTab() {
     const activeTarget = statusTabs.querySelector(`#${currentTab}`)
     statusTabs.querySelectorAll('.status__tab').forEach(item => {
@@ -114,13 +117,15 @@ function activeCurrentTab() {
 statusTabs.addEventListener('click', updateCurrentStatus)
 
 function updateCurrentStatus(e) {
-    currentTab = e.target.id;
+    // 下列判斷式是為了防止e.target點到其他目標，將錯誤的id傳給了currentTab
+    if (e.target.tagName === 'BUTTON') {
+        currentTab = e.target.id;
+    }
+
     localStorage.setItem('currentTab', JSON.stringify(currentTab))
     activeCurrentTab()
     renderTodo(currentTab)
 }
-
-
 
 
 const todoList = document.querySelector('#todo-list')
@@ -132,19 +137,17 @@ function renderTodo(currentTab) {
     let checkbox;
     let todoItems = '';
 
-    if (todoListData) {
+    todoListData.forEach((data, index) => {
+        // 檢查每一項todoListData內的「status」，確認其狀態是否為active
+        if (data.status === 'active') {
+            checkbox = '';
+        } else {
+            checkbox = 'checked';
+        }
 
-        todoListData.forEach((data, index) => {
-            // 檢查每一項todoListData內的「status」，確認其狀態是否為active
-            if (data.status === 'active') {
-                checkbox = ''
-            } else {
-                checkbox = 'checked'
-            }
-
-            if (currentTab === data.status || currentTab === 'all') {
-                todoItems +=
-                    `<li class="todo-item" id="${index}"">
+        if (currentTab === data.status || currentTab === 'all') {
+            todoItems +=
+                `<li class="todo-item" id="${index}"">
                         <label class="flex items-center justify-between w-full cursor-pointer">
                             <input type="checkbox" class="todo-checkbox" ${checkbox}>
                             <p class="todo-text">${data.content}</p>
@@ -161,34 +164,39 @@ function renderTodo(currentTab) {
                                     class="fa-solid fa-trash mr-2"></i>刪除</button>
                         </div>
                     </li>`
-            }
-            todoList.innerHTML = todoItems || '<p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>';
-        })
-    }
-}
+        }
 
-/**
- * 在父層的第一個ElementChild加上動畫效果，以表示它是最新的todo
- * @param {*} parentElement 父層
- */
-function latestItemHighlight(parentElement) {
-    parentElement.firstElementChild.style.animation = 'latestItem 2000ms ease-in-out';
-    parentElement.firstElementChild.addEventListener('animationend', () => {
-        parentElement.firstElementChild.style.animation = '';
+        if (todoItems) {
+            console.log(1)
+            todoList.innerHTML = todoItems;
+        } else {
+            console.log(2)
+            showEmptyMsg()
+        }
     })
 }
 
-function addedPrompt() {
-
-}
-
-
-
-function checkIfListEmpty() {
-    if (todoListData.length === 0) {
-        todoList.innerHTML = '<p id="empty-msg" class="text-primary text-center py-4">Is empty here.</p>';
+function showEmptyMsg() {
+    if (currentTab === 'all' || currentTab === 'active') {
+        todoList.innerHTML =
+            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+                <div class="flex flex-col items-center my-auto">
+                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+                    <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
+                </div>
+                <i class="fa-solid fa-arrow-down-long text-2xl text-primary mb-4 animate-bounce"></i>
+            </div>`;
+    } else {
+        todoList.innerHTML =
+            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+                <div class="flex flex-col items-center my-auto">
+                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+                    <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+                </div>
+            </div>`;
     }
 }
+
 
 todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg') {
@@ -217,16 +225,6 @@ todoList.addEventListener('click', e => {
             const todoCheckbox = todoItem.querySelector('.todo-checkbox')
             todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
             localStorage.setItem('todos', JSON.stringify(todoListData))
-            // console.log(todoCheckbox.checked)
-            // console.log(`
-            // 現在的cruuentTab是${currentTab}
-            // 此todoItem的checkbox狀態是${}
-            // `)
-
-
-
-            // 這邊不會執行，不知道為什麼
-            // renderTodo(currentTab)
         }
 
 
@@ -249,12 +247,13 @@ todoList.addEventListener('click', e => {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog')
                 editDialog.innerHTML =
-                    `
-                    <p class="text-xl text-center mb-8">編輯待辦事項</p>
-                    <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary  rounded-md overflow-y-auto"></textarea>
+
+                    `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
+                    <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary rounded-md overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center mt-8">
-                    <button class="cancel-btn btn btn-small mr-6">取消</button>
-                    <button class="save-btn btn btn-small">儲存</button>
+                        <button class="cancel-btn btn btn-small mr-6">取消</button>
+                        <button class="save-btn btn btn-small">儲存</button>
+                    </div>
                 `
 
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
@@ -320,16 +319,16 @@ todoList.addEventListener('click', e => {
                         const confirmDialog = document.querySelector('#confirm-dialog')
                         confirmDialog.innerHTML =
                             `
-                        <div class="flex flex-col items-center">
-                            <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
-                            <p class="text-center text-xl mb-6">編輯尚未儲存</p>
-                            <p class="text-center text-sm">是否儲存更動?</p>
-                            <div class="flex justify-center items-center mt-6">
-                                <button class="cancel-btn btn btn-small mr-6">不儲存</button>
-                                <button class="save-btn btn btn-small">儲存</button>
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
+                                <p class="text-center text-xl mb-6">編輯尚未儲存</p>
+                                <p class="text-center text-sm">是否儲存更動?</p>
+                                <div class="flex justify-center items-center mt-6">
+                                    <button class="cancel-btn btn btn-small mr-6">不儲存</button>
+                                    <button class="save-btn btn btn-small">儲存</button>
+                                </div>
                             </div>
-                        </div>
-                        `
+                            `
                         // 先確保在開啟dialog前，dialog是關閉的狀態
                         confirmDialog.close()
 
@@ -412,7 +411,6 @@ todoList.addEventListener('click', e => {
                         checkbox.click()
                     }
                 }
-
             }
         }
 
@@ -431,6 +429,40 @@ todoList.addEventListener('click', e => {
     }
 })
 
+/* 改良版 */
+
+function checkIfListEmpty() {
+    if (todoListData.length === 0) {
+        showEmptyMsg();
+    }
+}
+
+/* 原版 */
+
+// function checkIfListEmpty() {
+//     if (todoListData.length === 0 && currentTab !== 'completed') {
+//         todoList.innerHTML =
+//             `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+//                 <div class="flex flex-col items-center my-auto">
+//                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+//                     <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
+//                 </div>
+//                 <i class="fa-solid fa-arrow-down-long text-2xl text-primary mb-4 animate-bounce"></i>
+//             </div>`;
+//     } else if (todoListData.length === 0 && currentTab === 'completed') {
+//         todoList.innerHTML =
+//             `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+//                 <div class="flex flex-col items-center my-auto">
+//                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+//                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+//                 </div>
+//             </div>`;
+//     }
+// }
+
+
+
+
 /* 移除所有已完成項目 */
 const clearBtn = document.querySelector('#clear-btn')
 clearBtn.addEventListener('click', clearCompleted)
@@ -442,3 +474,17 @@ function clearCompleted() {
     checkIfListEmpty()
     localStorage.setItem('todos', JSON.stringify(todoListData))
 }
+
+/* 隱藏「清除已完成」按鈕 */
+const growingWrapper = document.querySelector('#growing-wrapper')
+
+function growing() {
+    if (growingWrapper.clientHeight) {
+        growingWrapper.style.height = '0px';
+    } else {
+        const innerWrapper = document.querySelector('#inner-wrapper')
+        growingWrapper.style.height = innerWrapper.clientHeight + 'px';
+    }
+}
+// console.log(title)
+title.addEventListener('click', growing)
