@@ -3,11 +3,17 @@
 @tailwind utilities;
 
 /*
-0514後記
-接下來要來處理h100vh的問題，想想看要用什麼方式使其不要超出螢幕
+0517後記
+現在已經初步的做出【清除已完成按鈕】的彈入彈出，
+接著是要選擇其中一種方式:
+1.在三個頁面都要有按鈕?
+    - 好處是這樣在<全部>頁面可以吃的到這個好處，可以直接篩掉已經完成的事項，
+        增加方便性
+    - 壞處是<待完成>掛著沒什麼意義
 
-想一個對策，不管用什麼手機都能夠自然
-可以去更改圖片的高度或寬度 在IPHONE SE圖片有點大了
+2.僅在'已完成'頁面有按鈕?
+    - 好處是頁面整潔
+    - 壞處是如果需要清掉已經完成的事項還得到<已完成>去按。
  */
 
 @media (hover: hover) {
@@ -85,9 +91,6 @@
         @apply mx-auto px-4;
     }
 
-    .growing-wrapper {
-        @apply shadow-primary/30 shadow-[0_0_8px_2px] overflow-hidden transition-[height] duration-500;
-    }
     
     .btn {
         @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
@@ -182,46 +185,44 @@
 
 
 @layer utilities{
-    /* ---hide & show--- */
-    .hide{
-        @apply invisible opacity-0;
+
+    .animation---popup {
+        animation: popup 300ms ease-out forwards;
     }
 
-    .show{
-        @apply visible opacity-100;
+    .animation---retreat {
+        animation: retreat 500ms ease-out forwards;
+    }
+
+}
+
+@keyframes popup {
+    0%{
+        @apply bottom-0 -z-10 opacity-0;
+    }
+
+    80% {
+        @apply bottom-[110%];
+    }
+    
+    100%{
+        @apply bottom-full z-10 opacity-100;
     }
 }
 
-
-
-@keyframes latestItem{
+@keyframes retreat  {
     0%{
-        @apply bg-primary/30;
+        @apply bottom-full z-10 opacity-100;
     }
 
-    25%{
-        @apply bg-secondary;
-    }
-
-    50%{
-        @apply bg-primary/30;
+    50% {
+        @apply -z-10;
     }
 
     100%{
-        
-        @apply bg-secondary;
+        @apply bottom-0 -z-10 opacity-0;
     }
 }
-
-@keyframes add-btn-transition {
-    0%{
-        @apply bg-black;
-    }
-    100%{
-        @apply bg-primary/70;
-    }
-}
-
 
 @keyframes fade-in{
     0%{
@@ -289,11 +290,11 @@
 
 @keyframes room-in {
     from {
-        @apply scale-75 opacity-0;
+        @apply scale-75;
     }
 
     to {
-        @apply scale-100 opacity-100;
+        @apply scale-100;
     }
 }
 

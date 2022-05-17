@@ -33,17 +33,9 @@ addBtn.addEventListener('mousedown', e => {
 addBtn.addEventListener('mouseup', e => {
     addNewTodo()
     addBtn.classList.remove('add-btn--active')
-
-    // 按下addBtn產生的動畫效果
-    addBtnTransition()
 })
 
-function addBtnTransition() {
-    addBtn.style.animation = "add-btn-transition linear 2000ms forwards";
-    addBtn.addEventListener('animationend', () => {
-        addBtn.style.animation = '';
-    })
-}
+
 
 addBtn.addEventListener('click', addNewTodo)
 
@@ -117,14 +109,16 @@ function activeCurrentTab() {
 statusTabs.addEventListener('click', updateCurrentStatus)
 
 function updateCurrentStatus(e) {
-    // 下列判斷式是為了防止e.target點到其他目標，將錯誤的id傳給了currentTab
+    // 此判斷式是為了防止e.target點到其他目標，將錯誤的id傳給了currentTab
     if (e.target.tagName === 'BUTTON') {
         currentTab = e.target.id;
     }
 
     localStorage.setItem('currentTab', JSON.stringify(currentTab))
     activeCurrentTab()
+
     renderTodo(currentTab)
+    checkIfListEmpty()
 }
 
 
@@ -148,47 +142,45 @@ function renderTodo(currentTab) {
         if (currentTab === data.status || currentTab === 'all') {
             todoItems +=
                 `<li class="todo-item" id="${index}"">
-                        <label class="flex items-center justify-between w-full cursor-pointer">
-                            <input type="checkbox" class="todo-checkbox" ${checkbox}>
-                            <p class="todo-text">${data.content}</p>
-                            <button class="todo-option-btn">
-                                <div class="todo-option-btn__dot"></div>
-                                <div class="todo-option-btn__dot"></div>
-                                <div class="todo-option-btn__dot"></div>
-                            </button>
-                        </label>
-                        <div class="todo-option">
-                            <button class="edit-btn btn mr-4"><i
-                                    class="fa-solid fa-pen-to-square mr-2"></i>編輯</button>
-                            <button class="remove-btn btn btn-hightlight"><i
-                                    class="fa-solid fa-trash mr-2"></i>刪除</button>
-                        </div>
-                    </li>`
+                    <label class="flex items-center justify-between w-full cursor-pointer">
+                        <input type="checkbox" class="todo-checkbox" ${checkbox}>
+                        <p class="todo-text">${data.content}</p>
+                        <button class="todo-option-btn">
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                            <div class="todo-option-btn__dot"></div>
+                        </button>
+                    </label>
+                    <div class="todo-option">
+                        <button class="edit-btn btn mr-4"><i
+                                class="fa-solid fa-pen-to-square mr-2"></i>編輯</button>
+                        <button class="remove-btn btn btn-hightlight"><i
+                                class="fa-solid fa-trash mr-2"></i>刪除</button>
+                    </div>
+                </li>`
         }
 
         if (todoItems) {
-            console.log(1)
             todoList.innerHTML = todoItems;
         } else {
-            console.log(2)
             showEmptyMsg()
         }
     })
 }
 
 function showEmptyMsg() {
-    if (currentTab === 'all' || currentTab === 'active') {
+    if (currentTab === 'active' || currentTab === 'all') {
         todoList.innerHTML =
-            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+            `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full">
                 <div class="flex flex-col items-center my-auto">
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
                 </div>
-                <i class="fa-solid fa-arrow-down-long text-2xl text-primary mb-4 animate-bounce"></i>
+                <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
             </div>`;
     } else {
         todoList.innerHTML =
-            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
+            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full">
                 <div class="flex flex-col items-center my-auto">
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
@@ -248,7 +240,7 @@ todoList.addEventListener('click', e => {
                 const editDialog = document.querySelector('#edit-dialog')
                 editDialog.innerHTML =
 
-                    `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
+                `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary rounded-md overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center mt-8">
                         <button class="cancel-btn btn btn-small mr-6">取消</button>
@@ -429,39 +421,15 @@ todoList.addEventListener('click', e => {
     }
 })
 
-/* 改良版 */
 
+/**
+ * 檢查todoListData是否為空，如果為空，則顯示出emptyMsg
+ */
 function checkIfListEmpty() {
     if (todoListData.length === 0) {
         showEmptyMsg();
     }
 }
-
-/* 原版 */
-
-// function checkIfListEmpty() {
-//     if (todoListData.length === 0 && currentTab !== 'completed') {
-//         todoList.innerHTML =
-//             `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
-//                 <div class="flex flex-col items-center my-auto">
-//                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-//                     <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
-//                 </div>
-//                 <i class="fa-solid fa-arrow-down-long text-2xl text-primary mb-4 animate-bounce"></i>
-//             </div>`;
-//     } else if (todoListData.length === 0 && currentTab === 'completed') {
-//         todoList.innerHTML =
-//             `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pt-8">
-//                 <div class="flex flex-col items-center my-auto">
-//                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-//                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
-//                 </div>
-//             </div>`;
-//     }
-// }
-
-
-
 
 /* 移除所有已完成項目 */
 const clearBtn = document.querySelector('#clear-btn')
@@ -475,16 +443,49 @@ function clearCompleted() {
     localStorage.setItem('todos', JSON.stringify(todoListData))
 }
 
-/* 隱藏「清除已完成」按鈕 */
-const growingWrapper = document.querySelector('#growing-wrapper')
+/* 【原版標記】隱藏「清除已完成」按鈕 */
+// const growingWrapper = document.querySelector('#growing-wrapper')
 
-function growing() {
-    if (growingWrapper.clientHeight) {
-        growingWrapper.style.height = '0px';
-    } else {
-        const innerWrapper = document.querySelector('#inner-wrapper')
-        growingWrapper.style.height = innerWrapper.clientHeight + 'px';
-    }
+// function growing() {
+//     if (growingWrapper.clientHeight) {
+//         growingWrapper.style.height = '0px';
+//     } else {
+//         const innerWrapper = document.querySelector('#inner-wrapper')
+//         growingWrapper.style.height = innerWrapper.clientHeight + 'px';
+//     }
+// }
+// title.addEventListener('click', growing)
+
+
+
+
+const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
+title.addEventListener('click', hideClearBtn)
+addBtn.addEventListener('click', showClearBtn)
+function hideClearBtn(){
+    
+    // clearBtnWrapper.classList.add('retreat')
+    clearBtnWrapper.classList.remove('animation---popup')
+    clearBtnWrapper.classList.add('animation---retreat')
+    // clearBtnWrapper.classList.remove('bottom-full')
+    // clearBtnWrapper.classList.add('bottom-0')
+
+    // clearBtnWrapper.classList.remove('z-10')
+    // clearBtnWrapper.classList.add('-z-10')
+
+    // clearBtnWrapper.classList.remove('opacity-100')
+    // clearBtnWrapper.classList.add('opacity-0')
 }
-// console.log(title)
-title.addEventListener('click', growing)
+
+function showClearBtn(){
+    clearBtnWrapper.classList.add('animation---popup')
+    clearBtnWrapper.classList.remove('animation---retreat')
+    // clearBtnWrapper.classList.add('bottom-full')
+    // clearBtnWrapper.classList.remove('bottom-0')
+
+    // clearBtnWrapper.classList.add('z-10')
+    // clearBtnWrapper.classList.remove('-z-10')
+
+    // clearBtnWrapper.classList.add('opacity-100')
+    // clearBtnWrapper.classList.remove('opacity-0')
+}
