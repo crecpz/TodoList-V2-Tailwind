@@ -793,16 +793,8 @@ textarea {
   bottom: -0px;
 }
 
-.bottom-full {
-  bottom: 100%;
-}
-
 .bottom-0 {
   bottom: 0px;
-}
-
-.z-10 {
-  z-index: 10;
 }
 
 .-z-10 {
@@ -1083,10 +1075,6 @@ textarea {
   color: rgb(64 83 98 / var(--tw-text-opacity));
 }
 
-.opacity-100 {
-  opacity: 1;
-}
-
 .opacity-0 {
   opacity: 0;
 }
@@ -1131,20 +1119,6 @@ textarea {
           animation: retreat 500ms ease-out forwards;
 }
 
-/*
-0517後記
-現在已經初步的做出【清除已完成按鈕】的彈入彈出，
-接著是要選擇其中一種方式:
-1.在三個頁面都要有按鈕?
-    - 好處是這樣在<全部>頁面可以吃的到這個好處，可以直接篩掉已經完成的事項，
-        增加方便性
-    - 壞處是<待完成>掛著沒什麼意義
-
-2.僅在'已完成'頁面有按鈕?
-    - 好處是頁面整潔
-    - 壞處是如果需要清掉已經完成的事項還得到<已完成>去按。
- */
-
 @media (hover: hover) {
   .btn:hover {
     --tw-translate-y: 2px;
@@ -1170,17 +1144,9 @@ textarea {
 }
 
 @-webkit-keyframes popup {
-  0% {
-    bottom: 0px;
-  }
-
-  0% {
-    z-index: -10;
-  }
-
-  0% {
-    opacity: 0;
-  }
+  /* 0%{
+        @apply bottom-0 -z-10 opacity-0;
+    } */
 
   80% {
     bottom: 110%;
@@ -1200,17 +1166,9 @@ textarea {
 }
 
 @keyframes popup {
-  0% {
-    bottom: 0px;
-  }
-
-  0% {
-    z-index: -10;
-  }
-
-  0% {
-    opacity: 0;
-  }
+  /* 0%{
+        @apply bottom-0 -z-10 opacity-0;
+    } */
 
   80% {
     bottom: 110%;
@@ -1230,17 +1188,9 @@ textarea {
 }
 
 @-webkit-keyframes retreat  {
-  0% {
-    bottom: 100%;
-  }
-
-  0% {
-    z-index: 10;
-  }
-
-  0% {
-    opacity: 1;
-  }
+  /* 0%{
+        @apply bottom-full z-10 opacity-100;
+    } */
 
   50% {
     z-index: -10;
@@ -1260,17 +1210,9 @@ textarea {
 }
 
 @keyframes retreat  {
-  0% {
-    bottom: 100%;
-  }
-
-  0% {
-    z-index: 10;
-  }
-
-  0% {
-    opacity: 1;
-  }
+  /* 0%{
+        @apply bottom-full z-10 opacity-100;
+    } */
 
   50% {
     z-index: -10;

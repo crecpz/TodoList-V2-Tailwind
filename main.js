@@ -9,10 +9,6 @@ const searchInput = document.querySelector('#search-input')
 
 
 
-
-
-
-
 /* Todo Input */
 
 //  adding new todo by {click addBtn} & {press Enter}
@@ -36,7 +32,6 @@ addBtn.addEventListener('mouseup', e => {
 })
 
 
-
 addBtn.addEventListener('click', addNewTodo)
 
 // {press Enter}
@@ -51,8 +46,6 @@ todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
         addNewTodo()
         addBtn.classList.remove('add-btn--active')
-        // 按下addBtn產生的動畫效果
-        addBtnTransition()
     }
 })
 
@@ -74,10 +67,6 @@ function addNewTodo() {
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
 
-        // if(currentTab !== 'completed'){
-        //     latestItemHighlight(todoList)
-        // }    
-
     } else {
         todoInput.value = '';
     }
@@ -85,8 +74,25 @@ function addNewTodo() {
 
 
 
-/* Todo List */
 
+const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
+// title.addEventListener('click', hideClearBtn)
+// addBtn.addEventListener('click', showClearBtn)
+
+function hideClearBtn() {
+    clearBtnWrapper.classList.remove('animation---popup')
+    clearBtnWrapper.classList.add('animation---retreat')
+
+}
+
+function showClearBtn() {
+    clearBtnWrapper.classList.add('animation---popup')
+    clearBtnWrapper.classList.remove('animation---retreat')
+}
+
+
+
+/* Todo List */
 
 /* status(全部、待完成、已完成) */
 const statusTabs = document.querySelector('#status');
@@ -95,7 +101,7 @@ let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 activeCurrentTab()
 
 /**
- * 將css中的.status__tab--current狀態給其中一個status__tab。
+ * 將css中的.status__tab--current狀態給某一個status__tab。
  */
 function activeCurrentTab() {
     const activeTarget = statusTabs.querySelector(`#${currentTab}`)
@@ -135,13 +141,15 @@ function renderTodo(currentTab) {
         // 檢查每一項todoListData內的「status」，確認其狀態是否為active
         if (data.status === 'active') {
             checkbox = '';
+            dataCheck = false;
         } else {
             checkbox = 'checked';
+            dataCheck = true;
         }
 
         if (currentTab === data.status || currentTab === 'all') {
             todoItems +=
-                `<li class="todo-item" id="${index}"">
+                `<li class="todo-item" id="${index}" data-status="${data.status}">
                     <label class="flex items-center justify-between w-full cursor-pointer">
                         <input type="checkbox" class="todo-checkbox" ${checkbox}>
                         <p class="todo-text">${data.content}</p>
@@ -158,6 +166,13 @@ function renderTodo(currentTab) {
                                 class="fa-solid fa-trash mr-2"></i>刪除</button>
                     </div>
                 </li>`
+
+            // if (todoListData.find(data => data.status === 'completed')) {
+            //     showClearBtn();
+            //     console.log(1)
+            // } else {
+            //     hideClearBtn(2);
+            // }
         }
 
         if (todoItems) {
@@ -167,6 +182,32 @@ function renderTodo(currentTab) {
         }
     })
 }
+
+/* 0519後記
+    我目前已經將todoItem的dataset做設定，
+    可以看到在DOM中，data-status中的值正好是todoListData.status，
+    勾起單項也可以更新DOM中的data-status。
+
+    下一步是要寫一個函數去檢查【如果在列表中有存在data-status為completed的項目】
+    就把clearBtn顯示，反之收起。
+
+    現在卡在我要怎麼用find來進行檢查，如下code:
+*/
+
+function clearBtnController() {
+    const todoItems = document.querySelectorAll('.todo-item')
+    todoItems.forEach(todoItem => {
+        console.log(todoItem.dataset.status)
+    })
+    // todoItems.find(todoItem => {
+    //     return todoItem.dataset.status === 'completed'
+    // })
+   
+}
+clearBtnController()
+
+
+
 
 function showEmptyMsg() {
     if (currentTab === 'active' || currentTab === 'all') {
@@ -208,16 +249,36 @@ todoList.addEventListener('click', e => {
             changeStatus()
         }
 
-
         /**
-         * 更換checkbox的狀態。
+         * 更換checkbox的狀態，一共會更換2處。
          * 1.更換在HTML中，對應項目的data-status狀態 2.更換todoListData中，對應項目的status屬性，並將其更新至localStorage
          */
         function changeStatus() {
-            const todoCheckbox = todoItem.querySelector('.todo-checkbox')
+            const todoCheckbox = todoItem.querySelector('.todo-checkbox');
             todoListData[todoItem.id].status = todoCheckbox.checked ? 'completed' : 'active';
-            localStorage.setItem('todos', JSON.stringify(todoListData))
+            todoItem.dataset.status = todoListData[todoItem.id].status;
+            localStorage.setItem('todos', JSON.stringify(todoListData));
         }
+
+        /* 
+        在什麼時機點需要檢查頁面中的內容是否還有已勾選的項目?
+            1. 勾選選項的當下
+            2. 刪除單一選項時
+            3. 按下【清除已完成】時
+            4. status頁面切換時
+            5. 頁面載入時
+
+        是不是只要在renderTodo()中做個檢查來控制此有沒有已經check的item就可以了?
+        但是勾選當下還是需要補一個函數，去檢查
+        
+        
+        
+        */
+
+
+        // function checkStatus(){
+        //     if()
+        // }
 
 
 
@@ -240,7 +301,7 @@ todoList.addEventListener('click', e => {
                 const editDialog = document.querySelector('#edit-dialog')
                 editDialog.innerHTML =
 
-                `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
+                    `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary rounded-md overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center mt-8">
                         <button class="cancel-btn btn btn-small mr-6">取消</button>
@@ -455,37 +516,3 @@ function clearCompleted() {
 //     }
 // }
 // title.addEventListener('click', growing)
-
-
-
-
-const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
-title.addEventListener('click', hideClearBtn)
-addBtn.addEventListener('click', showClearBtn)
-function hideClearBtn(){
-    
-    // clearBtnWrapper.classList.add('retreat')
-    clearBtnWrapper.classList.remove('animation---popup')
-    clearBtnWrapper.classList.add('animation---retreat')
-    // clearBtnWrapper.classList.remove('bottom-full')
-    // clearBtnWrapper.classList.add('bottom-0')
-
-    // clearBtnWrapper.classList.remove('z-10')
-    // clearBtnWrapper.classList.add('-z-10')
-
-    // clearBtnWrapper.classList.remove('opacity-100')
-    // clearBtnWrapper.classList.add('opacity-0')
-}
-
-function showClearBtn(){
-    clearBtnWrapper.classList.add('animation---popup')
-    clearBtnWrapper.classList.remove('animation---retreat')
-    // clearBtnWrapper.classList.add('bottom-full')
-    // clearBtnWrapper.classList.remove('bottom-0')
-
-    // clearBtnWrapper.classList.add('z-10')
-    // clearBtnWrapper.classList.remove('-z-10')
-
-    // clearBtnWrapper.classList.add('opacity-100')
-    // clearBtnWrapper.classList.remove('opacity-0')
-}

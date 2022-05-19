@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-0517後記
-現在已經初步的做出【清除已完成按鈕】的彈入彈出，
-接著是要選擇其中一種方式:
-1.在三個頁面都要有按鈕?
-    - 好處是這樣在<全部>頁面可以吃的到這個好處，可以直接篩掉已經完成的事項，
-        增加方便性
-    - 壞處是<待完成>掛著沒什麼意義
-
-2.僅在'已完成'頁面有按鈕?
-    - 好處是頁面整潔
-    - 壞處是如果需要清掉已經完成的事項還得到<已完成>去按。
- */
-
 @media (hover: hover) {
     .btn {
         @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
@@ -197,9 +183,9 @@
 }
 
 @keyframes popup {
-    0%{
+    /* 0%{
         @apply bottom-0 -z-10 opacity-0;
-    }
+    } */
 
     80% {
         @apply bottom-[110%];
@@ -211,9 +197,9 @@
 }
 
 @keyframes retreat  {
-    0%{
+    /* 0%{
         @apply bottom-full z-10 opacity-100;
-    }
+    } */
 
     50% {
         @apply -z-10;
