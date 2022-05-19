@@ -496,7 +496,7 @@ dialog[open]::backdrop {
           animation: fade-in 700ms forwards;
 }
 
-dialog[closing]{
+dialog[closing] {
   -webkit-animation: slide-down 700ms forwards;
           animation: slide-down 700ms forwards;
 }
@@ -606,12 +606,6 @@ textarea {
 .add-btn--active {
 }
 
-/* .btn--disabled {
-        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
-        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
-        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
-    } */
-
 /* status */
 
 .status {
@@ -694,7 +688,7 @@ textarea {
   border-color: rgb(64 83 98 / var(--tw-border-opacity));
 }
 
-.todo-checkbox:checked +.todo-text {
+.todo-checkbox:checked + .todo-text {
   color: rgb(64 83 98 / 0.6);
   -webkit-text-decoration-line: line-through;
           text-decoration-line: line-through;
@@ -733,7 +727,7 @@ textarea {
   outline-offset: 2px;
 }
 
-.todo-text[contenteditable="true"] {
+.todo-text[contenteditable='true'] {
   border-width: 1px;
   border-style: dashed;
   border-color: currentColor;
@@ -862,10 +856,6 @@ textarea {
   width: 100%;
 }
 
-.w-4 {
-  width: 1rem;
-}
-
 .w-3\.5 {
   width: 0.875rem;
 }
@@ -992,11 +982,6 @@ textarea {
   padding: 0.5rem;
 }
 
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .px-3 {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -1010,6 +995,11 @@ textarea {
 .px-5 {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .pt-12 {
@@ -1036,11 +1026,6 @@ textarea {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
 }
 
 .text-sm {
@@ -1149,7 +1134,7 @@ textarea {
     } */
 
   80% {
-    bottom: 110%;
+    bottom: 120%;
   }
 
   100% {
@@ -1171,7 +1156,7 @@ textarea {
     } */
 
   80% {
-    bottom: 110%;
+    bottom: 120%;
   }
 
   100% {
@@ -1187,13 +1172,45 @@ textarea {
   }
 }
 
-@-webkit-keyframes retreat  {
-  /* 0%{
-        @apply bottom-full z-10 opacity-100;
-    } */
+/* How to prevent a CSS keyframe animation from running on page load?
+https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
+*/
 
-  50% {
+@-webkit-keyframes retreat {
+  0% {
+    bottom: 100%;
+  }
+
+  0% {
+    z-index: 10;
+  }
+
+  0% {
+    opacity: 1;
+  }
+
+  30% {
+    bottom: 110%;
+  }
+
+  30% {
+    z-index: 10;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  60% {
+    bottom: 50%;
+  }
+
+  60% {
     z-index: -10;
+  }
+
+  60% {
+    opacity: 0.8;
   }
 
   100% {
@@ -1209,13 +1226,41 @@ textarea {
   }
 }
 
-@keyframes retreat  {
-  /* 0%{
-        @apply bottom-full z-10 opacity-100;
-    } */
+@keyframes retreat {
+  0% {
+    bottom: 100%;
+  }
 
-  50% {
+  0% {
+    z-index: 10;
+  }
+
+  0% {
+    opacity: 1;
+  }
+
+  30% {
+    bottom: 110%;
+  }
+
+  30% {
+    z-index: 10;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  60% {
+    bottom: 50%;
+  }
+
+  60% {
     z-index: -10;
+  }
+
+  60% {
+    opacity: 0.8;
   }
 
   100% {
@@ -1231,7 +1276,7 @@ textarea {
   }
 }
 
-@-webkit-keyframes fade-in{
+@-webkit-keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -1241,7 +1286,7 @@ textarea {
   }
 }
 
-@keyframes fade-in{
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -1251,7 +1296,7 @@ textarea {
   }
 }
 
-@-webkit-keyframes fade-out{
+@-webkit-keyframes fade-out {
   0% {
     opacity: 1;
   }
@@ -1261,7 +1306,7 @@ textarea {
   }
 }
 
-@keyframes fade-out{
+@keyframes fade-out {
   0% {
     opacity: 1;
   }
@@ -1321,41 +1366,41 @@ textarea {
 
 @-webkit-keyframes scale-up {
   from {
-    transform:scale(0.75);
+    transform: scale(0.75);
   }
 
   to {
-    transform:scale(1)
+    transform: scale(1);
   }
 }
 
 @keyframes scale-up {
   from {
-    transform:scale(0.75);
+    transform: scale(0.75);
   }
 
   to {
-    transform:scale(1)
+    transform: scale(1);
   }
 }
 
 @-webkit-keyframes scale-down {
   from {
-    transform:scale(1);
+    transform: scale(1);
   }
 
   to {
-    transform:scale(.75)
+    transform: scale(0.75);
   }
 }
 
 @keyframes scale-down {
   from {
-    transform:scale(1);
+    transform: scale(1);
   }
 
   to {
-    transform:scale(.75)
+    transform: scale(0.75);
   }
 }
 

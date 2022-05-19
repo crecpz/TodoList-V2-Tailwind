@@ -166,13 +166,6 @@ function renderTodo(currentTab) {
                                 class="fa-solid fa-trash mr-2"></i>刪除</button>
                     </div>
                 </li>`
-
-            // if (todoListData.find(data => data.status === 'completed')) {
-            //     showClearBtn();
-            //     console.log(1)
-            // } else {
-            //     hideClearBtn(2);
-            // }
         }
 
         if (todoItems) {
@@ -181,6 +174,8 @@ function renderTodo(currentTab) {
             showEmptyMsg()
         }
     })
+
+    clearBtnController()
 }
 
 /* 0519後記
@@ -188,23 +183,20 @@ function renderTodo(currentTab) {
     可以看到在DOM中，data-status中的值正好是todoListData.status，
     勾起單項也可以更新DOM中的data-status。
 
-    下一步是要寫一個函數去檢查【如果在列表中有存在data-status為completed的項目】
-    就把clearBtn顯示，反之收起。
-
-    現在卡在我要怎麼用find來進行檢查，如下code:
+    目前已經可以透過勾選去不斷更新clearBtn是否要升起了。
+    接下來要處理的是防止頁面讚載入的時候動畫播放的問題。
 */
 
 function clearBtnController() {
-    const todoItems = document.querySelectorAll('.todo-item')
-    todoItems.forEach(todoItem => {
-        console.log(todoItem.dataset.status)
-    })
-    // todoItems.find(todoItem => {
-    //     return todoItem.dataset.status === 'completed'
-    // })
-   
+    // Array.flnd()僅在Array使用，所以要將nodeList轉換成Array
+    const todoItems = [...document.querySelectorAll('.todo-item')];
+
+    if (todoItems.find(todoItem => todoItem.dataset.status === 'completed')) {
+        showClearBtn()
+    } else {
+        hideClearBtn()
+    }
 }
-clearBtnController()
 
 
 
@@ -246,7 +238,8 @@ todoList.addEventListener('click', e => {
 
         /* 控制checkbox狀態 */
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
-            changeStatus()
+            changeStatus();
+            clearBtnController();
         }
 
         /**
@@ -270,15 +263,7 @@ todoList.addEventListener('click', e => {
 
         是不是只要在renderTodo()中做個檢查來控制此有沒有已經check的item就可以了?
         但是勾選當下還是需要補一個函數，去檢查
-        
-        
-        
         */
-
-
-        // function checkStatus(){
-        //     if()
-        // }
 
 
 

@@ -3,293 +3,282 @@
 @tailwind utilities;
 
 @media (hover: hover) {
-    .btn {
-        @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
-        @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
-    }
+  .btn {
+    @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
+    @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
+  }
 }
-
 
 @layer base {
-    i {
-        @apply pointer-events-none;
-    }
+  i {
+    @apply pointer-events-none;
+  }
 
-    /* scrollbar setting */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
+  /* scrollbar setting */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    ::-webkit-scrollbar-track {
-        @apply bg-primary/30;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        @apply bg-primary/50; 
-    }
+  ::-webkit-scrollbar-track {
+    @apply bg-primary/30;
+  }
 
-    ::-webkit-scrollbar-thumb:hover {
-        @apply bg-black;
-    }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50;
+  }
 
-    /* selection */
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-black;
+  }
 
-    ::selection {
-        @apply bg-primary/30 /* WebKit/Blink Browsers */
-    }
+  /* selection */
 
-    ::-moz-selection {
-        @apply bg-primary/30; /* Gecko Browsers */
-    }
-    
-    /* dialog */
+  ::selection {
+    @apply bg-primary/30 /* WebKit/Blink Browsers */;
+  }
 
-    dialog {
-        @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md ;
-    }
+  ::-moz-selection {
+    @apply bg-primary/30; /* Gecko Browsers */
+  }
 
-    dialog[open] {
-        animation: slide-up 500ms forwards;
-    }
-    
-    dialog[open]::backdrop {
-        @apply bg-primary/80 h-[100vh] overflow-y-hidden;
-        animation: fade-in 700ms forwards;
-    }
+  /* dialog */
 
-    dialog[closing]{
-        animation: slide-down 700ms forwards;
-    }
-    
-    dialog[closing]::backdrop {
-        animation: fade-out 1000ms forwards;
-    } 
+  dialog {
+    @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md;
+  }
 
-    /* textarea */
-    textarea{
-        @apply resize-none;
-    }
+  dialog[open] {
+    animation: slide-up 500ms forwards;
+  }
+
+  dialog[open]::backdrop {
+    @apply bg-primary/80 h-[100vh] overflow-y-hidden;
+    animation: fade-in 700ms forwards;
+  }
+
+  dialog[closing] {
+    animation: slide-down 700ms forwards;
+  }
+
+  dialog[closing]::backdrop {
+    animation: fade-out 1000ms forwards;
+  }
+
+  /* textarea */
+  textarea {
+    @apply resize-none;
+  }
 }
 
-@layer components{
+@layer components {
+  .content {
+    @apply mx-auto px-4;
+  }
 
-    .content {
-        @apply mx-auto px-4;
-    }
+  .btn {
+    @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
+    @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
+  }
 
-    
-    .btn {
-        @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
-        @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
-    }
+  .btn-normal {
+    @apply bg-secondary;
+  }
 
-    .btn-normal {
-        @apply bg-secondary;
-    }
+  .btn-hightlight {
+    @apply bg-tertiary;
+  }
 
-    .btn-hightlight{
-        @apply bg-tertiary;
-    }
+  .add-btn--active {
+  }
 
-    .add-btn--active {
+  /* status */
+  .status {
+    @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary;
+  }
 
-    } 
+  .status__tab {
+    @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em];
+  }
 
-    /* .btn--disabled {
-        @apply relative py-1 px-3 left-0 top-0 text-primary border border-primary bg-secondary transition-all duration-100; 
-        @apply before:content-[''] before:absolute before:-z-10 before:left-1 before:-bottom-1.5 before:w-full before:h-1.5 before:rounded-sm before:skew-x-[45deg] before:bg-primary before:transition-all before:duration-75;
-        @apply after:content-[''] after:absolute after:-z-10  after:top-1 after:-right-1.5 after:h-full after:w-1.5 after:rounded-sm after:skew-y-[45deg] after:bg-primary after:transition-all after:duration-75;
-    } */
+  .status__tab--current {
+    @apply flex justify-center items-center;
+    @apply before:content-['\f104'] before:font-Font-Awesome before:text-primary before:pr-1;
+    @apply after:content-['\f105'] after:font-Font-Awesome after:text-primary after:pl-1;
+  }
 
-    
+  .todo-item {
+    @apply flex flex-col items-center px-6 py-2;
+  }
 
-    /* status */
-    .status {
-        @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary;
-    }
+  .todo-checkbox {
+    @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
+  }
 
-    .status__tab {
-        @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em];
-    }    
+  .todo-checkbox:checked + .todo-text {
+    @apply line-through text-primary/60;
+  }
 
-    .status__tab--current {
-        @apply flex justify-center items-center;
-        @apply before:content-['\f104'] before:font-Font-Awesome before:text-primary before:pr-1;
-        @apply after:content-['\f105'] after:font-Font-Awesome after:text-primary after:pl-1;
-    }
+  .todo-checkbox:checked::before {
+    @apply content-[''] w-2 h-2 bg-primary/80 rounded-sm;
+  }
 
-    .todo-item {
-        @apply flex flex-col items-center px-6 py-2;
-    }
+  .todo-text {
+    @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
+  }
 
-    .todo-checkbox {
-        @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
-    }
+  .todo-text[contenteditable='true'] {
+    @apply border border-dashed border-current;
+  }
 
-    .todo-checkbox:checked +.todo-text{
-        @apply line-through text-primary/60;
-    }
+  .todo-option-btn {
+    @apply p-2 ml-auto;
+  }
 
-    .todo-checkbox:checked::before {
-        @apply content-[''] w-2 h-2 bg-primary/80 rounded-sm;
-    }
+  .todo-option-btn__dot {
+    @apply w-[3px] h-[3px] mb-0.5 rounded-full bg-primary pointer-events-none;
+  }
 
-    .todo-text {
-        @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
-    }
+  .todo-option-btn__dot:last-child {
+    @apply mb-0;
+  }
 
-    .todo-text[contenteditable="true"] {
-        @apply border border-dashed border-current;
-    }
+  .todo-option {
+    @apply flex justify-start items-center w-full;
+    @apply transition-all duration-500;
+    @apply invisible max-h-0 opacity-0 mt-0 my-0;
+  }
 
-    .todo-option-btn{
-        @apply p-2 ml-auto;
-    }
-    
-    .todo-option-btn__dot{
-        @apply w-[3px] h-[3px] mb-0.5 rounded-full bg-primary pointer-events-none;
-    }
-    
-    .todo-option-btn__dot:last-child {
-        @apply mb-0;
-    }
-
-    .todo-option {
-        @apply flex justify-start items-center w-full;
-        @apply transition-all duration-500;
-        @apply invisible max-h-0 opacity-0 mt-0 my-0;
-    }
-
-    .todo-option--open {
-        @apply max-h-[100px] visible opacity-100 mt-2 my-4;
-    }
+  .todo-option--open {
+    @apply max-h-[100px] visible opacity-100 mt-2 my-4;
+  }
 }
 
+@layer utilities {
+  .animation---popup {
+    animation: popup 300ms ease-out forwards;
+  }
 
-
-
-
-
-@layer utilities{
-
-    .animation---popup {
-        animation: popup 300ms ease-out forwards;
-    }
-
-    .animation---retreat {
-        animation: retreat 500ms ease-out forwards;
-    }
-
+  .animation---retreat {
+    animation: retreat 500ms ease-out forwards;
+  }
 }
 
 @keyframes popup {
-    /* 0%{
+  /* 0%{
         @apply bottom-0 -z-10 opacity-0;
     } */
 
-    80% {
-        @apply bottom-[110%];
-    }
-    
-    100%{
-        @apply bottom-full z-10 opacity-100;
-    }
+  80% {
+    @apply bottom-[120%];
+  }
+
+  100% {
+    @apply bottom-full z-10 opacity-100;
+  }
 }
 
-@keyframes retreat  {
-    /* 0%{
-        @apply bottom-full z-10 opacity-100;
-    } */
+/* How to prevent a CSS keyframe animation from running on page load?
+https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
+*/
 
-    50% {
-        @apply -z-10;
-    }
+@keyframes retreat {
+  0% {
+    @apply bottom-full z-10 opacity-100;
+  }
 
-    100%{
-        @apply bottom-0 -z-10 opacity-0;
-    }
+  30% {
+    @apply bottom-[110%] z-10 opacity-100;
+  }
+
+  60% {
+    @apply bottom-1/2 -z-10 opacity-80;
+  }
+
+  100% {
+    @apply bottom-0 -z-10 opacity-0;
+  }
 }
 
-@keyframes fade-in{
-    0%{
-        @apply opacity-0;
-    }
+@keyframes fade-in {
+  0% {
+    @apply opacity-0;
+  }
 
-    100%{
-        @apply opacity-100;
-    }
+  100% {
+    @apply opacity-100;
+  }
 }
 
-@keyframes fade-out{
-    0%{
-        @apply opacity-100;
-    }
+@keyframes fade-out {
+  0% {
+    @apply opacity-100;
+  }
 
-    100%{
-        @apply opacity-0;
-    }
+  100% {
+    @apply opacity-0;
+  }
 }
 
 @keyframes slide-up {
-    from {
-      opacity: 0;
-      transform: translateY(50%);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0%);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(50%);
   }
-  
-  @keyframes slide-down {
-    from {
-      opacity: 1;
-      transform: translateY(0%);
-    }
-  
-    to {
-      opacity: 0;
-      transform: translateY(50%);
-    }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
   }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
 
 @keyframes scale-up {
-    from {
-        transform:scale(0.75);
-    }
+  from {
+    transform: scale(0.75);
+  }
 
-    to {
-        transform:scale(1)
-    }
+  to {
+    transform: scale(1);
+  }
 }
 
 @keyframes scale-down {
-    from {
-        transform:scale(1);
-    }
+  from {
+    transform: scale(1);
+  }
 
-    to {
-        transform:scale(.75)
-    }
+  to {
+    transform: scale(0.75);
+  }
 }
 
 @keyframes room-in {
-    from {
-        @apply scale-75;
-    }
+  from {
+    @apply scale-75;
+  }
 
-    to {
-        @apply scale-100;
-    }
+  to {
+    @apply scale-100;
+  }
 }
 
 @keyframes room-out {
-    from {
-        @apply scale-100 opacity-100;
-    }
+  from {
+    @apply scale-100 opacity-100;
+  }
 
-    to {
-        @apply scale-75 opacity-0;
-    }
+  to {
+    @apply scale-75 opacity-0;
+  }
 }
