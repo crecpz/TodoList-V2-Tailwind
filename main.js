@@ -1,13 +1,14 @@
-const menuBtn = document.querySelector('#menu-btn')
-const menu = document.querySelector('#menu')
+/**
+ * 有個.preload class用來防止動畫在載入時或重新整理時播放，
+ * 在頁面載入後的500ms後刪掉它。 
+ */
+setTimeout(function () {
+    document.body.classList.remove('preload');
+}, 500);
+
+
 const title = document.querySelector('#title')
-
-const searchBtn = document.querySelector('#search-btn')
-const searchWrapper = document.querySelector('#search-wrapper')
-const closeSearchBtn = document.querySelector('#search-close-btn')
-const searchInput = document.querySelector('#search-input')
-
-
+const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 
 /* Todo Input */
 
@@ -58,7 +59,6 @@ function addNewTodo() {
 
         let inputData = {
             content: todoInput.value,
-            // checked: false,
             status: 'active',
         }
 
@@ -72,23 +72,18 @@ function addNewTodo() {
     }
 }
 
+// 請將此封裝成函數，另外，刪去文字功能還沒做!
 
-
-
-const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
-// title.addEventListener('click', hideClearBtn)
-// addBtn.addEventListener('click', showClearBtn)
-
-function hideClearBtn() {
-    clearBtnWrapper.classList.remove('animation---popup')
-    clearBtnWrapper.classList.add('animation---retreat')
-
-}
-
-function showClearBtn() {
-    clearBtnWrapper.classList.add('animation---popup')
-    clearBtnWrapper.classList.remove('animation---retreat')
-}
+const clearTextBtn = document.querySelector('#clear-text-btn')
+todoInput.addEventListener('keyup', ()=> {
+    if(todoInput.value !== ''){
+        clearTextBtn.classList.remove('hidden');
+        clearTextBtn.classList.add('flex');
+    }else {
+        clearTextBtn.classList.remove('flex');
+        clearTextBtn.classList.add('hidden');
+    }
+})
 
 
 
@@ -126,7 +121,6 @@ function updateCurrentStatus(e) {
     renderTodo(currentTab)
     checkIfListEmpty()
 }
-
 
 const todoList = document.querySelector('#todo-list')
 let todoListData = JSON.parse(localStorage.getItem('todos'))
@@ -178,17 +172,13 @@ function renderTodo(currentTab) {
     clearBtnController()
 }
 
-/* 0519後記
-    我目前已經將todoItem的dataset做設定，
-    可以看到在DOM中，data-status中的值正好是todoListData.status，
-    勾起單項也可以更新DOM中的data-status。
 
-    目前已經可以透過勾選去不斷更新clearBtn是否要升起了。
-    接下來要處理的是防止頁面讚載入的時候動畫播放的問題。
-*/
 
+/**
+ * 判斷並控制clearBtn的容器顯示或隱藏。
+ */
 function clearBtnController() {
-    // Array.flnd()僅在Array使用，所以要將nodeList轉換成Array
+    // Array.flnd()僅能在Array使用，所以要將nodeList轉換成Array
     const todoItems = [...document.querySelectorAll('.todo-item')];
 
     if (todoItems.find(todoItem => todoItem.dataset.status === 'completed')) {
@@ -198,13 +188,24 @@ function clearBtnController() {
     }
 }
 
+/**
+ * 控制retreat(動畫)與popup(動畫)在clearBtnWrapper的classList狀態
+ */
+function hideClearBtn() {
+    clearBtnWrapper.classList.add('animation---retreat');
+    clearBtnWrapper.classList.remove('animation---popup');
+}
 
+function showClearBtn() {
+    clearBtnWrapper.classList.add('animation---popup');
+    clearBtnWrapper.classList.remove('animation---retreat');
+}
 
 
 function showEmptyMsg() {
     if (currentTab === 'active' || currentTab === 'all') {
         todoList.innerHTML =
-            `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full">
+            `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
                 <div class="flex flex-col items-center my-auto">
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
@@ -213,7 +214,7 @@ function showEmptyMsg() {
             </div>`;
     } else {
         todoList.innerHTML =
-            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full">
+            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
                 <div class="flex flex-col items-center my-auto">
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
@@ -224,8 +225,14 @@ function showEmptyMsg() {
 
 
 todoList.addEventListener('click', e => {
-    if (e.target.id !== 'empty-msg') {
+    
+    if (e.target.id !== 'empty-msg' && e.target.closest('li')) {
+        console.log(e.target.closest('li'))
+        
         // 取得點按的目標todoItem
+        // if(e.target.closest('li')){
+        // }
+
         const todoItem = e.target.closest('li')
 
         /* 展開todo-option */
@@ -467,13 +474,15 @@ todoList.addEventListener('click', e => {
     }
 })
 
-
 /**
- * 檢查todoListData是否為空，如果為空，則顯示出emptyMsg
+ * 檢查todoListData是否為空，如果為空，則:
+ *  1.顯示出emptyMsg
+ *  2.隱藏clearBtn
  */
 function checkIfListEmpty() {
     if (todoListData.length === 0) {
         showEmptyMsg();
+        hideClearBtn();
     }
 }
 
@@ -488,16 +497,3 @@ function clearCompleted() {
     checkIfListEmpty()
     localStorage.setItem('todos', JSON.stringify(todoListData))
 }
-
-/* 【原版標記】隱藏「清除已完成」按鈕 */
-// const growingWrapper = document.querySelector('#growing-wrapper')
-
-// function growing() {
-//     if (growingWrapper.clientHeight) {
-//         growingWrapper.style.height = '0px';
-//     } else {
-//         const innerWrapper = document.querySelector('#inner-wrapper')
-//         growingWrapper.style.height = innerWrapper.clientHeight + 'px';
-//     }
-// }
-// title.addEventListener('click', growing)

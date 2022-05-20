@@ -10,6 +10,11 @@
 }
 
 @layer base {
+  body.preload * {
+    animation-duration: 0s !important;
+    -webkit-animation-duration: 0s !important;
+  }
+
   i {
     @apply pointer-events-none;
   }
@@ -71,6 +76,11 @@
 }
 
 @layer components {
+  /* .preload{
+    animation-duration: 0ms; 
+    -webkit-animation-duration: 0s;
+  } */
+
   .content {
     @apply mx-auto px-4;
   }
@@ -159,21 +169,17 @@
   }
 
   .animation---retreat {
-    animation: retreat 500ms ease-out forwards;
+    animation: retreat 350ms ease-in forwards;
   }
 }
 
 @keyframes popup {
-  /* 0%{
-        @apply bottom-0 -z-10 opacity-0;
-    } */
-
-  80% {
-    @apply bottom-[120%];
+  70% {
+    @apply bottom-[130%];
   }
 
   100% {
-    @apply bottom-full z-10 opacity-100;
+    @apply bottom-full opacity-100;
   }
 }
 
@@ -183,19 +189,19 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
 
 @keyframes retreat {
   0% {
-    @apply bottom-full z-10 opacity-100;
+    @apply bottom-full opacity-100;
   }
 
   30% {
-    @apply bottom-[110%] z-10 opacity-100;
+    @apply bottom-[130%];
   }
 
-  60% {
-    @apply bottom-1/2 -z-10 opacity-80;
+  90% {
+    @apply opacity-100;
   }
 
   100% {
-    @apply bottom-0 -z-10 opacity-0;
+    @apply bottom-0 opacity-0;
   }
 }
 

@@ -423,6 +423,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+body.\!preload * {
+  animation-duration: 0s !important;
+  -webkit-animation-duration: 0s !important;
+}
+
+body.preload * {
+  animation-duration: 0s !important;
+  -webkit-animation-duration: 0s !important;
+}
+
 i {
   pointer-events: none;
 }
@@ -561,6 +571,11 @@ textarea {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+
+/* .preload{
+    animation-duration: 0ms; 
+    -webkit-animation-duration: 0s;
+  } */
 
 .content {
   margin-left: auto;
@@ -775,6 +790,10 @@ textarea {
   opacity: 1;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .absolute {
   position: absolute;
 }
@@ -789,6 +808,10 @@ textarea {
 
 .bottom-0 {
   bottom: 0px;
+}
+
+.z-10 {
+  z-index: 10;
 }
 
 .-z-10 {
@@ -832,8 +855,20 @@ textarea {
   margin-bottom: 1.5rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-full {
@@ -913,6 +948,10 @@ textarea {
   align-items: center;
 }
 
+.items-stretch {
+  align-items: stretch;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -945,8 +984,28 @@ textarea {
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-t-4 {
   border-top-width: 4px;
+}
+
+.border-r {
+  border-right-width: 1px;
+}
+
+.border-r-2 {
+  border-right-width: 2px;
+}
+
+.border-r-4 {
+  border-right-width: 4px;
+}
+
+.border-l-4 {
+  border-left-width: 4px;
 }
 
 .border-primary {
@@ -957,6 +1016,16 @@ textarea {
 .border-t-primary {
   --tw-border-opacity: 1;
   border-top-color: rgb(64 83 98 / var(--tw-border-opacity));
+}
+
+.border-r-primary {
+  --tw-border-opacity: 1;
+  border-right-color: rgb(64 83 98 / var(--tw-border-opacity));
+}
+
+.border-l-primary {
+  --tw-border-opacity: 1;
+  border-left-color: rgb(64 83 98 / var(--tw-border-opacity));
 }
 
 .bg-primary {
@@ -1002,12 +1071,49 @@ textarea {
   padding-bottom: 0.5rem;
 }
 
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .pt-12 {
   padding-top: 3rem;
 }
 
 .pb-20 {
   padding-bottom: 5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
+}
+
+.pr-6 {
+  padding-right: 1.5rem;
 }
 
 .text-center {
@@ -1038,6 +1144,11 @@ textarea {
   line-height: 2.5rem;
 }
 
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1064,6 +1175,18 @@ textarea {
   opacity: 0;
 }
 
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-40 {
+  opacity: 0.4;
+}
+
+.opacity-60 {
+  opacity: 0.6;
+}
+
 .shadow-\[0_-3px_6px_1px\] {
   --tw-shadow: 0 -3px 6px 1px;
   --tw-shadow-colored: 0 -3px 6px 1px var(--tw-shadow-color);
@@ -1078,6 +1201,14 @@ textarea {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.outline {
+  outline-style: solid;
+}
+
+.outline-red-500 {
+  outline-color: #ef4444;
 }
 
 .filter {
@@ -1100,8 +1231,8 @@ textarea {
 }
 
 .animation---retreat {
-  -webkit-animation: retreat 500ms ease-out forwards;
-          animation: retreat 500ms ease-out forwards;
+  -webkit-animation: retreat 350ms ease-in forwards;
+          animation: retreat 350ms ease-in forwards;
 }
 
 @media (hover: hover) {
@@ -1129,20 +1260,12 @@ textarea {
 }
 
 @-webkit-keyframes popup {
-  /* 0%{
-        @apply bottom-0 -z-10 opacity-0;
-    } */
-
-  80% {
-    bottom: 120%;
+  70% {
+    bottom: 130%;
   }
 
   100% {
     bottom: 100%;
-  }
-
-  100% {
-    z-index: 10;
   }
 
   100% {
@@ -1151,20 +1274,12 @@ textarea {
 }
 
 @keyframes popup {
-  /* 0%{
-        @apply bottom-0 -z-10 opacity-0;
-    } */
-
-  80% {
-    bottom: 120%;
+  70% {
+    bottom: 130%;
   }
 
   100% {
     bottom: 100%;
-  }
-
-  100% {
-    z-index: 10;
   }
 
   100% {
@@ -1182,43 +1297,19 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   }
 
   0% {
-    z-index: 10;
-  }
-
-  0% {
     opacity: 1;
   }
 
   30% {
-    bottom: 110%;
+    bottom: 130%;
   }
 
-  30% {
-    z-index: 10;
-  }
-
-  30% {
+  90% {
     opacity: 1;
-  }
-
-  60% {
-    bottom: 50%;
-  }
-
-  60% {
-    z-index: -10;
-  }
-
-  60% {
-    opacity: 0.8;
   }
 
   100% {
     bottom: 0px;
-  }
-
-  100% {
-    z-index: -10;
   }
 
   100% {
@@ -1232,43 +1323,19 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   }
 
   0% {
-    z-index: 10;
-  }
-
-  0% {
     opacity: 1;
   }
 
   30% {
-    bottom: 110%;
+    bottom: 130%;
   }
 
-  30% {
-    z-index: 10;
-  }
-
-  30% {
+  90% {
     opacity: 1;
-  }
-
-  60% {
-    bottom: 50%;
-  }
-
-  60% {
-    z-index: -10;
-  }
-
-  60% {
-    opacity: 0.8;
   }
 
   100% {
     bottom: 0px;
-  }
-
-  100% {
-    z-index: -10;
   }
 
   100% {
