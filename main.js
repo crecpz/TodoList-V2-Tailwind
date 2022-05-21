@@ -1,5 +1,12 @@
+/* ------ Table of contents ------
+    
+
+ */
+
+
+
 /**
- * 有個.preload class用來防止動畫在載入時或重新整理時播放，
+ * .preload class用來防止動畫在載入時或重新整理時播放，
  * 在頁面載入後的500ms後刪掉它。 
  */
 setTimeout(function () {
@@ -9,6 +16,7 @@ setTimeout(function () {
 
 const title = document.querySelector('#title')
 const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
+
 
 /* Todo Input */
 
@@ -72,18 +80,35 @@ function addNewTodo() {
     }
 }
 
-// 請將此封裝成函數，另外，刪去文字功能還沒做!
 
-const clearTextBtn = document.querySelector('#clear-text-btn')
-todoInput.addEventListener('keyup', ()=> {
-    if(todoInput.value !== ''){
-        clearTextBtn.classList.remove('hidden');
-        clearTextBtn.classList.add('flex');
-    }else {
-        clearTextBtn.classList.remove('flex');
-        clearTextBtn.classList.add('hidden');
-    }
+const clearTextBtn = document.querySelector('#clear-text-btn');
+const clearTextBtnWrapper = clearTextBtn.parentElement;
+clearTextBtnWrapper.addEventListener('click', () => {
+    todoInput.focus();
 })
+
+todoInput.addEventListener('keyup', clearTextBtnController)
+function clearTextBtnController() {
+    if (todoInput.value !== '') {
+        clearTextBtn.classList.remove('hide');
+        clearTextBtn.classList.add('show');
+    } else {
+        clearTextBtn.classList.remove('show');
+        clearTextBtn.classList.add('hide');
+    }
+}
+
+clearTextBtn.addEventListener('click', () => {
+    clearTextBtn.classList.remove('show');
+    clearTextBtn.classList.add('hide');
+    clearText()
+})
+
+function clearText() {
+    todoInput.value = '';
+}
+
+
 
 
 
@@ -169,33 +194,82 @@ function renderTodo(currentTab) {
         }
     })
 
-    clearBtnController()
-}
+    // clearBtnController()
 
-
-
-/**
- * 判斷並控制clearBtn的容器顯示或隱藏。
- */
-function clearBtnController() {
-    // Array.flnd()僅能在Array使用，所以要將nodeList轉換成Array
-    const todoItems = [...document.querySelectorAll('.todo-item')];
-
-    if (todoItems.find(todoItem => todoItem.dataset.status === 'completed')) {
+    if (isAnyItemCompleted()) {
         showClearBtn()
+        addPaddingBottom()
     } else {
         hideClearBtn()
+        removePaddingBottom()
     }
 }
 
+
 /**
- * 控制retreat(動畫)與popup(動畫)在clearBtnWrapper的classList狀態
+ * 檢查是否有任何一個項目已經是completed狀態。
+ * @returns Boolean
+ */
+function isAnyItemCompleted() {
+    const todoItems = [...document.querySelectorAll('.todo-item')];
+    return todoItems.some(todoItem => todoItem.dataset.status === 'completed');
+}
+
+
+
+
+
+// /**
+//  * '判斷'並'控制'clearBtn的容器顯示或隱藏。
+//  */
+// function clearBtnController() {
+//     // Array.flnd()僅能在Array使用，所以要將nodeList轉換成Array
+//     const todoItems = [...document.querySelectorAll('.todo-item')];
+
+//     if (todoItems.find(todoItem => todoItem.dataset.status === 'completed')) {
+//         showClearBtn()
+//         addPaddingBottom()
+//     } else {
+//         hideClearBtn()
+//         removePaddingBottom()
+//     }
+// }
+
+
+
+/**
+ * 在todoList增加額外的padding。
+ * 
+ * 為了防止「清除已完成」按鈕擋住內容，當「清除已完成」按鈕彈出時，使todoList的padding-bottom增加一個「清除已完成」的clientHeight的空間。
+ */
+function addPaddingBottom() {
+    todoList.style.paddingBottom = clearBtnWrapper.clientHeight + 'px';
+}
+
+/**
+ * 清除在todoList增加額外的padding。
+ * 
+ * 為了防止「清除已完成」按鈕擋住內容，當「清除已完成」按鈕彈出時，使todoList的padding-bottom增加一個「清除已完成」的clientHeight的空間。
+ */
+function removePaddingBottom() {
+    todoList.style.paddingBottom = '';
+}
+
+
+
+/**
+ * 控制retreat動畫與popup動畫在clearBtnWrapper的classList狀態。
+ * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
     clearBtnWrapper.classList.add('animation---retreat');
     clearBtnWrapper.classList.remove('animation---popup');
 }
 
+/**
+ * 控制retreat動畫與popup動畫在clearBtnWrapper的classList狀態。
+ * 此函數用來顯示clearBtn。
+ */
 function showClearBtn() {
     clearBtnWrapper.classList.add('animation---popup');
     clearBtnWrapper.classList.remove('animation---retreat');
@@ -225,10 +299,9 @@ function showEmptyMsg() {
 
 
 todoList.addEventListener('click', e => {
-    
+
     if (e.target.id !== 'empty-msg' && e.target.closest('li')) {
-        console.log(e.target.closest('li'))
-        
+
         // 取得點按的目標todoItem
         // if(e.target.closest('li')){
         // }
@@ -246,7 +319,15 @@ todoList.addEventListener('click', e => {
         /* 控制checkbox狀態 */
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
-            clearBtnController();
+            // clearBtnController();
+
+            if (isAnyItemCompleted()) {
+                showClearBtn()
+                addPaddingBottom()
+            } else {
+                hideClearBtn()
+                removePaddingBottom()
+            }
         }
 
         /**
@@ -259,19 +340,6 @@ todoList.addEventListener('click', e => {
             todoItem.dataset.status = todoListData[todoItem.id].status;
             localStorage.setItem('todos', JSON.stringify(todoListData));
         }
-
-        /* 
-        在什麼時機點需要檢查頁面中的內容是否還有已勾選的項目?
-            1. 勾選選項的當下
-            2. 刪除單一選項時
-            3. 按下【清除已完成】時
-            4. status頁面切換時
-            5. 頁面載入時
-
-        是不是只要在renderTodo()中做個檢查來控制此有沒有已經check的item就可以了?
-        但是勾選當下還是需要補一個函數，去檢查
-        */
-
 
 
         /* 編輯todoText */

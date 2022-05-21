@@ -13,6 +13,7 @@
   body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
+    transition-duration: 0s !important;
   }
 
   i {
@@ -76,10 +77,6 @@
 }
 
 @layer components {
-  /* .preload{
-    animation-duration: 0ms; 
-    -webkit-animation-duration: 0s;
-  } */
 
   .content {
     @apply mx-auto px-4;
@@ -103,11 +100,13 @@
 
   /* status */
   .status {
-    @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary;
+    /* @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary; */
+    @apply flex items-center w-full bg-tertiary rounded-tl-2xl rounded-tr-2xl;
   }
 
   .status__tab {
-    @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em];
+    /* @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em]; */
+    @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em] border-b-4 border-b-primary;
   }
 
   .status__tab--current {
@@ -164,6 +163,14 @@
 }
 
 @layer utilities {
+  .show {
+    @apply opacity-100 visible;
+  }
+
+  .hide {
+    @apply opacity-0 invisible;
+  }
+
   .animation---popup {
     animation: popup 300ms ease-out forwards;
   }
@@ -179,7 +186,8 @@
   }
 
   100% {
-    @apply bottom-full opacity-100;
+    @apply opacity-100;
+    bottom: calc(100% + 4px);
   }
 }
 
