@@ -489,7 +489,7 @@ dialog[open] {
 dialog[open]::-webkit-backdrop {
   height: 100vh;
   overflow-y: hidden;
-  background-color: rgb(64 83 98 / 0.8);
+  background-color: rgb(64 83 98 / 0.3);
   -webkit-animation: fade-in 700ms forwards;
           animation: fade-in 700ms forwards;
 }
@@ -497,7 +497,7 @@ dialog[open]::-webkit-backdrop {
 dialog[open]::backdrop {
   height: 100vh;
   overflow-y: hidden;
-  background-color: rgb(64 83 98 / 0.8);
+  background-color: rgb(64 83 98 / 0.3);
   -webkit-animation: fade-in 700ms forwards;
           animation: fade-in 700ms forwards;
 }
@@ -604,9 +604,24 @@ textarea {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.btn-normal {
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 233 228 / var(--tw-bg-opacity));
+}
+
+.btn-normal:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .btn-hightlight {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 200 129 / var(--tw-bg-opacity));
+  background-color: rgb(255 211 141 / var(--tw-bg-opacity));
+}
+
+.btn-hightlight:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 200 90 / var(--tw-bg-opacity));
 }
 
 .add-btn--active {
@@ -622,7 +637,7 @@ textarea {
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(239 200 129 / var(--tw-bg-opacity));
+  background-color: rgb(255 211 141 / var(--tw-bg-opacity));
 }
 
 .status__tab {
@@ -801,6 +816,18 @@ textarea {
   bottom: 0px;
 }
 
+.bottom-24 {
+  bottom: 6rem;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.bottom-20 {
+  bottom: 5rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -830,20 +857,16 @@ textarea {
   margin-right: 1rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
+.mb-6 {
+  margin-bottom: 1.5rem;
 }
 
 .mr-6 {
   margin-right: 1.5rem;
 }
 
-.mb-6 {
-  margin-bottom: 1.5rem;
+.mr-3 {
+  margin-right: 0.75rem;
 }
 
 .flex {
@@ -886,6 +909,11 @@ textarea {
   max-width: 150px;
 }
 
+.-translate-x-1\/2 {
+  --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 @-webkit-keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
@@ -919,12 +947,12 @@ textarea {
           animation: bounce 1s infinite;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
 .cursor-text {
   cursor: text;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .flex-col {
@@ -955,6 +983,14 @@ textarea {
   overflow-y: scroll;
 }
 
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -967,8 +1003,8 @@ textarea {
   border-bottom-right-radius: 0.75rem;
 }
 
-.border {
-  border-width: 1px;
+.border-2 {
+  border-width: 2px;
 }
 
 .border-t-4 {
@@ -979,9 +1015,8 @@ textarea {
   border-left-width: 4px;
 }
 
-.border-primary {
-  --tw-border-opacity: 1;
-  border-color: rgb(64 83 98 / var(--tw-border-opacity));
+.border-primary\/50 {
+  border-color: rgb(64 83 98 / 0.5);
 }
 
 .border-t-primary {
@@ -1006,7 +1041,27 @@ textarea {
 
 .bg-tertiary {
   --tw-bg-opacity: 1;
-  background-color: rgb(239 200 129 / var(--tw-bg-opacity));
+  background-color: rgb(255 211 141 / var(--tw-bg-opacity));
+}
+
+.bg-green-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+}
+
+.bg-green-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
+}
+
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+.bg-amber-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
 }
 
 .p-4 {
@@ -1015,11 +1070,6 @@ textarea {
 
 .p-2 {
   padding: 0.5rem;
-}
-
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
 }
 
 .px-6 {
@@ -1035,6 +1085,16 @@ textarea {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .pt-12 {
@@ -1104,22 +1164,18 @@ textarea {
   color: rgb(169 171 171 / var(--tw-text-opacity));
 }
 
-.opacity-40 {
-  opacity: 0.4;
-}
-
 .opacity-0 {
   opacity: 0;
 }
 
-.shadow-\[0_-3px_6px_1px\] {
-  --tw-shadow: 0 -3px 6px 1px;
-  --tw-shadow-colored: 0 -3px 6px 1px var(--tw-shadow-color);
+.shadow-\[0_-3px_15px_2px\] {
+  --tw-shadow: 0 -3px 15px 2px;
+  --tw-shadow-colored: 0 -3px 15px 2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-primary\/30 {
-  --tw-shadow-color: rgb(64 83 98 / 0.3);
+.shadow-primary\/10 {
+  --tw-shadow-color: rgb(64 83 98 / 0.1);
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -1130,6 +1186,12 @@ textarea {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.transition-\[padding\] {
+  transition-property: padding;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
 }
 
 .transition-opacity {
@@ -1152,32 +1214,8 @@ textarea {
   transition-duration: 150ms;
 }
 
-.transition {
-  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-\[\] {
-  transition-property: ;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-.transition-\[padding\] {
-  transition-property: padding;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .show {

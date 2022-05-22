@@ -9,7 +9,9 @@ module.exports = {
         primary:'#405362',
         'primary-light':'#a9abab',
         secondary:'#eee5dc',
-        tertiary:'#efc881',
+        tertiary:'#ffd38d',
+        'tertiary-dark':'#ffc85a',
+        // 'tertiary-dark':'#efc881',
       },
 
       fontFamily: {

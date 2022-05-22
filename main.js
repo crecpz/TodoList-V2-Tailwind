@@ -75,9 +75,26 @@ function addNewTodo() {
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
 
+
     } else {
         todoInput.value = '';
     }
+}
+
+/* 0522後記 - 研究msg的跳出
+    現在要來研究的是在已完成頁面中增加新todolist時，
+    要告知使用者已經有將todolist新增到待完成。
+*/
+showSuccessAddedMsg()
+function showSuccessAddedMsg() {
+    const msgText =
+        `<i class="fa-solid fa-circle-check mr-3"></i>已成功新增至<span class="font-bold">待完成！</span>`
+    showMsg(msgText);
+}
+
+function showMsg(msg) {
+    const target = document.querySelector('#message-wrapper');
+    target.innerHTML = msg;
 }
 
 
@@ -179,7 +196,7 @@ function renderTodo(currentTab) {
                         </button>
                     </label>
                     <div class="todo-option">
-                        <button class="edit-btn btn mr-4"><i
+                        <button class="edit-btn btn btn-normal mr-4"><i
                                 class="fa-solid fa-pen-to-square mr-2"></i>編輯</button>
                         <button class="remove-btn btn btn-hightlight"><i
                                 class="fa-solid fa-trash mr-2"></i>刪除</button>
@@ -275,7 +292,13 @@ function showClearBtn() {
     clearBtnWrapper.classList.remove('animation---retreat');
 }
 
-
+/**
+ * 在todoList為空的時候顯示訊息來告知使用者此處沒內容。
+ * 
+ * 在顯示訊息內容之前會先進行判斷，當前的頁面(currentTab)位於待完成(active)或是全部(all)，
+ * 與當前的頁面(currentTab)位於已完成(completed)所顯示的訊息會有所不同。
+ * 
+ */
 function showEmptyMsg() {
     if (currentTab === 'active' || currentTab === 'all') {
         todoList.innerHTML =
@@ -303,9 +326,6 @@ todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg' && e.target.closest('li')) {
 
         // 取得點按的目標todoItem
-        // if(e.target.closest('li')){
-        // }
-
         const todoItem = e.target.closest('li')
 
         /* 展開todo-option */
@@ -358,16 +378,21 @@ todoList.addEventListener('click', e => {
              */
             function editMode() {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
-                const editDialog = document.querySelector('#edit-dialog')
+                const editDialog = document.querySelector('#edit-dialog');
                 editDialog.innerHTML =
 
-                    `   <p class="text-xl text-center mb-8">編輯待辦事項</p>
-                    <textarea id="edit-text" class="w-full h-[80px] p-2 bg-secondary outline-none border border-primary rounded-md overflow-y-auto"></textarea>
-                    <div class="flex justify-center items-center mt-8">
-                        <button class="cancel-btn btn btn-small mr-6">取消</button>
-                        <button class="save-btn btn btn-small">儲存</button>
+                    `   <p class="text-xl text-center mb-6">編輯待辦事項</p>
+                    <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto"></textarea>
+                    <div class="flex justify-center items-center">
+                        <button class="cancel-btn btn btn-normal mr-6">
+                            <i class="fa-solid fa-circle-xmark mr-2"></i>取消
+                        </button>
+                        <button class="save-btn btn btn-hightlight">
+                            <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
+                        </button>
                     </div>
                 `
+
 
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
                 let editText = editDialog.querySelector('#edit-text')
@@ -435,10 +460,14 @@ todoList.addEventListener('click', e => {
                             <div class="flex flex-col items-center">
                                 <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
                                 <p class="text-center text-xl mb-6">編輯尚未儲存</p>
-                                <p class="text-center text-sm">是否儲存更動?</p>
+                                <p class="text-center text-sm">是否儲存變更?</p>
                                 <div class="flex justify-center items-center mt-6">
-                                    <button class="cancel-btn btn btn-small mr-6">不儲存</button>
-                                    <button class="save-btn btn btn-small">儲存</button>
+                                    <button class="cancel-btn btn btn-normal mr-6">
+                                        <i class="fa-solid fa-circle-xmark mr-2"></i>不儲存
+                                    </button>
+                                    <button class="save-btn btn btn-hightlight">
+                                        <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
+                                    </button>
                                 </div>
                             </div>
                             `
@@ -542,26 +571,39 @@ todoList.addEventListener('click', e => {
     }
 })
 
+
 /**
  * 檢查todoListData是否為空，如果為空，則:
  *  1.顯示出emptyMsg
  *  2.隱藏clearBtn
+ *  3.移除在todoList所新增的padding-bottom
  */
 function checkIfListEmpty() {
     if (todoListData.length === 0) {
         showEmptyMsg();
         hideClearBtn();
+        removePaddingBottom();
     }
 }
 
 /* 移除所有已完成項目 */
 const clearBtn = document.querySelector('#clear-btn')
-clearBtn.addEventListener('click', clearCompleted)
+
+clearBtn.addEventListener('click', () => {
+    clearCompleted();
+    renderTodo(currentTab);
+    checkIfListEmpty();
+    localStorage.setItem('todos', JSON.stringify(todoListData));
+})
+
+/**
+ * 清除所有已完成的項目
+ * 
+ * 將todoListData使用Array.fliter()檢查todoListData內每一個項目的status鍵，
+ * 將所有的status鍵中的值不是'completed'的項目賦值給todoListData。
+ */
 function clearCompleted() {
     todoListData = todoListData.filter(data => {
         return data.status !== 'completed';
     })
-    renderTodo(currentTab)
-    checkIfListEmpty()
-    localStorage.setItem('todos', JSON.stringify(todoListData))
 }

@@ -58,7 +58,7 @@
   }
 
   dialog[open]::backdrop {
-    @apply bg-primary/80 h-[100vh] overflow-y-hidden;
+    @apply bg-primary/30 h-[100vh] overflow-y-hidden;
     animation: fade-in 700ms forwards;
   }
 
@@ -88,11 +88,11 @@
   }
 
   .btn-normal {
-    @apply bg-secondary;
+    @apply bg-[#f2e9e4] hover:bg-[#ffffff];
   }
 
   .btn-hightlight {
-    @apply bg-tertiary;
+    @apply bg-tertiary hover:bg-tertiary-dark;
   }
 
   .add-btn--active {

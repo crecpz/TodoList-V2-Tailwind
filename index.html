@@ -40,7 +40,8 @@
         </div>
 
         <!-- todo list -->
-        <ul id="todo-list" class="overflow-y-scroll min-h-[50vh] bg-secondary transition-[padding] duration-300">
+        <ul id="todo-list"
+            class="relative overflow-y-scroll min-h-[50vh] bg-secondary transition-[padding] duration-300">
 
             <!-- empty message -->
             <div id="empty-msg"
@@ -51,16 +52,16 @@
                 </div>
                 <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
             </div>
+
+            <!-- message -->
+            <div id="message-wrapper" class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 bg-amber-500 px-4 py-2 whitespace-nowrap text-primary rounded-md"></div>
+
         </ul>
 
         <!-- todo input -->
         <div class="relative z-10 flex items-stretch border-t-4 border-t-primary">
             <input type="text" placeholder="New task here!" id="todo-input"
                 class="font-bold w-full h-full bg-secondary  text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic">
-            <!-- 
-            <div id="clear-text-btn" class="flex items-center px-3 h-full bg-secondary cursor-pointer transition-opacity duration-300">
-                <i class="fa-solid fa-circle-xmark text-primary text-xl opacity-40 hide"></i>
-            </div> -->
 
             <div class="flex items-center h-full bg-secondary pr-4 cursor-text">
                 <button id="clear-text-btn" class="hide flex bg-secondary transition-all duration-300 group">
@@ -75,7 +76,7 @@
 
             <!-- clear-btn-wrapper -->
             <div id="clear-btn-wrapper"
-                class="absolute bottom-0 -z-10 flex justify-center items-center w-full p-4 opacity-0 bg-secondary shadow-primary/30 shadow-[0_-3px_6px_1px]">
+                class="absolute bottom-0 -z-10 flex justify-center items-center w-full p-4 opacity-0 bg-secondary shadow-primary/10 shadow-[0_-3px_15px_2px]">
                 <button id="clear-btn"
                     class="btn btn-hightlight text-sm font-bold py-2 flex items-center justify-center w-full">
                     <img class="w-3.5 mr-2" src="img/delete-complete.svg">清除已完成
