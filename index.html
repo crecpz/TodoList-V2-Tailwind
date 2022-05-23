@@ -37,6 +37,10 @@
             <button id="all" class="status__tab status__tab-all status__tab--current">全部</button>
             <button id="active" class="status__tab status__tab-active">待完成</button>
             <button id="completed" class="status__tab status__tab-completed">已完成</button>
+            <!-- alert message -->
+            <div id="message-wrapper"
+                class="show absolute top-full left-1/2 z-20 -translate-x-1/2 w-full bg-amber-500 text-center px-4 py-4 whitespace-nowrap text-primary opacity-0">
+            </div>
         </div>
 
         <!-- todo list -->
@@ -52,9 +56,6 @@
                 </div>
                 <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
             </div>
-
-            <!-- message -->
-            <div id="message-wrapper" class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 bg-amber-500 px-4 py-2 whitespace-nowrap text-primary rounded-md"></div>
 
         </ul>
 

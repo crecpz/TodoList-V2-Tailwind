@@ -481,30 +481,125 @@ dialog {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+@-webkit-keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
 dialog[open] {
   -webkit-animation: slide-up 500ms forwards;
           animation: slide-up 500ms forwards;
+  /* animation: slide-up 500ms forwards; */
 }
 
 dialog[open]::-webkit-backdrop {
   height: 100vh;
-  overflow-y: hidden;
-  background-color: rgb(64 83 98 / 0.3);
-  -webkit-animation: fade-in 700ms forwards;
-          animation: fade-in 700ms forwards;
 }
 
 dialog[open]::backdrop {
   height: 100vh;
-  overflow-y: hidden;
-  background-color: rgb(64 83 98 / 0.3);
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+dialog[open]::-webkit-backdrop {
   -webkit-animation: fade-in 700ms forwards;
           animation: fade-in 700ms forwards;
+  overflow-y: hidden;
+  background-color: rgb(64 83 98 / 0.3);
+}
+
+dialog[open]::backdrop {
+  -webkit-animation: fade-in 700ms forwards;
+          animation: fade-in 700ms forwards;
+  overflow-y: hidden;
+  background-color: rgb(64 83 98 / 0.3);
+}
+
+@-webkit-keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
 }
 
 dialog[closing] {
   -webkit-animation: slide-down 700ms forwards;
           animation: slide-down 700ms forwards;
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 dialog[closing]::-webkit-backdrop {
@@ -630,7 +725,8 @@ textarea {
 /* status */
 
 .status {
-  /* @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary; */
+  position: relative;
+  margin-bottom: 0.25rem;
   display: flex;
   width: 100%;
   align-items: center;
@@ -641,14 +737,10 @@ textarea {
 }
 
 .status__tab {
-  /* @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em]; */
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-around;
-  border-bottom-width: 4px;
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(64 83 98 / var(--tw-border-opacity));
   padding-top: 1rem;
   padding-bottom: 1rem;
   text-align: center;
@@ -808,6 +900,14 @@ textarea {
   position: relative;
 }
 
+.top-full {
+  top: 100%;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
 .-bottom-0 {
   bottom: -0px;
 }
@@ -816,16 +916,16 @@ textarea {
   bottom: 0px;
 }
 
-.bottom-24 {
-  bottom: 6rem;
+.top-\[calc\] {
+  top: calc;
 }
 
-.left-1\/2 {
-  left: 50%;
+.top-\[calc\(s\)\] {
+  top: calc(s);
 }
 
-.bottom-20 {
-  bottom: 5rem;
+.z-20 {
+  z-index: 20;
 }
 
 .z-10 {
@@ -853,6 +953,10 @@ textarea {
   margin-right: 0.5rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -863,10 +967,6 @@ textarea {
 
 .mr-6 {
   margin-right: 1.5rem;
-}
-
-.mr-3 {
-  margin-right: 0.75rem;
 }
 
 .flex {
@@ -947,6 +1047,78 @@ textarea {
           animation: bounce 1s infinite;
 }
 
+@-webkit-keyframes retreat {
+  0% {
+    bottom: 100%;
+    opacity: 1;
+  }
+
+  30% {
+    bottom: 130%;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes retreat {
+  0% {
+    bottom: 100%;
+    opacity: 1;
+  }
+
+  30% {
+    bottom: 130%;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.animate-retreat {
+  -webkit-animation: retreat 350ms ease-in forwards;
+          animation: retreat 350ms ease-in forwards;
+}
+
+@-webkit-keyframes popup {
+  70% {
+    bottom: 130%;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: calc(100% + 4px);
+  }
+}
+
+@keyframes popup {
+  70% {
+    bottom: 130%;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: calc(100% + 4px);
+  }
+}
+
+.animate-popup {
+  -webkit-animation: popup 300ms ease-out forwards;
+          animation: popup 300ms ease-out forwards;
+}
+
 .cursor-text {
   cursor: text;
 }
@@ -991,10 +1163,6 @@ textarea {
   border-radius: 0.5rem;
 }
 
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
 .rounded-bl-xl {
   border-bottom-left-radius: 0.75rem;
 }
@@ -1034,6 +1202,11 @@ textarea {
   background-color: rgb(64 83 98 / var(--tw-bg-opacity));
 }
 
+.bg-amber-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
+}
+
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: rgb(238 229 220 / var(--tw-bg-opacity));
@@ -1044,26 +1217,6 @@ textarea {
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
 }
 
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
-.bg-green-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(134 239 172 / var(--tw-bg-opacity));
-}
-
-.bg-gray-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
-}
-
-.bg-amber-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
-}
-
 .p-4 {
   padding: 1rem;
 }
@@ -1072,9 +1225,9 @@ textarea {
   padding: 0.5rem;
 }
 
-.px-6 {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .py-4 {
@@ -1082,19 +1235,14 @@ textarea {
   padding-bottom: 1rem;
 }
 
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-.px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .pt-12 {
@@ -1228,16 +1376,6 @@ textarea {
   opacity: 0;
 }
 
-.animation---popup {
-  -webkit-animation: popup 300ms ease-out forwards;
-          animation: popup 300ms ease-out forwards;
-}
-
-.animation---retreat {
-  -webkit-animation: retreat 350ms ease-in forwards;
-          animation: retreat 350ms ease-in forwards;
-}
-
 @media (hover: hover) {
   .btn:hover {
     --tw-translate-y: 2px;
@@ -1262,141 +1400,62 @@ textarea {
   }
 }
 
-@-webkit-keyframes popup {
+/* 
+以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
+
+
+ @keyframes popup {
   70% {
-    bottom: 130%;
+    @apply bottom-[130%];
   }
 
   100% {
-    opacity: 1;
-  }
-
-  100% {
+    @apply opacity-100;
     bottom: calc(100% + 4px);
   }
 }
 
-@keyframes popup {
-  70% {
-    bottom: 130%;
-  }
-
-  100% {
-    opacity: 1;
-  }
-
-  100% {
-    bottom: calc(100% + 4px);
-  }
-}
-
-/* How to prevent a CSS keyframe animation from running on page load?
+How to prevent a CSS keyframe animation from running on page load?
 https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-*/
 
-@-webkit-keyframes retreat {
-  0% {
-    bottom: 100%;
-  }
-
-  0% {
-    opacity: 1;
-  }
-
-  30% {
-    bottom: 130%;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    bottom: 0px;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
 
 @keyframes retreat {
   0% {
-    bottom: 100%;
-  }
-
-  0% {
-    opacity: 1;
+    @apply bottom-full opacity-100;
   }
 
   30% {
-    bottom: 130%;
+    @apply bottom-[130%];
   }
 
   90% {
-    opacity: 1;
+    @apply opacity-100;
   }
 
   100% {
-    bottom: 0px;
+    @apply bottom-0 opacity-0;
   }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
+} 
 
 @keyframes fade-in {
   0% {
-    opacity: 0;
+    @apply opacity-0;
   }
 
   100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
+    @apply opacity-100;
   }
 }
 
 @keyframes fade-out {
   0% {
-    opacity: 1;
+    @apply opacity-100;
   }
 
   100% {
-    opacity: 0;
+    @apply opacity-0;
   }
-}
-
-@-webkit-keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
+} 
 
 @keyframes slide-up {
   from {
@@ -1410,18 +1469,6 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   }
 }
 
-@-webkit-keyframes slide-down {
-  from {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-}
-
 @keyframes slide-down {
   from {
     opacity: 1;
@@ -1432,119 +1479,9 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
     opacity: 0;
     transform: translateY(50%);
   }
-}
+} 
 
-@-webkit-keyframes scale-up {
-  from {
-    transform: scale(0.75);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes scale-up {
-  from {
-    transform: scale(0.75);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@-webkit-keyframes scale-down {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.75);
-  }
-}
-
-@keyframes scale-down {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.75);
-  }
-}
-
-@-webkit-keyframes room-in {
-  from {
-    --tw-scale-x: .75;
-    --tw-scale-y: .75;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  to {
-    --tw-scale-x: 1;
-    --tw-scale-y: 1;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-}
-
-@keyframes room-in {
-  from {
-    --tw-scale-x: .75;
-    --tw-scale-y: .75;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  to {
-    --tw-scale-x: 1;
-    --tw-scale-y: 1;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-}
-
-@-webkit-keyframes room-out {
-  from {
-    --tw-scale-x: 1;
-    --tw-scale-y: 1;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  from {
-    opacity: 1;
-  }
-
-  to {
-    --tw-scale-x: .75;
-    --tw-scale-y: .75;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes room-out {
-  from {
-    --tw-scale-x: 1;
-    --tw-scale-y: 1;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  from {
-    opacity: 1;
-  }
-
-  to {
-    --tw-scale-x: .75;
-    --tw-scale-y: .75;
-    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  }
-
-  to {
-    opacity: 0;
-  }
-}
+*/
 
 .placeholder\:italic::-moz-placeholder {
   font-style: italic;

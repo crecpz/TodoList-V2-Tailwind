@@ -17,6 +17,7 @@ setTimeout(function () {
 const title = document.querySelector('#title')
 const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 
+let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
 /* Todo Input */
 
@@ -74,29 +75,47 @@ function addNewTodo() {
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
-
+        showSuccessAddedMsg()
 
     } else {
         todoInput.value = '';
     }
 }
 
-/* 0522後記 - 研究msg的跳出
+/* 0523後記 - 研究msg的跳出
     現在要來研究的是在已完成頁面中增加新todolist時，
     要告知使用者已經有將todolist新增到待完成。
+    
+    目前決定從上面的status定位，讓他從上而下
+    然後進度條就利用上面的藍線
+
+    問題來了，我要定位在bottom-full 的calc -4px的地方，有什麼辦法?
 */
-showSuccessAddedMsg()
+const messageWrapper = document.querySelector('#message-wrapper');
+
 function showSuccessAddedMsg() {
-    const msgText =
-        `<i class="fa-solid fa-circle-check mr-3"></i>已成功新增至<span class="font-bold">待完成！</span>`
-    showMsg(msgText);
+    if (currentTab === 'completed') {
+        console.log(currentTab);
+        messageWrapper.classList.remove('hide');
+        messageWrapper.classList.add('show');
+        messageWrapper.innerHTML =
+            `<i class="fa-solid fa-circle-check mr-3"></i>
+                已成功新增至<span class="font-bold">待完成！</span>`
+        console.log(messageWrapper.innerHTML)
+        // showMsg(msgContent);
+    }
 }
 
-function showMsg(msg) {
-    const target = document.querySelector('#message-wrapper');
-    target.innerHTML = msg;
-}
 
+/**
+ * 顯示提示訊息
+ * @param {*} msg 欲顯示的訊息內容
+ */
+function showMsg(msgContent) {
+    // msgWrapper 
+    msgWrapper.innerHTML = msgContent;
+    // console.log(msgWrapper)
+}
 
 const clearTextBtn = document.querySelector('#clear-text-btn');
 const clearTextBtnWrapper = clearTextBtn.parentElement;
@@ -133,7 +152,6 @@ function clearText() {
 
 /* status(全部、待完成、已完成) */
 const statusTabs = document.querySelector('#status');
-let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
 activeCurrentTab()
 
@@ -279,8 +297,8 @@ function removePaddingBottom() {
  * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
-    clearBtnWrapper.classList.add('animation---retreat');
-    clearBtnWrapper.classList.remove('animation---popup');
+    clearBtnWrapper.classList.add('animate-retreat');
+    clearBtnWrapper.classList.remove('animate-popup');
 }
 
 /**
@@ -288,8 +306,8 @@ function hideClearBtn() {
  * 此函數用來顯示clearBtn。
  */
 function showClearBtn() {
-    clearBtnWrapper.classList.add('animation---popup');
-    clearBtnWrapper.classList.remove('animation---retreat');
+    clearBtnWrapper.classList.add('animate-popup');
+    clearBtnWrapper.classList.remove('animate-retreat');
 }
 
 /**
@@ -316,10 +334,9 @@ function showEmptyMsg() {
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
                 </div>
-            </div>`;
+            </div>`
     }
 }
-
 
 todoList.addEventListener('click', e => {
 
@@ -381,7 +398,7 @@ todoList.addEventListener('click', e => {
                 const editDialog = document.querySelector('#edit-dialog');
                 editDialog.innerHTML =
 
-                    `   <p class="text-xl text-center mb-6">編輯待辦事項</p>
+                    `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center">
                         <button class="cancel-btn btn btn-normal mr-6">

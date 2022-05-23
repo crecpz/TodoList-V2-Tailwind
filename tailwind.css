@@ -54,20 +54,20 @@
   }
 
   dialog[open] {
-    animation: slide-up 500ms forwards;
+    @apply animate-slide-up;
+    /* animation: slide-up 500ms forwards; */
   }
 
   dialog[open]::backdrop {
-    @apply bg-primary/30 h-[100vh] overflow-y-hidden;
-    animation: fade-in 700ms forwards;
+    @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
   }
 
   dialog[closing] {
-    animation: slide-down 700ms forwards;
+    @apply animate-slide-down;
   }
 
   dialog[closing]::backdrop {
-    animation: fade-out 1000ms forwards;
+    @apply animate-fade-out
   }
 
   /* textarea */
@@ -100,13 +100,11 @@
 
   /* status */
   .status {
-    /* @apply flex items-center w-full px-2 bg-tertiary rounded-tl-2xl rounded-tr-2xl border-b-4 border-b-primary; */
-    @apply flex items-center w-full bg-tertiary rounded-tl-2xl rounded-tr-2xl;
+    @apply relative flex items-center w-full bg-tertiary rounded-tl-2xl rounded-tr-2xl mb-1;
   }
 
   .status__tab {
-    /* @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em]; */
-    @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em] border-b-4 border-b-primary;
+    @apply flex items-center justify-around w-full text-primary text-center font-bold py-4 tracking-[0.3em];
   }
 
   .status__tab--current {
@@ -170,17 +168,22 @@
   .hide {
     @apply opacity-0 invisible;
   }
-
-  .animation---popup {
-    animation: popup 300ms ease-out forwards;
-  }
-
-  .animation---retreat {
-    animation: retreat 350ms ease-in forwards;
-  }
 }
 
-@keyframes popup {
+
+
+
+
+
+
+
+
+
+/* 
+以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
+
+
+ @keyframes popup {
   70% {
     @apply bottom-[130%];
   }
@@ -191,9 +194,9 @@
   }
 }
 
-/* How to prevent a CSS keyframe animation from running on page load?
+How to prevent a CSS keyframe animation from running on page load?
 https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-*/
+
 
 @keyframes retreat {
   0% {
@@ -211,7 +214,7 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   100% {
     @apply bottom-0 opacity-0;
   }
-}
+} 
 
 @keyframes fade-in {
   0% {
@@ -231,7 +234,7 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   100% {
     @apply opacity-0;
   }
-}
+} 
 
 @keyframes slide-up {
   from {
@@ -255,44 +258,6 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
     opacity: 0;
     transform: translateY(50%);
   }
-}
+} 
 
-@keyframes scale-up {
-  from {
-    transform: scale(0.75);
-  }
-
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes scale-down {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.75);
-  }
-}
-
-@keyframes room-in {
-  from {
-    @apply scale-75;
-  }
-
-  to {
-    @apply scale-100;
-  }
-}
-
-@keyframes room-out {
-  from {
-    @apply scale-100 opacity-100;
-  }
-
-  to {
-    @apply scale-75 opacity-0;
-  }
-}
+*/
