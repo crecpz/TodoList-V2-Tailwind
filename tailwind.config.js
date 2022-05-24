@@ -63,7 +63,7 @@ module.exports = {
           },
         },
 
-        'retreat': {
+        'hide-down': {
           '0%': {
             bottom: '100%',
             opacity: '1',
@@ -79,6 +79,46 @@ module.exports = {
             opacity: '0',
           },
         },
+
+        'popdown': {
+          // '0%': {
+          //   top: '0%',
+          // },
+          '70%': {
+            top: '130%',
+          },
+          '100%': {
+            opacity: '1',
+            // top: '100%',
+            top: 'calc(100% + 4px)',
+          },
+        },
+
+        'hide-up': {
+          '0%': {
+            top: 'calc(100% + 4px)',
+            opacity: '1',
+          },
+          '30%': {
+            top: '130%',
+          },
+          '90%': {
+            opacity: '1',
+          },
+          '100%': {
+            top: '0',
+            opacity: '0',
+          },
+        },
+
+        'progress': {
+          '0%':{
+            width: '100%'
+          },
+          '100%':{
+            width: '0%',
+          },
+        },
       },
 
       animation: {
@@ -86,9 +126,11 @@ module.exports = {
         'fade-out': 'fade-out 1000ms forwards',
         'slide-up': 'slide-up 500ms forwards',
         'slide-down': ' slide-down 700ms forwards',
-        'popup': 'popup 300ms ease-out forwards',
-        'retreat': 'retreat 350ms ease-in forwards',
-        
+        'popup': 'popup 200ms ease-out forwards',
+        'hide-down': 'hide-down 350ms ease-in forwards',
+        'popdown': 'popdown 200ms ease-out forwards',
+        'hide-up': 'hide-up 350ms ease-in-out forwards',
+        'progress': 'progress 2s linear forwards',
       },
 
     },

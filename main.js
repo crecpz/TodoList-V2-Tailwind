@@ -93,16 +93,41 @@ function addNewTodo() {
 */
 const messageWrapper = document.querySelector('#message-wrapper');
 
+/* 這行暫時寫的 用完務必刪除 */
+addBtn.addEventListener('click', showSuccessAddedMsg)
+
+/**
+ * 5/24快速上手
+ * 1. 跳出來的綠色訊息框對比有點不太行，難以閱讀
+ * 2. 上面:97行的那具如果不需要就刪掉
+ */
+
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
-        console.log(currentTab);
         messageWrapper.classList.remove('hide');
         messageWrapper.classList.add('show');
         messageWrapper.innerHTML =
-            `<i class="fa-solid fa-circle-check mr-3"></i>
-                已成功新增至<span class="font-bold">待完成！</span>`
-        console.log(messageWrapper.innerHTML)
-        // showMsg(msgContent);
+            `<i class="fa-regular fa-circle-check text-lg mr-0.5"></i>
+                已成功新增至待完成！<span class="font-bold"></span>`
+            // 下面這段DOM使用的check icon是實心的
+            // `<i class="fa-solid fa-circle-check text-lg mr-2"></i>
+            //     已成功新增至待完成！<span class="font-bold"></span>`
+        messageWrapper.classList.add('animate-popdown');
+        messageWrapper.classList.add('before:animate-progress');
+
+        const progressCountdown = setTimeout(() => {
+            messageWrapper.classList.add('animate-hide-up');
+            messageWrapper.classList.remove('animate-popdown');
+            messageWrapper.classList.remove('before:animate-progress');
+
+            messageWrapper.addEventListener('animationend', () => {
+                messageWrapper.classList.remove('animate-hide-up');
+                messageWrapper.innerHTML = '';
+                messageWrapper.classList.add('hide');
+                messageWrapper.classList.remove('show');
+            }, { once: true })
+            clearTimeout(progressCountdown)
+        }, 2000)
     }
 }
 
@@ -293,21 +318,21 @@ function removePaddingBottom() {
 
 
 /**
- * 控制retreat動畫與popup動畫在clearBtnWrapper的classList狀態。
+ * 控制hide-down動畫與popup動畫在clearBtnWrapper的classList狀態。
  * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
-    clearBtnWrapper.classList.add('animate-retreat');
+    clearBtnWrapper.classList.add('animate-hide-down');
     clearBtnWrapper.classList.remove('animate-popup');
 }
 
 /**
- * 控制retreat動畫與popup動畫在clearBtnWrapper的classList狀態。
+ * 控制hide-down動畫與popup動畫在clearBtnWrapper的classList狀態。
  * 此函數用來顯示clearBtn。
  */
 function showClearBtn() {
     clearBtnWrapper.classList.add('animate-popup');
-    clearBtnWrapper.classList.remove('animate-retreat');
+    clearBtnWrapper.classList.remove('animate-hide-down');
 }
 
 /**
