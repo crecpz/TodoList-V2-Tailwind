@@ -951,14 +951,6 @@ textarea {
   margin-right: 0.5rem;
 }
 
-.mr-0\.5 {
-  margin-right: 0.125rem;
-}
-
-.mr-0 {
-  margin-right: 0px;
-}
-
 .mr-4 {
   margin-right: 1rem;
 }
@@ -1276,9 +1268,12 @@ textarea {
   background-color: rgb(64 83 98 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#78977e\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(120 151 126 / var(--tw-bg-opacity));
+.bg-\[\#78977e\]\/80 {
+  background-color: rgb(120 151 126 / 0.8);
+}
+
+.bg-black\/80 {
+  background-color: rgb(0 0 0 / 0.8);
 }
 
 .bg-secondary {
@@ -1299,16 +1294,6 @@ textarea {
   padding: 0.5rem;
 }
 
-.py-2\.5 {
-  padding-top: 0.625rem;
-  padding-bottom: 0.625rem;
-}
-
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -1319,12 +1304,29 @@ textarea {
   padding-bottom: 1rem;
 }
 
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .pt-12 {
   padding-top: 3rem;
 }
 
 .pb-20 {
   padding-bottom: 5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
+}
+
+.pb-2\.5 {
+  padding-bottom: 0.625rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
 }
 
 .pr-4 {
@@ -1389,6 +1391,11 @@ textarea {
 .text-primary-light {
   --tw-text-opacity: 1;
   color: rgb(169 171 171 / var(--tw-text-opacity));
+}
+
+.text-tertiary-dark {
+  --tw-text-opacity: 1;
+  color: rgb(255 200 90 / var(--tw-text-opacity));
 }
 
 .opacity-0 {
@@ -1612,15 +1619,14 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   height: 0.25rem;
 }
 
-.before\:w-0::before {
+.before\:w-full::before {
   content: var(--tw-content);
-  width: 0px;
+  width: 100%;
 }
 
 @-webkit-keyframes progress {
   0% {
     content: var(--tw-content);
-    width: 100%;
   }
 
   100% {
@@ -1632,7 +1638,6 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
 @keyframes progress {
   0% {
     content: var(--tw-content);
-    width: 100%;
   }
 
   100% {
@@ -1647,10 +1652,9 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
           animation: progress 2s linear forwards;
 }
 
-.before\:bg-secondary::before {
+.before\:bg-secondary\/70::before {
   content: var(--tw-content);
-  --tw-bg-opacity: 1;
-  background-color: rgb(238 229 220 / var(--tw-bg-opacity));
+  background-color: rgb(238 229 220 / 0.7);
 }
 
 .before\:content-\[\'\'\]::before {

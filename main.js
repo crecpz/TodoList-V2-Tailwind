@@ -93,29 +93,38 @@ function addNewTodo() {
 */
 const messageWrapper = document.querySelector('#message-wrapper');
 
+
+
+
+
+
+/*
+    以下針對談出的訊息框做說明:
+    
+    由於目前仍未找到當動畫重複觸發時，重新執行動畫的方法，
+        所以這部分先擱置，先去處理該處理的其他部分。
+    (怕忘記這邊說一下:重複執行動畫是要用在alert message這個div的::before部分，
+        為了使progress(進度條動畫)可以重新從100%開始倒數)
+    
+*/
+
+
 /* 這行暫時寫的 用完務必刪除 */
 addBtn.addEventListener('click', showSuccessAddedMsg)
 
-/**
- * 5/24快速上手
- * 1. 跳出來的綠色訊息框對比有點不太行，難以閱讀
- * 2. 上面:97行的那具如果不需要就刪掉
- */
 
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
+    
+        messageWrapper.classList.add('before:w-full');
         messageWrapper.classList.remove('hide');
-        messageWrapper.classList.add('show');
         messageWrapper.innerHTML =
-            `<i class="fa-regular fa-circle-check text-lg mr-0.5"></i>
-                已成功新增至待完成！<span class="font-bold"></span>`
-            // 下面這段DOM使用的check icon是實心的
-            // `<i class="fa-solid fa-circle-check text-lg mr-2"></i>
-            //     已成功新增至待完成！<span class="font-bold"></span>`
+            `<i class="fa-regular fa-circle-check text-lg"></i>
+                已成功新增至<span class="text-tertiary-dark">待完成</span>！`
         messageWrapper.classList.add('animate-popdown');
         messageWrapper.classList.add('before:animate-progress');
 
-        const progressCountdown = setTimeout(() => {
+        setTimeout(() => {
             messageWrapper.classList.add('animate-hide-up');
             messageWrapper.classList.remove('animate-popdown');
             messageWrapper.classList.remove('before:animate-progress');
@@ -126,9 +135,9 @@ function showSuccessAddedMsg() {
                 messageWrapper.classList.add('hide');
                 messageWrapper.classList.remove('show');
             }, { once: true })
-            clearTimeout(progressCountdown)
         }, 2000)
     }
+
 }
 
 
