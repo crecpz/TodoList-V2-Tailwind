@@ -82,32 +82,20 @@ function addNewTodo() {
     }
 }
 
-/* 0523後記 - 研究msg的跳出
-    現在要來研究的是在已完成頁面中增加新todolist時，
-    要告知使用者已經有將todolist新增到待完成。
-    
-    目前決定從上面的status定位，讓他從上而下
-    然後進度條就利用上面的藍線
-
-    問題來了，我要定位在bottom-full 的calc -4px的地方，有什麼辦法?
-*/
-const messageWrapper = document.querySelector('#message-wrapper');
-
-
-
 
 
 
 /*
-    以下針對談出的訊息框做說明:
-    
-    由於目前仍未找到當動畫重複觸發時，重新執行動畫的方法，
-        所以這部分先擱置，先去處理該處理的其他部分。
-    (怕忘記這邊說一下:重複執行動畫是要用在alert message這個div的::before部分，
-        為了使progress(進度條動畫)可以重新從100%開始倒數)
-    
-*/
+以下針對彈出的訊息框做說明:
 
+由於目前仍未找到當動畫重複觸發時，重新執行動畫的方法，
+所以這部分先擱置，先去處理該處理的其他部分。
+(怕忘記這邊說一下:重複執行動畫是要用在alert message這個div的::before部分，
+    為了使progress(進度條動畫)可以重新從100%開始倒數)
+    
+ */
+
+const messageWrapper = document.querySelector('#message-wrapper');
 
 /* 這行暫時寫的 用完務必刪除 */
 addBtn.addEventListener('click', showSuccessAddedMsg)
@@ -115,7 +103,7 @@ addBtn.addEventListener('click', showSuccessAddedMsg)
 
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
-    
+
         messageWrapper.classList.add('before:w-full');
         messageWrapper.classList.remove('hide');
         messageWrapper.innerHTML =
@@ -286,23 +274,6 @@ function isAnyItemCompleted() {
 
 
 
-
-
-// /**
-//  * '判斷'並'控制'clearBtn的容器顯示或隱藏。
-//  */
-// function clearBtnController() {
-//     // Array.flnd()僅能在Array使用，所以要將nodeList轉換成Array
-//     const todoItems = [...document.querySelectorAll('.todo-item')];
-
-//     if (todoItems.find(todoItem => todoItem.dataset.status === 'completed')) {
-//         showClearBtn()
-//         addPaddingBottom()
-//     } else {
-//         hideClearBtn()
-//         removePaddingBottom()
-//     }
-// }
 
 
 
