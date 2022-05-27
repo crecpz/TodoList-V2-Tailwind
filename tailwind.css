@@ -97,8 +97,33 @@
   .add-btn--active {
   }
 
-  /* status */
+  /* status new */
   .status {
+    @apply relative flex items-center w-full rounded-tl-2xl rounded-tr-2xl mb-2;
+  }
+
+  .status__tab {
+    @apply relative z-20 flex items-center justify-around w-full bg-secondary  text-primary text-center font-bold py-4 tracking-[0.3em] shadow-[0_10px_0_0_#999] rounded-md transition-[box-shadow_150ms,transform_150ms];
+  }
+
+  .status__tab + .status__tab{
+    @apply ml-[2px];
+  }
+
+  .status__tab-all {
+    @apply rounded-tl-xl;
+  }
+
+  .status__tab-completed {
+    @apply rounded-tr-xl;
+  }
+
+  .status__tab--current {
+    @apply translate-y-[7px] shadow-[0_5px_0_0_#999];
+  }
+
+  /* status old */
+  /* .status {
     @apply relative flex items-center w-full rounded-tl-2xl rounded-tr-2xl mb-1;
   }
 
@@ -106,10 +131,11 @@
     @apply relative z-20 flex items-center justify-around w-full bg-tertiary  text-primary text-center font-bold py-4 tracking-[0.3em];
   }
 
-  .status__tab:nth-child(1) {
+  .status__tab-all {
     @apply rounded-tl-xl;
   }
-  .status__tab:nth-child(3) {
+
+  .status__tab-completed {
     @apply rounded-tr-xl;
   }
 
@@ -117,7 +143,7 @@
     @apply flex justify-center items-center;
     @apply before:content-['\f104'] before:font-Font-Awesome before:text-primary before:pr-1;
     @apply after:content-['\f105'] after:font-Font-Awesome after:text-primary after:pl-1;
-  }
+  } */
 
   .todo-item {
     @apply flex flex-col items-center px-6 py-2;
