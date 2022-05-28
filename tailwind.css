@@ -99,15 +99,18 @@
 
   /* status new */
   .status {
-    @apply relative flex items-center w-full rounded-tl-2xl rounded-tr-2xl mb-2;
+    @apply relative z-20 flex items-center w-full mb-2;
+    @apply rounded-tl-2xl rounded-tr-2xl;
+    /* @apply shadow-[0_3px_8px_2px_#222]; */
   }
 
   .status__tab {
-    @apply relative z-20 flex items-center justify-around w-full bg-secondary  text-primary text-center font-bold py-4 tracking-[0.3em] shadow-[0_10px_0_0_#999] rounded-md transition-[box-shadow_150ms,transform_150ms];
+    @apply relative z-20 flex items-center justify-around w-full py-3;
+    @apply bg-secondary  text-primary text-center font-bold tracking-[0.3em] shadow-[0_8px_0_0_#bbb,0_7px_3px_2px_#333,inset_0_0_2px_0_#888] rounded-sm transition-[box-shadow,transform] duration-100;
   }
 
-  .status__tab + .status__tab{
-    @apply ml-[2px];
+  .status__tab + .status__tab {
+    @apply ml-[1px];
   }
 
   .status__tab-all {
@@ -119,38 +122,16 @@
   }
 
   .status__tab--current {
-    @apply translate-y-[7px] shadow-[0_5px_0_0_#999];
+    @apply translate-y-[5px] shadow-[0_5px_0_0_#999,0_3px_1.5px_1.5px_#333,inset_0_0_3px_0px_#888] bg-tertiary;
   }
 
-  /* status old */
-  /* .status {
-    @apply relative flex items-center w-full rounded-tl-2xl rounded-tr-2xl mb-1;
-  }
-
-  .status__tab {
-    @apply relative z-20 flex items-center justify-around w-full bg-tertiary  text-primary text-center font-bold py-4 tracking-[0.3em];
-  }
-
-  .status__tab-all {
-    @apply rounded-tl-xl;
-  }
-
-  .status__tab-completed {
-    @apply rounded-tr-xl;
-  }
-
-  .status__tab--current {
-    @apply flex justify-center items-center;
-    @apply before:content-['\f104'] before:font-Font-Awesome before:text-primary before:pr-1;
-    @apply after:content-['\f105'] after:font-Font-Awesome after:text-primary after:pl-1;
-  } */
 
   .todo-item {
     @apply flex flex-col items-center px-6 py-2;
   }
 
   .todo-checkbox {
-    @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border border-primary rounded-sm cursor-pointer;
+    @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border-[1.5px] border-primary rounded-sm cursor-pointer;
   }
 
   .todo-checkbox:checked + .todo-text {
