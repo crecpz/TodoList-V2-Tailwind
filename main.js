@@ -361,7 +361,12 @@ todoList.addEventListener('click', e => {
         /* 控制checkbox狀態 */
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
-            // clearBtnController();
+
+            removingItem()
+
+            function removingItem() {
+                todoItem.classList.add('animate-remove-item')
+            }
 
             if (isAnyItemCompleted()) {
                 showClearBtn()
@@ -584,6 +589,7 @@ todoList.addEventListener('click', e => {
             checkIfListEmpty()
         }
 
+
         function removeTodo() {
             // 找出在localStorage中的todo所有除了點到的這項以外的todo，然後重新賦值(更新)給todoListData
             todoListData = todoListData.filter(data => data !== todoListData[todoItem.id])
@@ -592,6 +598,10 @@ todoList.addEventListener('click', e => {
         }
     }
 })
+
+
+
+
 
 
 /**

@@ -732,7 +732,6 @@ textarea {
   align-items: center;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  /* @apply shadow-[0_3px_8px_2px_#222]; */
 }
 
 .status__tab {
@@ -1183,6 +1182,37 @@ textarea {
           animation: popup 200ms ease-out forwards;
 }
 
+@-webkit-keyframes remove-item {
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    overflow: hidden;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+
+@keyframes remove-item {
+  50% {
+    transform: scaleY(1);
+    transform-origin: top;
+    overflow: hidden;
+  }
+
+  100% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+
+.animate-remove-item {
+  -webkit-animation: remove-item 500ms ease-in-out forwards;
+          animation: remove-item 500ms ease-in-out forwards;
+}
+
 .cursor-text {
   cursor: text;
 }
@@ -1213,6 +1243,14 @@ textarea {
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.overflow-x-scroll {
+  overflow-x: scroll;
 }
 
 .overflow-y-scroll {
@@ -1494,7 +1532,7 @@ textarea {
 以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
 
 
- @keyframes popup {
+@keyframes popup {
   70% {
     @apply bottom-[130%];
   }

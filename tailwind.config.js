@@ -81,15 +81,11 @@ module.exports = {
         },
 
         'popdown': {
-          // '0%': {
-          //   top: '0%',
-          // },
           '70%': {
             top: '130%',
           },
           '100%': {
             opacity: '1',
-            // top: '100%',
             top: 'calc(100% + 4px)',
           },
         },
@@ -112,14 +108,32 @@ module.exports = {
         },
 
         'progress': {
-          '0%':{
-            // width: '100%'
+          '0%': {
           },
-          '100%':{
+          '100%': {
             width: '0%',
           },
         },
-        
+
+        'add-item': {
+
+        },
+
+        'remove-item': {
+          '50%':{
+            // transform: 'translateX(100%) scaleY(1)',
+            transform: 'scaleY(1)',
+            'transform-origin': 'top',
+            overflow: 'hidden'
+            
+          },
+          '100%': {
+            transform: 'scaleY(0)',
+            'transform-origin': 'top',
+            // 'max-height': '0',
+           
+          },
+        },
       },
 
       animation: {
@@ -132,6 +146,8 @@ module.exports = {
         'popdown': 'popdown 200ms ease-out forwards',
         'hide-up': 'hide-up 350ms ease-in-out forwards',
         'progress': 'progress 2s linear forwards',
+        'add-item': 'add-item 300ms ease-in-out forwards',
+        'remove-item': 'remove-item 500ms ease-in-out forwards',
       },
 
     },

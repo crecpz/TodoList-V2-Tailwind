@@ -100,7 +100,6 @@
   .status {
     @apply relative z-20 flex items-center w-full mb-2;
     @apply rounded-tl-2xl rounded-tr-2xl;
-    /* @apply shadow-[0_3px_8px_2px_#222]; */
   }
 
   .status__tab {
@@ -123,7 +122,6 @@
   .status__tab--current {
     @apply translate-y-[5px] shadow-[0_5px_0_0_#999,0_3px_1.5px_1.5px_#333,inset_0_0_3px_0px_#888] bg-tertiary;
   }
-
 
   .todo-item {
     @apply flex flex-col items-center px-6 py-2;
@@ -180,13 +178,21 @@
   .hide {
     @apply opacity-0 invisible;
   }
+
+  .todo-item--add-item {
+    
+  }
+
+  .todo-item--removing {
+    @apply animate-remove-item;
+  }
 }
 
 /* 
 以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
 
 
- @keyframes popup {
+@keyframes popup {
   70% {
     @apply bottom-[130%];
   }
