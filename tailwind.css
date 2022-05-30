@@ -2,39 +2,265 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes full-width {
-    0%{
-        max-width:0;
-    }100%{
-        max-width:100%;
-    }
+@media (hover: hover) {
+  .btn {
+    @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
+    @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
+  }
 }
 
+@layer base {
+  body.preload * {
+    animation-duration: 0s !important;
+    -webkit-animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
 
+  i {
+    @apply pointer-events-none;
+  }
 
-@layer components{
-    .btn{
-        @apply relative py-2 px-4 border border-primary transition-colors duration-200;
-        @apply after:content-[''] after:absolute after:-z-[1] after:left-1.5 after:top-1.5 after:border after:border-primary/80 after:w-full after:h-full after:transition-all after:duration-300;
-        @apply hover:bg-primary hover:text-black after:hover:left-1 after:hover:top-1;
-        @apply text-sm;
-    }    
-    
-    .btn--black{
-        @apply bg-black;
-    }
+  /* scrollbar setting */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-    .full-width{
-        animation:full-width 500ms ease forwards;
-    }
+  ::-webkit-scrollbar-track {
+    @apply bg-primary/30;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-black;
+  }
+
+  /* selection */
+
+  ::selection {
+    @apply bg-primary/30 /* WebKit/Blink Browsers */;
+  }
+
+  ::-moz-selection {
+    @apply bg-primary/30; /* Gecko Browsers */
+  }
+
+  /* dialog */
+
+  dialog {
+    @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md;
+  }
+
+  dialog[open] {
+    @apply animate-slide-up;
+  }
+
+  dialog[open]::backdrop {
+    @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
+  }
+
+  dialog[closing] {
+    @apply animate-slide-down;
+  }
+
+  dialog[closing]::backdrop {
+    @apply animate-fade-out;
+  }
+
+  /* textarea */
+  textarea {
+    @apply resize-none;
+  }
 }
 
-@layer utilities{
-    .hide{
-        @apply invisible opacity-0;
-    }
+@layer components {
+  .content {
+    @apply mx-auto px-4;
+  }
 
-    .show{
-        @apply visible opacity-100;
-    }
+  .btn {
+    @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
+    @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
+  }
+
+  .btn-normal {
+    @apply bg-[#f2e9e4] hover:bg-[#ffffff];
+  }
+
+  .btn-hightlight {
+    @apply bg-tertiary hover:bg-tertiary-dark;
+  }
+
+  .add-btn--active {
+  }
+
+  /* status new */
+  .status {
+    @apply relative z-20 flex items-center w-full mb-2;
+    @apply rounded-tl-2xl rounded-tr-2xl;
+    /* @apply shadow-[0_3px_8px_2px_#222]; */
+  }
+
+  .status__tab {
+    @apply relative z-20 flex items-center justify-around w-full py-3;
+    @apply bg-secondary  text-primary text-center font-bold tracking-[0.3em] shadow-[0_8px_0_0_#bbb,0_7px_3px_2px_#333,inset_0_0_2px_0_#888] rounded-sm transition-[box-shadow,transform] duration-100;
+  }
+
+  .status__tab + .status__tab {
+    @apply ml-[1px];
+  }
+
+  .status__tab-all {
+    @apply rounded-tl-xl;
+  }
+
+  .status__tab-completed {
+    @apply rounded-tr-xl;
+  }
+
+  .status__tab--current {
+    @apply translate-y-[5px] shadow-[0_5px_0_0_#999,0_3px_1.5px_1.5px_#333,inset_0_0_3px_0px_#888] bg-tertiary;
+  }
+
+
+  .todo-item {
+    @apply flex flex-col items-center px-6 py-2;
+  }
+
+  .todo-checkbox {
+    @apply appearance-none flex items-center justify-center flex-shrink-0 w-4 h-4 border-[1.5px] border-primary rounded-sm cursor-pointer;
+  }
+
+  .todo-checkbox:checked + .todo-text {
+    @apply line-through text-primary/60;
+  }
+
+  .todo-checkbox:checked::before {
+    @apply content-[''] w-2 h-2 bg-primary/80 rounded-sm;
+  }
+
+  .todo-text {
+    @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
+  }
+
+  .todo-text[contenteditable="true"] {
+    @apply border border-dashed border-current;
+  }
+
+  .todo-option-btn {
+    @apply p-2 ml-auto;
+  }
+
+  .todo-option-btn__dot {
+    @apply w-[3px] h-[3px] mb-0.5 rounded-full bg-primary pointer-events-none;
+  }
+
+  .todo-option-btn__dot:last-child {
+    @apply mb-0;
+  }
+
+  .todo-option {
+    @apply flex justify-start items-center w-full;
+    @apply transition-all duration-500;
+    @apply invisible max-h-0 opacity-0 mt-0 my-0;
+  }
+
+  .todo-option--open {
+    @apply max-h-[100px] visible opacity-100 mt-2 my-4;
+  }
 }
+
+@layer utilities {
+  .show {
+    @apply opacity-100 visible;
+  }
+
+  .hide {
+    @apply opacity-0 invisible;
+  }
+}
+
+/* 
+以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
+
+
+ @keyframes popup {
+  70% {
+    @apply bottom-[130%];
+  }
+
+  100% {
+    @apply opacity-100;
+    bottom: calc(100% + 4px);
+  }
+}
+
+How to prevent a CSS keyframe animation from running on page load?
+https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
+
+
+@keyframes retreat {
+  0% {
+    @apply bottom-full opacity-100;
+  }
+
+  30% {
+    @apply bottom-[130%];
+  }
+
+  90% {
+    @apply opacity-100;
+  }
+
+  100% {
+    @apply bottom-0 opacity-0;
+  }
+} 
+
+@keyframes fade-in {
+  0% {
+    @apply opacity-0;
+  }
+
+  100% {
+    @apply opacity-100;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    @apply opacity-100;
+  }
+
+  100% {
+    @apply opacity-0;
+  }
+} 
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+} 
+
+*/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-Hant-TW" class="h-full">
 
 <head>
     <meta charset="UTF-8">
@@ -7,55 +7,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todolist v2</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- google font  -->
+    <!-- google font : 'Source Code Pro' -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- google font : Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
         integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="font-space-mono bg-black text-primary">
-    <!-- container -->
-    <div class="container px-4 py-16">
+<body class="preload h-[100vh] font-Source-Code-Pro bg-primary text-secondary tracking-widest">
 
-        <div class="relative flex justify-between">
-            <h1 id="title" class="text-2xl">Todo List</h1>
-            <button id="menu-btn"><i class="fa-solid fa-bars text-2xl"></i></button>
+    <!-- content -->
+    <div class="content h-[100vh] flex flex-col justify-center">
 
-            <div id="menu" class="hide absolute left-0 -top-1.5">
-                <!-- search btn -->
-                <button id="search-btn" class="btn btn--black text-left">
-                    <i class="fa-solid fa-magnifying-glass mr-2"></i>Search
-                </button>
+        <!-- title -->
+        <h1 id="title" class="text-3xl text-center leading-[34px] pt-12 pb-20">Todo List</h1>
 
-                <button id="completed-btn" class="btn btn--black">
-                    <i class="fa-solid fa-trash mr-2"></i>Clear Completed
-                </button>
-                <!-- search wrapper -->
-                <div id="search-wrapper" class="absolute left-0 top-0 -z-[1] w-full text-sm opacity-0 invisible ">
-                    <div
-                        class="absolute left-0 top-0 z-[3] flex items-center w-full h-full border border-primary bg-black py-2 px-4">
-                        <i class="fa-solid fa-magnifying-glass mr-2 text-primary"></i>
-                        <input type="text" id="search-input" placeholder="Search"
-                            class="text-primary placeholder:text-primary outline-none bg-black w-full h-full">
-                        <i id="search-close-btn"
-                            class="text-primary-darken fa-solid fa-circle-xmark cursor-pointer text-base transition-colors duration-300 hover:text-primary"></i>
-                    </div>
-                    <div
-                        class="relative left-1.5 top-1.5 -z-[1] py-2 px-4  border border-primary/80 w-full h-full text-transparent">
-                        1
-                    </div>
-                </div>
+        <!-- status tabs -->
+        <div id="status" class="status">
+            <button id="all" class="status__tab status__tab-all status__tab--current">全部</button>
+            <button id="active" class="status__tab status__tab-active">待完成</button>
+            <button id="completed" class="status__tab status__tab-completed">已完成</button>
 
+            <!-- alert message -->
+            <!-- bg-[#78977e]/80 -->
+            <div id="message-wrapper" class="hide absolute top-2 left-1/2 z-10 -translate-x-1/2 w-full bg-black/80 text-center pt-3 pb-2.5 whitespace-nowrap text-secondary shadow-xl
+                before:content-[''] before:absolute before:-top-1 before:left-0 before:h-1 before:bg-secondary/70
+                ">
             </div>
         </div>
 
+        <!-- todo list -->
+        <ul id="todo-list"
+            class="relative overflow-y-scroll min-h-[50vh] bg-secondary transition-[padding] duration-300">
 
+            <!-- empty message -->
+            <div id="empty-msg"
+                class="relative flex flex-col items-center justify-between w-full h-full transition-opacity duration-300 pointer-events-none">
+                <div class="flex flex-col items-center my-auto">
+                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+                    <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
+                </div>
+                <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
+            </div>
 
+        </ul>
+
+        <!-- todo input -->
+        <div class="relative z-10 flex items-stretch border-t-4 border-t-primary">
+            <input type="text" placeholder="New task here!" id="todo-input"
+                class="font-bold w-full h-full bg-secondary  text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic">
+
+            <div class="flex items-center h-full bg-secondary pr-4 cursor-text">
+                <button id="clear-text-btn" class="hide flex bg-secondary transition-all duration-300 group">
+                    <i
+                        class="fa-solid fa-circle-xmark text-primary-light text-xl transition-colors duration-300 group-hover:text-primary"></i>
+                </button>
+            </div>
+
+            <button id="add-btn" class="bg-tertiary rounded-br-xl border-l-4 border-l-primary">
+                <i class="fa-solid fa-arrow-right px-6 py-4 text-primary"></i>
+            </button>
+
+            <!-- clear-btn-wrapper -->
+            <div id="clear-btn-wrapper"
+                class="absolute bottom-0 -z-10 flex justify-center items-center w-full p-4 opacity-0 bg-secondary shadow-primary/10 shadow-[0_-3px_15px_2px]">
+                <button id="clear-btn"
+                    class="btn btn-hightlight text-sm font-bold py-2 flex items-center justify-center w-full">
+                    <img class="w-3.5 mr-2" src="img/delete-complete.svg">清除已完成
+                </button>
+            </div>
+
+        </div>
     </div>
+
+
+    <dialog id="edit-dialog"></dialog>
+    <dialog id="confirm-dialog"></dialog>
+
 
     <script src="main.js"></script>
 </body>
