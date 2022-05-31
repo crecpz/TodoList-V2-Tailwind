@@ -7,6 +7,22 @@
     @apply hover:shadow-[0px_3px_0px_0] hover:translate-y-[2px];
     @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
   }
+
+  .btn-hightlight {
+    @apply hover:bg-tertiary-dark;
+  }
+
+  .btn-normal {
+    @apply hover:bg-white;
+  }
+
+  .status__tab {
+    @apply hover:bg-tertiary-dark;
+  }
+
+  .add-btn {
+    @apply hover:bg-tertiary-dark;
+  }
 }
 
 @layer base {
@@ -26,15 +42,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-primary/30;
+    /* @apply bg-primary/30; */
+    @apply bg-tertiary/80;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/50;
+    /* @apply bg-primary/50; */
+    @apply bg-tertiary/50;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-black;
+    @apply bg-tertiary-dark;
   }
 
   /* selection */
@@ -86,14 +104,11 @@
   }
 
   .btn-normal {
-    @apply bg-[#f2e9e4] hover:bg-[#ffffff];
+    @apply bg-[#f2e9e4];
   }
 
   .btn-hightlight {
-    @apply bg-tertiary hover:bg-tertiary-dark;
-  }
-
-  .add-btn--active {
+    @apply bg-tertiary;
   }
 
   /* status new */
@@ -103,8 +118,9 @@
   }
 
   .status__tab {
-    @apply relative z-20 flex items-center justify-around w-full py-3;
-    @apply bg-secondary  text-primary text-center font-bold tracking-[0.3em] shadow-[0_8px_0_0_#bbb,0_7px_3px_2px_#333,inset_0_0_2px_0_#888] rounded-sm transition-[box-shadow,transform] duration-100;
+    @apply relative z-20 flex items-center justify-around w-full py-3 transition-colors duration-500;
+    @apply bg-secondary  text-primary text-center font-bold tracking-[0.3em]  rounded-sm transition-[box-shadow,transform,background-color] duration-300;
+    @apply shadow-[0_8px_1px_0_#aaa];
   }
 
   .status__tab + .status__tab {
@@ -120,7 +136,8 @@
   }
 
   .status__tab--current {
-    @apply translate-y-[5px] shadow-[0_5px_0_0_#999,0_3px_1.5px_1.5px_#333,inset_0_0_3px_0px_#888] bg-tertiary;
+    @apply translate-y-[5px]  bg-tertiary;
+    @apply shadow-[0_5px_0px_0_#888];
   }
 
   .todo-item {
@@ -168,6 +185,14 @@
   .todo-option--open {
     @apply max-h-[100px] visible opacity-100 mt-2 my-4;
   }
+
+  .add-btn {
+    @apply bg-tertiary ml-1 rounded-br-xl shadow-[0_8px_0_0_#999] transition-all;
+  }
+
+  .add-btn--active {
+    @apply translate-y-[6px] shadow-[0_2px_0_0_#999];
+  }
 }
 
 @layer utilities {
@@ -179,94 +204,12 @@
     @apply opacity-0 invisible;
   }
 
-  .todo-item--add-item {
-    
-  }
-
   .todo-item--removing {
     @apply animate-remove-item;
   }
 }
 
-/* 
-以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
-
-
-@keyframes popup {
-  70% {
-    @apply bottom-[130%];
-  }
-
-  100% {
-    @apply opacity-100;
-    bottom: calc(100% + 4px);
-  }
-}
-
+/*
 How to prevent a CSS keyframe animation from running on page load?
 https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-
-
-@keyframes retreat {
-  0% {
-    @apply bottom-full opacity-100;
-  }
-
-  30% {
-    @apply bottom-[130%];
-  }
-
-  90% {
-    @apply opacity-100;
-  }
-
-  100% {
-    @apply bottom-0 opacity-0;
-  }
-} 
-
-@keyframes fade-in {
-  0% {
-    @apply opacity-0;
-  }
-
-  100% {
-    @apply opacity-100;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    @apply opacity-100;
-  }
-
-  100% {
-    @apply opacity-0;
-  }
-} 
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
-
-@keyframes slide-down {
-  from {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-} 
-
 */

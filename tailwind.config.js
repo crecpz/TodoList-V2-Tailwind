@@ -55,6 +55,7 @@ module.exports = {
 
         'popup': {
           '70%': {
+            
             bottom: '130%',
           },
           '100%': {
@@ -77,6 +78,7 @@ module.exports = {
           '100%': {
             bottom: '0',
             opacity: '0',
+            visibility: 'hidden',
           },
         },
 

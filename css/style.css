@@ -440,16 +440,18 @@ i {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: rgb(64 83 98 / 0.3);
+  /* @apply bg-primary/30; */
+  background-color: rgb(255 211 141 / 0.8);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(64 83 98 / 0.5);
+  /* @apply bg-primary/50; */
+  background-color: rgb(255 211 141 / 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  background-color: rgb(255 200 90 / var(--tw-bg-opacity));
 }
 
 /* selection */
@@ -703,22 +705,9 @@ textarea {
   background-color: rgb(242 233 228 / var(--tw-bg-opacity));
 }
 
-.btn-normal:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .btn-hightlight {
   --tw-bg-opacity: 1;
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
-}
-
-.btn-hightlight:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 200 90 / var(--tw-bg-opacity));
-}
-
-.add-btn--active {
 }
 
 /* status new */
@@ -743,6 +732,9 @@ textarea {
   justify-content: space-around;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   border-radius: 0.125rem;
   --tw-bg-opacity: 1;
   background-color: rgb(238 229 220 / var(--tw-bg-opacity));
@@ -751,12 +743,12 @@ textarea {
   letter-spacing: 0.3em;
   --tw-text-opacity: 1;
   color: rgb(64 83 98 / var(--tw-text-opacity));
-  --tw-shadow: 0 8px 0 0 #bbb,0 7px 3px 2px #333,inset 0 0 2px 0 #888;
-  --tw-shadow-colored: 0 8px 0 0 var(--tw-shadow-color), 0 7px 3px 2px var(--tw-shadow-color), inset 0 0 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  transition-property: box-shadow,transform;
+  transition-property: box-shadow,transform,background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 100ms;
+  transition-duration: 300ms;
+  --tw-shadow: 0 8px 1px 0 #aaa;
+  --tw-shadow-colored: 0 8px 1px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .status__tab + .status__tab {
@@ -776,8 +768,8 @@ textarea {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-bg-opacity: 1;
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
-  --tw-shadow: 0 5px 0 0 #999,0 3px 1.5px 1.5px #333,inset 0 0 3px 0px #888;
-  --tw-shadow-colored: 0 5px 0 0 var(--tw-shadow-color), 0 3px 1.5px 1.5px var(--tw-shadow-color), inset 0 0 3px 0px var(--tw-shadow-color);
+  --tw-shadow: 0 5px 0px 0 #888;
+  --tw-shadow-colored: 0 5px 0px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -895,6 +887,27 @@ textarea {
   opacity: 1;
 }
 
+.add-btn {
+  margin-left: 0.25rem;
+  border-bottom-right-radius: 0.75rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 211 141 / var(--tw-bg-opacity));
+  --tw-shadow: 0 8px 0 0 #999;
+  --tw-shadow-colored: 0 8px 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.add-btn--active {
+  --tw-translate-y: 6px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-shadow: 0 2px 0 0 #999;
+  --tw-shadow-colored: 0 2px 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -942,6 +955,10 @@ textarea {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .mr-2 {
@@ -1127,6 +1144,7 @@ textarea {
   100% {
     bottom: 0;
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -1147,6 +1165,7 @@ textarea {
   100% {
     bottom: 0;
     opacity: 0;
+    visibility: hidden;
   }
 }
 
@@ -1249,10 +1268,6 @@ textarea {
   overflow-x: hidden;
 }
 
-.overflow-x-scroll {
-  overflow-x: scroll;
-}
-
 .overflow-y-scroll {
   overflow-y: scroll;
 }
@@ -1269,34 +1284,12 @@ textarea {
   border-bottom-left-radius: 0.75rem;
 }
 
-.rounded-br-xl {
-  border-bottom-right-radius: 0.75rem;
-}
-
 .border-2 {
   border-width: 2px;
 }
 
-.border-t-4 {
-  border-top-width: 4px;
-}
-
-.border-l-4 {
-  border-left-width: 4px;
-}
-
 .border-primary\/50 {
   border-color: rgb(64 83 98 / 0.5);
-}
-
-.border-t-primary {
-  --tw-border-opacity: 1;
-  border-top-color: rgb(64 83 98 / var(--tw-border-opacity));
-}
-
-.border-l-primary {
-  --tw-border-opacity: 1;
-  border-left-color: rgb(64 83 98 / var(--tw-border-opacity));
 }
 
 .bg-primary {
@@ -1315,11 +1308,6 @@ textarea {
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: rgb(238 229 220 / var(--tw-bg-opacity));
-}
-
-.bg-tertiary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 211 141 / var(--tw-bg-opacity));
 }
 
 .p-4 {
@@ -1444,6 +1432,12 @@ textarea {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-\[0_8px_0_0_\#999\] {
+  --tw-shadow: 0 8px 0 0 #999;
+  --tw-shadow-colored: 0 8px 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-\[0_-3px_15px_2px\] {
   --tw-shadow: 0 -3px 15px 2px;
   --tw-shadow-colored: 0 -3px 15px 2px var(--tw-shadow-color);
@@ -1526,89 +1520,31 @@ textarea {
     --tw-shadow-colored: 0 0 0 0 var(--tw-shadow-color);
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   }
-}
 
-/* 
-以下的@keyframes 已經寫到tailwind.config.js裡面了，要刪也可以
-
-
-@keyframes popup {
-  70% {
-    @apply bottom-[130%];
+  .btn-hightlight:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 200 90 / var(--tw-bg-opacity));
   }
 
-  100% {
-    @apply opacity-100;
-    bottom: calc(100% + 4px);
+  .btn-normal:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  }
+
+  .status__tab:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 200 90 / var(--tw-bg-opacity));
+  }
+
+  .add-btn:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 200 90 / var(--tw-bg-opacity));
   }
 }
 
+/*
 How to prevent a CSS keyframe animation from running on page load?
 https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-
-
-@keyframes retreat {
-  0% {
-    @apply bottom-full opacity-100;
-  }
-
-  30% {
-    @apply bottom-[130%];
-  }
-
-  90% {
-    @apply opacity-100;
-  }
-
-  100% {
-    @apply bottom-0 opacity-0;
-  }
-} 
-
-@keyframes fade-in {
-  0% {
-    @apply opacity-0;
-  }
-
-  100% {
-    @apply opacity-100;
-  }
-}
-
-@keyframes fade-out {
-  0% {
-    @apply opacity-100;
-  }
-
-  100% {
-    @apply opacity-0;
-  }
-} 
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-}
-
-@keyframes slide-down {
-  from {
-    opacity: 1;
-    transform: translateY(0%);
-  }
-
-  to {
-    opacity: 0;
-    transform: translateY(50%);
-  }
-} 
-
 */
 
 .placeholder\:italic::-moz-placeholder {

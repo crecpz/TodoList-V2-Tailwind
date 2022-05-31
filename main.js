@@ -21,14 +21,13 @@ let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
 /* Todo Input */
 
-//  adding new todo by {click addBtn} & {press Enter}
+//  透過'滑鼠點擊addBtn'或'鍵盤按下Enter'來新增todo-item
 const todoInput = document.querySelector('#todo-input')
 const addBtn = document.querySelector('#add-btn')
 
-// {click addBtn}
+// 滑鼠點擊addBtn
 addBtn.addEventListener('mousedown', e => {
-    addBtn.classList.add('add-btn--active')
-    addBtn.style.animation = '';
+    addBtn.classList.add('add-btn--active');
 
     // 防止使用者壓著滑鼠不放移出範圍產生的按鈕卡住問題
     addBtn.addEventListener('mouseout', () => {
@@ -41,10 +40,10 @@ addBtn.addEventListener('mouseup', e => {
     addBtn.classList.remove('add-btn--active')
 })
 
-
 addBtn.addEventListener('click', addNewTodo)
 
-// {press Enter}
+
+// 鍵盤按下Enter
 todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
         addBtn.classList.add('add-btn--active')
@@ -251,7 +250,6 @@ function renderTodo(currentTab) {
         }
     })
 
-    // clearBtnController()
 
     if (isAnyItemCompleted()) {
         showClearBtn()
