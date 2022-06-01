@@ -20,6 +20,10 @@
     @apply hover:bg-tertiary-dark;
   }
 
+  .todo-item {
+    @apply hover:bg-primary/10;
+  }
+
   .add-btn {
     @apply hover:bg-tertiary-dark;
   }
@@ -36,18 +40,20 @@
     @apply pointer-events-none;
   }
 
-  /* scrollbar setting */
+
+
+
+  /* --------- scrollbar setting --------- */
+
   ::-webkit-scrollbar {
     width: 10px;
   }
 
   ::-webkit-scrollbar-track {
-    /* @apply bg-primary/30; */
     @apply bg-tertiary/80;
   }
 
   ::-webkit-scrollbar-thumb {
-    /* @apply bg-primary/50; */
     @apply bg-tertiary/50;
   }
 
@@ -55,7 +61,10 @@
     @apply bg-tertiary-dark;
   }
 
-  /* selection */
+
+
+
+  /* --------- selection --------- */
 
   ::selection {
     @apply bg-primary/30 /* WebKit/Blink Browsers */;
@@ -65,7 +74,10 @@
     @apply bg-primary/30; /* Gecko Browsers */
   }
 
-  /* dialog */
+
+
+
+  /* --------- dialog --------- */
 
   dialog {
     @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md;
@@ -87,16 +99,22 @@
     @apply animate-fade-out;
   }
 
-  /* textarea */
   textarea {
     @apply resize-none;
   }
 }
 
+
+
+
+
 @layer components {
   .content {
-    @apply mx-auto px-4;
+    @apply mx-auto px-4 py-8 max-w-xl;
   }
+
+
+  /* 最大寬度設定600px應該可以 */
 
   .btn {
     @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
@@ -111,20 +129,25 @@
     @apply bg-tertiary;
   }
 
-  /* status new */
+
+
+
+  /* --------- status --------- */
+
   .status {
     @apply relative z-20 flex items-center w-full mb-2;
     @apply rounded-tl-2xl rounded-tr-2xl;
+    @apply xs:text-lg;
   }
 
   .status__tab {
     @apply relative z-20 flex items-center justify-around w-full py-3 transition-colors duration-500;
-    @apply bg-secondary  text-primary text-center font-bold tracking-[0.3em]  rounded-sm transition-[box-shadow,transform,background-color] duration-300;
+    @apply bg-secondary text-primary text-center font-bold tracking-[0.3em]  rounded-sm transition-[box-shadow,transform,background-color] duration-300;
     @apply shadow-[0_8px_1px_0_#aaa];
   }
 
   .status__tab + .status__tab {
-    @apply ml-[1px];
+    @apply ml-0.5;
   }
 
   .status__tab-all {
@@ -136,12 +159,18 @@
   }
 
   .status__tab--current {
-    @apply translate-y-[5px]  bg-tertiary;
-    @apply shadow-[0_5px_0px_0_#888];
+    @apply translate-y-[5px] bg-tertiary;
+    @apply shadow-[0_5px_0px_0_#999];
   }
 
+
+
+
+  /* ---------- todo-item  ----------*/
+
   .todo-item {
-    @apply flex flex-col items-center px-6 py-2;
+    /* @apply flex flex-col items-center px-6 py-2 border-b border-primary/10 transition-colors duration-300; */
+    @apply flex flex-col items-center px-6 border-b border-primary/10 transition-colors duration-300;
   }
 
   .todo-checkbox {
@@ -158,6 +187,7 @@
 
   .todo-text {
     @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
+    @apply xs:text-lg;
   }
 
   .todo-text[contenteditable="true"] {
@@ -186,6 +216,11 @@
     @apply max-h-[100px] visible opacity-100 mt-2 my-4;
   }
 
+
+
+
+  /* ---------- add-btn ------------ */
+
   .add-btn {
     @apply bg-tertiary ml-1 rounded-br-xl shadow-[0_8px_0_0_#999] transition-all;
   }
@@ -194,6 +229,9 @@
     @apply translate-y-[6px] shadow-[0_2px_0_0_#999];
   }
 }
+
+
+
 
 @layer utilities {
   .show {

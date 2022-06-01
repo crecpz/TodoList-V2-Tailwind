@@ -14,6 +14,11 @@ module.exports = {
         // 'tertiary-dark':'#efc881',
       },
 
+      screens: {
+        'xs': '576px',
+      },
+
+    
       fontFamily: {
         'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Sans TC','Noto Serif TC'",
         'Font-Awesome': "'Font Awesome 5 Free'",

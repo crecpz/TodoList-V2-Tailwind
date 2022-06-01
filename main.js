@@ -38,6 +38,8 @@ addBtn.addEventListener('mousedown', e => {
 addBtn.addEventListener('mouseup', e => {
     addNewTodo()
     addBtn.classList.remove('add-btn--active')
+
+    clearTextBtn.classList.add('hide');
 })
 
 addBtn.addEventListener('click', addNewTodo)
@@ -48,7 +50,6 @@ todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
         addBtn.classList.add('add-btn--active')
     }
-    addBtn.style.animation = '';
 })
 
 todoInput.addEventListener('keyup', e => {
@@ -56,6 +57,8 @@ todoInput.addEventListener('keyup', e => {
         addNewTodo()
         addBtn.classList.remove('add-btn--active')
     }
+
+    clearTextBtn.classList.add('hide');
 })
 
 function addNewTodo() {
@@ -135,35 +138,34 @@ function showSuccessAddedMsg() {
 function showMsg(msgContent) {
     // msgWrapper 
     msgWrapper.innerHTML = msgContent;
-    // console.log(msgWrapper)
 }
 
+
+
+/* clear text button */
 const clearTextBtn = document.querySelector('#clear-text-btn');
 const clearTextBtnWrapper = clearTextBtn.parentElement;
 clearTextBtnWrapper.addEventListener('click', () => {
+    // clearTextBtnWrapper是額外做出來的區塊，所以點它並不會使input聚焦，要手動增加點，使他點了之後可以聚焦input
     todoInput.focus();
 })
 
 todoInput.addEventListener('keyup', clearTextBtnController)
+
 function clearTextBtnController() {
     if (todoInput.value !== '') {
         clearTextBtn.classList.remove('hide');
-        clearTextBtn.classList.add('show');
     } else {
-        clearTextBtn.classList.remove('show');
         clearTextBtn.classList.add('hide');
     }
 }
 
 clearTextBtn.addEventListener('click', () => {
-    clearTextBtn.classList.remove('show');
-    clearTextBtn.classList.add('hide');
-    clearText()
+    clearTextBtn.classList.toggle('hide');
+    todoInput.value = '';
 })
 
-function clearText() {
-    todoInput.value = '';
-}
+
 
 
 
@@ -225,7 +227,7 @@ function renderTodo(currentTab) {
         if (currentTab === data.status || currentTab === 'all') {
             todoItems +=
                 `<li class="todo-item" id="${index}" data-status="${data.status}">
-                    <label class="flex items-center justify-between w-full cursor-pointer">
+                    <label class="flex items-center justify-between w-full py-2 cursor-pointer">
                         <input type="checkbox" class="todo-checkbox" ${checkbox}>
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
@@ -360,11 +362,11 @@ todoList.addEventListener('click', e => {
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
 
-            removingItem()
-
-            function removingItem() {
-                todoItem.classList.add('animate-remove-item')
-            }
+            /* 滑走動畫試寫 */
+            // removingItem()
+            // function removingItem() {
+            //     todoItem.classList.add('animate-remove-item')
+            // }
 
             if (isAnyItemCompleted()) {
                 showClearBtn()

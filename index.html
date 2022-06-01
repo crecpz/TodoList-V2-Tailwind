@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todolist v2</title>
     <link rel="stylesheet" href="css/style.css">
+
     <!-- google font : 'Source Code Pro' -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,10 +28,10 @@
 <body class="preload h-[100vh] font-Source-Code-Pro bg-primary text-secondary tracking-widest">
 
     <!-- content -->
-    <div class="content h-[100vh] flex flex-col justify-center">
+    <div class="content h-[100vh] flex flex-col justify-end">
 
         <!-- title -->
-        <h1 id="title" class="text-3xl text-center leading-[34px] pt-12 pb-20">Todo List</h1>
+        <h1 id="title" class="text-3xl text-center leading-[34px] my-auto">Todo List</h1>
 
         <!-- status tabs -->
         <div id="status" class="status">
@@ -48,7 +49,7 @@
 
         <!-- todo list -->
         <ul id="todo-list"
-            class="relative overflow-y-scroll overflow-x-hidden min-h-[50vh] bg-secondary transition-[padding] duration-300">
+            class="relative overflow-y-scroll overflow-x-hidden max-h-[60vh] h-full  bg-secondary transition-[padding] duration-300">
 
             <!-- empty message -->
             <div id="empty-msg"
@@ -65,7 +66,7 @@
         <!-- todo input -->
         <div class="relative z-10 flex items-stretch mt-1">
             <input type="text" placeholder="New task here!" id="todo-input"
-                class="font-bold w-full h-full bg-secondary  text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic shadow-[0_8px_0_0_#999]">
+                class="font-bold w-full h-full bg-secondary  text-primary outline-none p-5 rounded-bl-xl placeholder:text-primary/70 placeholder:italic shadow-[0_8px_0_0_#999] xs:text-lg">
 
             <div class="flex items-center h-full bg-secondary pr-4 cursor-text shadow-[0_8px_0_0_#999]">
                 <button id="clear-text-btn" class="hide flex bg-secondary transition-all duration-300 group">
@@ -74,8 +75,7 @@
                 </button>
             </div>
 
-            <button id="add-btn"
-                class="add-btn">
+            <button id="add-btn" class="add-btn">
                 <i class="fa-solid fa-arrow-right px-6 py-4 text-primary"></i>
             </button>
 
@@ -83,19 +83,15 @@
             <div id="clear-btn-wrapper"
                 class="absolute bottom-0 -z-10 flex justify-center items-center w-full p-4 opacity-0 bg-secondary shadow-primary/10 shadow-[0_-3px_15px_2px]">
                 <button id="clear-btn"
-                    class="btn btn-hightlight text-sm font-bold py-2 flex items-center justify-center w-full">
+                    class="btn btn-hightlight text-sm font-bold py-2 flex items-center justify-center w-full xs:text-lg">
                     <img class="w-3.5 mr-2" src="img/delete-complete.svg">清除已完成
                 </button>
             </div>
 
         </div>
     </div>
-
-
     <dialog id="edit-dialog"></dialog>
     <dialog id="confirm-dialog"></dialog>
-
-
     <script src="main.js"></script>
 </body>
 
