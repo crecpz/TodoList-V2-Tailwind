@@ -46,19 +46,22 @@
   /* --------- scrollbar setting --------- */
 
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-tertiary/80;
+    @apply bg-primary/50;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-tertiary/50;
+    @apply bg-tertiary;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-tertiary-dark;
+    @apply bg-[#d0ab6e];
+  }
+  ::-webkit-scrollbar-thumb:active {
+    @apply bg-[#7e622e];
   }
 
 
@@ -80,7 +83,7 @@
   /* --------- dialog --------- */
 
   dialog {
-    @apply w-full max-w-[80%] p-8 bg-secondary shadow-xl rounded-md;
+    @apply w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
   }
 
   dialog[open] {
@@ -207,13 +210,13 @@
   }
 
   .todo-option {
-    @apply flex justify-start items-center w-full;
+    @apply flex justify-end items-center w-full;
+    @apply invisible max-h-0 opacity-0 mb-0 pr-2;
     @apply transition-all duration-500;
-    @apply invisible max-h-0 opacity-0 mt-0 my-0;
   }
 
   .todo-option--open {
-    @apply max-h-[100px] visible opacity-100 mt-2 my-4;
+    @apply max-h-[100px] visible opacity-100 mb-7;
   }
 
 
@@ -245,6 +248,12 @@
   .todo-item--removing {
     @apply animate-remove-item;
   }
+
+  .scrollbar {
+    scrollbar-color: rgb(255,211,141) rgba(64,83,98,0.5);
+    scrollbar-width: thin;
+  }
+
 }
 
 /*

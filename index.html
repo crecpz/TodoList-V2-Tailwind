@@ -17,15 +17,17 @@
     <!-- google font : Noto Sans TC -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- font awesome -->
+    <!-- font awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
         integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
-<body class="preload h-[100vh] font-Source-Code-Pro bg-primary text-secondary tracking-widest">
+
+<body class="preload h-[100vh] font-main-font bg-primary text-secondary tracking-widest">
 
     <!-- content -->
     <div class="content h-[100vh] flex flex-col justify-end">
@@ -42,14 +44,14 @@
             <!-- alert message -->
             <!-- bg-[#78977e]/80 -->
             <div id="message-wrapper" class="hide absolute top-2 left-1/2 z-10 -translate-x-1/2 w-full bg-black/80 text-center pt-3 pb-2.5 whitespace-nowrap text-secondary shadow-xl
-                before:content-[''] before:absolute before:-top-1 before:left-0 before:h-1 before:bg-secondary/70
-                ">
+                before:content-[''] before:absolute before:-top-1 before:left-0 before:h-1 before:bg-secondary/70">
             </div>
         </div>
 
+
         <!-- todo list -->
         <ul id="todo-list"
-            class="relative overflow-y-scroll overflow-x-hidden max-h-[60vh] h-full  bg-secondary transition-[padding] duration-300">
+            class="relative overflow-y-scroll overflow-x-hidden max-h-[60vh] h-full  bg-secondary transition-[padding] duration-300 scrollbar">
 
             <!-- empty message -->
             <div id="empty-msg"
@@ -60,13 +62,12 @@
                 </div>
                 <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
             </div>
-
         </ul>
 
         <!-- todo input -->
         <div class="relative z-10 flex items-stretch mt-1">
             <input type="text" placeholder="New task here!" id="todo-input"
-                class="font-bold w-full h-full bg-secondary  text-primary outline-none p-5 rounded-bl-xl placeholder:text-primary/70 placeholder:italic shadow-[0_8px_0_0_#999] xs:text-lg">
+                class="font-bold w-full h-full bg-secondary text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic shadow-[0_8px_0_0_#999] xs:text-lg">
 
             <div class="flex items-center h-full bg-secondary pr-4 cursor-text shadow-[0_8px_0_0_#999]">
                 <button id="clear-text-btn" class="hide flex bg-secondary transition-all duration-300 group">
@@ -76,7 +77,7 @@
             </div>
 
             <button id="add-btn" class="add-btn">
-                <i class="fa-solid fa-arrow-right px-6 py-4 text-primary"></i>
+                <i class="fa-solid fa-arrow-right px-7 text-primary"></i>
             </button>
 
             <!-- clear-btn-wrapper -->
@@ -90,6 +91,7 @@
 
         </div>
     </div>
+
     <dialog id="edit-dialog"></dialog>
     <dialog id="confirm-dialog"></dialog>
     <script src="main.js"></script>

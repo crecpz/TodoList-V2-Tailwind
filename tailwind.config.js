@@ -20,7 +20,9 @@ module.exports = {
 
     
       fontFamily: {
-        'Source-Code-Pro': "'Source Code Pro', monospace,'Noto Sans TC','Noto Serif TC'",
+        // 'zh-font': "'Noto Sans TC'",
+        // 'en-font': "'Source Code Pro'",
+        'main-font': "'Source Code Pro','Noto Sans TC'",
         'Font-Awesome': "'Font Awesome 5 Free'",
       },
 

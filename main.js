@@ -227,7 +227,7 @@ function renderTodo(currentTab) {
         if (currentTab === data.status || currentTab === 'all') {
             todoItems +=
                 `<li class="todo-item" id="${index}" data-status="${data.status}">
-                    <label class="flex items-center justify-between w-full py-2 cursor-pointer">
+                    <label class="flex items-center justify-between w-full py-3 cursor-pointer xs:py-4">
                         <input type="checkbox" class="todo-checkbox" ${checkbox}>
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
