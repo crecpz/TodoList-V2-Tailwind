@@ -33,7 +33,7 @@
     <div class="content h-[100vh] flex flex-col justify-end">
 
         <!-- title -->
-        <h1 id="title" class="text-3xl text-center leading-[34px] my-auto">Todo List</h1>
+        <h1 id="title" class="text-3xl text-center leading-[34px] my-auto xs:text-4xl">Todo List</h1>
 
         <!-- status tabs -->
         <div id="status" class="status">
@@ -67,16 +67,17 @@
         <!-- todo input -->
         <div class="relative z-10 flex items-stretch mt-1">
             <input type="text" placeholder="New task here!" id="todo-input"
-                class="font-bold w-full h-full bg-secondary text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic shadow-[0_8px_0_0_#999] xs:text-lg">
+                class="font-bold w-full h-full bg-secondary text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic xs:text-lg">
 
             <!-- clear text btn -->
-            <button id="clear-text-btn" class="hide absolute top-1/2 right-24 -translate-y-1/2 transition-all duration-300">
+            <button id="clear-text-btn"
+                class="hide absolute top-1/2 right-24 -translate-y-1/2 transition-all duration-300">
                 <i
                     class="fa-solid fa-circle-xmark text-primary-light text-xl transition-colors duration-300 group-hover:text-primary"></i>
             </button>
 
             <button id="add-btn" class="add-btn">
-                <i class="fa-solid fa-arrow-right px-7 text-primary"></i>
+                <i class="fa-solid fa-arrow-right px-6 text-primary"></i>
             </button>
 
             <!-- clear-btn-wrapper -->
@@ -84,7 +85,7 @@
                 class="absolute bottom-0 -z-10 flex justify-center items-center w-full p-4 opacity-0 bg-secondary shadow-primary/10 shadow-[0_-3px_15px_2px]">
                 <button id="clear-btn"
                     class="btn btn-hightlight text-sm font-bold py-2 flex items-center justify-center w-full xs:text-lg">
-                    <img class="w-3.5 mr-2" src="img/delete-complete.svg">清除已完成
+                    <img class="w-3.5 mr-2 xs:w-5" src="img/delete-complete.svg">清除已完成
                 </button>
             </div>
 

@@ -915,6 +915,15 @@ textarea {
   opacity: 1;
 }
 
+/* edit btn & remove btn */
+
+@media (min-width: 576px) {
+  .edit-btn, .remove-btn {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
 /* ---------- add-btn ------------ */
 
 .add-btn {
@@ -922,20 +931,17 @@ textarea {
   border-bottom-right-radius: 0.75rem;
   --tw-bg-opacity: 1;
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
-  --tw-shadow: 0 8px 0 0 #999;
-  --tw-shadow-colored: 0 8px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  transition-property: all;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+  transition-duration: 100ms;
 }
 
 .add-btn--active {
-  --tw-translate-y: 6px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  --tw-shadow: 0 2px 0 0 #999;
-  --tw-shadow-colored: 0 2px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  background-color: rgb(255 200 90 / 0.8) !important;
 }
 
 .pointer-events-none {
@@ -962,24 +968,16 @@ textarea {
   bottom: -0px;
 }
 
-.bottom-0 {
-  bottom: 0px;
-}
-
 .top-1\/2 {
   top: 50%;
 }
 
-.right-2 {
-  right: 0.5rem;
-}
-
-.right-10 {
-  right: 2.5rem;
-}
-
 .right-24 {
   right: 6rem;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .z-10 {
@@ -1068,17 +1066,8 @@ textarea {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.translate-y-1\/2 {
-  --tw-translate-y: 50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1292,10 +1281,6 @@ textarea {
           animation: remove-item 500ms ease-in-out forwards;
 }
 
-.cursor-text {
-  cursor: text;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -1382,9 +1367,9 @@ textarea {
   padding: 0.5rem;
 }
 
-.px-7 {
-  padding-left: 1.75rem;
-  padding-right: 1.75rem;
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .py-2 {
@@ -1407,10 +1392,6 @@ textarea {
 
 .pb-2 {
   padding-bottom: 0.5rem;
-}
-
-.pr-4 {
-  padding-right: 1rem;
 }
 
 .text-center {
@@ -1488,12 +1469,6 @@ textarea {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-\[0_8px_0_0_\#999\] {
-  --tw-shadow: 0 8px 0 0 #999;
-  --tw-shadow-colored: 0 8px 0 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-\[0_-3px_15px_2px\] {
   --tw-shadow: 0 -3px 15px 2px;
   --tw-shadow-colored: 0 -3px 15px 2px var(--tw-shadow-color);
@@ -1544,18 +1519,6 @@ textarea {
   transition-duration: 300ms;
 }
 
-.duration-700 {
-  transition-duration: 700ms;
-}
-
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
-.duration-500 {
-  transition-duration: 500ms;
-}
-
 .show {
   visibility: visible;
   opacity: 1;
@@ -1567,7 +1530,7 @@ textarea {
 }
 
 .scrollbar {
-  scrollbar-color: rgb(255,211,141) rgba(64,83,98,0.5);
+  scrollbar-color: rgb(255, 211, 141) rgba(64, 83, 98, 0.5);
   scrollbar-width: thin;
 }
 
@@ -1623,10 +1586,6 @@ textarea {
 How to prevent a CSS keyframe animation from running on page load?
 https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
 */
-
-.first-letter\:absolute::first-letter {
-  position: absolute;
-}
 
 .placeholder\:italic::-moz-placeholder {
   font-style: italic;
@@ -1721,9 +1680,18 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
 }
 
 @media (min-width: 576px) {
+  .xs\:w-5 {
+    width: 1.25rem;
+  }
+
   .xs\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+
+  .xs\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .xs\:text-lg {
