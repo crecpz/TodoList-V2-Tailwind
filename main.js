@@ -239,7 +239,7 @@ function renderTodo(currentTab) {
 
                     <div class="todo-option">
                         <button class="edit-btn btn btn-normal mr-4">
-                          <i class="fa-solid fa-pen-to-square mr-2"></i>編輯
+                            <i class="fa-solid fa-pen-to-square mr-2"></i>編輯
                         </button>
                         <button class="remove-btn btn btn-hightlight">
                             <i class="fa-solid fa-trash mr-2"></i>刪除
@@ -351,14 +351,40 @@ todoList.addEventListener('click', e => {
     if (e.target.id !== 'empty-msg' && e.target.closest('li')) {
 
         // 取得點按的目標todoItem
-        const todoItem = e.target.closest('li')
+        const todoItem = e.target.closest('li');
 
         /* 展開todo-option */
 
         // 如果使用者點按todo-option-btn，使其展開todo-option
+
         const todoOption = todoItem.querySelector('.todo-option');
+        
         if (e.target.classList.value === 'todo-option-btn') {
-            todoOption.classList.toggle('todo-option--open')
+            let currentOpenItem = todoItem;
+
+            
+
+            console.log(currentOpenItem)
+            
+
+            // 去除所有todo-option的open狀態
+
+            todoOption.classList.toggle('todo-option--open');
+            // document.querySelectorAll('.todo-option')
+            //     .forEach(todoOption => {
+            //         todoOption.classList.remove('todo-option--open');
+            //     });
+
+            
+
+
+
+            // 去除所有todoItem上的背景顏色
+            document.querySelectorAll('.todo-item')
+                .forEach(todoItem => {
+                    todoItem.classList.remove('todo-item--todo-option-open')
+                })
+            todoItem.classList.toggle('todo-item--todo-option-open')
         }
 
         /* 控制checkbox狀態 */

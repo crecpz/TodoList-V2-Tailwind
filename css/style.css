@@ -722,7 +722,7 @@ textarea {
 .status {
   position: relative;
   z-index: 20;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   display: flex;
   width: 100%;
   align-items: center;
@@ -760,13 +760,10 @@ textarea {
   transition-property: box-shadow,transform,background-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
-  --tw-shadow: 0 8px 1px 0 #aaa;
-  --tw-shadow-colored: 0 8px 1px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .status__tab + .status__tab {
-  margin-left: 0.125rem;
+  margin-left: 0.25rem;
 }
 
 .status__tab-all {
@@ -778,13 +775,8 @@ textarea {
 }
 
 .status__tab--current {
-  --tw-translate-y: 5px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   --tw-bg-opacity: 1;
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
-  --tw-shadow: 0 5px 0px 0 #999;
-  --tw-shadow-colored: 0 5px 0px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 /* ---------- todo-item  ----------*/
@@ -803,6 +795,10 @@ textarea {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
+}
+
+.todo-item--todo-option-open {
+  background-color: rgb(64 83 98 / 0.1);
 }
 
 .todo-checkbox {

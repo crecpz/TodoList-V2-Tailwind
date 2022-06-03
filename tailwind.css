@@ -121,7 +121,7 @@
   /* --------- status --------- */
 
   .status {
-    @apply relative z-20 flex items-center w-full mb-2;
+    @apply relative z-20 flex items-center w-full mb-1;
     @apply rounded-tl-2xl rounded-tr-2xl;
     @apply xs:text-lg;
   }
@@ -129,11 +129,10 @@
   .status__tab {
     @apply relative z-20 flex items-center justify-around w-full py-3 transition-colors duration-500;
     @apply bg-secondary text-primary text-center font-bold tracking-[0.3em]  rounded-sm transition-[box-shadow,transform,background-color] duration-300;
-    @apply shadow-[0_8px_1px_0_#aaa];
   }
 
   .status__tab + .status__tab {
-    @apply ml-0.5;
+    @apply ml-1;
   }
 
   .status__tab-all {
@@ -145,8 +144,7 @@
   }
 
   .status__tab--current {
-    @apply translate-y-[5px] bg-tertiary;
-    @apply shadow-[0_5px_0px_0_#999];
+    @apply bg-tertiary;
   }
 
   /* ---------- todo-item  ----------*/
@@ -154,6 +152,10 @@
   .todo-item {
     /* @apply flex flex-col items-center px-6 py-2 border-b border-primary/10 transition-colors duration-300; */
     @apply flex flex-col items-center px-6 border-b border-primary/10 transition-colors duration-300;
+  }
+
+  .todo-item--todo-option-open {
+    @apply bg-primary/10;
   }
 
   .todo-checkbox {
