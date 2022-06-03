@@ -20,8 +20,6 @@ module.exports = {
 
     
       fontFamily: {
-        // 'zh-font': "'Noto Sans TC'",
-        // 'en-font': "'Source Code Pro'",
         'main-font': "'Source Code Pro','Noto Sans TC'",
         'Font-Awesome': "'Font Awesome 5 Free'",
       },
