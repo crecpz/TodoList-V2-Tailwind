@@ -14,6 +14,25 @@ setTimeout(function () {
 }, 500);
 
 
+/*
+1. 如何讓他在載入的時候
+*/
+
+const loader = document.querySelector('#loader');
+// loader
+
+const wordsWrapper = document.querySelector('#words-wrapper');
+[...wordsWrapper.children].forEach((word, index, array) => {
+    word.classList.add('animate-jumping-words');
+    array[index + 1].style.animationDelay = (index + 1) + '00ms';
+})
+
+wordsWrapper.lastChild.addEventListener('animationend', () => {
+    loader.classList.add('animate-fade-out')
+}, { once: true })
+
+
+
 const title = document.querySelector('#title')
 const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 

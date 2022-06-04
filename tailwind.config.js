@@ -60,7 +60,6 @@ module.exports = {
 
         'popup': {
           '70%': {
-            
             bottom: '130%',
           },
           '100%': {
@@ -128,7 +127,6 @@ module.exports = {
 
         'remove-item': {
           '50%':{
-            // transform: 'translateX(100%) scaleY(1)',
             transform: 'scaleY(1)',
             'transform-origin': 'top',
             overflow: 'hidden'
@@ -136,9 +134,19 @@ module.exports = {
           },
           '100%': {
             transform: 'scaleY(0)',
-            'transform-origin': 'top',
-            // 'max-height': '0',
-           
+            'transform-origin': 'top',           
+          },
+        },
+
+        'jumping-words': {
+          '0%' :{
+            transform: 'translateY(0%)',
+          },
+          '50%': {
+            transform: 'translateY(-30%)',
+          },
+          '100%': {
+            transform: 'translateY(0%)',
           },
         },
       },
@@ -155,6 +163,7 @@ module.exports = {
         'progress': 'progress 2s linear forwards',
         'add-item': 'add-item 300ms ease-in-out forwards',
         'remove-item': 'remove-item 500ms ease-in-out forwards',
+        'jumping-words': 'jumping-words 300ms linear',
       },
 
     },

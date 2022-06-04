@@ -26,8 +26,12 @@
 
 </head>
 
+<!-- preload先拿上來暫放，如果載入的動畫做好的話也就不需要preload了 -->
+<body class="relative  h-[100vh] font-main-font bg-primary text-secondary tracking-widest">
 
-<body class="preload h-[100vh] font-main-font bg-primary text-secondary tracking-widest">
+    <div id="loader" class="absolute left-0 top-0 z-50 flex justify-center items-center w-full h-full bg-primary">
+        <p id="words-wrapper" class="text-3xl xs:text-4xl"><span class="inline-block">T</span><span class="inline-block">o</span><span class="inline-block">d</span><span class="inline-block">o</span><span class="inline-block">&nbsp;</span><span class="inline-block">L</span><span class="inline-block">i</span><span class="inline-block">s</span><span class="inline-block">t</span></p>
+    </div>
 
     <!-- content -->
     <div class="content h-[100vh] flex flex-col justify-end">
