@@ -353,38 +353,35 @@ todoList.addEventListener('click', e => {
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li');
 
-        /* 展開todo-option */
+        // 展開todo-option
+
 
         // 如果使用者點按todo-option-btn，使其展開todo-option
-
         const todoOption = todoItem.querySelector('.todo-option');
-        
+
+
         if (e.target.classList.value === 'todo-option-btn') {
-            let currentOpenItem = todoItem;
-
-            
-
-            console.log(currentOpenItem)
-            
-
-            // 去除所有todo-option的open狀態
-
-            todoOption.classList.toggle('todo-option--open');
-            // document.querySelectorAll('.todo-option')
-            //     .forEach(todoOption => {
-            //         todoOption.classList.remove('todo-option--open');
-            //     });
-
-            
+            if (todoOption.classList.contains('todo-option--open')) {
+                todoOption.classList.remove('todo-option--open');
+                todoItem.classList.remove('todo-item--todo-option-open');
+            } else {
+                todoOption.classList.add('todo-option--open');
+                todoItem.classList.add('todo-item--todo-option-open');
+            }
 
 
 
-            // 去除所有todoItem上的背景顏色
+            /* 找出所有的.todo-item:
+            1.保留當前所點擊的todoItem身上的「todo-item--todo-option-open」className，並移除所有非當前的
+            2.保留當前所點擊的todoItem中的.todo-option身上的todo-option--open，並移除所有非當前的
+            */
             document.querySelectorAll('.todo-item')
-                .forEach(todoItem => {
-                    todoItem.classList.remove('todo-item--todo-option-open')
-                })
-            todoItem.classList.toggle('todo-item--todo-option-open')
+                .forEach(i => {
+                    if (i.id !== todoItem.id) {
+                        i.classList.remove('todo-item--todo-option-open');
+                        i.querySelector('.todo-option').classList.remove('todo-option--open');
+                    }
+                });
         }
 
         /* 控制checkbox狀態 */

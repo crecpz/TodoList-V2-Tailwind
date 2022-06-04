@@ -151,7 +151,7 @@
 
   .todo-item {
     /* @apply flex flex-col items-center px-6 py-2 border-b border-primary/10 transition-colors duration-300; */
-    @apply flex flex-col items-center px-6 border-b border-primary/10 transition-colors duration-300;
+    @apply flex flex-col items-center px-6 border-b border-primary/10 transition-colors duration-500;
   }
 
   .todo-item--todo-option-open {
