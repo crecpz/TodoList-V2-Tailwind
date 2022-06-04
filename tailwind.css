@@ -210,7 +210,7 @@
   /* ---------- add-btn ------------ */
 
   .add-btn {
-    @apply text-lg bg-tertiary ml-1 rounded-br-xl transition-colors duration-100;
+    @apply text-lg bg-tertiary border-l-4 border-primary rounded-br-xl transition-colors duration-100;
   }
 
   .add-btn--active {

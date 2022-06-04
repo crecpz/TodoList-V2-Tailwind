@@ -794,7 +794,7 @@ textarea {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
+  transition-duration: 500ms;
 }
 
 .todo-item--todo-option-open {
@@ -923,8 +923,10 @@ textarea {
 /* ---------- add-btn ------------ */
 
 .add-btn {
-  margin-left: 0.25rem;
   border-bottom-right-radius: 0.75rem;
+  border-left-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgb(64 83 98 / var(--tw-border-opacity));
   --tw-bg-opacity: 1;
   background-color: rgb(255 211 141 / var(--tw-bg-opacity));
   font-size: 1.125rem;
@@ -1333,8 +1335,21 @@ textarea {
   border-width: 2px;
 }
 
+.border {
+  border-width: 1px;
+}
+
+.border-t-4 {
+  border-top-width: 4px;
+}
+
 .border-primary\/50 {
   border-color: rgb(64 83 98 / 0.5);
+}
+
+.border-t-primary {
+  --tw-border-opacity: 1;
+  border-top-color: rgb(64 83 98 / var(--tw-border-opacity));
 }
 
 .bg-primary {
