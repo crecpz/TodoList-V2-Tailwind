@@ -27,10 +27,31 @@
 </head>
 
 <!-- preload先拿上來暫放，如果載入的動畫做好的話也就不需要preload了 -->
+
 <body class="relative  h-[100vh] font-main-font bg-primary text-secondary tracking-widest">
 
-    <div id="loader" class="absolute left-0 top-0 z-50 flex justify-center items-center w-full h-full bg-primary">
-        <p id="words-wrapper" class="text-3xl xs:text-4xl"><span class="inline-block">T</span><span class="inline-block">o</span><span class="inline-block">d</span><span class="inline-block">o</span><span class="inline-block">&nbsp;</span><span class="inline-block">L</span><span class="inline-block">i</span><span class="inline-block">s</span><span class="inline-block">t</span></p>
+    <div id="loader"
+        class="absolute left-0 top-0 z-50 flex flex-col justify-center items-center w-full h-full bg-primary">
+
+        <!-- 這邊我試著讓打勾的框不要那麼大，
+                原本14現在12，
+                但我打勾還沒調整，請調整 打勾兩撇的長度或寬度，還有勾在正方形的絕對位置
+
+                https://codepen.io/frontendjoe/pen/eYGYPaw?editors=1000
+        -->
+        <div class="relative w-12 h-12 mb-10 border-4 border-secondary rounded-sm">
+            <div class="absolute -top-[5px] w-full h-full rotate-45">
+                <div class="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 w-4 h-1 rounded-sm bg-secondary 
+                before:content-[''] before:absolute before:bottom-0 before:right-0 before:w-1 before:h-7 before:rounded-sm before:bg-inherit
+                "></div>
+                <!-- <div class="w-1 h-8 bg-blue-500"></div> -->
+            </div>
+        </div>
+
+        <p id="words-wrapper" class="text-3xl mb-[150px] xs:text-4xl"><span class="inline-block">T</span><span
+                class="inline-block">o</span><span class="inline-block">d</span><span class="inline-block">o</span><span
+                class="inline-block">&nbsp;</span><span class="inline-block">L</span><span
+                class="inline-block">i</span><span class="inline-block">s</span><span class="inline-block">t</span></p>
     </div>
 
     <!-- content -->

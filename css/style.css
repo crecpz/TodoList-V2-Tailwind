@@ -608,13 +608,13 @@ dialog[closing] {
 }
 
 dialog[closing]::-webkit-backdrop {
-  -webkit-animation: fade-out 1000ms forwards;
-          animation: fade-out 1000ms forwards;
+  -webkit-animation: fade-out 1500ms ease forwards;
+          animation: fade-out 1500ms ease forwards;
 }
 
 dialog[closing]::backdrop {
-  -webkit-animation: fade-out 1000ms forwards;
-          animation: fade-out 1000ms forwards;
+  -webkit-animation: fade-out 1500ms ease forwards;
+          animation: fade-out 1500ms ease forwards;
 }
 
 textarea {
@@ -986,6 +986,22 @@ textarea {
   bottom: 0px;
 }
 
+.top-3\/4 {
+  top: 75%;
+}
+
+.-top-0 {
+  top: -0px;
+}
+
+.-top-5 {
+  top: -1.25rem;
+}
+
+.-top-\[5px\] {
+  top: -5px;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -1001,6 +1017,14 @@ textarea {
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.mb-\[150px\] {
+  margin-bottom: 150px;
 }
 
 .mt-6 {
@@ -1047,8 +1071,24 @@ textarea {
   height: 100vh;
 }
 
+.h-14 {
+  height: 3.5rem;
+}
+
+.h-1 {
+  height: 0.25rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
 .h-\[80px\] {
   height: 80px;
+}
+
+.h-12 {
+  height: 3rem;
 }
 
 .max-h-\[60vh\] {
@@ -1059,12 +1099,28 @@ textarea {
   width: 100%;
 }
 
+.w-14 {
+  width: 3.5rem;
+}
+
+.w-4 {
+  width: 1rem;
+}
+
+.w-1 {
+  width: 0.25rem;
+}
+
 .w-3\.5 {
   width: 0.875rem;
 }
 
 .w-3 {
   width: 0.75rem;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .max-w-\[150px\] {
@@ -1078,6 +1134,21 @@ textarea {
 
 .-translate-y-1\/2 {
   --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-1 {
+  --tw-translate-y: -0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rotate-45 {
+  --tw-rotate: 45deg;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.rotate-0 {
+  --tw-rotate: 0deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1117,34 +1188,55 @@ textarea {
 @-webkit-keyframes jumping-words {
   0% {
     transform: translateY(0%);
+    color: #eee5dc;
   }
 
-  50% {
-    transform: translateY(-30%);
+  70% {
+    transform: translateY(-40%);
+    color: #fff;
   }
 
   100% {
     transform: translateY(0%);
+    color: #eee5dc;
   }
 }
 
 @keyframes jumping-words {
   0% {
     transform: translateY(0%);
+    color: #eee5dc;
   }
 
-  50% {
-    transform: translateY(-30%);
+  70% {
+    transform: translateY(-40%);
+    color: #fff;
   }
 
   100% {
     transform: translateY(0%);
+    color: #eee5dc;
   }
 }
 
 .animate-jumping-words {
-  -webkit-animation: jumping-words 300ms linear;
-          animation: jumping-words 300ms linear;
+  -webkit-animation: jumping-words 500ms ease-in-out;
+          animation: jumping-words 500ms ease-in-out;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fade-out {
+  -webkit-animation: fade-out 1500ms ease forwards;
+          animation: fade-out 1500ms ease forwards;
 }
 
 @-webkit-keyframes popdown {
@@ -1324,42 +1416,16 @@ textarea {
           animation: remove-item 500ms ease-in-out forwards;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  -webkit-animation: fade-in 700ms forwards;
-          animation: fade-in 700ms forwards;
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
-
-.animate-fade-out {
-  -webkit-animation: fade-out 1000ms forwards;
-          animation: fade-out 1000ms forwards;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
 
 .flex-col {
   flex-direction: column;
+}
+
+.items-end {
+  align-items: flex-end;
 }
 
 .items-center {
@@ -1402,8 +1468,20 @@ textarea {
   border-radius: 0.5rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+
 .rounded-bl-xl {
   border-bottom-left-radius: 0.75rem;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border-2 {
@@ -1412,6 +1490,11 @@ textarea {
 
 .border-t-4 {
   border-top-width: 4px;
+}
+
+.border-secondary {
+  --tw-border-opacity: 1;
+  border-color: rgb(238 229 220 / var(--tw-border-opacity));
 }
 
 .border-primary\/50 {
@@ -1426,6 +1509,16 @@ textarea {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: rgb(64 83 98 / var(--tw-bg-opacity));
+}
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .bg-\[\#78977e\]\/80 {
@@ -1565,6 +1658,14 @@ textarea {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.outline {
+  outline-style: solid;
+}
+
+.outline-red-400 {
+  outline-color: #f87171;
 }
 
 .filter {
@@ -1708,14 +1809,44 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
   left: 0px;
 }
 
+.before\:top-0::before {
+  content: var(--tw-content);
+  top: 0px;
+}
+
+.before\:bottom-0::before {
+  content: var(--tw-content);
+  bottom: 0px;
+}
+
+.before\:right-0::before {
+  content: var(--tw-content);
+  right: 0px;
+}
+
 .before\:h-1::before {
   content: var(--tw-content);
   height: 0.25rem;
 }
 
+.before\:h-8::before {
+  content: var(--tw-content);
+  height: 2rem;
+}
+
+.before\:h-7::before {
+  content: var(--tw-content);
+  height: 1.75rem;
+}
+
 .before\:w-full::before {
   content: var(--tw-content);
   width: 100%;
+}
+
+.before\:w-1::before {
+  content: var(--tw-content);
+  width: 0.25rem;
 }
 
 @-webkit-keyframes progress {
@@ -1746,9 +1877,25 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
           animation: progress 2s linear forwards;
 }
 
+.before\:rounded-sm::before {
+  content: var(--tw-content);
+  border-radius: 0.125rem;
+}
+
 .before\:bg-secondary\/70::before {
   content: var(--tw-content);
   background-color: rgb(238 229 220 / 0.7);
+}
+
+.before\:bg-blue-500::before {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.before\:bg-inherit::before {
+  content: var(--tw-content);
+  background-color: inherit;
 }
 
 .before\:content-\[\'\'\]::before {

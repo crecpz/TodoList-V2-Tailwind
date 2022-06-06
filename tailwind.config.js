@@ -18,7 +18,7 @@ module.exports = {
         'xs': '576px',
       },
 
-    
+
       fontFamily: {
         'main-font': "'Source Code Pro','Noto Sans TC'",
         'Font-Awesome': "'Font Awesome 5 Free'",
@@ -121,39 +121,39 @@ module.exports = {
           },
         },
 
-        'add-item': {
-
-        },
-
         'remove-item': {
-          '50%':{
+          '50%': {
             transform: 'scaleY(1)',
             'transform-origin': 'top',
             overflow: 'hidden'
-            
+
           },
           '100%': {
             transform: 'scaleY(0)',
-            'transform-origin': 'top',           
+            'transform-origin': 'top',
           },
         },
 
         'jumping-words': {
-          '0%' :{
+          '0%': {
             transform: 'translateY(0%)',
+            color:'#eee5dc',
           },
-          '50%': {
-            transform: 'translateY(-30%)',
+          '70%': {
+            transform: 'translateY(-40%)',
+            color:'#fff',
           },
           '100%': {
             transform: 'translateY(0%)',
+            color:'#eee5dc'
           },
         },
       },
 
       animation: {
         'fade-in': 'fade-in 700ms forwards',
-        'fade-out': 'fade-out 1000ms forwards',
+        // fade out 的forwards被我拿掉了，為了測試用，測試完請放回
+        'fade-out': 'fade-out 1500ms ease forwards',
         'slide-up': 'slide-up 500ms forwards',
         'slide-down': ' slide-down 700ms forwards',
         'popup': 'popup 200ms ease-out forwards',
@@ -163,9 +163,8 @@ module.exports = {
         'progress': 'progress 2s linear forwards',
         'add-item': 'add-item 300ms ease-in-out forwards',
         'remove-item': 'remove-item 500ms ease-in-out forwards',
-        'jumping-words': 'jumping-words 300ms linear',
+        'jumping-words': 'jumping-words 500ms ease-in-out',
       },
-
     },
 
     plugins: [],
