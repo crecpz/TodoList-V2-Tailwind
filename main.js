@@ -16,17 +16,22 @@ setTimeout(function () {
 const loader = document.querySelector('#loader');
 // loader
 
-const wordsWrapper = document.querySelector('#words-wrapper');
-[...wordsWrapper.children].forEach((word, index, array) => {
-    word.classList.add('animate-jumping-words');
-    if (array[index + 1]) {
-        array[index + 1].style.animationDelay = (index + 1) + '00ms';
-    }
-})
+const letterWrapper = document.querySelector('#letter-wrapper');
 
-// wordsWrapper.lastChild.addEventListener('animationend', () => {
-//     loader.classList.add('animate-fade-out');
-// }, { once: true })
+setTimeout(() => {
+    [...letterWrapper.children].forEach((letter, index, arr) => {
+        letter.classList.add('animate-jumping-letter');
+        if (arr[index + 1]) {
+            arr[index + 1].style.animationDelay = (index + 1) + '00ms';
+        };
+    })
+}, 1200);
+
+
+
+letterWrapper.lastChild.addEventListener('animationend', () => {
+    loader.classList.add('animate-fade-out');
+}, { once: true })
 
 
 

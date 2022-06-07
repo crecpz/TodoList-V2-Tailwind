@@ -134,18 +134,50 @@ module.exports = {
           },
         },
 
-        'jumping-words': {
+        'jumping-letter': {
           '0%': {
             transform: 'translateY(0%)',
-            color:'#eee5dc',
+            color: '#eee5dc',
           },
           '70%': {
             transform: 'translateY(-40%)',
-            color:'#fff',
+            color: '#ffc85a',
           },
           '100%': {
             transform: 'translateY(0%)',
-            color:'#eee5dc'
+            color: '#eee5dc'
+          },
+        },
+
+        'tick': {
+          '100%': {
+            width: '14px',
+          }
+        },
+
+        'tick-before': {
+          '100%': {
+            height: '24px',
+          },
+        },
+
+        'box-appear': {
+          '0%': {
+            // 'border-bottom-width': '0',
+            // 'box-shadow': 'inset 0 0 0 0',
+            transform: 'scale(0)',
+            opacity: '0',
+          },
+
+          '50%':{
+            transform: 'scale(1)',
+          },
+
+          '100%': {
+            // 'border-bottom-width': '10px',
+            // 'box-shadow': 'inset 0 -48px 0 0',
+            transform: 'scale(.8)',
+            opacity: '1',
           },
         },
       },
@@ -163,8 +195,13 @@ module.exports = {
         'progress': 'progress 2s linear forwards',
         'add-item': 'add-item 300ms ease-in-out forwards',
         'remove-item': 'remove-item 500ms ease-in-out forwards',
-        'jumping-words': 'jumping-words 500ms ease-in-out',
+        'jumping-letter': 'jumping-letter 500ms ease',
+        'tick': 'tick 300ms linear forwards 450ms',
+        'tick-before': 'tick-before 300ms linear forwards 800ms',
+        'box-appear': 'box-appear 300ms ease-out forwards',
       },
+
+      // 動畫延遲無效是因為我用js在inline-style增加了delay
     },
 
     plugins: [],
