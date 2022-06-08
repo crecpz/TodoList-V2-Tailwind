@@ -590,31 +590,35 @@ dialog[closing] {
 @-webkit-keyframes fade-out {
   0% {
     opacity: 1;
+    visibility: visible;
   }
 
   100% {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
 @keyframes fade-out {
   0% {
     opacity: 1;
+    visibility: visible;
   }
 
   100% {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
 dialog[closing]::-webkit-backdrop {
-  -webkit-animation: fade-out 1500ms ease forwards;
-          animation: fade-out 1500ms ease forwards;
+  -webkit-animation: fade-out 1000ms ease forwards;
+          animation: fade-out 1000ms ease forwards;
 }
 
 dialog[closing]::backdrop {
-  -webkit-animation: fade-out 1500ms ease forwards;
-          animation: fade-out 1500ms ease forwards;
+  -webkit-animation: fade-out 1000ms ease forwards;
+          animation: fade-out 1000ms ease forwards;
 }
 
 textarea {
@@ -986,8 +990,8 @@ textarea {
   top: 50%;
 }
 
-.right-24 {
-  right: 6rem;
+.right-\[88px\] {
+  right: 88px;
 }
 
 .bottom-0 {
@@ -1134,15 +1138,25 @@ textarea {
   0% {
     transform: scale(0);
     opacity: 0;
+    box-shadow: 0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc;
+  }
+
+  30% {
+    transform: scale(0);
   }
 
   50% {
+    transform: scale(1.25);
+  }
+
+  75% {
     transform: scale(1);
+    opacity: 1;
   }
 
   100% {
-    transform: scale(.8);
-    opacity: 1;
+    box-shadow: 0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc;
+    transform: scale(1);
   }
 }
 
@@ -1150,21 +1164,31 @@ textarea {
   0% {
     transform: scale(0);
     opacity: 0;
+    box-shadow: 0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc;
+  }
+
+  30% {
+    transform: scale(0);
   }
 
   50% {
+    transform: scale(1.25);
+  }
+
+  75% {
     transform: scale(1);
+    opacity: 1;
   }
 
   100% {
-    transform: scale(.8);
-    opacity: 1;
+    box-shadow: 0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc;
+    transform: scale(1);
   }
 }
 
 .animate-box-appear {
-  -webkit-animation: box-appear 300ms ease-out forwards;
-          animation: box-appear 300ms ease-out forwards;
+  -webkit-animation: box-appear 500ms ease-out forwards;
+          animation: box-appear 500ms ease-out forwards;
 }
 
 @-webkit-keyframes tick {
@@ -1180,8 +1204,23 @@ textarea {
 }
 
 .animate-tick {
-  -webkit-animation: tick 300ms linear forwards 450ms;
-          animation: tick 300ms linear forwards 450ms;
+  -webkit-animation: tick 100ms linear forwards 650ms;
+          animation: tick 100ms linear forwards 650ms;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  -webkit-animation: fade-in 700ms forwards;
+          animation: fade-in 700ms forwards;
 }
 
 @-webkit-keyframes bounce {
@@ -1224,8 +1263,7 @@ textarea {
   }
 
   70% {
-    transform: translateY(-40%);
-    color: #ffc85a;
+    transform: translateY(-25%);
   }
 
   100% {
@@ -1241,8 +1279,7 @@ textarea {
   }
 
   70% {
-    transform: translateY(-40%);
-    color: #ffc85a;
+    transform: translateY(-25%);
   }
 
   100% {
@@ -1252,23 +1289,25 @@ textarea {
 }
 
 .animate-jumping-letter {
-  -webkit-animation: jumping-letter 500ms ease;
-          animation: jumping-letter 500ms ease;
+  -webkit-animation: jumping-letter 500ms ease-out;
+          animation: jumping-letter 500ms ease-out;
 }
 
 @keyframes fade-out {
   0% {
     opacity: 1;
+    visibility: visible;
   }
 
   100% {
     opacity: 0;
+    visibility: hidden;
   }
 }
 
 .animate-fade-out {
-  -webkit-animation: fade-out 1500ms ease forwards;
-          animation: fade-out 1500ms ease forwards;
+  -webkit-animation: fade-out 1000ms ease forwards;
+          animation: fade-out 1000ms ease forwards;
 }
 
 @-webkit-keyframes popdown {
@@ -1492,12 +1531,12 @@ textarea {
   white-space: nowrap;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
-}
-
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .rounded-bl-xl {
@@ -1596,6 +1635,11 @@ textarea {
   font-family: 'Source Code Pro','Noto Sans TC';
 }
 
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -1614,11 +1658,6 @@ textarea {
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
-}
-
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
 }
 
 .font-bold {
@@ -1870,8 +1909,8 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
 
 .before\:animate-tick-before::before {
   content: var(--tw-content);
-  -webkit-animation: tick-before 300ms linear forwards 800ms;
-          animation: tick-before 300ms linear forwards 800ms;
+  -webkit-animation: tick-before 150ms linear forwards 800ms;
+          animation: tick-before 150ms linear forwards 800ms;
 }
 
 @-webkit-keyframes progress {

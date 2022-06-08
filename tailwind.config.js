@@ -27,13 +27,23 @@ module.exports = {
 
       keyframes: {
         'fade-in': {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+          '0%': {
+            opacity: '0'
+          },
+          '100%': {
+            opacity: '1'
+          },
         },
 
         'fade-out': {
-          '0%': { opacity: '1' },
-          '100%': { opacity: '0' },
+          '0%': {
+            opacity: '1',
+            visibility: 'visible',
+          },
+          '100%': {
+            opacity: '0',
+            visibility: 'hidden',
+          },
         },
 
         'slide-up': {
@@ -137,15 +147,18 @@ module.exports = {
         'jumping-letter': {
           '0%': {
             transform: 'translateY(0%)',
+            // 'text-shadow': '0 0 0px #eee5dc',
             color: '#eee5dc',
           },
           '70%': {
-            transform: 'translateY(-40%)',
-            color: '#ffc85a',
+            transform: 'translateY(-25%)',
+            // color: '#ffd38d',
+            // 'text-shadow': '0 0 1px #eee5dc',
           },
           '100%': {
             transform: 'translateY(0%)',
-            color: '#eee5dc'
+            color: '#eee5dc',
+            // 'text-shadow': '0 0 5px #eee5dc',
           },
         },
 
@@ -161,7 +174,52 @@ module.exports = {
           },
         },
 
+        // shadow-[0_0_6px_0,inset_0_0_3px_0] shadow-secondary
+
         'box-appear': {
+          '0%': {
+            transform: 'scale(0)',
+            opacity: '0',
+            'box-shadow': '0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc',
+          },
+          '30%': {
+            transform: 'scale(0)',
+          },
+          '50%': {
+            transform: 'scale(1.25)',
+          },
+          '75%': {
+            transform: 'scale(1)',
+            opacity: '1',
+          },
+          '100%': {
+            'box-shadow': '0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc',
+            transform: 'scale(1)',
+            // opacity: '1',
+          },
+        },
+
+        // 'box-appear': {
+        //   '0%': {
+        //     // 'border-bottom-width': '0',
+        //     // 'box-shadow': 'inset 0 0 0 0',
+        //     transform: 'scale(0)',
+        //     opacity: '0',
+        //   },
+
+        //   '50%': {
+        //     transform: 'scale(1.4)',
+        //   },
+
+        //   '100%': {
+        //     // 'border-bottom-width': '10px',
+        //     // 'box-shadow': 'inset 0 -48px 0 0',
+        //     transform: 'scale(1)',
+        //     opacity: '1',
+        //   },
+        // },
+
+        'light-on': {
           '0%': {
             // 'border-bottom-width': '0',
             // 'box-shadow': 'inset 0 0 0 0',
@@ -169,14 +227,14 @@ module.exports = {
             opacity: '0',
           },
 
-          '50%':{
-            transform: 'scale(1)',
+          '50%': {
+            transform: 'scale(1.4)',
           },
 
           '100%': {
             // 'border-bottom-width': '10px',
             // 'box-shadow': 'inset 0 -48px 0 0',
-            transform: 'scale(.8)',
+            transform: 'scale(1)',
             opacity: '1',
           },
         },
@@ -185,7 +243,7 @@ module.exports = {
       animation: {
         'fade-in': 'fade-in 700ms forwards',
         // fade out 的forwards被我拿掉了，為了測試用，測試完請放回
-        'fade-out': 'fade-out 1500ms ease forwards',
+        'fade-out': 'fade-out 1000ms ease forwards',
         'slide-up': 'slide-up 500ms forwards',
         'slide-down': ' slide-down 700ms forwards',
         'popup': 'popup 200ms ease-out forwards',
@@ -195,10 +253,10 @@ module.exports = {
         'progress': 'progress 2s linear forwards',
         'add-item': 'add-item 300ms ease-in-out forwards',
         'remove-item': 'remove-item 500ms ease-in-out forwards',
-        'jumping-letter': 'jumping-letter 500ms ease',
-        'tick': 'tick 300ms linear forwards 450ms',
-        'tick-before': 'tick-before 300ms linear forwards 800ms',
-        'box-appear': 'box-appear 300ms ease-out forwards',
+        'jumping-letter': 'jumping-letter 500ms ease-out',
+        'tick': 'tick 100ms linear forwards 650ms',
+        'tick-before': 'tick-before 150ms linear forwards 800ms',
+        'box-appear': 'box-appear 500ms ease-out forwards',
       },
 
       // 動畫延遲無效是因為我用js在inline-style增加了delay

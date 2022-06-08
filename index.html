@@ -30,13 +30,13 @@
 
 <body class="relative  h-[100vh] font-main-font bg-primary text-secondary tracking-widest">
 
+    <!--    codepen loader 參考
+            https://codepen.io/frontendjoe/pen/eYGYPaw?editors=1000
+    -->
     <div id="loader"
         class="absolute left-0 top-0 z-50 flex flex-col justify-center items-center w-full h-full bg-primary">
-
-        <!--    codepen loader 參考
-                https://codepen.io/frontendjoe/pen/eYGYPaw?editors=1000
-        -->
-        <div class="relative w-12 h-12 mb-10 border-[2.5px] border-secondary opacity-90 rounded-sm animate-box-appear">
+        <div
+            class="relative w-12 h-12 mb-10 border-[2.5px] border-secondary rounded-lg animate-box-appear">
             <div class="absolute -top-[3px] w-full h-full rotate-45">
                 <div class="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 w-0 h-1 opacity-90 rounded-sm bg-secondary origin-left animate-tick
                 before:content-[''] before:absolute before:bottom-0 before:right-0 before:w-1 before:h-0 before:opacity-90 before:rounded-sm before:bg-inherit before:animate-tick-before
@@ -45,11 +45,12 @@
             </div>
         </div>
 
-        <p id="letter-wrapper" class="text-3xl mb-[150px] xs:text-4xl"><span class="inline-block">T</span><span
+        <p id="letter-wrapper" class="text-4xl mb-[150px] animate-fade-in"><span class="inline-block">T</span><span
                 class="inline-block">o</span><span class="inline-block">d</span><span class="inline-block">o</span><span
                 class="inline-block">&nbsp;</span><span class="inline-block">L</span><span
                 class="inline-block">i</span><span class="inline-block">s</span><span class="inline-block">t</span></p>
     </div>
+
 
     <!-- content -->
     <div class="content h-[100vh] flex flex-col justify-end">
@@ -93,7 +94,7 @@
 
             <!-- clear-text btn -->
             <button id="clear-text-btn"
-                class="hide absolute top-1/2 right-24 -translate-y-1/2 transition-all duration-300">
+                class="hide absolute top-1/2 right-[88px] -translate-y-1/2 transition-all duration-300">
                 <i
                     class="fa-solid fa-circle-xmark text-primary-light text-xl transition-colors duration-300 group-hover:text-primary"></i>
             </button>
