@@ -28,10 +28,10 @@ module.exports = {
       keyframes: {
         'fade-in': {
           '0%': {
-            opacity: '0'
+            opacity: '0',
           },
           '100%': {
-            opacity: '1'
+            opacity: '1',
           },
         },
 
@@ -40,9 +40,12 @@ module.exports = {
             opacity: '1',
             visibility: 'visible',
           },
-          '100%': {
+          '99%': {
             opacity: '0',
+          },
+          '100%': {
             visibility: 'hidden',
+            opacity: '0',
           },
         },
 
@@ -80,7 +83,7 @@ module.exports = {
 
         'hide-down': {
           '0%': {
-            bottom: '100%',
+            bottom: 'calc(100% + 4px)',
             opacity: '1',
           },
           '30%': {
@@ -159,7 +162,7 @@ module.exports = {
           },
           '70%': {
             transform: 'translateY(-35%)',
-          
+
           },
           '100%': {
             transform: 'translateY(0%)',
@@ -189,10 +192,6 @@ module.exports = {
           '40%': {
             'box-shadow': '0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc',
           },
-          '75%': {
-            
-          },
-
           '99%': {
           },
           '100%': {
@@ -200,71 +199,28 @@ module.exports = {
             'box-shadow': '0 0 3px 0 #eee5dc,inset 0 0 3px 0 #eee5dc',
           },
         },
-
-        // 'box-appear': {
-        //   '0%': {
-        //     // 'border-bottom-width': '0',
-        //     // 'box-shadow': 'inset 0 0 0 0',
-        //     transform: 'scale(0)',
-        //     opacity: '0',
-        //   },
-
-        //   '50%': {
-        //     transform: 'scale(1.4)',
-        //   },
-
-        //   '100%': {
-        //     // 'border-bottom-width': '10px',
-        //     // 'box-shadow': 'inset 0 -48px 0 0',
-        //     transform: 'scale(1)',
-        //     opacity: '1',
-        //   },
-        // },
-
-        'light-on': {
-          '0%': {
-            // 'border-bottom-width': '0',
-            // 'box-shadow': 'inset 0 0 0 0',
-            transform: 'scale(0)',
-            opacity: '0',
-          },
-
-          '50%': {
-            transform: 'scale(1.4)',
-          },
-
-          '100%': {
-            // 'border-bottom-width': '10px',
-            // 'box-shadow': 'inset 0 -48px 0 0',
-            transform: 'scale(1)',
-            opacity: '1',
-          },
-        },
       },
-
-      animation: {
-        'fade-in': 'fade-in 700ms forwards',
-        'fade-out': 'fade-out 1000ms ease forwards',
-        'slide-up': 'slide-up 500ms forwards',
-        'slide-down': ' slide-down 700ms forwards',
-        'popup': 'popup 200ms ease-out forwards',
-        'hide-down': 'hide-down 350ms ease-in forwards',
-        'popdown': 'popdown 200ms ease-out forwards',
-        'hide-up': 'hide-up 350ms ease-in-out forwards',
-        'progress': 'progress 2s linear forwards',
-        'add-item': 'add-item 300ms ease-in-out forwards',
-        'remove-item': 'remove-item 500ms ease-in-out forwards',
-        // 'loader-fade-in': 'loader-fade-in 1000ms ease-in-out forwards',
-        'jumping-letter': 'jumping-letter 500ms ease-out',
-        'tick': 'tick 150ms linear forwards 300ms',
-        'tick-before': 'tick-before 150ms linear forwards 500ms',
-        'box-appear': 'box-appear 750ms ease-out forwards 800ms',
-      },
-
-      // 動畫延遲無效是因為我用js在inline-style增加了delay
     },
 
-    plugins: [],
+    animation: {
+      'fade-in': 'fade-in 700ms forwards',
+      'fade-out': 'fade-out 1000ms ease forwards',
+      'slide-up': 'slide-up 500ms forwards',
+      'slide-down': ' slide-down 700ms forwards',
+      'popup': 'popup 200ms ease-out forwards',
+      'hide-down': 'hide-down 350ms ease-in forwards',
+      'popdown': 'popdown 200ms ease-out forwards',
+      'hide-up': 'hide-up 350ms ease-in-out forwards',
+      'progress': 'progress 2s linear forwards',
+      'add-item': 'add-item 300ms ease-in-out forwards',
+      'remove-item': 'remove-item 500ms ease-in-out forwards',
+      'jumping-letter': 'jumping-letter 500ms ease-out',
+      'tick': 'tick 150ms linear forwards 300ms',
+      'tick-before': 'tick-before 150ms linear forwards 500ms',
+      'box-appear': 'box-appear 750ms ease-out forwards 800ms',
+    },
+  },
 
-  }
+  plugins: [],
+
 }

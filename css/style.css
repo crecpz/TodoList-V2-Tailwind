@@ -593,9 +593,13 @@ dialog[closing] {
     visibility: visible;
   }
 
-  100% {
+  99% {
     opacity: 0;
+  }
+
+  100% {
     visibility: hidden;
+    opacity: 0;
   }
 }
 
@@ -605,9 +609,13 @@ dialog[closing] {
     visibility: visible;
   }
 
-  100% {
+  99% {
     opacity: 0;
+  }
+
+  100% {
     visibility: hidden;
+    opacity: 0;
   }
 }
 
@@ -1011,6 +1019,11 @@ textarea {
   z-index: -10;
 }
 
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
@@ -1147,9 +1160,6 @@ textarea {
     box-shadow: 0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc;
   }
 
-  75% {
-  }
-
   99% {
   }
 
@@ -1168,9 +1178,6 @@ textarea {
 
   40% {
     box-shadow: 0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc;
-  }
-
-  75% {
   }
 
   99% {
@@ -1218,39 +1225,6 @@ textarea {
           animation: fade-in 700ms forwards;
 }
 
-@-webkit-keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
-            animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
-
-  50% {
-    transform: none;
-    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
-            animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(-25%);
-    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
-            animation-timing-function: cubic-bezier(0.8,0,1,1);
-  }
-
-  50% {
-    transform: none;
-    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
-            animation-timing-function: cubic-bezier(0,0,0.2,1);
-  }
-}
-
-.animate-bounce {
-  -webkit-animation: bounce 1s infinite;
-          animation: bounce 1s infinite;
-}
-
 @-webkit-keyframes jumping-letter {
   0% {
     transform: translateY(0%);
@@ -1290,9 +1264,13 @@ textarea {
     visibility: visible;
   }
 
-  100% {
+  99% {
     opacity: 0;
+  }
+
+  100% {
     visibility: hidden;
+    opacity: 0;
   }
 }
 
@@ -1375,7 +1353,7 @@ textarea {
 
 @-webkit-keyframes hide-down {
   0% {
-    bottom: 100%;
+    bottom: calc(100% + 4px);
     opacity: 1;
   }
 
@@ -1396,7 +1374,7 @@ textarea {
 
 @keyframes hide-down {
   0% {
-    bottom: 100%;
+    bottom: calc(100% + 4px);
     opacity: 1;
   }
 
@@ -1492,10 +1470,6 @@ textarea {
 
 .items-stretch {
   align-items: stretch;
-}
-
-.justify-end {
-  justify-content: flex-end;
 }
 
 .justify-center {

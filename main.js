@@ -9,9 +9,10 @@
  * .preload class用來防止動畫在載入時或重新整理時播放，
  * 在頁面載入後的500ms後刪掉它。 
  */
-setTimeout(function () {
-    document.body.classList.remove('preload');
-}, 500);
+// setTimeout(function () {
+//     document.body.classList.remove('preload');
+// }, 500);
+
 
 const loader = document.querySelector('#loader');
 // loader
@@ -29,7 +30,7 @@ setTimeout(() => {
 
 letterWrapper.lastChild.addEventListener('animationend', () => {
     loader.classList.add('animate-fade-out');
-    loader.addEventListener('animationend', ()=> {
+    loader.addEventListener('animationend', () => {
         // loader.classList.add('hide');
     })
 }, { once: true })
@@ -149,7 +150,6 @@ function showSuccessAddedMsg() {
             }, { once: true })
         }, 2000)
     }
-
 }
 
 
@@ -186,8 +186,6 @@ clearTextBtn.addEventListener('click', () => {
     clearTextBtn.classList.toggle('hide');
     todoInput.value = '';
 })
-
-
 
 
 
@@ -436,7 +434,6 @@ todoList.addEventListener('click', e => {
             localStorage.setItem('todos', JSON.stringify(todoListData));
         }
 
-
         /* 編輯todoText */
         if (e.target.classList.contains('edit-btn')) {
             // 一按下「編輯」，就收合已展開的todoOption
@@ -455,7 +452,6 @@ todoList.addEventListener('click', e => {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog');
                 editDialog.innerHTML =
-
                     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto"></textarea>
                     <div class="flex justify-center items-center">
@@ -468,11 +464,10 @@ todoList.addEventListener('click', e => {
                     </div>
                 `
 
-
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
                 let editText = editDialog.querySelector('#edit-text')
                 editText.value = todoText.innerHTML;
-                editText.select()
+                editText.select();
 
 
                 // 以下這段暫時用不到，但是如果未來在處理手機板不會自動全選的時候，可能會用到
