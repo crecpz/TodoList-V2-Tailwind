@@ -17,7 +17,7 @@
     <!-- google font : Noto Sans TC -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- font awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
@@ -35,8 +35,7 @@
     -->
     <div id="loader"
         class="absolute left-0 top-0 z-50 flex flex-col justify-center items-center w-full h-full bg-primary">
-        <div
-            class="relative w-12 h-12 mb-10 border-[2.5px] border-secondary rounded-lg animate-box-appear">
+        <div class="relative w-12 h-12 mb-10 border-[2.5px] border-secondary rounded-sm animate-box-appear">
             <div class="absolute -top-[3px] w-full h-full rotate-45">
                 <div class="absolute left-1/2 top-3/4 -translate-x-1/2 -translate-y-1/2 w-0 h-1 opacity-90 rounded-sm bg-secondary origin-left animate-tick
                 before:content-[''] before:absolute before:bottom-0 before:right-0 before:w-1 before:h-0 before:opacity-90 before:rounded-sm before:bg-inherit before:animate-tick-before
@@ -90,7 +89,7 @@
         <!-- todo-input -->
         <div class="relative z-10 flex items-stretch border-t-4 border-t-primary">
             <input type="text" placeholder="New task here!" id="todo-input"
-                class="font-bold w-full h-full bg-secondary text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic xs:text-lg">
+                class="w-full h-full bg-secondary font-medium text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic xs:text-lg">
 
             <!-- clear-text btn -->
             <button id="clear-text-btn"
@@ -112,7 +111,6 @@
                     <img class="w-3.5 mr-2 xs:w-5" src="img/delete-complete.svg">清除已完成
                 </button>
             </div>
-
         </div>
     </div>
 

@@ -799,6 +799,7 @@ textarea {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
+  font-weight: 500;
 }
 
 .todo-item--todo-option-open {
@@ -1136,59 +1137,53 @@ textarea {
 
 @-webkit-keyframes box-appear {
   0% {
-    transform: scale(0);
-    opacity: 0;
-    box-shadow: 0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc;
+    box-shadow: 0 0 0px 0 #eee5dc,inset 0 0px 0 #eee5dc;
   }
 
   30% {
-    transform: scale(0);
   }
 
-  50% {
-    transform: scale(1.25);
+  40% {
+    box-shadow: 0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc;
   }
 
   75% {
-    transform: scale(1);
-    opacity: 1;
+  }
+
+  99% {
   }
 
   100% {
-    box-shadow: 0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc;
-    transform: scale(1);
+    box-shadow: 0 0 3px 0 #eee5dc,inset 0 0 3px 0 #eee5dc;
   }
 }
 
 @keyframes box-appear {
   0% {
-    transform: scale(0);
-    opacity: 0;
-    box-shadow: 0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc;
+    box-shadow: 0 0 0px 0 #eee5dc,inset 0 0px 0 #eee5dc;
   }
 
   30% {
-    transform: scale(0);
   }
 
-  50% {
-    transform: scale(1.25);
+  40% {
+    box-shadow: 0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc;
   }
 
   75% {
-    transform: scale(1);
-    opacity: 1;
+  }
+
+  99% {
   }
 
   100% {
-    box-shadow: 0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc;
-    transform: scale(1);
+    box-shadow: 0 0 3px 0 #eee5dc,inset 0 0 3px 0 #eee5dc;
   }
 }
 
 .animate-box-appear {
-  -webkit-animation: box-appear 500ms ease-out forwards;
-          animation: box-appear 500ms ease-out forwards;
+  -webkit-animation: box-appear 750ms ease-out forwards 800ms;
+          animation: box-appear 750ms ease-out forwards 800ms;
 }
 
 @-webkit-keyframes tick {
@@ -1204,8 +1199,8 @@ textarea {
 }
 
 .animate-tick {
-  -webkit-animation: tick 100ms linear forwards 650ms;
-          animation: tick 100ms linear forwards 650ms;
+  -webkit-animation: tick 150ms linear forwards 300ms;
+          animation: tick 150ms linear forwards 300ms;
 }
 
 @keyframes fade-in {
@@ -1259,32 +1254,28 @@ textarea {
 @-webkit-keyframes jumping-letter {
   0% {
     transform: translateY(0%);
-    color: #eee5dc;
   }
 
   70% {
-    transform: translateY(-25%);
+    transform: translateY(-35%);
   }
 
   100% {
     transform: translateY(0%);
-    color: #eee5dc;
   }
 }
 
 @keyframes jumping-letter {
   0% {
     transform: translateY(0%);
-    color: #eee5dc;
   }
 
   70% {
-    transform: translateY(-25%);
+    transform: translateY(-35%);
   }
 
   100% {
     transform: translateY(0%);
-    color: #eee5dc;
   }
 }
 
@@ -1531,12 +1522,12 @@ textarea {
   white-space: nowrap;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
 .rounded-sm {
   border-radius: 0.125rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
 .rounded-bl-xl {
@@ -1662,6 +1653,10 @@ textarea {
 
 .font-bold {
   font-weight: 700;
+}
+
+.font-medium {
+  font-weight: 500;
 }
 
 .leading-\[34px\] {
@@ -1909,8 +1904,8 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
 
 .before\:animate-tick-before::before {
   content: var(--tw-content);
-  -webkit-animation: tick-before 150ms linear forwards 800ms;
-          animation: tick-before 150ms linear forwards 800ms;
+  -webkit-animation: tick-before 150ms linear forwards 500ms;
+          animation: tick-before 150ms linear forwards 500ms;
 }
 
 @-webkit-keyframes progress {

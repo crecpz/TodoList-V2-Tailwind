@@ -144,21 +144,25 @@ module.exports = {
           },
         },
 
+        // 'loader-fade-in' : {
+        //   '0%': {
+        //     opacity: '0',
+        //   },
+        //   '100' : {
+        //     opacity: '1',
+        //   }
+        // },
+
         'jumping-letter': {
           '0%': {
             transform: 'translateY(0%)',
-            // 'text-shadow': '0 0 0px #eee5dc',
-            color: '#eee5dc',
           },
           '70%': {
-            transform: 'translateY(-25%)',
-            // color: '#ffd38d',
-            // 'text-shadow': '0 0 1px #eee5dc',
+            transform: 'translateY(-35%)',
+          
           },
           '100%': {
             transform: 'translateY(0%)',
-            color: '#eee5dc',
-            // 'text-shadow': '0 0 5px #eee5dc',
           },
         },
 
@@ -178,24 +182,22 @@ module.exports = {
 
         'box-appear': {
           '0%': {
-            transform: 'scale(0)',
-            opacity: '0',
-            'box-shadow': '0 0 0 0 #eee5dc,inset 0 0 0px 0 #eee5dc',
+            'box-shadow': '0 0 0px 0 #eee5dc,inset 0 0px 0 #eee5dc',
           },
           '30%': {
-            transform: 'scale(0)',
           },
-          '50%': {
-            transform: 'scale(1.25)',
+          '40%': {
+            'box-shadow': '0 0 40px 0 #eee5dc,inset 0 0 20px 0 #eee5dc',
           },
           '75%': {
-            transform: 'scale(1)',
-            opacity: '1',
+            
+          },
+
+          '99%': {
           },
           '100%': {
-            'box-shadow': '0 0 5px 0 #eee5dc,inset 0 0 5px 0 #eee5dc',
-            transform: 'scale(1)',
-            // opacity: '1',
+            'box-shadow': '0 0 0px 0 #eee5dc,inset 0 0 0px 0 #eee5dc',
+            'box-shadow': '0 0 3px 0 #eee5dc,inset 0 0 3px 0 #eee5dc',
           },
         },
 
@@ -242,7 +244,6 @@ module.exports = {
 
       animation: {
         'fade-in': 'fade-in 700ms forwards',
-        // fade out 的forwards被我拿掉了，為了測試用，測試完請放回
         'fade-out': 'fade-out 1000ms ease forwards',
         'slide-up': 'slide-up 500ms forwards',
         'slide-down': ' slide-down 700ms forwards',
@@ -253,10 +254,11 @@ module.exports = {
         'progress': 'progress 2s linear forwards',
         'add-item': 'add-item 300ms ease-in-out forwards',
         'remove-item': 'remove-item 500ms ease-in-out forwards',
+        // 'loader-fade-in': 'loader-fade-in 1000ms ease-in-out forwards',
         'jumping-letter': 'jumping-letter 500ms ease-out',
-        'tick': 'tick 100ms linear forwards 650ms',
-        'tick-before': 'tick-before 150ms linear forwards 800ms',
-        'box-appear': 'box-appear 500ms ease-out forwards',
+        'tick': 'tick 150ms linear forwards 300ms',
+        'tick-before': 'tick-before 150ms linear forwards 500ms',
+        'box-appear': 'box-appear 750ms ease-out forwards 800ms',
       },
 
       // 動畫延遲無效是因為我用js在inline-style增加了delay

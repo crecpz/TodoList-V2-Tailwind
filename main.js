@@ -25,7 +25,7 @@ setTimeout(() => {
             arr[index + 1].style.animationDelay = (index + 1) + '00ms';
         };
     })
-}, 1000);
+}, 1400);
 
 letterWrapper.lastChild.addEventListener('animationend', () => {
     loader.classList.add('animate-fade-out');
