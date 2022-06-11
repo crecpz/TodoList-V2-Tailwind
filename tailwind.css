@@ -100,7 +100,8 @@
 
 @layer components {
   .content {
-    @apply mx-auto px-4 py-8 max-w-xl;
+    /* @apply mx-auto px-4 py-8 max-w-xl; */
+    /* 已將此處移至HTML中 */
   }
 
   /* 最大寬度設定600px應該可以 */
@@ -121,7 +122,7 @@
   /* --------- status --------- */
 
   .status {
-    @apply relative z-20 flex items-center w-full mb-1;
+    @apply relative z-20 flex items-center w-full mb-1 mt-12;
     @apply rounded-tl-2xl rounded-tr-2xl;
     @apply xs:text-lg;
   }
@@ -150,9 +151,8 @@
   /* ---------- todo-item  ----------*/
 
   .todo-item {
-    /* @apply flex flex-col items-center px-6 py-2 border-b border-primary/10 transition-colors duration-300; */
-    @apply flex flex-col items-center px-6 border-b border-primary/10 transition-colors duration-500;
-    @apply font-medium;
+    @apply flex flex-col items-center font-medium border-b border-primary/10 transition-colors duration-500 select-none;
+    /* @apply -translate-y-[65px] opacity-100 animate-add-item; */
   }
 
   .todo-item--todo-option-open {
@@ -181,7 +181,7 @@
   }
 
   .todo-option-btn {
-    @apply p-2 ml-auto;
+    @apply p-3 ml-auto;
   }
 
   .todo-option-btn__dot {
@@ -194,7 +194,7 @@
 
   .todo-option {
     @apply flex justify-end items-center w-full;
-    @apply invisible max-h-0 opacity-0 mb-0 pr-2;
+    @apply invisible max-h-0 opacity-0 mb-0 pr-[30px];
     @apply transition-all duration-500;
   }
 
@@ -238,7 +238,4 @@
   }
 }
 
-/*
-How to prevent a CSS keyframe animation from running on page load?
-https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-*/
+

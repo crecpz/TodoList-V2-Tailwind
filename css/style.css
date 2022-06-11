@@ -423,12 +423,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-body.preload * {
-  animation-duration: 0s !important;
-  -webkit-animation-duration: 0s !important;
-  transition-duration: 0s !important;
-}
-
 i {
   pointer-events: none;
 }
@@ -679,13 +673,8 @@ textarea {
 }
 
 .content {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 36rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  /* @apply mx-auto px-4 py-8 max-w-xl; */
+  /* 已將此處移至HTML中 */
 }
 
 /* 最大寬度設定600px應該可以 */
@@ -735,6 +724,7 @@ textarea {
   position: relative;
   z-index: 20;
   margin-bottom: 0.25rem;
+  margin-top: 3rem;
   display: flex;
   width: 100%;
   align-items: center;
@@ -794,20 +784,22 @@ textarea {
 /* ---------- todo-item  ----------*/
 
 .todo-item {
-  /* @apply flex flex-col items-center px-6 py-2 border-b border-primary/10 transition-colors duration-300; */
   display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   flex-direction: column;
   align-items: center;
   border-bottom-width: 1px;
   border-color: rgb(64 83 98 / 0.1);
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  font-weight: 500;
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  font-weight: 500;
+  /* @apply -translate-y-[65px] opacity-100 animate-add-item; */
 }
 
 .todo-item--todo-option-open {
@@ -885,7 +877,7 @@ textarea {
 
 .todo-option-btn {
   margin-left: auto;
-  padding: 0.5rem;
+  padding: 0.75rem;
 }
 
 .todo-option-btn__dot {
@@ -910,7 +902,7 @@ textarea {
   visibility: hidden;
   margin-bottom: 0px;
   max-height: 0px;
-  padding-right: 0.5rem;
+  padding-right: 30px;
   opacity: 0;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1019,14 +1011,14 @@ textarea {
   z-index: -10;
 }
 
-.my-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-}
-
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-10 {
@@ -1127,6 +1119,10 @@ textarea {
 
 .max-w-\[150px\] {
   max-width: 150px;
+}
+
+.max-w-xl {
+  max-width: 36rem;
 }
 
 .origin-left {
@@ -1580,6 +1576,21 @@ textarea {
   padding-bottom: 0.75rem;
 }
 
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 .pt-3 {
   padding-top: 0.75rem;
 }
@@ -1721,6 +1732,10 @@ textarea {
   transition-duration: 150ms;
 }
 
+.duration-500 {
+  transition-duration: 500ms;
+}
+
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -1787,11 +1802,6 @@ textarea {
     background-color: rgb(255 200 90 / var(--tw-bg-opacity));
   }
 }
-
-/*
-How to prevent a CSS keyframe animation from running on page load?
-https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-animation-from-running-on-page-load
-*/
 
 .placeholder\:italic::-moz-placeholder {
   font-style: italic;
@@ -1960,3 +1970,5 @@ https://stackoverflow.com/questions/27938900/how-to-prevent-a-css-keyframe-anima
     line-height: 1.75rem;
   }
 }
+
+

@@ -3,19 +3,14 @@
 
  */
 
+window.addEventListener('click', e => {
+    console.log(e.target);
+})
 
 
-/**
- * .preload class用來防止動畫在載入時或重新整理時播放，
- * 在頁面載入後的500ms後刪掉它。 
- */
-// setTimeout(function () {
-//     document.body.classList.remove('preload');
-// }, 500);
 
-
-const loader = document.querySelector('#loader');
 // loader
+const loader = document.querySelector('#loader');
 
 const letterWrapper = document.querySelector('#letter-wrapper');
 
@@ -26,7 +21,8 @@ setTimeout(() => {
             arr[index + 1].style.animationDelay = (index + 1) + '00ms';
         };
     })
-}, 1400);
+}, 14000);
+// ↑↑↑↑↑↑↑ 這邊記得，我有多打一個0
 
 letterWrapper.lastChild.addEventListener('animationend', () => {
     loader.classList.add('animate-fade-out');
@@ -163,14 +159,8 @@ function showMsg(msgContent) {
 }
 
 
-
 /* clear text button */
 const clearTextBtn = document.querySelector('#clear-text-btn');
-const clearTextBtnWrapper = clearTextBtn.parentElement;
-clearTextBtnWrapper.addEventListener('click', () => {
-    // clearTextBtnWrapper是額外做出來的區塊，所以點它並不會使input聚焦，要手動增加點，使他點了之後可以聚焦input
-    todoInput.focus();
-})
 
 todoInput.addEventListener('keyup', clearTextBtnController)
 
@@ -196,7 +186,7 @@ clearTextBtn.addEventListener('click', () => {
 /* status(全部、待完成、已完成) */
 const statusTabs = document.querySelector('#status');
 
-activeCurrentTab()
+activeCurrentTab();
 
 /**
  * 將css中的.status__tab--current狀態給某一個status__tab。
@@ -247,7 +237,7 @@ function renderTodo(currentTab) {
         if (currentTab === data.status || currentTab === 'all') {
             todoItems +=
                 `<li class="todo-item" id="${index}" data-status="${data.status}">
-                    <label class="flex items-center justify-between w-full py-3 cursor-pointer xs:py-4">
+                    <label class="flex items-center justify-between w-full py-3 px-6 cursor-pointer xs:py-4">
                         <input type="checkbox" class="todo-checkbox" ${checkbox}>
                         <p class="todo-text">${data.content}</p>
                         <button class="todo-option-btn">
@@ -294,8 +284,6 @@ function isAnyItemCompleted() {
     const todoItems = [...document.querySelectorAll('.todo-item')];
     return todoItems.some(todoItem => todoItem.dataset.status === 'completed');
 }
-
-
 
 
 
@@ -392,8 +380,8 @@ todoList.addEventListener('click', e => {
 
 
             /* 找出所有的.todo-item:
-            1.保留當前所點擊的todoItem身上的「todo-item--todo-option-open」className，並移除所有非當前的
-            2.保留當前所點擊的todoItem中的.todo-option身上的todo-option--open，並移除所有非當前的
+            1.保留當前所點擊的todoItem身上的「todo-item--todo-option-open」className，並移除其他所有非當前的
+            2.保留當前所點擊的todoItem中的.todo-option身上的todo-option--open，並移除其他所有非當前的
             */
             document.querySelectorAll('.todo-item')
                 .forEach(i => {
@@ -436,11 +424,12 @@ todoList.addEventListener('click', e => {
 
         /* 編輯todoText */
         if (e.target.classList.contains('edit-btn')) {
-            // 一按下「編輯」，就收合已展開的todoOption
-            todoOption.classList.remove('todo-option--open')
+            // 當「編輯」鈕被按下: 1.收合已展開的todoOption 2.去除todoItem的背景色
+            todoOption.classList.remove('todo-option--open');
+            todoItem.classList.remove('todo-item--todo-option-open');
 
             // 獲取todoText DOM
-            const todoText = todoItem.querySelector('.todo-text')
+            const todoText = todoItem.querySelector('.todo-text');
 
             // 調用editMode()
             editMode();
@@ -453,7 +442,7 @@ todoList.addEventListener('click', e => {
                 const editDialog = document.querySelector('#edit-dialog');
                 editDialog.innerHTML =
                     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
-                    <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto"></textarea>
+                    <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>${todoText.innerHTML}</textarea>
                     <div class="flex justify-center items-center">
                         <button class="cancel-btn btn btn-normal mr-6">
                             <i class="fa-solid fa-circle-xmark mr-2"></i>取消
@@ -466,7 +455,8 @@ todoList.addEventListener('click', e => {
 
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
                 let editText = editDialog.querySelector('#edit-text')
-                editText.value = todoText.innerHTML;
+
+                // editText.value = todoText.innerHTML; ---> 此處內容已經放到上方的模板文字中
                 editText.select();
 
 
@@ -510,7 +500,7 @@ todoList.addEventListener('click', e => {
                 saveBtn.addEventListener('click', updateChanges)
                 saveBtn.addEventListener('click', changeToActive)
 
-                // 當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
+                // ★當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
                 const cancelBtn = editDialog.querySelector('.cancel-btn')
                 cancelBtn.addEventListener('click', () => closeDialog(editDialog))
                 cancelBtn.addEventListener('click', checkIfEdited)
@@ -643,6 +633,11 @@ todoList.addEventListener('click', e => {
 })
 
 
+// todoOption小細節優化
+// window.addEventListener('click', e => {
+//     // if(e.target)
+//     console.log(e.target)
+// })
 
 
 
