@@ -100,31 +100,34 @@ module.exports = {
         },
 
         'popdown': {
-          '70%': {
-            top: '130%',
-          },
           '100%': {
-            opacity: '1',
-            top: 'calc(100% + 4px)',
+            'transform': 'translateY(0)'
           },
+          // '70%': {
+          //   top: '130%',
+          // },
+          // '100%': {
+          //   opacity: '1',
+          //   top: 'calc(100% + 4px)',
+          // },
         },
 
-        'hide-up': {
-          '0%': {
-            top: 'calc(100% + 4px)',
-            opacity: '1',
-          },
-          '30%': {
-            top: '130%',
-          },
-          '90%': {
-            opacity: '1',
-          },
-          '100%': {
-            top: '0',
-            opacity: '0',
-          },
-        },
+        // 'hide-up': {
+        //   '0%': {
+        //     top: 'calc(100% + 4px)',
+        //     opacity: '1',
+        //   },
+        //   '30%': {
+        //     top: '130%',
+        //   },
+        //   '90%': {
+        //     opacity: '1',
+        //   },
+        //   '100%': {
+        //     top: '0',
+        //     opacity: '0',
+        //   },
+        // },
 
         'progress': {
           '0%': {
@@ -141,8 +144,6 @@ module.exports = {
           },
         },
 
-
-
         'remove-item': {
           '50%': {
             transform: 'scaleY(1)',
@@ -155,15 +156,6 @@ module.exports = {
             'transform-origin': 'top',
           },
         },
-
-        // 'loader-fade-in' : {
-        //   '0%': {
-        //     opacity: '0',
-        //   },
-        //   '100' : {
-        //     opacity: '1',
-        //   }
-        // },
 
         'jumping-letter': {
           '0%': {
@@ -189,8 +181,6 @@ module.exports = {
             height: '24px',
           },
         },
-
-        // shadow-[0_0_6px_0,inset_0_0_3px_0] shadow-secondary
 
         'box-appear': {
           '0%': {

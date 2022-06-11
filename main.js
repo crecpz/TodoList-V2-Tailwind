@@ -10,26 +10,25 @@ window.addEventListener('click', e => {
 
 
 // loader
-const loader = document.querySelector('#loader');
+// const loader = document.querySelector('#loader');
 
-const letterWrapper = document.querySelector('#letter-wrapper');
+// const letterWrapper = document.querySelector('#letter-wrapper');
 
-setTimeout(() => {
-    [...letterWrapper.children].forEach((letter, index, arr) => {
-        letter.classList.add('animate-jumping-letter');
-        if (arr[index + 1]) {
-            arr[index + 1].style.animationDelay = (index + 1) + '00ms';
-        };
-    })
-}, 14000);
-// ↑↑↑↑↑↑↑ 這邊記得，我有多打一個0
+// setTimeout(() => {
+//     [...letterWrapper.children].forEach((letter, index, arr) => {
+//         letter.classList.add('animate-jumping-letter');
+//         if (arr[index + 1]) {
+//             arr[index + 1].style.animationDelay = (index + 1) + '00ms';
+//         };
+//     })
+// }, 1400);
 
-letterWrapper.lastChild.addEventListener('animationend', () => {
-    loader.classList.add('animate-fade-out');
-    loader.addEventListener('animationend', () => {
-        // loader.classList.add('hide');
-    })
-}, { once: true })
+// letterWrapper.lastChild.addEventListener('animationend', () => {
+//     loader.classList.add('animate-fade-out');
+//     loader.addEventListener('animationend', () => {
+//         // loader.classList.add('hide');
+//     })
+// }, { once: true })
 
 
 
@@ -125,26 +124,29 @@ addBtn.addEventListener('click', showSuccessAddedMsg)
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
 
-        messageWrapper.classList.add('before:w-full');
-        messageWrapper.classList.remove('hide');
-        messageWrapper.innerHTML =
-            `<i class="fa-regular fa-circle-check text-lg"></i>
-                已成功新增至<span class="text-tertiary-dark">待完成</span>！`
-        messageWrapper.classList.add('animate-popdown');
-        messageWrapper.classList.add('before:animate-progress');
 
-        setTimeout(() => {
-            messageWrapper.classList.add('animate-hide-up');
-            messageWrapper.classList.remove('animate-popdown');
-            messageWrapper.classList.remove('before:animate-progress');
 
-            messageWrapper.addEventListener('animationend', () => {
-                messageWrapper.classList.remove('animate-hide-up');
-                messageWrapper.innerHTML = '';
-                messageWrapper.classList.add('hide');
-                messageWrapper.classList.remove('show');
-            }, { once: true })
-        }, 2000)
+
+        // messageWrapper.classList.add('before:w-full');
+        // messageWrapper.classList.remove('hide');
+        // messageWrapper.innerHTML =
+        //     `<i class="fa-regular fa-circle-check text-lg"></i>
+        //         已成功新增至<span class="text-tertiary-dark">待完成</span>！`
+        // messageWrapper.classList.add('animate-popdown');
+        // messageWrapper.classList.add('before:animate-progress');
+
+        // setTimeout(() => {
+        //     messageWrapper.classList.add('animate-hide-up');
+        //     messageWrapper.classList.remove('animate-popdown');
+        //     messageWrapper.classList.remove('before:animate-progress');
+
+        //     messageWrapper.addEventListener('animationend', () => {
+        //         messageWrapper.classList.remove('animate-hide-up');
+        //         messageWrapper.innerHTML = '';
+        //         messageWrapper.classList.add('hide');
+        //         messageWrapper.classList.remove('show');
+        //     }, { once: true })
+        // }, 2000)
     }
 }
 
