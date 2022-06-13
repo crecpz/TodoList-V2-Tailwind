@@ -3,9 +3,7 @@
 
  */
 
-window.addEventListener('click', e => {
-    console.log(e.target);
-})
+
 
 
 
@@ -123,6 +121,30 @@ addBtn.addEventListener('click', showSuccessAddedMsg)
 
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
+        // setTimeout(()=>{
+        //     messageWrapper.classList.remove('before:animate-progress');
+        // },2000)
+
+
+        messageWrapper.style.animationName = "none";
+
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                messageWrapper.classList.add('before:animate-progress');
+            }, 0);
+        });
+
+
+        messageWrapper.classList.add('translate-y-[calc(100%+6px)]');
+        messageWrapper.classList.remove('hide');
+        // messageWrapper.classList.add('before:animate-progress');
+
+        messageWrapper.addEventListener('animationend', () => {
+            messageWrapper.classList.remove('translate-y-[calc(100%+6px)]');
+            messageWrapper.classList.add('hide');
+            messageWrapper.classList.remove('before:animate-progress');
+        }, { once: true })
+
 
 
 
