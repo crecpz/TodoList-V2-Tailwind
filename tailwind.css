@@ -30,11 +30,11 @@
 }
 
 @layer base {
-  body.preload * {
+  /* body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
     transition-duration: 0s !important;
-  }
+  } */
 
   i {
     @apply pointer-events-none;
@@ -47,11 +47,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-primary/50;
+    @apply bg-secondary;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-tertiary;
+    @apply bg-tertiary-dark;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -232,12 +232,13 @@
     @apply animate-remove-item;
   }
 
+  /* scrollbar for firefox */ 
   .scrollbar {
-    scrollbar-color: rgb(255, 211, 141) rgba(64, 83, 98, 0.5);
+    /* scrollbar-color: scrollbar-thumb / scrollbar-track;  */
+    /* scrollbar-color: rgb(255, 211, 141) #eee5dc; */
+    scrollbar-color: #ffc85a #eee5dc;
     scrollbar-width: thin;
-  }
-
-  
+  } 
 }
 
 

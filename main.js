@@ -114,6 +114,7 @@ function addNewTodo() {
  */
 
 const messageWrapper = document.querySelector('#message-wrapper');
+const progressBar = messageWrapper.children[0];
 
 /* 這行暫時寫的 用完務必刪除 */
 addBtn.addEventListener('click', showSuccessAddedMsg)
@@ -121,32 +122,26 @@ addBtn.addEventListener('click', showSuccessAddedMsg)
 
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
-        // setTimeout(()=>{
-        //     messageWrapper.classList.remove('before:animate-progress');
-        // },2000)
-
-
-        messageWrapper.style.animationName = "none";
+        progressBar.style.animationName = "none";
 
         requestAnimationFrame(() => {
             setTimeout(() => {
-                messageWrapper.classList.add('before:animate-progress');
+                progressBar.style.animationName = "";
+                progressBar.classList.add('animate-progress');
             }, 0);
         });
 
-
         messageWrapper.classList.add('translate-y-[calc(100%+6px)]');
         messageWrapper.classList.remove('hide');
-        // messageWrapper.classList.add('before:animate-progress');
 
-        messageWrapper.addEventListener('animationend', () => {
+        messageWrapper.addEventListener('animationend', closeMessage, { once: true })
+        messageWrapper.addEventListener('click', closeMessage, { once: true })
+
+        function closeMessage() {
             messageWrapper.classList.remove('translate-y-[calc(100%+6px)]');
             messageWrapper.classList.add('hide');
             messageWrapper.classList.remove('before:animate-progress');
-        }, { once: true })
-
-
-
+        }
 
 
         // messageWrapper.classList.add('before:w-full');

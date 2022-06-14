@@ -131,6 +131,7 @@ module.exports = {
 
         'progress': {
           '0%': {
+            'opacity': '0',
           },
           '100%': {
             width: '0%',
@@ -210,7 +211,7 @@ module.exports = {
       'hide-down': 'hide-down 350ms ease-in forwards',
       'popdown': 'popdown 200ms ease-out forwards',
       'hide-up': 'hide-up 350ms ease-in-out forwards',
-      // progress延遲幾秒取決於整個通知條由上而下需要花費多少時間
+      // 提醒: progress延遲幾秒取決於整個通知條由上而下需要花費多少時間
       'progress': 'progress 2s linear forwards 500ms',
       'add-item': 'add-item 500ms ease-in-out forwards',
       'remove-item': 'remove-item 500ms ease-in-out forwards',
