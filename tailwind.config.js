@@ -11,7 +11,6 @@ module.exports = {
         secondary: '#eee5dc',
         tertiary: '#ffd38d',
         'tertiary-dark': '#ffc85a',
-        // 'tertiary-dark':'#efc881',
       },
 
       screens: {
@@ -103,35 +102,11 @@ module.exports = {
           '100%': {
             'transform': 'translateY(0)'
           },
-          // '70%': {
-          //   top: '130%',
-          // },
-          // '100%': {
-          //   opacity: '1',
-          //   top: 'calc(100% + 4px)',
-          // },
         },
-
-        // 'hide-up': {
-        //   '0%': {
-        //     top: 'calc(100% + 4px)',
-        //     opacity: '1',
-        //   },
-        //   '30%': {
-        //     top: '130%',
-        //   },
-        //   '90%': {
-        //     opacity: '1',
-        //   },
-        //   '100%': {
-        //     top: '0',
-        //     opacity: '0',
-        //   },
-        // },
 
         'progress': {
           '0%': {
-            'opacity': '0',
+            width: '100%',
           },
           '100%': {
             width: '0%',
@@ -200,26 +175,26 @@ module.exports = {
           },
         },
       },
+      animation: {
+        'fade-in': 'fade-in 700ms forwards',
+        'fade-out': 'fade-out 1000ms ease forwards',
+        'slide-up': 'slide-up 500ms forwards',
+        'slide-down': ' slide-down 700ms forwards',
+        'popup': 'popup 200ms ease-out forwards',
+        'hide-down': 'hide-down 350ms ease-in forwards',
+        'popdown': 'popdown 200ms ease-out forwards',
+        'hide-up': 'hide-up 350ms ease-in-out forwards',
+        // 提醒: progress延遲秒數乃是取決於整個通知條由上而下的transition-duration，盡量在transition-duration結束後就接著開始播放progress動畫
+        'progress': 'progress 2s linear forwards 300ms',
+        'add-item': 'add-item 500ms ease-in-out forwards',
+        'remove-item': 'remove-item 500ms ease-in-out forwards',
+        'jumping-letter': 'jumping-letter 500ms ease-out',
+        'tick': 'tick 150ms linear forwards 300ms',
+        'tick-before': 'tick-before 150ms linear forwards 500ms',
+        'box-appear': 'box-appear 750ms ease-out forwards 800ms',
+      },
     },
 
-    animation: {
-      'fade-in': 'fade-in 700ms forwards',
-      'fade-out': 'fade-out 1000ms ease forwards',
-      'slide-up': 'slide-up 500ms forwards',
-      'slide-down': ' slide-down 700ms forwards',
-      'popup': 'popup 200ms ease-out forwards',
-      'hide-down': 'hide-down 350ms ease-in forwards',
-      'popdown': 'popdown 200ms ease-out forwards',
-      'hide-up': 'hide-up 350ms ease-in-out forwards',
-      // 提醒: progress延遲幾秒取決於整個通知條由上而下需要花費多少時間
-      'progress': 'progress 2s linear forwards 500ms',
-      'add-item': 'add-item 500ms ease-in-out forwards',
-      'remove-item': 'remove-item 500ms ease-in-out forwards',
-      'jumping-letter': 'jumping-letter 500ms ease-out',
-      'tick': 'tick 150ms linear forwards 300ms',
-      'tick-before': 'tick-before 150ms linear forwards 500ms',
-      'box-appear': 'box-appear 750ms ease-out forwards 800ms',
-    },
   },
 
   plugins: [],

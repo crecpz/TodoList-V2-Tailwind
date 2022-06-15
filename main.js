@@ -1,32 +1,34 @@
-/* ------ Table of contents ------
+/*  ------ Table of contents ------
+
     
 
- */
+
+*/
 
 
 
 
 
 // loader
-// const loader = document.querySelector('#loader');
+const loader = document.querySelector('#loader');
 
-// const letterWrapper = document.querySelector('#letter-wrapper');
+const letterWrapper = document.querySelector('#letter-wrapper');
 
-// setTimeout(() => {
-//     [...letterWrapper.children].forEach((letter, index, arr) => {
-//         letter.classList.add('animate-jumping-letter');
-//         if (arr[index + 1]) {
-//             arr[index + 1].style.animationDelay = (index + 1) + '00ms';
-//         };
-//     })
-// }, 1400);
+setTimeout(() => {
+    [...letterWrapper.children].forEach((letter, index, arr) => {
+        letter.classList.add('animate-jumping-letter');
+        if (arr[index + 1]) {
+            arr[index + 1].style.animationDelay = (index + 1) + '00ms';
+        };
+    })
+}, 1400);
 
-// letterWrapper.lastChild.addEventListener('animationend', () => {
-//     loader.classList.add('animate-fade-out');
-//     loader.addEventListener('animationend', () => {
-//         // loader.classList.add('hide');
-//     })
-// }, { once: true })
+letterWrapper.lastChild.addEventListener('animationend', () => {
+    loader.classList.add('animate-fade-out');
+    loader.addEventListener('animationend', () => {
+        // loader.classList.add('hide');
+    })
+}, { once: true })
 
 
 
@@ -35,7 +37,7 @@ const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 
 let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
-/* Todo Input */
+// ---------- Todo Input ----------
 
 //  透過'滑鼠點擊addBtn'或'鍵盤按下Enter'來新增todo-item
 const todoInput = document.querySelector('#todo-input')
@@ -73,7 +75,6 @@ todoInput.addEventListener('keyup', e => {
         addNewTodo()
         addBtn.classList.remove('add-btn--active')
     }
-
     clearTextBtn.classList.add('hide');
 })
 
@@ -115,10 +116,6 @@ function addNewTodo() {
 
 const messageWrapper = document.querySelector('#message-wrapper');
 const progressBar = messageWrapper.children[0];
-
-/* 這行暫時寫的 用完務必刪除 */
-addBtn.addEventListener('click', showSuccessAddedMsg)
-
 
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {

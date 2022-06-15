@@ -1281,7 +1281,7 @@ textarea {
 
 @-webkit-keyframes progress {
   0% {
-    opacity: 0;
+    width: 100%;
   }
 
   100% {
@@ -1291,7 +1291,7 @@ textarea {
 
 @keyframes progress {
   0% {
-    opacity: 0;
+    width: 100%;
   }
 
   100% {
@@ -1300,8 +1300,8 @@ textarea {
 }
 
 .animate-progress {
-  -webkit-animation: progress 2s linear forwards 500ms;
-          animation: progress 2s linear forwards 500ms;
+  -webkit-animation: progress 2s linear forwards 300ms;
+          animation: progress 2s linear forwards 300ms;
 }
 
 @-webkit-keyframes popdown {
@@ -1398,6 +1398,39 @@ textarea {
 .animate-popup {
   -webkit-animation: popup 200ms ease-out forwards;
           animation: popup 200ms ease-out forwards;
+}
+
+@-webkit-keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.animate-bounce {
+  -webkit-animation: bounce 1s infinite;
+          animation: bounce 1s infinite;
 }
 
 @-webkit-keyframes remove-item {
@@ -1526,17 +1559,13 @@ textarea {
   background-color: rgb(238 229 220 / var(--tw-bg-opacity));
 }
 
-.bg-\[\#78977e\]\/80 {
-  background-color: rgb(120 151 126 / 0.8);
-}
-
-.bg-\[\#116046\]\/60 {
-  background-color: rgb(17 96 70 / 0.6);
-}
-
-.bg-white {
+.bg-\[\#2b2a2a\] {
   --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  background-color: rgb(43 42 42 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#ffc85a\]\/90 {
+  background-color: rgb(255 200 90 / 0.9);
 }
 
 .p-4 {
@@ -1724,12 +1753,12 @@ textarea {
   transition-duration: 150ms;
 }
 
-.duration-500 {
-  transition-duration: 500ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
+}
+
+.duration-500 {
+  transition-duration: 500ms;
 }
 
 .show {
@@ -1876,7 +1905,7 @@ textarea {
 @keyframes progress {
   0% {
     content: var(--tw-content);
-    opacity: 0;
+    width: 100%;
   }
 
   100% {
@@ -1887,8 +1916,8 @@ textarea {
 
 .before\:animate-progress::before {
   content: var(--tw-content);
-  -webkit-animation: progress 2s linear forwards 500ms;
-          animation: progress 2s linear forwards 500ms;
+  -webkit-animation: progress 2s linear forwards 300ms;
+          animation: progress 2s linear forwards 300ms;
 }
 
 .before\:rounded-sm::before {
