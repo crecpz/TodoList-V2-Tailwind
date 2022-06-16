@@ -475,29 +475,6 @@ todoList.addEventListener('click', e => {
                 // editText.value = todoText.innerHTML; ---> 此處內容已經放到上方的模板文字中
                 editText.select();
 
-
-                // 以下這段暫時用不到，但是如果未來在處理手機板不會自動全選的時候，可能會用到
-                // 先不刪
-                // editText.setAttribute('contenteditable', true)
-
-                // selectText(editText)
-
-                // function selectText(node) {
-                //     if (document.body.createTextRange) {
-                //         const range = document.body.createTextRange();
-                //         range.moveToElementText(node);
-                //         range.select();
-                //     } else if (window.getSelection) {
-                //         const selection = window.getSelection();
-                //         const range = document.createRange();
-                //         range.selectNodeContents(node);
-                //         selection.removeAllRanges();
-                //         selection.addRange(range);
-                //     } else {
-                //         console.warn("Could not select text in node: Unsupported browser.");
-                //     }
-                // }
-
                 // 先確保在開啟dialog前，dialog是關閉的狀態
                 editDialog.close()
 
@@ -505,12 +482,10 @@ todoList.addEventListener('click', e => {
                 editDialog.showModal()
 
 
-
-
                 // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
 
-                // 當使用者按下【儲存】(無論是否有編輯過):
-                // 關閉dialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
+                /* 當使用者按下【儲存】(無論是否有編輯過):
+                關閉dialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選 */
                 const saveBtn = editDialog.querySelector('.save-btn')
                 saveBtn.addEventListener('click', () => closeDialog(editDialog))
                 saveBtn.addEventListener('click', updateChanges)

@@ -679,13 +679,6 @@ textarea {
   --tw-backdrop-sepia:  ;
 }
 
-.content {
-  /* @apply mx-auto px-4 py-8 max-w-xl; */
-  /* 已將此處移至HTML中 */
-}
-
-/* 最大寬度設定600px應該可以 */
-
 .btn {
   border-radius: 0.375rem;
   border-width: 2px;
@@ -806,7 +799,6 @@ textarea {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  /* @apply -translate-y-[65px] opacity-100 animate-add-item; */
 }
 
 .todo-item--todo-option-open {
@@ -831,9 +823,15 @@ textarea {
 }
 
 .todo-checkbox:checked + .todo-text {
-  color: rgb(64 83 98 / 0.6);
+  color: rgb(64 83 98 / 0.4);
   -webkit-text-decoration-line: line-through;
           text-decoration-line: line-through;
+  -webkit-text-decoration-color: rgb(64 83 98 / 0.6);
+          text-decoration-color: rgb(64 83 98 / 0.6);
+  text-decoration-thickness: 2px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
 }
 
 .todo-checkbox:checked::before {
@@ -994,28 +992,16 @@ textarea {
   bottom: -0px;
 }
 
-.top-1\/2 {
-  top: 50%;
-}
-
 .right-\[88px\] {
   right: 88px;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
 .bottom-0 {
   bottom: 0px;
-}
-
-.right-0 {
-  right: 0px;
-}
-
-.right-\[\] {
-  right: ;
-}
-
-.right-\[88\] {
-  right: 88;
 }
 
 .z-50 {
@@ -1580,11 +1566,6 @@ textarea {
   background-color: rgb(255 200 90 / 0.9);
 }
 
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .p-4 {
   padding: 1rem;
 }
@@ -1791,8 +1772,6 @@ textarea {
 /* scrollbar for firefox */
 
 .scrollbar {
-  /* scrollbar-color: scrollbar-thumb / scrollbar-track;  */
-  /* scrollbar-color: rgb(255, 211, 141) #eee5dc; */
   scrollbar-color: #ffc85a #eee5dc;
   scrollbar-width: thin;
 }
@@ -1957,12 +1936,7 @@ textarea {
   content: var(--tw-content);
 }
 
-.hover\:text-primary:hover {
-  --tw-text-opacity: 1;
-  color: rgb(64 83 98 / var(--tw-text-opacity));
-}
-
-.hover\:text-red-500:hover {
+.group:hover .group-hover\:text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
@@ -1970,11 +1944,6 @@ textarea {
 .group:hover .group-hover\:text-primary {
   --tw-text-opacity: 1;
   color: rgb(64 83 98 / var(--tw-text-opacity));
-}
-
-.group:hover .group-hover\:text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 @media (min-width: 576px) {

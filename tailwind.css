@@ -99,12 +99,6 @@
 }
 
 @layer components {
-  .content {
-    /* @apply mx-auto px-4 py-8 max-w-xl; */
-    /* 已將此處移至HTML中 */
-  }
-
-  /* 最大寬度設定600px應該可以 */
 
   .btn {
     @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
@@ -152,7 +146,6 @@
 
   .todo-item {
     @apply flex flex-col items-center font-medium border-b border-primary/10 transition-colors duration-500 select-none;
-    /* @apply -translate-y-[65px] opacity-100 animate-add-item; */
   }
 
   .todo-item--todo-option-open {
@@ -164,7 +157,7 @@
   }
 
   .todo-checkbox:checked + .todo-text {
-    @apply line-through text-primary/60;
+    @apply line-through text-primary/40 decoration-primary/60 decoration-2 transition-all duration-500;
   }
 
   .todo-checkbox:checked::before {
@@ -234,8 +227,6 @@
 
   /* scrollbar for firefox */ 
   .scrollbar {
-    /* scrollbar-color: scrollbar-thumb / scrollbar-track;  */
-    /* scrollbar-color: rgb(255, 211, 141) #eee5dc; */
     scrollbar-color: #ffc85a #eee5dc;
     scrollbar-width: thin;
   } 
