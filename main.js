@@ -1,5 +1,6 @@
 /*  ------ Table of contents ------
 
+    - loader
     
 
 
@@ -11,7 +12,6 @@
 
 // loader
 const loader = document.querySelector('#loader');
-
 const letterWrapper = document.querySelector('#letter-wrapper');
 
 setTimeout(() => {
@@ -37,36 +37,38 @@ const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 
 let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
+
+
 // ---------- Todo Input ----------
 
-//  透過'滑鼠點擊addBtn'或'鍵盤按下Enter'來新增todo-item
-const todoInput = document.querySelector('#todo-input')
-const addBtn = document.querySelector('#add-btn')
+// 透過「 滑鼠點擊addBtn 」或「 鍵盤按下Enter 」來新增todo-item
+const todoInput = document.querySelector('#todo-input');
+const addBtn = document.querySelector('#add-btn');
 
 // 滑鼠點擊addBtn
-addBtn.addEventListener('mousedown', e => {
+addBtn.addEventListener('mousedown', () => {
     addBtn.classList.add('add-btn--active');
 
     // 防止使用者壓著滑鼠不放移出範圍產生的按鈕卡住問題
     addBtn.addEventListener('mouseout', () => {
-        addBtn.classList.remove('add-btn--active')
-    })
-})
+        addBtn.classList.remove('add-btn--active');
+    });
+});
 
-addBtn.addEventListener('mouseup', e => {
-    addNewTodo()
-    addBtn.classList.remove('add-btn--active')
+addBtn.addEventListener('mouseup', () => {
+    addNewTodo();
+    addBtn.classList.remove('add-btn--active');
 
     clearTextBtn.classList.add('hide');
 })
 
-addBtn.addEventListener('click', addNewTodo)
+addBtn.addEventListener('click', addNewTodo);
 
 
 // 鍵盤按下Enter
 todoInput.addEventListener('keydown', e => {
     if (e.key === "Enter") {
-        addBtn.classList.add('add-btn--active')
+        addBtn.classList.add('add-btn--active');
     }
 })
 
@@ -94,7 +96,7 @@ function addNewTodo() {
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
-        showSuccessAddedMsg()
+        showSuccessAddedMsg();
 
     } else {
         todoInput.value = '';
@@ -103,24 +105,16 @@ function addNewTodo() {
 
 
 
-
-/*
-以下針對彈出的訊息框做說明:
-
-由於目前仍未找到當動畫重複觸發時，重新執行動畫的方法，
-所以這部分先擱置，先去處理該處理的其他部分。
-(怕忘記這邊說一下:重複執行動畫是要用在alert message這個div的::before部分，
-    為了使progress(進度條動畫)可以重新從100%開始倒數)
-    
- */
-
 const messageWrapper = document.querySelector('#message-wrapper');
 const progressBar = messageWrapper.children[0];
 
+/**
+ * 在「 completed 」頁面新增新的代辦事項時，跳出成功新增的提示。
+ */
 function showSuccessAddedMsg() {
     if (currentTab === 'completed') {
+        // 使動畫可以在執行過程中能夠被重複(重新)觸發
         progressBar.style.animationName = "none";
-
         requestAnimationFrame(() => {
             setTimeout(() => {
                 progressBar.style.animationName = "";
@@ -128,39 +122,22 @@ function showSuccessAddedMsg() {
             }, 0);
         });
 
+        // 跳出提示通知
         messageWrapper.classList.add('translate-y-[calc(100%+6px)]');
         messageWrapper.classList.remove('hide');
 
-        messageWrapper.addEventListener('animationend', closeMessage, { once: true })
-        messageWrapper.addEventListener('click', closeMessage, { once: true })
+        // 當動畫執行結束時或當使用者親自按下提示通知時 => 關閉提示通知 
+        messageWrapper.addEventListener('animationend', closeMessage, { once: true });
+        messageWrapper.addEventListener('click', closeMessage, { once: true });
 
+        /**
+         * 關閉提示通知
+         */
         function closeMessage() {
             messageWrapper.classList.remove('translate-y-[calc(100%+6px)]');
             messageWrapper.classList.add('hide');
             messageWrapper.classList.remove('before:animate-progress');
         }
-
-
-        // messageWrapper.classList.add('before:w-full');
-        // messageWrapper.classList.remove('hide');
-        // messageWrapper.innerHTML =
-        //     `<i class="fa-regular fa-circle-check text-lg"></i>
-        //         已成功新增至<span class="text-tertiary-dark">待完成</span>！`
-        // messageWrapper.classList.add('animate-popdown');
-        // messageWrapper.classList.add('before:animate-progress');
-
-        // setTimeout(() => {
-        //     messageWrapper.classList.add('animate-hide-up');
-        //     messageWrapper.classList.remove('animate-popdown');
-        //     messageWrapper.classList.remove('before:animate-progress');
-
-        //     messageWrapper.addEventListener('animationend', () => {
-        //         messageWrapper.classList.remove('animate-hide-up');
-        //         messageWrapper.innerHTML = '';
-        //         messageWrapper.classList.add('hide');
-        //         messageWrapper.classList.remove('show');
-        //     }, { once: true })
-        // }, 2000)
     }
 }
 
@@ -170,7 +147,6 @@ function showSuccessAddedMsg() {
  * @param {*} msg 欲顯示的訊息內容
  */
 function showMsg(msgContent) {
-    // msgWrapper 
     msgWrapper.innerHTML = msgContent;
 }
 
@@ -178,7 +154,7 @@ function showMsg(msgContent) {
 /* clear text button */
 const clearTextBtn = document.querySelector('#clear-text-btn');
 
-todoInput.addEventListener('keyup', clearTextBtnController)
+todoInput.addEventListener('keyup', clearTextBtnController);
 
 function clearTextBtnController() {
     if (todoInput.value !== '') {
@@ -622,15 +598,6 @@ todoList.addEventListener('click', e => {
         }
     }
 })
-
-
-// todoOption小細節優化
-// window.addEventListener('click', e => {
-//     // if(e.target)
-//     console.log(e.target)
-// })
-
-
 
 
 /**
