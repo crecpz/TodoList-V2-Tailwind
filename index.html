@@ -57,11 +57,15 @@
             <button id="completed" class="status__tab status__tab-completed">已完成</button>
 
             <!-- alert message -->
+            <!-- <div id="message-wrapper"
+                class="hide absolute top-0 left-0 z-10 w-full bg-[#2b2a2a] text-center pt-3 pb-2.5 whitespace-nowrap text-secondary cursor-pointer select-none shadow-xl transition-[opacity,transform,visibility] duration-300"> -->
             <div id="message-wrapper"
-                class="hide absolute top-0 left-0 z-10 w-full bg-[#2b2a2a] text-center pt-3 pb-2.5 whitespace-nowrap text-secondary cursor-pointer select-none shadow-xl transition-[opacity,transform,visibility] duration-300">
+                class="hide absolute top-0 left-0 z-10 flex justify-center items-center w-full bg-[#2b2a2a] text-center pt-3 pb-2.5 whitespace-nowrap text-secondary cursor-pointer select-none shadow-xl transition-[opacity,transform,visibility] duration-300">
+                
                 <div class="absolute -top-1 left-0 w-full h-1 bg-[#ffc85a]/90"></div>
-                <i class="fa-regular fa-circle-check text-lg"></i>
+                <i class="fa-regular fa-circle-check text-lg ml-auto mr-4"></i>
                 已成功新增至<span class="text-tertiary">待完成</span>！
+                <i class="fa-solid fa-x text-sm ml-auto mr-4 text-secondary"></i>
             </div>
         </div>
 
@@ -87,7 +91,8 @@
                 class="w-full h-full bg-secondary font-medium text-primary outline-none p-4 rounded-bl-xl placeholder:text-primary/70 placeholder:italic xs:text-lg">
 
             <!-- clear-text btn -->
-            <div class="absolute right-[88px] top-1/2 -translate-y-1/2 flex justify-center items-center h-full bg-secondary">
+            <div
+                class="absolute right-[88px] top-1/2 -translate-y-1/2 flex justify-center items-center h-full bg-secondary">
                 <button id="clear-text-btn" class="hide transition-all duration-300 group">
                     <i
                         class="fa-solid fa-circle-xmark text-primary-light text-xl transition-colors duration-300 group-hover:text-red-500"></i>

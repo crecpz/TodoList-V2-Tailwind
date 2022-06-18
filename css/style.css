@@ -1058,6 +1058,10 @@ textarea {
   margin-right: 1.5rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -1333,28 +1337,6 @@ textarea {
 .animate-progress {
   -webkit-animation: progress 2s linear forwards 300ms;
           animation: progress 2s linear forwards 300ms;
-}
-
-@-webkit-keyframes popdown {
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes popdown {
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.animate-popdown {
-  -webkit-animation: popdown 200ms ease-out forwards;
-          animation: popdown 200ms ease-out forwards;
-}
-
-.animate-hide-up {
-  -webkit-animation: hide-up 350ms ease-in-out forwards;
-          animation: hide-up 350ms ease-in-out forwards;
 }
 
 @-webkit-keyframes hide-down {
@@ -1680,11 +1662,6 @@ textarea {
   color: rgb(169 171 171 / var(--tw-text-opacity));
 }
 
-.text-tertiary-dark {
-  --tw-text-opacity: 1;
-  color: rgb(255 200 90 / var(--tw-text-opacity));
-}
-
 .opacity-90 {
   opacity: 0.9;
 }
@@ -1757,11 +1734,6 @@ textarea {
 
 .duration-500 {
   transition-duration: 500ms;
-}
-
-.show {
-  visibility: visible;
-  opacity: 1;
 }
 
 .hide {
@@ -1873,11 +1845,6 @@ textarea {
   width: 0.25rem;
 }
 
-.before\:w-full::before {
-  content: var(--tw-content);
-  width: 100%;
-}
-
 @-webkit-keyframes tick-before {
   100% {
     content: var(--tw-content);
@@ -1936,14 +1903,19 @@ textarea {
   content: var(--tw-content);
 }
 
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-green-500:hover {
+  --tw-text-opacity: 1;
+  color: rgb(34 197 94 / var(--tw-text-opacity));
+}
+
 .group:hover .group-hover\:text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-
-.group:hover .group-hover\:text-primary {
-  --tw-text-opacity: 1;
-  color: rgb(64 83 98 / var(--tw-text-opacity));
 }
 
 @media (min-width: 576px) {

@@ -96,7 +96,11 @@ function addNewTodo() {
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
-        showSuccessAddedMsg();
+
+        
+        if (currentTab === 'completed') {
+            showMsg();
+        }
 
     } else {
         todoInput.value = '';
@@ -108,46 +112,36 @@ function addNewTodo() {
 const messageWrapper = document.querySelector('#message-wrapper');
 const progressBar = messageWrapper.children[0];
 
+
 /**
- * 在「 completed 」頁面新增新的代辦事項時，跳出成功新增的提示。
+ * 顯示提示訊息，在在使用者點按提示訊息後收起或數秒後自動收起
  */
-function showSuccessAddedMsg() {
-    if (currentTab === 'completed') {
-        // 使動畫可以在執行過程中能夠被重複(重新)觸發
-        progressBar.style.animationName = "none";
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                progressBar.style.animationName = "";
-                progressBar.classList.add('animate-progress');
-            }, 0);
-        });
+function showMsg() {
+    // 使動畫可以在執行過程中能夠被重複(重新)觸發
+    progressBar.style.animationName = "none";
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            progressBar.style.animationName = "";
+            progressBar.classList.add('animate-progress');
+        }, 0);
+    });
 
-        // 跳出提示通知
-        messageWrapper.classList.add('translate-y-[calc(100%+6px)]');
-        messageWrapper.classList.remove('hide');
+    // 跳出提示通知
+    messageWrapper.classList.add('translate-y-[calc(100%+6px)]');
+    messageWrapper.classList.remove('hide');
 
-        // 當動畫執行結束時或當使用者親自按下提示通知時 => 關閉提示通知 
-        messageWrapper.addEventListener('animationend', closeMessage, { once: true });
-        messageWrapper.addEventListener('click', closeMessage, { once: true });
+    // 當動畫執行結束時或當使用者親自按下提示通知時 => 關閉提示通知 
+    messageWrapper.addEventListener('animationend', closeMessage, { once: true });
+    messageWrapper.addEventListener('click', closeMessage, { once: true });
 
-        /**
-         * 關閉提示通知
-         */
-        function closeMessage() {
-            messageWrapper.classList.remove('translate-y-[calc(100%+6px)]');
-            messageWrapper.classList.add('hide');
-            messageWrapper.classList.remove('before:animate-progress');
-        }
+    /**
+     * 關閉提示通知
+     */
+    function closeMessage() {
+        messageWrapper.classList.remove('translate-y-[calc(100%+6px)]');
+        messageWrapper.classList.add('hide');
+        messageWrapper.classList.remove('before:animate-progress');
     }
-}
-
-
-/**
- * 顯示提示訊息
- * @param {*} msg 欲顯示的訊息內容
- */
-function showMsg(msgContent) {
-    msgWrapper.innerHTML = msgContent;
 }
 
 
