@@ -165,7 +165,7 @@
   }
 
   .todo-text {
-    @apply flex flex-wrap text-primary ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
+    @apply flex flex-wrap text-primary tracking-[0.125em] ml-2 pl-2 mr-1.5 pr-1.5 my-1 py-1 cursor-pointer focus-visible:outline-none decoration-2 pointer-events-none bg-transparent;
     @apply xs:text-lg;
   }
 
