@@ -25,9 +25,6 @@ setTimeout(() => {
 
 letterWrapper.lastChild.addEventListener('animationend', () => {
     loader.classList.add('animate-fade-out');
-    loader.addEventListener('animationend', () => {
-        // loader.classList.add('hide');
-    })
 }, { once: true })
 
 
@@ -107,16 +104,29 @@ function addNewTodo() {
     }
 }
 
+/*
+    已成功新增至待完成 
+    已成功
+
+*/
 
 
-const messageWrapper = document.querySelector('#message-wrapper');
-const progressBar = messageWrapper.children[0];
+
+        // <i class="fa-regular fa-circle-check text-lg mr-4"></i>
+        // 已成功新增至<span class="text-tertiary">待完成</span>！
+
 
 
 /**
  * 顯示提示訊息，在在使用者點按提示訊息後收起或數秒後自動收起
  */
-function showMsg() {
+function showMsg(msg) {
+    const messageWrapper = document.querySelector('#message-wrapper');
+    const progressBar = messageWrapper.children[0];
+    const messageContent = document.querySelector('#message-content');
+    messageContent.innerHTML = msg;
+
+
     // 使動畫可以在執行過程中能夠被重複(重新)觸發
     progressBar.style.animationName = "none";
     requestAnimationFrame(() => {
