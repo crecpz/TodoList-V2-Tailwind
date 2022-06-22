@@ -94,9 +94,10 @@ function addNewTodo() {
         localStorage.setItem('todos', JSON.stringify(todoListData))
         renderTodo(currentTab)
 
-        
+
         if (currentTab === 'completed') {
-            showMsg();
+            showMsg(msg_addToActive);
+    
         }
 
     } else {
@@ -105,15 +106,35 @@ function addNewTodo() {
 }
 
 /*
-    已成功新增至待完成 
-    已成功
+    成功新增至待完成msg_addToActive
+    成功清除已完成事項 msg_clearCompleted
 
+    方法: 利用showMsg(msg)函數，參數msg放入提示訊息內容。
 */
 
+// 提示訊息內容:成功新增至待完成
+const msg_addToActive = `
+    <i class="fa-regular fa-circle-check text-lg mr-4"></i>
+    已成功新增至<span class="text-tertiary">待完成</span>！
+`;
 
+// 提示訊息內容:成功清除已完成事項
+const msg_clearCompleted = `
+    <svg class="w-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.49 13.13">
+        <defs>
+            <style>
+                .cls-2 {
+                    fill: #eee5dc;
+                }
+            </style>
+        </defs>
+        <path class="cls-2"
+            d="M.8,11.49a1.66,1.66,0,0,0,1.64,1.64H9a1.65,1.65,0,0,0,1.64-1.64V3.28H.8ZM5.23,9.84a.39.39,0,0,1-.56,0L3.08,8.25a.39.39,0,0,1,0-.56.4.4,0,0,1,.56,0L4.94,9,7.85,6.1a.4.4,0,0,1,.56,0,.39.39,0,0,1,0,.56Z" />
+        <path class="cls-2"
+            d="M10.67.82H8.21L8,.45A.83.83,0,0,0,7.29,0H4.2a.83.83,0,0,0-.73.45L3.28.82H.82a.82.82,0,0,0,0,1.64h9.85a.82.82,0,1,0,0-1.64Z" />
+    </svg>成功<span class="text-tertiary">清除已完成事項</span>！
+`;
 
-        // <i class="fa-regular fa-circle-check text-lg mr-4"></i>
-        // 已成功新增至<span class="text-tertiary">待完成</span>！
 
 
 
