@@ -97,7 +97,6 @@ function addNewTodo() {
 
         if (currentTab === 'completed') {
             showMsg(msg_addToActive);
-    
         }
 
     } else {
@@ -209,33 +208,33 @@ activeCurrentTab();
  * 將css中的.status__tab--current狀態給某一個status__tab。
  */
 function activeCurrentTab() {
-    const activeTarget = statusTabs.querySelector(`#${currentTab}`)
+    const activeTarget = statusTabs.querySelector(`#${currentTab}`);
     statusTabs.querySelectorAll('.status__tab').forEach(item => {
-        item.classList.remove('status__tab--current')
+        item.classList.remove('status__tab--current');
     })
-    activeTarget.classList.add('status__tab--current')
+    activeTarget.classList.add('status__tab--current');
 }
 
 
-statusTabs.addEventListener('click', updateCurrentStatus)
+statusTabs.addEventListener('click', updateCurrentTab);
 
-function updateCurrentStatus(e) {
-    // 此判斷式是為了防止e.target點到其他目標，將錯誤的id傳給了currentTab
+function updateCurrentTab(e) {
+    // 確保e.target點的是<button>
     if (e.target.tagName === 'BUTTON') {
         currentTab = e.target.id;
     }
 
-    localStorage.setItem('currentTab', JSON.stringify(currentTab))
-    activeCurrentTab()
+    localStorage.setItem('currentTab', JSON.stringify(currentTab));
+    activeCurrentTab();
 
-    renderTodo(currentTab)
-    checkIfListEmpty()
+    renderTodo(currentTab);
+    checkIfListEmpty();
 }
 
-const todoList = document.querySelector('#todo-list')
-let todoListData = JSON.parse(localStorage.getItem('todos'))
+const todoList = document.querySelector('#todo-list');
+let todoListData = JSON.parse(localStorage.getItem('todos'));
 
-renderTodo(currentTab)
+renderTodo(currentTab);
 
 function renderTodo(currentTab) {
     let checkbox;
@@ -278,17 +277,16 @@ function renderTodo(currentTab) {
         if (todoItems) {
             todoList.innerHTML = todoItems;
         } else {
-            showEmptyMsg()
+            showEmptyMsg();
         }
     })
 
-
-    if (isAnyItemCompleted()) {
-        showClearBtn()
-        addPaddingBottom()
+    if (isAnyItemCompleted() && currentTab === "completed") {
+        showClearBtn();
+        addPaddingBottom();
     } else {
-        hideClearBtn()
-        removePaddingBottom()
+        hideClearBtn();
+        removePaddingBottom();
     }
 }
 
@@ -343,32 +341,79 @@ function showClearBtn() {
     clearBtnWrapper.classList.remove('animate-hide-down');
 }
 
+
+showEmptyMsg();
+
 /**
- * 在todoList為空的時候顯示訊息來告知使用者此處沒內容。
+ * 在todoList為空的時候，顯示訊息告知使用者此處沒內容。
  * 
  * 在顯示訊息內容之前會先進行判斷，當前的頁面(currentTab)位於待完成(active)或是全部(all)，
  * 與當前的頁面(currentTab)位於已完成(completed)所顯示的訊息會有所不同。
  * 
  */
 function showEmptyMsg() {
-    if (currentTab === 'active' || currentTab === 'all') {
-        todoList.innerHTML =
-            `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
-                <div class="flex flex-col items-center my-auto">
-                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-                    <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
-                </div>
-                <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
-            </div>`;
-    } else {
+
+    const allEmptyMsg = "目前沒有任何事項<br>在下方輸入新的待辦事項吧！";
+    const activeEmptyMsg = "目前沒有待完成事項<br>在下方輸入新的待辦事項吧！";
+    const completedEmptyMsg = "目前沒有已完成事項!";
+    let outputMsg;
+
+    if (currentTab === 'all') {
+        outputMsg = allEmptyMsg;
+    } else if (currentTab === 'active') {
+        outputMsg = activeEmptyMsg;
+    } else if (currentTab === 'completed') {
+        outputMsg = completedEmptyMsg;
+    }
+    // 這段是專屬「已完成」的頁面
+    // todoList.innerHTML =
+    // `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
+    //     <div class="flex flex-col items-center my-auto">
+    //         <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+    //         <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+    //     </div>
+    // </div>`
+
+    todoList.innerHTML = `
+       <div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
+        <div class="flex flex-col items-center my-auto">
+            <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+            <p class="text-primary text-center mt-6 font-bold">${outputMsg}</p>
+        </div>
+        <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
+         </div>
+    `;
+
+    if (currentTab === 'completed') {
         todoList.innerHTML =
             `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
-                <div class="flex flex-col items-center my-auto">
-                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-                    <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
-                </div>
-            </div>`
+        <div class="flex flex-col items-center my-auto">
+            <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+            <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+        </div>
+    </div>`
     }
+
+
+
+    // if (currentTab === 'active' || currentTab === 'all') {
+    //     todoList.innerHTML =
+    //         `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
+    //             <div class="flex flex-col items-center my-auto">
+    //                 <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+    //                 <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
+    //             </div>
+    //             <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
+    //         </div>`;
+    // } else {
+    //     todoList.innerHTML =
+    //         `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
+    //             <div class="flex flex-col items-center my-auto">
+    //                 <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+    //                 <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+    //             </div>
+    //         </div>`
+    // }
 }
 
 todoList.addEventListener('click', e => {
@@ -413,18 +458,12 @@ todoList.addEventListener('click', e => {
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
 
-            /* 滑走動畫試寫 */
-            // removingItem()
-            // function removingItem() {
-            //     todoItem.classList.add('animate-remove-item')
-            // }
-
-            if (isAnyItemCompleted()) {
-                showClearBtn()
-                addPaddingBottom()
+            if (isAnyItemCompleted() && currentTab === 'completed') {
+                showClearBtn();
+                addPaddingBottom();
             } else {
-                hideClearBtn()
-                removePaddingBottom()
+                hideClearBtn();
+                removePaddingBottom();
             }
         }
 
@@ -643,9 +682,16 @@ function checkIfListEmpty() {
 const clearBtn = document.querySelector('#clear-btn')
 
 clearBtn.addEventListener('click', () => {
+    // 清除所有已完成的項目
     clearCompleted();
+
+    // 渲染
     renderTodo(currentTab);
+
+    // 檢查清單是否為空
     checkIfListEmpty();
+
+    // 將最新的內容更新至localStorage
     localStorage.setItem('todos', JSON.stringify(todoListData));
 })
 

@@ -1095,10 +1095,6 @@ textarea {
   height: 80px;
 }
 
-.h-\[5rem\] {
-  height: 5rem;
-}
-
 .max-h-\[60vh\] {
   max-height: 60vh;
 }
@@ -1135,10 +1131,6 @@ textarea {
   max-width: 150px;
 }
 
-.max-w-\[9\.375rem\] {
-  max-width: 9.375rem;
-}
-
 .origin-left {
   transform-origin: left;
 }
@@ -1155,11 +1147,6 @@ textarea {
 
 .translate-y-\[calc\(100\%\+6px\)\] {
   --tw-translate-y: calc(100% + 6px);
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.translate-y-\[calc\(100\%\+\.375rem\)\] {
-  --tw-translate-y: calc(100% + .375rem);
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1431,37 +1418,6 @@ textarea {
           animation: popup 200ms ease-out forwards;
 }
 
-@-webkit-keyframes remove-item {
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-    overflow: hidden;
-  }
-
-  100% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-}
-
-@keyframes remove-item {
-  50% {
-    transform: scaleY(1);
-    transform-origin: top;
-    overflow: hidden;
-  }
-
-  100% {
-    transform: scaleY(0);
-    transform-origin: top;
-  }
-}
-
-.animate-remove-item {
-  -webkit-animation: remove-item 500ms ease-in-out forwards;
-          animation: remove-item 500ms ease-in-out forwards;
-}
-
 .cursor-pointer {
   cursor: pointer;
 }
@@ -1564,10 +1520,6 @@ textarea {
 
 .bg-\[\#ffc85a\]\/90 {
   background-color: rgb(255 200 90 / 0.9);
-}
-
-.fill-secondary {
-  fill: #eee5dc;
 }
 
 .p-4 {
