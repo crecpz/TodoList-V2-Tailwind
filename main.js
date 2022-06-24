@@ -353,8 +353,8 @@ showEmptyMsg();
  */
 function showEmptyMsg() {
 
-    const allEmptyMsg = "目前沒有任何事項<br>在下方輸入新的待辦事項吧！";
-    const activeEmptyMsg = "目前沒有待完成事項<br>在下方輸入新的待辦事項吧！";
+    const allEmptyMsg = '目前沒有任何事項<br><span class="inline-block mt-0.5">在下方輸入新的待辦事項吧！</span>';
+    const activeEmptyMsg = '目前沒有待完成事項<br><span class="inline-block mt-0.5">在下方輸入新的待辦事項吧！</span>';
     const completedEmptyMsg = "目前沒有已完成事項!";
     let outputMsg;
 
@@ -365,55 +365,27 @@ function showEmptyMsg() {
     } else if (currentTab === 'completed') {
         outputMsg = completedEmptyMsg;
     }
-    // 這段是專屬「已完成」的頁面
-    // todoList.innerHTML =
-    // `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
-    //     <div class="flex flex-col items-center my-auto">
-    //         <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-    //         <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
-    //     </div>
-    // </div>`
 
     todoList.innerHTML = `
-       <div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
-        <div class="flex flex-col items-center my-auto">
-            <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-            <p class="text-primary text-center mt-6 font-bold">${outputMsg}</p>
+        <div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
+            <div class="flex flex-col items-center my-auto">
+                <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+                <p class="text-primary text-center mt-6 font-bold">${outputMsg}</p>
+            </div>
+            <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
         </div>
-        <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
-         </div>
     `;
 
     if (currentTab === 'completed') {
-        todoList.innerHTML =
-            `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
-        <div class="flex flex-col items-center my-auto">
-            <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-            <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
-        </div>
-    </div>`
+        todoList.innerHTML = `
+            <div id="empty-msg" class="bg-red-500 flex flex-col items-center justify-between w-full h-full pointer-events-none">
+                <div class="flex flex-col items-center my-auto">
+                    <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
+                    <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
+                </div>
+            </div>
+    `;
     }
-
-
-
-    // if (currentTab === 'active' || currentTab === 'all') {
-    //     todoList.innerHTML =
-    //         `<div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
-    //             <div class="flex flex-col items-center my-auto">
-    //                 <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-    //                 <p class="text-primary text-center mt-6 font-bold">目前沒有待辦事項<br>在下方輸入新的待辦事項吧！</p>
-    //             </div>
-    //             <i class="fa-solid fa-arrow-down-long absolute -bottom-0 text-xl text-primary mb-4 animate-bounce"></i>
-    //         </div>`;
-    // } else {
-    //     todoList.innerHTML =
-    //         `<div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
-    //             <div class="flex flex-col items-center my-auto">
-    //                 <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
-    //                 <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
-    //             </div>
-    //         </div>`
-    // }
 }
 
 todoList.addEventListener('click', e => {
@@ -422,9 +394,6 @@ todoList.addEventListener('click', e => {
 
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li');
-
-        // 展開todo-option
-
 
         // 如果使用者點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
