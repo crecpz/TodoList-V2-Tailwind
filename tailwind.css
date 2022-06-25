@@ -116,7 +116,7 @@
   /* --------- status --------- */
 
   .status {
-    @apply relative z-20 flex items-center w-full mb-1 mt-12;
+    @apply relative z-20 flex items-center w-full mb-1;
     @apply rounded-tl-2xl rounded-tr-2xl;
     @apply xs:text-lg;
   }
