@@ -1106,6 +1106,10 @@ textarea {
   max-height: 75%;
 }
 
+.max-h-\[65\%\] {
+  max-height: 65%;
+}
+
 .w-full {
   width: 100%;
 }
