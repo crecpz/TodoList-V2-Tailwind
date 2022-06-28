@@ -1102,10 +1102,6 @@ textarea {
   height: 80px;
 }
 
-.max-h-\[75\%\] {
-  max-height: 75%;
-}
-
 .max-h-\[65\%\] {
   max-height: 65%;
 }
@@ -1458,6 +1454,10 @@ textarea {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .overflow-y-auto {

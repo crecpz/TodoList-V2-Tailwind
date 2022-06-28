@@ -232,7 +232,7 @@ function updateCurrentTab(e) {
 }
 
 const todoList = document.querySelector('#todo-list');
-let todoListData = JSON.parse(localStorage.getItem('todos'));
+let todoListData = JSON.parse(localStorage.getItem('todos')) || [];
 
 renderTodo(currentTab);
 
@@ -275,6 +275,8 @@ function renderTodo(currentTab) {
             `;
         }
 
+
+        // 如果todoItems沒東西，則顯示此處為空的訊息
         if (todoItems) {
             todoList.innerHTML = todoItems;
         } else {
@@ -555,18 +557,6 @@ todoList.addEventListener('click', e => {
                 }
 
                 editDialog.addEventListener('keydown', e => {
-                    /* 原本想要做按下esc可以等同於按下取消鈕一樣的效果，但出了點問題，像是如果 
-                    把文字編輯過之後，再次打開編輯框，不做任何編輯就按ESC，會跳出checkIfEdited對話框 */
-                    // if (e.key === "Escape") {
-                    //     e.preventDefault();
-                    //     e.stopPropagation()
-                    //     closeDialog(editDialog);
-                    //     checkIfEdited();
-                    // }
-
-
-                    // 所以，我想試著用 esc 點下去就相當於點下取消按鈕，我不要再重複綁一堆亂七八糟的了，先來研究如何阻止連續觸發keydown
-                    // https://localcoder.org/prevent-javascript-keydown-event-from-being-handled-multiple-times-while-held-do#solution_3
 
                     if (e.key === "Escape") {
                         e.preventDefault();
