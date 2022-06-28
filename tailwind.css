@@ -74,7 +74,7 @@
   /* --------- dialog --------- */
 
   dialog {
-    @apply w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
+    @apply hidden w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
   }
 
   dialog[open] {
