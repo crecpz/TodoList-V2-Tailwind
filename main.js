@@ -35,7 +35,6 @@ const clearBtnWrapper = document.querySelector('#clear-btn-wrapper')
 let currentTab = JSON.parse(localStorage.getItem('currentTab')) || 'all';
 
 
-
 // ---------- Todo Input ----------
 
 // 透過「 滑鼠點擊addBtn 」或「 鍵盤按下Enter 」來新增todo-item
@@ -71,7 +70,7 @@ todoInput.addEventListener('keydown', e => {
 
 todoInput.addEventListener('keyup', e => {
     if (e.key === "Enter") {
-        addNewTodo()
+        addNewTodo();
         addBtn.classList.remove('add-btn--active')
     }
     clearTextBtn.classList.add('hide');
@@ -90,26 +89,19 @@ function addNewTodo() {
             status: 'active',
         }
 
-        todoListData.unshift(inputData)
+        todoListData.unshift(inputData);
         todoInput.value = '';
         localStorage.setItem('todos', JSON.stringify(todoListData))
-        renderTodo(currentTab)
+        renderTodo(currentTab);
 
         if (currentTab === 'completed') {
             showMsg(msg_addToActive);
         }
-
     } else {
         todoInput.value = '';
     }
 }
 
-/*
-    成功新增至待完成msg_addToActive
-    成功清除已完成事項 msg_clearCompleted
-
-    方法: 利用showMsg(msg)函數，參數msg放入提示訊息內容。
-*/
 
 // 提示訊息內容:成功新增至待完成
 const msg_addToActive = `
@@ -232,62 +224,70 @@ function updateCurrentTab(e) {
 }
 
 const todoList = document.querySelector('#todo-list');
-let todoListData = JSON.parse(localStorage.getItem('todos')) || [];
+let todoListData = JSON.parse(localStorage.getItem('todos'));
 
 renderTodo(currentTab);
 
 function renderTodo(currentTab) {
-    let checkbox;
-    let todoItems = '';
+    // 如果todoListData為空，則顯示訊息告知使用者此處沒內容
+    if (todoListData === null) {
+        showEmptyMsg();
+    } else {
+        let checkbox = '';
+        let todoItems = '';
 
-    todoListData.forEach((data, index) => {
-        // 檢查每一項todoListData內的「status」，確認其狀態是否為active
-        if (data.status === 'active') {
-            checkbox = '';
-            dataCheck = false;
-        } else {
-            checkbox = 'checked';
-            dataCheck = true;
-        }
+        todoListData.forEach((data, index) => {
+            /* 
+            檢查每一項todoListData內的「status」，確認其狀態是否為active?
+            如果是active，則表示該事項還未被完成，checkbox不應該被勾選；
+            如果不是active，則表示該事項已被完成，checkbox應該勾選起來。
+            以下的checkbox用來儲存在模板文字中應該顯示的狀態。
+            */
+            checkbox = data.status === 'active'
+                ? ''
+                : 'checked';
 
-        if (currentTab === data.status || currentTab === 'all') {
-            todoItems +=
-                `<li class="todo-item" id="${index}" data-status="${data.status}">
-                    <label class="flex items-center justify-between w-full py-3 px-6 cursor-pointer xs:py-4">
-                        <input type="checkbox" class="todo-checkbox" ${checkbox}>
-                        <p class="todo-text">${data.content}</p>
-                        <button class="todo-option-btn">
-                            <div class="todo-option-btn__dot"></div>
-                            <div class="todo-option-btn__dot"></div>
-                            <div class="todo-option-btn__dot"></div>
-                        </button>
-                    </label>
+            if (currentTab === data.status || currentTab === 'all') {
+                todoItems +=
+                    `<li class="todo-item" id="${index}" data-status="${data.status}">
+                        <label class="flex items-center justify-between w-full py-3 px-6 cursor-pointer xs:py-4">
+                            <input type="checkbox" class="todo-checkbox" ${checkbox}>
+                            <p class="todo-text">${data.content}</p>
+                            <button class="todo-option-btn">
+                                <div class="todo-option-btn__dot"></div>
+                                <div class="todo-option-btn__dot"></div>
+                                <div class="todo-option-btn__dot"></div>
+                            </button>
+                        </label>
+        
+                        <div class="todo-option">
+                            <button class="edit-btn btn btn-normal mr-4">
+                                <i class="fa-solid fa-pen-to-square mr-2"></i>編輯
+                            </button>
+                            <button class="remove-btn btn btn-hightlight">
+                                <i class="fa-solid fa-trash mr-2"></i>刪除
+                            </button>
+                        </div>
+                    </li>
+                `;
+            }
+        })
 
-                    <div class="todo-option">
-                        <button class="edit-btn btn btn-normal mr-4">
-                            <i class="fa-solid fa-pen-to-square mr-2"></i>編輯
-                        </button>
-                        <button class="remove-btn btn btn-hightlight">
-                            <i class="fa-solid fa-trash mr-2"></i>刪除
-                        </button>
-                    </div>
-                </li>
-            `;
-        }
 
-
-        // 如果todoItems沒東西，則顯示此處為空的訊息
+        //  如果todoItems沒東西，則顯示此處為空的訊息
         if (todoItems) {
             todoList.innerHTML = todoItems;
         } else {
             showEmptyMsg();
         }
-    })
+    }
 
-    if (isAnyItemCompleted() && currentTab === "completed") {
+    if (hasAnyCompleted() && currentTab === "completed") {
+        // console.log('open')
         showClearBtn();
         addPaddingBottom();
     } else {
+        // console.log('close')
         hideClearBtn();
         removePaddingBottom();
     }
@@ -298,12 +298,12 @@ function renderTodo(currentTab) {
  * 檢查是否有任何一個項目已經是completed狀態。
  * @returns Boolean
  */
-function isAnyItemCompleted() {
+function hasAnyCompleted() {
     const todoItems = [...document.querySelectorAll('.todo-item')];
+    // console.log(todoItems);
+    // console.log(todoItems.some(todoItem => todoItem.dataset.status === 'completed'));
     return todoItems.some(todoItem => todoItem.dataset.status === 'completed');
 }
-
-
 
 
 /**
@@ -331,6 +331,7 @@ function removePaddingBottom() {
  * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
+    console.log('hideClearBtn')
     clearBtnWrapper.classList.add('animate-hide-down');
     clearBtnWrapper.classList.remove('animate-popup');
 }
@@ -340,12 +341,15 @@ function hideClearBtn() {
  * 此函數用來顯示clearBtn。
  */
 function showClearBtn() {
-    clearBtnWrapper.classList.add('animate-popup');
+    console.log('showClearBtn')
     clearBtnWrapper.classList.remove('animate-hide-down');
+    clearBtnWrapper.classList.add('animate-popup');
 }
 
 
-showEmptyMsg();
+
+
+// showEmptyMsg();
 
 /**
  * 在todoList為空的時候，顯示訊息告知使用者此處沒內容。
@@ -359,7 +363,7 @@ function showEmptyMsg() {
     const allEmptyMsg = '目前沒有任何事項<br><span class="inline-block mt-0.5">在下方輸入新的待辦事項吧！</span>';
     const activeEmptyMsg = '目前沒有待完成事項<br><span class="inline-block mt-0.5">在下方輸入新的待辦事項吧！</span>';
     const completedEmptyMsg = "目前沒有已完成事項!";
-    let outputMsg;
+    let outputMsg = '';
 
     if (currentTab === 'all') {
         outputMsg = allEmptyMsg;
@@ -430,7 +434,7 @@ todoList.addEventListener('click', e => {
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
 
-            if (isAnyItemCompleted() && currentTab === 'completed') {
+            if (hasAnyCompleted() && currentTab === 'completed') {
                 showClearBtn();
                 addPaddingBottom();
             } else {
@@ -492,6 +496,8 @@ todoList.addEventListener('click', e => {
 
                 // 以上內容準備完成後，使對話框彈出
                 editDialog.showModal();
+
+                editDialog.classList.remove('hidden');
 
 
                 // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
@@ -631,12 +637,14 @@ todoList.addEventListener('click', e => {
  *  3.移除在todoList所新增的padding-bottom
  */
 function checkIfListEmpty() {
-    if (todoListData.length === 0) {
+    if (!todoListData || todoListData.length === 0) {
         showEmptyMsg();
         hideClearBtn();
         removePaddingBottom();
     }
 }
+
+
 
 // 使用者按下「清除已完成事項」
 
