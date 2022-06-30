@@ -283,7 +283,7 @@ function renderTodo(currentTab) {
     }
 
     if (hasAnyCompleted() && currentTab === "completed") {
-        // console.log('open')
+       
         showClearBtn();
         addPaddingBottom();
     } else {
@@ -331,7 +331,7 @@ function removePaddingBottom() {
  * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
-    console.log('hideClearBtn')
+    // console.log('hideClearBtn')
     clearBtnWrapper.classList.add('animate-hide-down');
     clearBtnWrapper.classList.remove('animate-popup');
 }
@@ -341,7 +341,7 @@ function hideClearBtn() {
  * 此函數用來顯示clearBtn。
  */
 function showClearBtn() {
-    console.log('showClearBtn')
+    console.log('open')
     clearBtnWrapper.classList.remove('animate-hide-down');
     clearBtnWrapper.classList.add('animate-popup');
 }
