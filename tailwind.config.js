@@ -71,7 +71,8 @@ module.exports = {
         },
 
         'popup': {
-          '70%': {
+          '80%': {
+            opacity: '1',
             bottom: '130%',
           },
           '100%': {
@@ -85,7 +86,7 @@ module.exports = {
             bottom: 'calc(100% + 4px)',
             opacity: '1',
           },
-          '30%': {
+          '20%': {
             bottom: '130%',
           },
           '90%': {
@@ -179,11 +180,11 @@ module.exports = {
         'fade-in': 'fade-in 700ms forwards',
         'fade-out': 'fade-out 1000ms ease forwards',
         'slide-up': 'slide-up 500ms forwards',
-        'slide-down': ' slide-down 700ms forwards',
-        'popup': 'popup 200ms ease-out forwards',
-        'hide-down': 'hide-down 350ms ease-in forwards',
+        'slide-down': 'slide-down 700ms forwards',
+        'popup': 'popup 200ms ease-in forwards',
+        'hide-down': 'hide-down 200ms ease-in forwards',
         'popdown': 'popdown 200ms ease-out forwards',
-        'hide-up': 'hide-up 350ms ease-in-out forwards',
+        'hide-up': 'hide-up 200ms ease-in-out forwards',
         // 提醒: progress延遲秒數乃是取決於整個通知條由上而下的transition-duration，盡量在transition-duration結束後就接著開始播放progress動畫
         'progress': 'progress 2s linear forwards 300ms',
         'add-item': 'add-item 500ms ease-in-out forwards',

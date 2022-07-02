@@ -74,7 +74,8 @@
   /* --------- dialog --------- */
 
   dialog {
-    @apply hidden w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
+    @apply w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
+    /* @apply hidden; */
   }
 
   dialog[open] {
@@ -99,7 +100,6 @@
 }
 
 @layer components {
-
   .btn {
     @apply py-1 px-3 text-sm text-primary border-2 border-primary rounded-md shadow-[0_5px_0_0] duration-200 transition-all;
     @apply active:shadow-[0_0_0_0] active:translate-y-[5px];
@@ -225,11 +225,9 @@
     @apply animate-remove-item;
   }
 
-  /* scrollbar for firefox */ 
+  /* scrollbar for firefox */
   .scrollbar {
     scrollbar-color: #ffc85a #eee5dc;
     scrollbar-width: thin;
-  } 
+  }
 }
-
-

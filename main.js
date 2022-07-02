@@ -123,7 +123,7 @@ const msg_clearCompleted = `
             d="M.8,11.49a1.66,1.66,0,0,0,1.64,1.64H9a1.65,1.65,0,0,0,1.64-1.64V3.28H.8ZM5.23,9.84a.39.39,0,0,1-.56,0L3.08,8.25a.39.39,0,0,1,0-.56.4.4,0,0,1,.56,0L4.94,9,7.85,6.1a.4.4,0,0,1,.56,0,.39.39,0,0,1,0,.56Z" />
         <path class="cls-2"
             d="M10.67.82H8.21L8,.45A.83.83,0,0,0,7.29,0H4.2a.83.83,0,0,0-.73.45L3.28.82H.82a.82.82,0,0,0,0,1.64h9.85a.82.82,0,1,0,0-1.64Z" />
-    </svg>成功<span class="text-tertiary">清除已完成事項</span>！
+    </svg>成功清除已完成事項！
 `;
 
 
@@ -283,7 +283,6 @@ function renderTodo(currentTab) {
     }
 
     if (hasAnyCompleted() && currentTab === "completed") {
-       
         showClearBtn();
         addPaddingBottom();
     } else {
@@ -331,7 +330,6 @@ function removePaddingBottom() {
  * 此函數用來隱藏clearBtn。
  */
 function hideClearBtn() {
-    // console.log('hideClearBtn')
     clearBtnWrapper.classList.add('animate-hide-down');
     clearBtnWrapper.classList.remove('animate-popup');
 }
@@ -341,7 +339,6 @@ function hideClearBtn() {
  * 此函數用來顯示clearBtn。
  */
 function showClearBtn() {
-    console.log('open')
     clearBtnWrapper.classList.remove('animate-hide-down');
     clearBtnWrapper.classList.add('animate-popup');
 }
@@ -374,7 +371,7 @@ function showEmptyMsg() {
     }
 
     todoList.innerHTML = `
-        <div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none">
+        <div id="empty-msg" class="relative flex flex-col items-center justify-between w-full h-full pointer-events-none select-none">
             <div class="flex flex-col items-center my-auto">
                 <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                 <p class="text-primary text-center mt-6 font-bold">${outputMsg}</p>
@@ -385,7 +382,7 @@ function showEmptyMsg() {
 
     if (currentTab === 'completed') {
         todoList.innerHTML = `
-            <div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none">
+            <div id="empty-msg" class="flex flex-col items-center justify-between w-full h-full pointer-events-none select-none">
                 <div class="flex flex-col items-center my-auto">
                     <img class="max-w-[150px] w-full" src="img/todo-illustration.svg">
                     <p class="text-primary text-center mt-6 font-bold">目前沒有已完成事項!</p>
@@ -497,7 +494,30 @@ todoList.addEventListener('click', e => {
                 // 以上內容準備完成後，使對話框彈出
                 editDialog.showModal();
 
-                editDialog.classList.remove('hidden');
+
+                // showDialog(editDialog);
+                // editDialog.classList.add('block');
+                // editDialog.classList.remove('hidden');
+
+                // 開啟對話
+                // function showDialog(dialog) {
+                //     dialog.showModal();
+                //     dialog.classList.add('block');
+                //     dialog.classList.remove('hidden');
+                // }
+
+                // 關閉對話
+                // function closeDialog(dialog) {
+                //     dialog.close();
+
+
+                //     dialog.addEventListener('animationend', () => {
+                //         // dialog.classList.remove('block');
+                //         dialog.classList.remove('block');
+                //         dialog.classList.add('hidden');
+                //     }, { once: true })
+                // }
+
 
 
                 // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
@@ -511,7 +531,10 @@ todoList.addEventListener('click', e => {
 
                 // ★當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
                 const cancelBtn = editDialog.querySelector('.cancel-btn');
-                cancelBtn.addEventListener('click', () => closeDialog(editDialog));
+                cancelBtn.addEventListener('click', () => {
+                    editDialog.close();
+                    // closeDialog(editDialog);
+                });
                 cancelBtn.addEventListener('click', checkIfEdited);
 
                 /**
@@ -556,7 +579,11 @@ todoList.addEventListener('click', e => {
                         // 若使用者選擇【儲存】　---> 儲存此次變更
                         // 關閉confirmDialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
                         const saveBtn = confirmDialog.querySelector('.save-btn');
-                        saveBtn.addEventListener('click', () => closeDialog(confirmDialog));
+                        saveBtn.addEventListener('click', () => {
+                            confirmDialog.close();
+                            // closeDialog(confirmDialog)
+                            // closeDialog(editDialog);
+                        });
                         saveBtn.addEventListener('click', updateChanges);
                         saveBtn.addEventListener('click', changeToActive);
                     }
