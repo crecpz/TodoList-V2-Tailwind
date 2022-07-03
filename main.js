@@ -525,16 +525,40 @@ todoList.addEventListener('click', e => {
                 /* 當使用者按下【儲存】(無論是否有編輯過):
                 關閉dialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選 */
                 const saveBtn = editDialog.querySelector('.save-btn');
-                saveBtn.addEventListener('click', () => closeDialog(editDialog));
+                saveBtn.addEventListener('click', () => dialogClosing(editDialog));
+                // saveBtn.addEventListener('click', () => {
+                //     editDialog.close();
+                // });
                 saveBtn.addEventListener('click', updateChanges);
                 saveBtn.addEventListener('click', changeToActive);
 
                 // ★當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
                 const cancelBtn = editDialog.querySelector('.cancel-btn');
                 cancelBtn.addEventListener('click', () => {
-                    editDialog.close();
-                    // closeDialog(editDialog);
+                    dialogClosing(editDialog);
+
+                    // editDialog.setAttribute('closing', "");
+
+                    // editDialog.addEventListener('animationend', () => {
+                    //     editDialog.close();
+                    //     editDialog.removeAttribute('closing', "");
+                    // }, { once: true })
                 });
+
+                /**
+                 * 將dialog加上"closing"的attribute，這麼做的目的是為了讓css的[closing]屬性可以運作動畫。
+                 * 在動畫執行完後，關閉dialog，並刪除attribute屬性。
+                 * 
+                 * @param {*} dialog 欲關閉的dialog
+                 */
+                function dialogClosing(dialog) {
+                    dialog.setAttribute('closing', "");
+
+                    dialog.addEventListener('animationend', () => {
+                        dialog.close();
+                        dialog.removeAttribute('closing', "");
+                    }, { once: true })
+                }
                 cancelBtn.addEventListener('click', checkIfEdited);
 
                 /**
@@ -574,15 +598,17 @@ todoList.addEventListener('click', e => {
 
                         // 若使用者選擇【不儲存】--->　關閉此confirmDialog
                         const cancelBtn = confirmDialog.querySelector('.cancel-btn');
-                        cancelBtn.addEventListener('click', () => closeDialog(confirmDialog));
+                        // cancelBtn.addEventListener('click', () => closeDialog(confirmDialog));
+                        cancelBtn.addEventListener('click', () => dialogClosing(confirmDialog));
 
                         // 若使用者選擇【儲存】　---> 儲存此次變更
                         // 關閉confirmDialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
                         const saveBtn = confirmDialog.querySelector('.save-btn');
+                        // saveBtn.addEventListener('click', () => {
+                        //     confirmDialog.close();
+                        // });
                         saveBtn.addEventListener('click', () => {
-                            confirmDialog.close();
-                            // closeDialog(confirmDialog)
-                            // closeDialog(editDialog);
+                            dialogClosing(confirmDialog);
                         });
                         saveBtn.addEventListener('click', updateChanges);
                         saveBtn.addEventListener('click', changeToActive);

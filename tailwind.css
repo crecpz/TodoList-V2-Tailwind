@@ -87,7 +87,8 @@
   }
 
   dialog[closing] {
-    @apply animate-slide-down;
+    /* @apply animate-slide-down; */
+    @apply animate-fade-out;
   }
 
   dialog[closing]::backdrop {

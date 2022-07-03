@@ -178,8 +178,8 @@ module.exports = {
       },
       animation: {
         'fade-in': 'fade-in 700ms forwards',
-        'fade-out': 'fade-out 1000ms ease forwards',
-        'slide-up': 'slide-up 500ms forwards',
+        'fade-out': 'fade-out 500ms ease-in-out forwards',
+        'slide-up': 'slide-up 650ms ease-in-out forwards',
         'slide-down': 'slide-down 700ms forwards',
         'popup': 'popup 200ms ease-in forwards',
         'hide-down': 'hide-down 200ms ease-in forwards',
