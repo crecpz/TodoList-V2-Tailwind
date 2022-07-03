@@ -55,18 +55,23 @@ module.exports = {
           },
           'to': {
             opacity: 1,
-            transform: 'translateY(0%)',
+            transform: 'translateY(-50%)',
           },
         },
 
-        'slide-down': {
-          'from': {
-            opacity: 1,
-            transform: 'translateY(0%)',
+        'dialog-closing': {
+          '0%': {
+            transform: 'translateY(-50%)',
+            opacity: '1',
+            visibility: 'visible',
           },
-          'to': {
-            opacity: 0,
-            transform: 'translateY(50%)',
+          '99%': {
+            opacity: '0',
+          },
+          '100%': {
+            transform: 'translateY(-50%)',
+            visibility: 'hidden',
+            opacity: '0',
           },
         },
 
@@ -180,7 +185,7 @@ module.exports = {
         'fade-in': 'fade-in 700ms forwards',
         'fade-out': 'fade-out 500ms ease-in-out forwards',
         'slide-up': 'slide-up 650ms ease-in-out forwards',
-        'slide-down': 'slide-down 700ms forwards',
+        'dialog-closing': 'dialog-closing 700ms forwards',
         'popup': 'popup 200ms ease-in forwards',
         'hide-down': 'hide-down 200ms ease-in forwards',
         'popdown': 'popdown 200ms ease-out forwards',

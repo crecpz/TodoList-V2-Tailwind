@@ -497,7 +497,7 @@ dialog {
 
   to {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(-50%);
   }
 }
 
@@ -509,7 +509,7 @@ dialog {
 
   to {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(-50%);
   }
 }
 
@@ -564,6 +564,47 @@ dialog[closing] {
   /* @apply animate-slide-down; */
 }
 
+@-webkit-keyframes dialog-closing {
+  0% {
+    transform: translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-50%);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-closing {
+  0% {
+    transform: translateY(-50%);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  99% {
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(-50%);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+dialog[closing] {
+  -webkit-animation: dialog-closing 700ms forwards;
+          animation: dialog-closing 700ms forwards;
+}
+
 @-webkit-keyframes fade-out {
   0% {
     opacity: 1;
@@ -578,27 +619,6 @@ dialog[closing] {
     visibility: hidden;
     opacity: 0;
   }
-}
-
-@keyframes fade-out {
-  0% {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  99% {
-    opacity: 0;
-  }
-
-  100% {
-    visibility: hidden;
-    opacity: 0;
-  }
-}
-
-dialog[closing] {
-  -webkit-animation: fade-out 500ms ease-in-out forwards;
-          animation: fade-out 500ms ease-in-out forwards;
 }
 
 @keyframes fade-out {

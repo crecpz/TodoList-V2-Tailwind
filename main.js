@@ -183,6 +183,14 @@ function clearTextBtnController() {
 clearTextBtn.addEventListener('click', () => {
     clearTextBtn.classList.toggle('hide');
     todoInput.value = '';
+    console.log('click');
+})
+
+clearTextBtn.addEventListener('touchend',e => {
+    e.preventDefault();
+    clearTextBtn.classList.toggle('hide');
+    todoInput.value = '';
+    console.log('touchend');
 })
 
 
