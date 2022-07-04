@@ -169,6 +169,7 @@ function showMsg(msg) {
 
 /* clear text button */
 const clearTextBtn = document.querySelector('#clear-text-btn');
+const clearTextBtnIcon = document.querySelector('#clear-text-btn-icon');
 
 todoInput.addEventListener('keyup', clearTextBtnController);
 
@@ -179,6 +180,15 @@ function clearTextBtnController() {
         clearTextBtn.classList.add('hide');
     }
 }
+
+clearTextBtn.addEventListener('mouseenter', ()=> {
+    // console.log(this)
+    clearTextBtnIcon.classList.add('text-red-500');
+})
+
+clearTextBtn.addEventListener('mouseout', ()=> {
+    clearTextBtnIcon.classList.remove('text-red-500');
+})
 
 clearTextBtn.addEventListener('click', () => {
     clearTextBtn.classList.add('hide');
