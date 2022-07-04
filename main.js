@@ -55,7 +55,14 @@ addBtn.addEventListener('mouseup', () => {
     addNewTodo();
     addBtn.classList.remove('add-btn--active');
     clearTextBtn.classList.add('hide');
+    todoInput.focus();
 })
+
+// // 取消在觸控螢幕上按下addBtn的預設行為(鍵盤收起)
+// addBtn.addEventListener('touchend', e => {
+//     e.preventDefault();
+//     console.log(e)
+// })
 
 addBtn.addEventListener('click', addNewTodo);
 
@@ -169,6 +176,7 @@ function showMsg(msg) {
 
 /* clear text button */
 const clearTextBtn = document.querySelector('#clear-text-btn');
+const clearTextBtnIcon = document.querySelector('#clear-text-btn-icon');
 
 todoInput.addEventListener('keyup', clearTextBtnController);
 
@@ -180,17 +188,29 @@ function clearTextBtnController() {
     }
 }
 
+clearTextBtn.addEventListener('mouseenter', () => {
+    // console.log(this)
+    clearTextBtnIcon.classList.add('text-red-500');
+})
+
+clearTextBtn.addEventListener('mouseout', () => {
+    clearTextBtnIcon.classList.remove('text-red-500');
+})
+
 clearTextBtn.addEventListener('click', () => {
     clearTextBtn.classList.add('hide');
     todoInput.value = '';
+    todoInput.focus();
 })
 
-clearTextBtn.addEventListener('touchend',e => {
+clearTextBtn.addEventListener('touchend', e => {
     e.preventDefault();
     clearTextBtn.classList.add('hide');
     todoInput.value = '';
-    console.log('touchend');
+    todoInput.focus();
 })
+
+
 
 
 
