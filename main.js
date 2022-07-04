@@ -58,10 +58,11 @@ addBtn.addEventListener('mouseup', () => {
     todoInput.focus();
 })
 
-// 取消在觸控螢幕上按下addBtn的預設行為(鍵盤收起)
-addBtn.addEventListener('touchend', e => {
-    e.preventDefault();
-})
+// // 取消在觸控螢幕上按下addBtn的預設行為(鍵盤收起)
+// addBtn.addEventListener('touchend', e => {
+//     e.preventDefault();
+//     console.log(e)
+// })
 
 addBtn.addEventListener('click', addNewTodo);
 
