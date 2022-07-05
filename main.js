@@ -180,6 +180,11 @@ const clearTextBtnIcon = document.querySelector('#clear-text-btn-icon');
 
 todoInput.addEventListener('keyup', clearTextBtnController);
 
+/**
+ * 控制clearTextBtn的顯示與隱藏。
+ * 
+ * 如果todoInput的value為空，則顯示；反之則隱藏。
+ */
 function clearTextBtnController() {
     if (todoInput.value !== '') {
         clearTextBtn.classList.remove('hide');
@@ -187,14 +192,6 @@ function clearTextBtnController() {
         clearTextBtn.classList.add('hide');
     }
 }
-
-clearTextBtn.addEventListener('mouseenter', () => {
-    // clearTextBtnIcon.classList.add('text-red-500');
-})
-
-clearTextBtn.addEventListener('mouseout', () => {
-    // clearTextBtnIcon.classList.remove('text-red-500');
-})
 
 clearTextBtn.addEventListener('click', () => {
     clearTextBtn.classList.add('hide');
@@ -208,9 +205,6 @@ clearTextBtn.addEventListener('touchend', e => {
     todoInput.value = '';
     todoInput.focus();
 })
-
-
-
 
 
 
