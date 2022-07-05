@@ -61,7 +61,7 @@ addBtn.addEventListener('mouseup', () => {
 // // 取消在觸控螢幕上按下addBtn的預設行為(鍵盤收起)
 // addBtn.addEventListener('touchend', e => {
 //     e.preventDefault();
-//     console.log(e)
+//     console.loclearTextBtng(e)
 // })
 
 addBtn.addEventListener('click', addNewTodo);
@@ -189,12 +189,11 @@ function clearTextBtnController() {
 }
 
 clearTextBtn.addEventListener('mouseenter', () => {
-    // console.log(this)
-    clearTextBtnIcon.classList.add('text-red-500');
+    // clearTextBtnIcon.classList.add('text-red-500');
 })
 
 clearTextBtn.addEventListener('mouseout', () => {
-    clearTextBtnIcon.classList.remove('text-red-500');
+    // clearTextBtnIcon.classList.remove('text-red-500');
 })
 
 clearTextBtn.addEventListener('click', () => {

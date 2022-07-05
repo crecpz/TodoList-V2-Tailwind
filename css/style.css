@@ -1556,11 +1556,6 @@ textarea {
   background-color: rgb(255 200 90 / 0.9);
 }
 
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .p-4 {
   padding: 1rem;
 }
@@ -1796,6 +1791,11 @@ textarea {
     --tw-bg-opacity: 1;
     background-color: rgb(255 200 90 / var(--tw-bg-opacity));
   }
+
+  .clear-text-btn:hover .clear-text-btn-icon {
+    --tw-text-opacity: 1;
+    color: rgb(239 68 68 / var(--tw-text-opacity));
+  }
 }
 
 .placeholder\:italic::-moz-placeholder {
@@ -1903,11 +1903,6 @@ textarea {
 .before\:content-\[\'\'\]::before {
   --tw-content: '';
   content: var(--tw-content);
-}
-
-.group:hover .group-hover\:text-red-500 {
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 @media (min-width: 576px) {
