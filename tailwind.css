@@ -79,7 +79,7 @@
 
   dialog {
     @apply w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
-    /* @apply hidden; */
+    @apply hidden;
   }
 
   dialog[open] {
@@ -91,7 +91,6 @@
   }
 
   dialog[closing] {
-    /* @apply animate-slide-down; */
     @apply animate-dialog-closing;
   }
 
