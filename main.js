@@ -75,40 +75,18 @@ todoInput.addEventListener('keydown', e => {
 })
 
 
-
-/** ------------------以下做測試------------------ */
-
-
-
-/**
- * 明明上面的 isComposition在送出之後應該要改成false的，
- * 不知道為什麼沒有改? 可以打開偵錯工具來看
- */
-
-// todoInput.addEventListener('compositionend', () => {
-
-//     /* 讓compositionend觸發一個函式，該函式負責新增keyup的lintener，
-//         而且該listen一次只觸發一次。
-//      */
-//     console.log('compositionend')
-
-//     // if (isComposition) addKeyupListener();
-
-
-// })
-
-
-/* 按下Enter不放，觸發了'compositionend'，放開Enter，觸發'keyup'，
-    所以寫嵌套跟分開寫都一樣?
-
-*/
-
-// isComposition為「選字完成」的狀態，預設是false
+// isComposition用來表示現在是否為「選字完成」的狀態，預設是false
 let isComposition = false;
 
+// compositionend用來偵測是否完成選字，該事件在選完字按下enter時(keydown)即觸發
+todoInput.addEventListener('compositionend', () => {
+    isComposition = true;
+})
+
+
 todoInput.addEventListener('keyup', e => {
+    // 如果e.key是Enter，而且isComposition是false狀態    
     if (e.key === "Enter" && !isComposition) {
-        console.log('keyup', isComposition);
         addNewTodo();
         addBtn.classList.remove('add-btn--active');
         clearTextBtn.classList.add('hide');
@@ -117,33 +95,9 @@ todoInput.addEventListener('keyup', e => {
     isComposition = false;
 })
 
-todoInput.addEventListener('compositionend', () => {
-    isComposition = true;
-})
-
-
-
-
-
-
-/* ------------------以上做測試------------------ */
-
-
-// todoInput.addEventListener('keyup', e => {
-//     // console.log(isComposition);
-
-//     if (e.key === "Enter" && isComposition) {
-//         addNewTodo();
-//         // addBtn.click();
-//         addBtn.classList.remove('add-btn--active');
-//         isComposition = false;
-//     }
-//     clearTextBtn.classList.add('hide');
-// })
 
 
 function addNewTodo() {
-
     if (todoInput.value.trim() !== '') {
         if (!todoListData) {
             todoListData = [];
