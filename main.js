@@ -80,7 +80,10 @@ let isComposition = false;
 
 // compositionend用來偵測是否完成選字，該事件在選完字按下enter時(keydown)即觸發
 todoInput.addEventListener('compositionend', () => {
-    isComposition = true;
+    if(navigator.userAgent.search("Firefox") > -1){
+        // console.log(true);
+        isComposition = true;
+    }
 })
 
 
@@ -94,7 +97,6 @@ todoInput.addEventListener('keyup', e => {
 
     isComposition = false;
 })
-
 
 
 function addNewTodo() {
