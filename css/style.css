@@ -423,6 +423,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+body {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 /* body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
@@ -1103,10 +1108,6 @@ textarea {
   height: 100%;
 }
 
-.h-\[100vh\] {
-  height: 100vh;
-}
-
 .h-12 {
   height: 3rem;
 }
@@ -1481,10 +1482,6 @@ textarea {
 
 .overflow-x-hidden {
   overflow-x: hidden;
-}
-
-.overflow-y-hidden {
-  overflow-y: hidden;
 }
 
 .overflow-y-scroll {
