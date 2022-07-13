@@ -1103,6 +1103,10 @@ textarea {
   height: 100%;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .h-12 {
   height: 3rem;
 }
@@ -1113,18 +1117,6 @@ textarea {
 
 .h-\[80px\] {
   height: 80px;
-}
-
-.h-\[100vh\] {
-  height: 100vh;
-}
-
-.max-h-\[65\%\] {
-  max-height: 65%;
-}
-
-.max-h-\[50\%\] {
-  max-height: 50%;
 }
 
 .max-h-\[50vh\] {
@@ -1489,6 +1481,10 @@ textarea {
 
 .overflow-x-hidden {
   overflow-x: hidden;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
 }
 
 .overflow-y-scroll {
