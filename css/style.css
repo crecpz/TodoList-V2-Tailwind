@@ -423,6 +423,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
+body{
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
+}
+
 /* body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
@@ -1101,10 +1107,6 @@ textarea {
 
 .h-full {
   height: 100%;
-}
-
-.h-\[100vh\] {
-  height: 100vh;
 }
 
 .h-12 {

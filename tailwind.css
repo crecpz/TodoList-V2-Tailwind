@@ -34,6 +34,10 @@
 }
 
 @layer base {
+  body{
+    height: fill-available;
+  }
+
   /* body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
