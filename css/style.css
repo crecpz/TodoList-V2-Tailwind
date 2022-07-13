@@ -423,9 +423,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-body{
+html {
   height: -webkit-fill-available;
   height: -moz-available;
+  height: fill-available;
+}
+
+body {
+  /*  WebKit-based browsers will ignore this */
+  height: -moz-available;
+  /* For Edge */
+  height: 100vh;
+  /* Mozilla-based browsers will ignore this. */
+  height: -webkit-fill-available;
+  /* For WebKit-based browsers, Edge not support this */
   height: fill-available;
 }
 
