@@ -423,23 +423,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-html {
-  height: -webkit-fill-available;
-  height: -moz-available;
-  height: fill-available;
-}
-
-body {
-  /*  WebKit-based browsers will ignore this */
-  height: -moz-available;
-  /* For Edge */
-  height: 100vh;
-  /* Mozilla-based browsers will ignore this. */
-  height: -webkit-fill-available;
-  /* For WebKit-based browsers, Edge not support this */
-  height: fill-available;
-}
-
 /* body.preload * {
     animation-duration: 0s !important;
     -webkit-animation-duration: 0s !important;
@@ -1132,8 +1115,16 @@ textarea {
   height: 80px;
 }
 
+.h-\[100vh\] {
+  height: 100vh;
+}
+
 .max-h-\[65\%\] {
   max-height: 65%;
+}
+
+.max-h-\[50\%\] {
+  max-height: 50%;
 }
 
 .w-full {
