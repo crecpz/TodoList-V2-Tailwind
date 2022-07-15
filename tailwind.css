@@ -84,24 +84,42 @@
 
   /* --------- dialog --------- */
 
-  dialog {
-    @apply w-full max-w-xs p-8 bg-secondary shadow-xl rounded-md;
-    @apply hidden;
+
+  /*
+      .dialog[data-status="open"] {
+           @apply animate-slide-up; 
+       }
+
+       :109行的屬性動畫讓整個dialog的位置跑掉了，動畫應該有用到transform將我的設定蓋掉了!
+  */
+
+  .dialog-bg {
+    @apply transition-colors duration-500;
   }
 
-  dialog[open] {
-    @apply animate-slide-up;
+  .dialog-bg[data-status="open"] {
+    @apply fixed z-[100] w-full h-full bg-[#333]/40;
   }
 
-  dialog[open]::backdrop {
+  .dialog {
+    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 ;
+    @apply text-primary bg-secondary shadow-xl rounded-md;
+    /* @apply hidden; */
+  }
+
+  .dialog[data-status="open"] {
+    @apply animate-slide-up; 
+  }
+
+  .dialog[open]::backdrop {
     @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
   }
 
-  dialog[closing] {
+  .dialog[closing] {
     @apply animate-dialog-closing;
   }
 
-  dialog[closing]::backdrop {
+  .dialog[closing]::backdrop {
     @apply animate-fade-out;
   }
 

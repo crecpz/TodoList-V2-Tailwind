@@ -481,17 +481,49 @@ i {
 
 /* --------- dialog --------- */
 
-dialog {
+/*
+      .dialog[data-status="open"] {
+           @apply animate-slide-up; 
+       }
+
+       :109行的屬性動畫讓整個dialog的位置跑掉了，動畫應該有用到transform將我的設定蓋掉了!
+  */
+
+.dialog-bg {
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.dialog-bg[data-status="open"] {
+  position: fixed;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(51 51 51 / 0.4);
+}
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
   width: 100%;
   max-width: 20rem;
+  --tw-translate-x: -50%;
+  --tw-translate-y: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  padding: 2rem;
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
   background-color: rgb(238 229 220 / var(--tw-bg-opacity));
-  padding: 2rem;
+  --tw-text-opacity: 1;
+  color: rgb(64 83 98 / var(--tw-text-opacity));
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-  display: none;
+  /* @apply hidden; */
 }
 
 @-webkit-keyframes slide-up {
@@ -518,16 +550,16 @@ dialog {
   }
 }
 
-dialog[open] {
+.dialog[data-status="open"] {
   -webkit-animation: slide-up 650ms ease-in-out forwards;
           animation: slide-up 650ms ease-in-out forwards;
 }
 
-dialog[open]::-webkit-backdrop {
+.dialog[open]::-webkit-backdrop {
   height: 100vh;
 }
 
-dialog[open]::backdrop {
+.dialog[open]::backdrop {
   height: 100vh;
 }
 
@@ -551,14 +583,14 @@ dialog[open]::backdrop {
   }
 }
 
-dialog[open]::-webkit-backdrop {
+.dialog[open]::-webkit-backdrop {
   -webkit-animation: fade-in 700ms forwards;
           animation: fade-in 700ms forwards;
   overflow-y: hidden;
   background-color: rgb(64 83 98 / 0.3);
 }
 
-dialog[open]::backdrop {
+.dialog[open]::backdrop {
   -webkit-animation: fade-in 700ms forwards;
           animation: fade-in 700ms forwards;
   overflow-y: hidden;
@@ -601,7 +633,7 @@ dialog[open]::backdrop {
   }
 }
 
-dialog[closing] {
+.dialog[closing] {
   -webkit-animation: dialog-closing 700ms forwards;
           animation: dialog-closing 700ms forwards;
 }
@@ -638,12 +670,12 @@ dialog[closing] {
   }
 }
 
-dialog[closing]::-webkit-backdrop {
+.dialog[closing]::-webkit-backdrop {
   -webkit-animation: fade-out 500ms ease-in-out forwards;
           animation: fade-out 500ms ease-in-out forwards;
 }
 
-dialog[closing]::backdrop {
+.dialog[closing]::backdrop {
   -webkit-animation: fade-out 500ms ease-in-out forwards;
           animation: fade-out 500ms ease-in-out forwards;
 }
@@ -1102,6 +1134,10 @@ textarea {
 
 .contents {
   display: contents;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-full {

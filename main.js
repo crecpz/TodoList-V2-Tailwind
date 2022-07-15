@@ -502,7 +502,8 @@ todoList.addEventListener('click', e => {
              */
             function editMode() {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
-                const editDialog = document.querySelector('#edit-dialog');
+                const editDialog = document.querySelector('#edit-dialog'),
+                dialogBg = document.querySelector('#dialog-bg');
                 editDialog.innerHTML =
                     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>${todoText.innerHTML}</textarea>
@@ -520,11 +521,12 @@ todoList.addEventListener('click', e => {
                 let editText = editDialog.querySelector('#edit-text');
 
                 // 先確保在開啟dialog前，dialog是關閉的狀態
-                editDialog.close();
+                // editDialog.close();
 
                 // 以上內容準備完成後，使對話框彈出
-                editDialog.showModal();
-                editDialog.classList.add('block');
+                openDialog(editDialog);
+                // editDialog.showModal();
+
 
                 editText.select();
 
@@ -538,14 +540,6 @@ todoList.addEventListener('click', e => {
                     changeToActive();
 
                     closeDialog(editDialog);
-
-                    // (1)
-                    // editDialog.setAttribute('closing', "");
-                    // editDialog.addEventListener('animationend', () => {
-                    //     editDialog.close();
-                    //     editDialog.removeAttribute('closing', "");
-                    //     editDialog.classList.remove('block');
-                    // }, { once: true })
                 });
 
                 // 當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
@@ -553,13 +547,6 @@ todoList.addEventListener('click', e => {
                 cancelBtn.addEventListener('click', () => {
                     checkIfEdited();
                     closeDialog(editDialog);
-                    // (2)
-                    // editDialog.setAttribute('closing', "");
-                    // editDialog.addEventListener('animationend', () => {
-                    //     editDialog.close();
-                    //     editDialog.removeAttribute('closing', "");
-                    //     editDialog.classList.remove('block');
-                    // }, { once: true });
                 });
 
                 // 有關editDialog的鍵盤操作
@@ -641,6 +628,17 @@ todoList.addEventListener('click', e => {
                             // }, { once: true });
                         });
                     }
+                }
+
+                function openDialog(dialog){
+                    dialogBg.setAttribute('data-status', 'open');
+                    dialog.setAttribute('data-status', 'open');
+
+                    // dialog.classList.add('block');
+                }
+
+                function closeDialog(dialog){
+                    
                 }
 
 
