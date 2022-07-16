@@ -94,34 +94,38 @@
   */
 
   .dialog-bg {
-    @apply transition-colors duration-500;
+    @apply transition-all duration-500;
   }
 
-  .dialog-bg[data-status="open"] {
+  .dialog-bg[data-status="opening"] {
     @apply fixed z-[100] w-full h-full bg-[#333]/40;
   }
 
+  .dialog-bg[data-status="closing"] {
+    /* @apply opacity-0; */
+  }
+
   .dialog {
-    @apply fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 ;
+    @apply opacity-0 invisible fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 ;
     @apply text-primary bg-secondary shadow-xl rounded-md;
     /* @apply hidden; */
   }
 
-  .dialog[data-status="open"] {
-    @apply animate-slide-up; 
+  .dialog[data-status="opening"] {
+    @apply animate-dialog-opening; 
   }
 
-  .dialog[open]::backdrop {
+  .dialog[data-status="closing"] {
+    @apply animate-dialog-closing; 
+  }
+
+  /* .dialog[open]::backdrop {
     @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
   }
 
   .dialog[closing] {
     @apply animate-dialog-closing;
-  }
-
-  .dialog[closing]::backdrop {
-    @apply animate-fade-out;
-  }
+  } */
 
   textarea {
     @apply resize-none;

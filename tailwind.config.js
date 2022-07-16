@@ -50,18 +50,18 @@ module.exports = {
 
         'slide-up': {
           'from': {
-            opacity: 0,
-            transform: 'translateY(50%)',
+            transform: 'translate(-50%,0%)',
           },
           'to': {
+            visibility: 'visible',
             opacity: 1,
-            transform: 'translateY(-50%)',
+            transform: 'translate(-50%,-50%)',
           },
         },
 
-        'dialog-closing': {
+        'slide-down': {
           '0%': {
-            transform: 'translateY(-50%)',
+            transform: 'translate(-50%,-50%)',
             opacity: '1',
             visibility: 'visible',
           },
@@ -69,7 +69,7 @@ module.exports = {
             opacity: '0',
           },
           '100%': {
-            transform: 'translateY(-50%)',
+            transform: 'translate(-50%,-50%)',
             visibility: 'hidden',
             opacity: '0',
           },
@@ -184,8 +184,8 @@ module.exports = {
       animation: {
         'fade-in': 'fade-in 700ms forwards',
         'fade-out': 'fade-out 500ms ease-in-out forwards',
-        'slide-up': 'slide-up 650ms ease-in-out forwards',
-        'dialog-closing': 'dialog-closing 700ms forwards',
+        'dialog-opening': 'slide-up 650ms ease-in-out forwards',
+        'dialog-closing': 'slide-down 700ms forwards',
         'popup': 'popup 200ms ease-in forwards',
         'hide-down': 'hide-down 200ms ease-in forwards',
         'popdown': 'popdown 200ms ease-out forwards',

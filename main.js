@@ -80,7 +80,7 @@ let isComposition = false;
 
 // compositionend用來偵測是否完成選字，該事件在選完字按下enter時(keydown)即觸發
 todoInput.addEventListener('compositionend', () => {
-    if(navigator.userAgent.search("Firefox") > -1){
+    if (navigator.userAgent.search("Firefox") > -1) {
         // console.log(true);
         isComposition = true;
     }
@@ -503,7 +503,7 @@ todoList.addEventListener('click', e => {
             function editMode() {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog'),
-                dialogBg = document.querySelector('#dialog-bg');
+                    dialogBg = document.querySelector('#dialog-bg');
                 editDialog.innerHTML =
                     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>${todoText.innerHTML}</textarea>
@@ -630,15 +630,34 @@ todoList.addEventListener('click', e => {
                     }
                 }
 
-                function openDialog(dialog){
-                    dialogBg.setAttribute('data-status', 'open');
-                    dialog.setAttribute('data-status', 'open');
+                function openDialog(dialog) {
+                    dialogBg.setAttribute('data-status', 'opening');
+                    dialog.setAttribute('data-status', 'opening');
+                    dialogBg.classList.add('show')
+
+                    // dialog.addEventListener('animationend', () => {
+                    //     dialog.removeAttribute('data-status', 'open');
+                    // },{once: true});
+
+                    // dialogBg.addEventListener('animationend', () => {
+                    //     dialog.removeAttribute('data-status', 'open');
+                    // },{once: true});
 
                     // dialog.classList.add('block');
                 }
 
-                function closeDialog(dialog){
+                function closeDialog(dialog) {
+                    // dialogBg.removeAttribute('data-status', 'open');
+                    // dialogBg.setAttribute('data-status', 'closing');
+
+                    // dialog.setAttribute('data-status', 'closing');
+
+                    dialogBg.classList.add('animate-fade-out');
                     
+
+                    dialogBg.addEventListener('animationend', () => {
+                        dialogBg.classList.add('hidden');
+                    }, { once: true });
                 }
 
 
@@ -655,18 +674,18 @@ todoList.addEventListener('click', e => {
                     localStorage.setItem('todos', JSON.stringify(todoListData));
                 }
 
-                /**
-                 * 此函數用來關閉dialog(附帶監聽animationend)
-                 * @param {*} dialog 欲關閉的dialog
-                 */
-                function closeDialog(dialog) {
-                    dialog.setAttribute('closing', "");
-                    dialog.addEventListener('animationend', () => {
-                        dialog.close();
-                        dialog.removeAttribute('closing', "");
-                        dialog.classList.remove('block');
-                    }, { once: true })
-                }
+                // /**
+                //  * 此函數用來關閉dialog(附帶監聽animationend)
+                //  * @param {*} dialog 欲關閉的dialog
+                //  */
+                // function closeDialog(dialog) {
+                //     dialog.setAttribute('closing', "");
+                //     dialog.addEventListener('animationend', () => {
+                //         dialog.close();
+                //         dialog.removeAttribute('closing', "");
+                //         dialog.classList.remove('block');
+                //     }, { once: true })
+                // }
 
                 /**
                  * 在編輯過後，若使用者按下「儲存」，自動將原本已經勾選的checkbox取消勾選
