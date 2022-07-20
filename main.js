@@ -504,6 +504,7 @@ todoList.addEventListener('click', e => {
                 // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog'),
                     dialogBg = document.querySelector('#dialog-bg');
+
                 editDialog.innerHTML =
                     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
                     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>${todoText.innerHTML}</textarea>
@@ -520,15 +521,14 @@ todoList.addEventListener('click', e => {
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
                 let editText = editDialog.querySelector('#edit-text');
 
-                // 先確保在開啟dialog前，dialog是關閉的狀態
-                // editDialog.close();
 
                 // 以上內容準備完成後，使對話框彈出
                 openDialog(editDialog);
-                // editDialog.showModal();
 
+                setTimeout(() => {
+                    editText.select();
+                }, 100)
 
-                editText.select();
 
                 // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
 
@@ -538,7 +538,6 @@ todoList.addEventListener('click', e => {
                 saveBtn.addEventListener('click', () => {
                     updateChanges();
                     changeToActive();
-
                     closeDialog(editDialog);
                 });
 
@@ -592,8 +591,7 @@ todoList.addEventListener('click', e => {
 
 
                         // confirmDialog內容準備完成，使confirmDialog彈出
-                        confirmDialog.showModal();
-                        confirmDialog.classList.add('block');
+                        openDialog(confirmDialog);
 
 
                         // 在confirmDialog有兩個按鈕，分別是【不儲存】與【儲存】:
@@ -602,13 +600,6 @@ todoList.addEventListener('click', e => {
                         const cancelBtn = confirmDialog.querySelector('.cancel-btn');
                         cancelBtn.addEventListener('click', () => {
                             closeDialog(confirmDialog);
-                            // (3)
-                            // confirmDialog.setAttribute('closing', "");
-                            // confirmDialog.addEventListener('animationend', () => {
-                            //     confirmDialog.close();
-                            //     confirmDialog.removeAttribute('closing', "");
-                            //     confirmDialog.classList.remove('block');
-                            // }, { once: true });
                         });
 
                         // 若使用者選擇【儲存】　---> 儲存此次變更
@@ -618,46 +609,53 @@ todoList.addEventListener('click', e => {
                             updateChanges();
                             changeToActive();
                             closeDialog(confirmDialog);
-
-                            // (4)
-                            // confirmDialog.setAttribute('closing', "");
-                            // confirmDialog.addEventListener('animationend', () => {
-                            //     confirmDialog.close();
-                            //     confirmDialog.removeAttribute('closing', "");
-                            //     confirmDialog.classList.remove('block');
-                            // }, { once: true });
                         });
                     }
                 }
 
                 function openDialog(dialog) {
-                    dialogBg.setAttribute('data-status', 'opening');
+                    // dialogBg.setAttribute('data-status', 'opening');
+                    dialogBg.classList.remove('hide');
                     dialog.setAttribute('data-status', 'opening');
-                    dialogBg.classList.add('show')
-
-                    // dialog.addEventListener('animationend', () => {
-                    //     dialog.removeAttribute('data-status', 'open');
-                    // },{once: true});
-
-                    // dialogBg.addEventListener('animationend', () => {
-                    //     dialog.removeAttribute('data-status', 'open');
-                    // },{once: true});
-
-                    // dialog.classList.add('block');
                 }
 
                 function closeDialog(dialog) {
-                    // dialogBg.removeAttribute('data-status', 'open');
-                    // dialogBg.setAttribute('data-status', 'closing');
+                    dialog.setAttribute('data-status', 'closing');
 
-                    // dialog.setAttribute('data-status', 'closing');
+                    /* 以下判斷是否所有的dialog都要關了，目前已經可以判斷出:
+                        - 如果在場仍然有dialog是opening的狀態返回true
+                        - 如果沒有則返回false。
 
-                    dialogBg.classList.add('animate-fade-out');
+                        接下來就要利用這個Boolean來做利用，來判斷dialogBg要不要去掉
                     
+                    */
+                    console.log([...document.querySelectorAll('.dialog')]
+                        .some(dialog => {
+                            return dialog.dataset.status === 'opening';
+                        }))
 
-                    dialogBg.addEventListener('animationend', () => {
-                        dialogBg.classList.add('hidden');
+
+                    if (true) {
+                        dialogBg.classList.add('hide');
+                    }
+
+                    dialog.addEventListener('animationend', () => {
+                        dialog.removeAttribute('data-status', 'closing');
                     }, { once: true });
+                }
+
+                function checkDialogIsOpen() {
+                    // 檢查所有的dialog中是否有任何一項的data-status為closing
+                    const isOpen = [...document.querySelectorAll('.dialog')]
+                        .some(dialog => {
+                            return dialog.dataset.status === 'opining';
+                        });
+
+                    if (isOpen) {
+                        console.log(1);
+                    } else {
+                        console.log(2)
+                    }
                 }
 
 

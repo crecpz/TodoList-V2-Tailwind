@@ -84,35 +84,27 @@
 
   /* --------- dialog --------- */
 
-
-  /*
-      .dialog[data-status="open"] {
-           @apply animate-slide-up; 
-       }
-
-       :109行的屬性動畫讓整個dialog的位置跑掉了，動畫應該有用到transform將我的設定蓋掉了!
-  */
-
   .dialog-bg {
+    @apply fixed z-[100] w-full h-full bg-[#333]/40;
     @apply transition-all duration-500;
   }
 
-  .dialog-bg[data-status="opening"] {
+  /* .dialog-bg[data-status="opening"] {
     @apply fixed z-[100] w-full h-full bg-[#333]/40;
-  }
+  } */
 
   .dialog-bg[data-status="closing"] {
-    /* @apply opacity-0; */
+    @apply fixed z-[100] w-full h-full bg-[#333]/40;
   }
 
   .dialog {
     @apply opacity-0 invisible fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 ;
     @apply text-primary bg-secondary shadow-xl rounded-md;
-    /* @apply hidden; */
   }
 
   .dialog[data-status="opening"] {
     @apply animate-dialog-opening; 
+    /* @apply before:content-[''] before:absolute before:inset-full before:bg-[#333]/40; */
   }
 
   .dialog[data-status="closing"] {

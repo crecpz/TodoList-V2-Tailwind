@@ -185,7 +185,7 @@ module.exports = {
         'fade-in': 'fade-in 700ms forwards',
         'fade-out': 'fade-out 500ms ease-in-out forwards',
         'dialog-opening': 'slide-up 650ms ease-in-out forwards',
-        'dialog-closing': 'slide-down 700ms forwards',
+        'dialog-closing': 'fade-out 700ms forwards',
         'popup': 'popup 200ms ease-in forwards',
         'hide-down': 'hide-down 200ms ease-in forwards',
         'popdown': 'popdown 200ms ease-out forwards',
