@@ -614,7 +614,7 @@ todoList.addEventListener('click', e => {
                 }
 
                 function openDialog(dialog) {
-                    // dialogBg.setAttribute('data-status', 'opening');
+                    document.body.style.overflowY = 'hidden';
                     dialogBg.classList.remove('hide');
                     dialog.setAttribute('data-status', 'opening');
                 }
@@ -636,8 +636,10 @@ todoList.addEventListener('click', e => {
 
                     dialog.addEventListener('animationend', () => {
                         dialog.removeAttribute('data-status', 'closing');
+                        document.body.style.overflowY = '';
                     }, { once: true });
                 }
+
 
                 function checkDialogIsOpen() {
                     // 檢查所有的dialog中是否有任何一項的data-status為closing

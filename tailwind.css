@@ -94,7 +94,7 @@
   }
 
   .dialog {
-    @apply opacity-0 invisible fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 ;
+    @apply opacity-0 invisible fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xs p-8 select-none;
     @apply text-primary bg-secondary shadow-xl rounded-md;
   }
 
