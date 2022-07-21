@@ -630,9 +630,7 @@ todoList.addEventListener('click', e => {
 
                     // 如果沒有任何的dialog是開啟狀態的話
                     if (!anyDialogIsOpen) {
-                        // 隱藏dialogBg
-                        dialogBg.classList.add('hide');
-                    }
+                        // 隱
 
                     dialog.addEventListener('animationend', () => {
                         dialog.removeAttribute('data-status', 'closing');
