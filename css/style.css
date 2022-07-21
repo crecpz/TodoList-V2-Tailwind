@@ -492,10 +492,6 @@ i {
   transition-duration: 500ms;
 }
 
-/* .dialog-bg[data-status="opening"] {
-    @apply fixed z-[100] w-full h-full bg-[#333]/40;
-  } */
-
 .dialog-bg[data-status="closing"] {
   position: fixed;
   z-index: 100;
@@ -553,7 +549,6 @@ i {
 .dialog[data-status="opening"] {
   -webkit-animation: slide-up 650ms ease-in-out forwards;
           animation: slide-up 650ms ease-in-out forwards;
-  /* @apply before:content-[''] before:absolute before:inset-full before:bg-[#333]/40; */
 }
 
 @-webkit-keyframes fade-out {
@@ -592,14 +587,6 @@ i {
   -webkit-animation: fade-out 700ms forwards;
           animation: fade-out 700ms forwards;
 }
-
-/* .dialog[open]::backdrop {
-    @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
-  }
-
-  .dialog[closing] {
-    @apply animate-dialog-closing;
-  } */
 
 textarea {
   resize: none;

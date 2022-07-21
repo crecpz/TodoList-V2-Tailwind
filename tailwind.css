@@ -89,10 +89,6 @@
     @apply transition-all duration-500;
   }
 
-  /* .dialog-bg[data-status="opening"] {
-    @apply fixed z-[100] w-full h-full bg-[#333]/40;
-  } */
-
   .dialog-bg[data-status="closing"] {
     @apply fixed z-[100] w-full h-full bg-[#333]/40;
   }
@@ -104,20 +100,11 @@
 
   .dialog[data-status="opening"] {
     @apply animate-dialog-opening; 
-    /* @apply before:content-[''] before:absolute before:inset-full before:bg-[#333]/40; */
   }
 
   .dialog[data-status="closing"] {
     @apply animate-dialog-closing; 
   }
-
-  /* .dialog[open]::backdrop {
-    @apply bg-primary/30 h-[100vh] overflow-y-hidden animate-fade-in;
-  }
-
-  .dialog[closing] {
-    @apply animate-dialog-closing;
-  } */
 
   textarea {
     @apply resize-none;

@@ -622,20 +622,15 @@ todoList.addEventListener('click', e => {
                 function closeDialog(dialog) {
                     dialog.setAttribute('data-status', 'closing');
 
-                    /* 以下判斷是否所有的dialog都要關了，目前已經可以判斷出:
-                        - 如果在場仍然有dialog是opening的狀態返回true
-                        - 如果沒有則返回false。
-
-                        接下來就要利用這個Boolean來做利用，來判斷dialogBg要不要去掉
-                    
-                    */
-                    console.log([...document.querySelectorAll('.dialog')]
+                    // 確認是否有任何dialog是開啟狀態
+                    let anyDialogIsOpen = [...document.querySelectorAll('.dialog')]
                         .some(dialog => {
                             return dialog.dataset.status === 'opening';
-                        }))
+                        });
 
-
-                    if (true) {
+                    // 如果沒有任何的dialog是開啟狀態的話
+                    if (!anyDialogIsOpen) {
+                        // 隱藏dialogBg
                         dialogBg.classList.add('hide');
                     }
 
