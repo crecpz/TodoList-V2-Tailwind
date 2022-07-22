@@ -614,7 +614,9 @@ todoList.addEventListener('click', e => {
                 }
 
                 function openDialog(dialog) {
-                    document.body.style.overflowY = 'hidden';
+                    document.documentElement.style.overflowY = 'hidden';
+                    console.log(document.documentElement);
+
                     dialogBg.classList.remove('hide');
                     dialog.setAttribute('data-status', 'opening');
                 }
@@ -636,7 +638,7 @@ todoList.addEventListener('click', e => {
 
                     dialog.addEventListener('animationend', () => {
                         dialog.removeAttribute('data-status', 'closing');
-                        document.body.style.overflowY = '';
+                        document.documentElement.style.overflowY = '';
                     }, { once: true });
                 }
 
