@@ -614,16 +614,32 @@ todoList.addEventListener('click', e => {
                 }
 
                 function openDialog(dialog) {
+                    
                     document.documentElement.style.overflowY = 'hidden';
-                    console.log(document.documentElement);
-
                     dialogBg.classList.remove('hide');
                     dialog.setAttribute('data-status', 'opening');
                 }
 
+                /**
+                 * 傳入一個diaolg，關閉該dialog
+                 * @param {*} dialog 要關閉的目標dialog
+                 */
                 function closeDialog(dialog) {
                     dialog.setAttribute('data-status', 'closing');
 
+                    // 檢查在場是否有還未關閉的dialog，如果都沒有，則連同dialogBg一起隱藏
+                    checkDialogIsOpen();
+
+                    dialog.addEventListener('animationend', () => {
+                        dialog.removeAttribute('data-status', 'closing');
+                        document.documentElement.style.overflowY = '';
+                    }, { once: true });
+                }
+
+                /**
+                 * 檢查在場是否有還未關閉的dialog，如果都沒有，則連同`dialogBg`一起隱藏
+                 */
+                function checkDialogIsOpen() {
                     // 確認是否有任何dialog是開啟狀態
                     let anyDialogIsOpen = [...document.querySelectorAll('.dialog')]
                         .some(dialog => {
@@ -634,26 +650,6 @@ todoList.addEventListener('click', e => {
                     if (!anyDialogIsOpen) {
                         // 隱藏dialogBg
                         dialogBg.classList.add('hide');
-                    }
-
-                    dialog.addEventListener('animationend', () => {
-                        dialog.removeAttribute('data-status', 'closing');
-                        document.documentElement.style.overflowY = '';
-                    }, { once: true });
-                }
-
-
-                function checkDialogIsOpen() {
-                    // 檢查所有的dialog中是否有任何一項的data-status為closing
-                    const isOpen = [...document.querySelectorAll('.dialog')]
-                        .some(dialog => {
-                            return dialog.dataset.status === 'opining';
-                        });
-
-                    if (isOpen) {
-                        console.log(1);
-                    } else {
-                        console.log(2)
                     }
                 }
 
