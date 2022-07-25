@@ -1,14 +1,6 @@
 /*  ------ Table of contents ------
-
     - loader
-    
-
-
 */
-
-
-
-
 
 // loader
 const loader = document.querySelector('#loader');
@@ -505,22 +497,26 @@ todoList.addEventListener('click', e => {
                 const editDialog = document.querySelector('#edit-dialog'),
                     dialogBg = document.querySelector('#dialog-bg');
 
-                editDialog.innerHTML =
-                    `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
-                    <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>${todoText.innerHTML}</textarea>
-                    <div class="flex justify-center items-center">
-                        <button class="cancel-btn btn btn-normal mr-6">
-                            <i class="fa-solid fa-circle-xmark mr-2"></i>取消
-                        </button>
-                        <button class="save-btn btn btn-hightlight">
-                            <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
-                        </button>
-                    </div>
-                `
+                // editDialog.innerHTML =
+                //     `<p class="text-xl text-primary text-center mb-6">編輯待辦事項</p>
+                //     <textarea id="edit-text" class="w-full h-[80px] p-2 mb-6 bg-secondary outline-none border-2 border-primary/50 rounded-lg overflow-y-auto" autofocus>
+                //         ${todoText.innerHTML}
+                //     </textarea>
+                //     <div class="flex justify-center items-center">
+                //         <button class="cancel-btn btn btn-normal mr-6">
+                //             <i class="fa-solid fa-circle-xmark mr-2"></i>取消
+                //         </button>
+                //         <button class="save-btn btn btn-hightlight">
+                //             <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
+                //         </button>
+                //     </div>
+                // `;
+
+
 
                 // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
                 let editText = editDialog.querySelector('#edit-text');
-
+                editText.value = todoText.innerHTML;
 
                 // 以上內容準備完成後，使對話框彈出
                 openDialog(editDialog);
@@ -572,22 +568,22 @@ todoList.addEventListener('click', e => {
                     if (editText.value !== todoText.innerHTML) {
                         // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
                         const confirmDialog = document.querySelector('#confirm-dialog');
-                        confirmDialog.innerHTML =
-                            `
-                            <div class="flex flex-col items-center">
-                                <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
-                                <p class="text-center text-xl mb-6">編輯尚未儲存</p>
-                                <p class="text-center text-sm">是否儲存變更?</p>
-                                <div class="flex justify-center items-center mt-6">
-                                    <button class="cancel-btn btn btn-normal mr-6">
-                                        <i class="fa-solid fa-circle-xmark mr-2"></i>不儲存
-                                    </button>
-                                    <button class="save-btn btn btn-hightlight">
-                                        <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
-                                    </button>
-                                </div>
-                            </div>
-                            `;
+                        // confirmDialog.innerHTML =
+                        //     `
+                        //     <div class="flex flex-col items-center">
+                        //         <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
+                        //         <p class="text-center text-xl mb-6">編輯尚未儲存</p>
+                        //         <p class="text-center text-sm">是否儲存變更?</p>
+                        //         <div class="flex justify-center items-center mt-6">
+                        //             <button class="cancel-btn btn btn-normal mr-6">
+                        //                 <i class="fa-solid fa-circle-xmark mr-2"></i>不儲存
+                        //             </button>
+                        //             <button class="save-btn btn btn-hightlight">
+                        //                 <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
+                        //             </button>
+                        //         </div>
+                        //     </div>
+                        //     `;
 
 
                         // confirmDialog內容準備完成，使confirmDialog彈出
