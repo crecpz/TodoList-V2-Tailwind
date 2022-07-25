@@ -966,6 +966,10 @@ textarea {
   bottom: -0px;
 }
 
+.right-\[85px\] {
+  right: 85px;
+}
+
 .z-50 {
   z-index: 50;
 }
@@ -1545,6 +1549,10 @@ textarea {
 
 .pb-2 {
   padding-bottom: 0.5rem;
+}
+
+.pr-12 {
+  padding-right: 3rem;
 }
 
 .text-center {
