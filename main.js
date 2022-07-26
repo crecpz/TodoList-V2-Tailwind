@@ -568,23 +568,6 @@ todoList.addEventListener('click', e => {
                     if (editText.value !== todoText.innerHTML) {
                         // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
                         const confirmDialog = document.querySelector('#confirm-dialog');
-                        // confirmDialog.innerHTML =
-                        //     `
-                        //     <div class="flex flex-col items-center">
-                        //         <i class="fa-solid fa-circle-exclamation text-4xl text-primary mb-4 text-center"></i>
-                        //         <p class="text-center text-xl mb-6">編輯尚未儲存</p>
-                        //         <p class="text-center text-sm">是否儲存變更?</p>
-                        //         <div class="flex justify-center items-center mt-6">
-                        //             <button class="cancel-btn btn btn-normal mr-6">
-                        //                 <i class="fa-solid fa-circle-xmark mr-2"></i>不儲存
-                        //             </button>
-                        //             <button class="save-btn btn btn-hightlight">
-                        //                 <i class="fa-solid fa-floppy-disk mr-2"></i>儲存
-                        //             </button>
-                        //         </div>
-                        //     </div>
-                        //     `;
-
 
                         // confirmDialog內容準備完成，使confirmDialog彈出
                         openDialog(confirmDialog);
@@ -610,7 +593,6 @@ todoList.addEventListener('click', e => {
                 }
 
                 function openDialog(dialog) {
-                    
                     document.documentElement.style.overflowY = 'hidden';
                     dialogBg.classList.remove('hide');
                     dialog.setAttribute('data-status', 'opening');
@@ -655,10 +637,17 @@ todoList.addEventListener('click', e => {
                 * 將已編輯的todoText更新至HTML與localstorage
                 */
                 function updateChanges() {
+                    const todoText = todoItem.querySelector('.todo-text');
+                    console.log('todoText: ', todoText);
+
                     // 將編輯後的文字更新至DOM
                     todoText.innerHTML = editText.value;
+
+                    
+
                     // 將編輯後的文字更新至todoListData中
                     todoListData[todoItem.id].content = editText.value;
+
                     // 將最新的todoListData更新至localstorage中
                     localStorage.setItem('todos', JSON.stringify(todoListData));
                 }
