@@ -762,7 +762,7 @@ textarea {
   transition-duration: 500ms;
 }
 
-.todo-item--todo-option-open {
+.todo-item--option-open {
   background-color: rgb(64 83 98 / 0.1);
 }
 

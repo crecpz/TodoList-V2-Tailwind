@@ -160,7 +160,7 @@
     @apply flex flex-col items-center font-medium border-b border-primary/10 transition-colors duration-500 select-none;
   }
 
-  .todo-item--todo-option-open {
+  .todo-item--option-open {
     @apply bg-primary/10;
   }
 

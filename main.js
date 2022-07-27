@@ -312,7 +312,6 @@ function renderTodo(currentTab) {
         showClearBtn();
         addPaddingBottom();
     } else {
-        // console.log('close')
         hideClearBtn();
         removePaddingBottom();
     }
@@ -325,8 +324,6 @@ function renderTodo(currentTab) {
  */
 function hasAnyCompleted() {
     const todoItems = [...document.querySelectorAll('.todo-item')];
-    // console.log(todoItems);
-    // console.log(todoItems.some(todoItem => todoItem.dataset.status === 'completed'));
     return todoItems.some(todoItem => todoItem.dataset.status === 'completed');
 }
 
@@ -419,41 +416,36 @@ function showEmptyMsg() {
 }
 
 todoList.addEventListener('click', e => {
-
+    // 如果e.target.id不是'empty-msg' 而且 e.target向上層尋找可以找到li的話
     if (e.target.id !== 'empty-msg' && e.target.closest('li')) {
-
         // 取得點按的目標todoItem
         const todoItem = e.target.closest('li');
 
         // 如果使用者點按todo-option-btn，使其展開todo-option
         const todoOption = todoItem.querySelector('.todo-option');
 
-
         if (e.target.classList.value === 'todo-option-btn') {
             if (todoOption.classList.contains('todo-option--open')) {
                 todoOption.classList.remove('todo-option--open');
-                todoItem.classList.remove('todo-item--todo-option-open');
+                todoItem.classList.remove('todo-item--option-open');
             } else {
                 todoOption.classList.add('todo-option--open');
-                todoItem.classList.add('todo-item--todo-option-open');
+                todoItem.classList.add('todo-item--option-open');
             }
-
-
-
             /* 找出所有的.todo-item:
-            1.保留當前所點擊的todoItem身上的「todo-item--todo-option-open」className，並移除其他所有非當前的
+            1.保留當前所點擊的todoItem身上的「todo-item--option-open」className，並移除其他所有非當前的
             2.保留當前所點擊的todoItem中的.todo-option身上的todo-option--open，並移除其他所有非當前的
             */
             document.querySelectorAll('.todo-item')
                 .forEach(i => {
                     if (i.id !== todoItem.id) {
-                        i.classList.remove('todo-item--todo-option-open');
+                        i.classList.remove('todo-item--option-open');
                         i.querySelector('.todo-option').classList.remove('todo-option--open');
                     }
                 });
         }
 
-        /* 控制checkbox狀態 */
+        // 控制checkbox狀態
         if (e.target.tagName === 'LABEL' || e.target.tagName === 'INPUT') {
             changeStatus();
 
@@ -477,11 +469,11 @@ todoList.addEventListener('click', e => {
             localStorage.setItem('todos', JSON.stringify(todoListData));
         }
 
-        /* 編輯todoText */
+        // 編輯todoText
         if (e.target.classList.contains('edit-btn')) {
             // 當「編輯」鈕被按下: 1.收合已展開的todoOption 2.去除todoItem的背景色
             todoOption.classList.remove('todo-option--open');
-            todoItem.classList.remove('todo-item--todo-option-open');
+            todoItem.classList.remove('todo-item--option-open');
 
             // 獲取todoText DOM
             const todoText = todoItem.querySelector('.todo-text');
@@ -490,10 +482,10 @@ todoList.addEventListener('click', e => {
             editMode();
 
             /**
-             * 編輯模式:開啟
+             * 開始編輯
              */
             function editMode() {
-                // 準備內容: 先獲取editDialogDOM，加入HTML結構，並把todoText.innerHTML內容抓進編輯輸入框內
+                // 先獲取editDialog的DOM，並把todoText.innerHTML內容抓進編輯輸入框內
                 const editDialog = document.querySelector('#edit-dialog'),
                     dialogBg = document.querySelector('#dialog-bg');
 
@@ -513,29 +505,33 @@ todoList.addEventListener('click', e => {
                 // `;
 
 
-
-                // 設定輸入框內容為可編輯狀態，並在對話框彈出時，內容文字已被全選
-                let editText = editDialog.querySelector('#edit-text');
-                editText.value = todoText.innerHTML;
-
-                // 以上內容準備完成後，使對話框彈出
+                // 使對話框彈出
                 openDialog(editDialog);
 
+                let editTextarea = editDialog.querySelector('#edit-text');
+
+                editTextarea.value = todoText.innerHTML;
+
+                // 在對話框彈出時，內容文字全選
                 setTimeout(() => {
-                    editText.select();
+                    editTextarea.select();
                 }, 100)
 
 
                 // 在editDialog中有兩個按鈕，分別是【取消】與【儲存】:
 
-                /* 當使用者按下【儲存】(無論是否有編輯過):
-                關閉dialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選 */
+                /* 
+                    當使用者按下【儲存】按鈕，無論是否有編輯過都會做以下的事情:
+                    - 將最新的todoText更新至HTML與localstorage
+                    - 自動將原本已經勾選的checkbox取消勾選     
+                    - 關閉現有的dialog
+                */
                 const saveBtn = editDialog.querySelector('.save-btn');
                 saveBtn.addEventListener('click', () => {
                     updateChanges();
                     changeToActive();
                     closeDialog(editDialog);
-                });
+                },{once: true});
 
                 // 當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
                 const cancelBtn = editDialog.querySelector('.cancel-btn');
@@ -564,8 +560,9 @@ todoList.addEventListener('click', e => {
                  * 如果沒有，則忽略此函式的內容。
                  */
                 function checkIfEdited() {
-                    // 如果使用者有更動todTtext，則執行以下；沒有則此函式的內容可忽略。                    
-                    if (editText.value !== todoText.innerHTML) {
+
+                    // 如果使用者有更動todoTtext，則執行以下；沒有則此函式的內容可忽略。                    
+                    if (editTextarea.value !== todoText.innerHTML) {
                         // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
                         const confirmDialog = document.querySelector('#confirm-dialog');
 
@@ -633,37 +630,24 @@ todoList.addEventListener('click', e => {
 
 
 
+
+
                 /**
                 * 將已編輯的todoText更新至HTML與localstorage
                 */
                 function updateChanges() {
-                    const todoText = todoItem.querySelector('.todo-text');
-                    console.log('todoText: ', todoText);
-
+                    // const todoText = todoItem.querySelector('.todo-text');
+                    console.log(todoText)
                     // 將編輯後的文字更新至DOM
-                    todoText.innerHTML = editText.value;
-
-                    
+                    todoText.innerHTML = editTextarea.value;
 
                     // 將編輯後的文字更新至todoListData中
-                    todoListData[todoItem.id].content = editText.value;
+                    // todoListData[todoItem.id].content = editText.value;
+                    todoListData[todoItem.id].content = todoText.innerHTML;
 
                     // 將最新的todoListData更新至localstorage中
                     localStorage.setItem('todos', JSON.stringify(todoListData));
                 }
-
-                // /**
-                //  * 此函數用來關閉dialog(附帶監聽animationend)
-                //  * @param {*} dialog 欲關閉的dialog
-                //  */
-                // function closeDialog(dialog) {
-                //     dialog.setAttribute('closing', "");
-                //     dialog.addEventListener('animationend', () => {
-                //         dialog.close();
-                //         dialog.removeAttribute('closing', "");
-                //         dialog.classList.remove('block');
-                //     }, { once: true })
-                // }
 
                 /**
                  * 在編輯過後，若使用者按下「儲存」，自動將原本已經勾選的checkbox取消勾選
