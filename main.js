@@ -526,16 +526,18 @@ todoList.addEventListener('click', e => {
                     - 自動將原本已經勾選的checkbox取消勾選     
                     - 關閉現有的dialog
                 */
-                const saveBtn = editDialog.querySelector('.save-btn');
-                saveBtn.addEventListener('click', () => {
+                const editSaveBtn = editDialog.querySelector('.save-btn');
+                editSaveBtn.addEventListener('click', () => {
                     updateChanges();
                     changeToActive();
                     closeDialog(editDialog);
-                },{once: true});
+                });
 
                 // 當使用者按下【取消】: 1.關閉dialog  2.檢查使用者是否有編輯過內容
-                const cancelBtn = editDialog.querySelector('.cancel-btn');
-                cancelBtn.addEventListener('click', () => {
+                const eidtCancelBtn = editDialog.querySelector('.cancel-btn');
+                eidtCancelBtn.addEventListener('click', () => {
+                    // console.log(editTextarea);
+                    // console.log(todoText.innerHTML);
                     checkIfEdited();
                     closeDialog(editDialog);
                 });
@@ -544,12 +546,12 @@ todoList.addEventListener('click', e => {
                 editDialog.addEventListener('keydown', e => {
                     if (e.key === "Escape") {
                         e.preventDefault();
-                        cancelBtn.click();
+                        eidtCancelBtn.click();
                     }
 
                     if (e.key === "Enter") {
                         e.preventDefault();
-                        saveBtn.click();
+                        editSaveBtn.click();
                     }
                 })
 
@@ -560,7 +562,6 @@ todoList.addEventListener('click', e => {
                  * 如果沒有，則忽略此函式的內容。
                  */
                 function checkIfEdited() {
-
                     // 如果使用者有更動todoTtext，則執行以下；沒有則此函式的內容可忽略。                    
                     if (editTextarea.value !== todoText.innerHTML) {
                         // 準備內容: 獲取confirmDialog的DOM，在DOM中加入相應的innerHTML
@@ -573,15 +574,15 @@ todoList.addEventListener('click', e => {
                         // 在confirmDialog有兩個按鈕，分別是【不儲存】與【儲存】:
 
                         // 若使用者選擇【不儲存】--->　關閉此confirmDialog
-                        const cancelBtn = confirmDialog.querySelector('.cancel-btn');
-                        cancelBtn.addEventListener('click', () => {
+                        const confirmCancelBtn = confirmDialog.querySelector('.cancel-btn');
+                        confirmCancelBtn.addEventListener('click', () => {
                             closeDialog(confirmDialog);
                         });
 
                         // 若使用者選擇【儲存】　---> 儲存此次變更
                         // 關閉confirmDialog -> 將已編輯的todoText更新至HTML與localstorage -> 自動將原本已經勾選的checkbox取消勾選
-                        const saveBtn = confirmDialog.querySelector('.save-btn');
-                        saveBtn.addEventListener('click', () => {
+                        const confirmSaveBtn = confirmDialog.querySelector('.save-btn');
+                        confirmSaveBtn.addEventListener('click', () => {
                             updateChanges();
                             changeToActive();
                             closeDialog(confirmDialog);
@@ -629,25 +630,21 @@ todoList.addEventListener('click', e => {
                 }
 
 
-
-
-
                 /**
                 * 將已編輯的todoText更新至HTML與localstorage
                 */
                 function updateChanges() {
-                    // const todoText = todoItem.querySelector('.todo-text');
-                    console.log(todoText)
                     // 將編輯後的文字更新至DOM
+                    const todoText = todoItem.querySelector('.todo-text');
                     todoText.innerHTML = editTextarea.value;
 
                     // 將編輯後的文字更新至todoListData中
-                    // todoListData[todoItem.id].content = editText.value;
                     todoListData[todoItem.id].content = todoText.innerHTML;
 
                     // 將最新的todoListData更新至localstorage中
                     localStorage.setItem('todos', JSON.stringify(todoListData));
                 }
+
 
                 /**
                  * 在編輯過後，若使用者按下「儲存」，自動將原本已經勾選的checkbox取消勾選
